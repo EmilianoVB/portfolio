@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Emiliano's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: #fff;
       color: #111;
     }
@@ -18,14 +19,15 @@
       display: flex;
       justify-content: flex-end;
       background: #000;
-      padding: 10px 20px;
+      padding: 10px 30px;
       z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     .nav ul {
       list-style: none;
       display: flex;
-      gap: 20px;
+      gap: 24px;
       margin: 0;
       padding: 0;
     }
@@ -33,7 +35,13 @@
     .nav a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav a:hover {
+      color: #aaa;
     }
 
     .hero {
@@ -42,49 +50,63 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      text-align: center;
     }
 
     .hero-overlay h1 {
       color: white;
-      font-size: 4rem;
-      z-index: 1;
+      font-size: 4.5rem;
+      font-weight: 700;
+      margin: 0;
     }
 
     .summary-button {
       text-align: center;
-      margin: 30px 0;
+      margin: 40px 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 24px;
     }
 
     .summary-button .logo-placeholder {
       width: 60px;
       height: 60px;
       background: black;
+      border-radius: 12px;
     }
 
     .summary-button button {
-      padding: 10px 20px;
+      padding: 12px 24px;
       font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      background-color: #111;
+      color: white;
       cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .summary-button button:hover {
+      background-color: #333;
     }
 
     .projects {
-      padding: 50px 20px;
-      background: #f4f4f4;
+      padding: 60px 20px;
+      background: #f9f9f9;
     }
 
     .projects h2 {
       text-align: center;
+      font-size: 2.2rem;
       margin-bottom: 40px;
+      font-weight: 700;
     }
 
     .project-grid {
       display: flex;
-      gap: 20px;
+      gap: 30px;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -92,56 +114,84 @@
     .project {
       background: white;
       text-align: center;
-      padding: 10px;
+      padding: 20px;
       width: 300px;
       text-decoration: none;
       color: inherit;
       border-radius: 10px;
-      transition: box-shadow 0.3s;
+      transition: box-shadow 0.3s, transform 0.2s;
     }
 
     .project:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      transform: translateY(-4px);
     }
 
     .project-img {
       width: 100%;
       height: 200px;
       background: black;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+
+    .project h3 {
+      font-size: 1.2rem;
+      margin: 0 0 8px 0;
+      font-weight: 600;
+    }
+
+    .project p {
+      font-size: 0.95rem;
+      color: #555;
     }
 
     .experience {
-      padding: 50px 20px;
+      padding: 60px 20px;
     }
 
     .experience h2 {
       text-align: center;
+      font-size: 2.2rem;
       margin-bottom: 30px;
+      font-weight: 700;
     }
 
     .experience-entry,
     .education-entry,
     .certification-entry {
-      margin-bottom: 20px;
+      max-width: 800px;
+      margin: 0 auto 30px auto;
+      padding: 10px 20px;
+      background: #f0f0f0;
+      border-radius: 8px;
+    }
+
+    .experience-entry h3,
+    .education-entry h4,
+    .certification-entry h4 {
+      margin-bottom: 8px;
+      font-weight: 600;
     }
 
     .about {
-      padding: 50px 20px;
+      padding: 60px 20px;
       background: #f4f4f4;
     }
 
     .about h2 {
       text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
     }
 
     .about-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 30px;
       justify-content: center;
       align-items: center;
-      margin-top: 20px;
+      margin-top: 30px;
     }
 
     .about-photo {
@@ -153,15 +203,19 @@
 
     .about-text {
       max-width: 500px;
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     .contact {
-      padding: 50px 20px;
+      padding: 60px 20px;
     }
 
     .contact h2 {
       text-align: center;
+      font-size: 2.2rem;
       margin-bottom: 20px;
+      font-weight: 700;
     }
 
     .contact-form {
@@ -169,139 +223,43 @@
       flex-direction: column;
       max-width: 500px;
       margin: auto;
-      gap: 10px;
+      gap: 12px;
     }
 
     .contact-form input,
     .contact-form textarea {
-      padding: 10px;
+      padding: 12px;
       font-size: 1rem;
-      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
 
     .contact-form button {
-      padding: 10px;
+      padding: 12px;
       font-size: 1rem;
+      font-weight: 600;
+      background-color: #111;
+      color: white;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .contact-form button:hover {
+      background-color: #333;
     }
 
     .social-links {
-      margin-top: 20px;
+      margin-top: 24px;
       text-align: center;
     }
 
     .social-links a {
-      margin: 0 10px;
+      margin: 0 12px;
       text-decoration: none;
-      color: #000;
-      font-weight: bold;
+      color: #111;
+      font-weight: 600;
     }
   </style>
 </head>
-<body>
-  <!-- Sticky Header -->
-  <header class="header">
-    <nav class="nav">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="hero-overlay">
-      <h1>Emiliano VB</h1>
-    </div>
-  </section>
-
-  <!-- Summary Button + Logos -->
-  <section class="summary-button">
-    <div class="logo-placeholder"></div>
-    <button>Get a 2-Minute Summary</button>
-    <div class="logo-placeholder"></div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects" class="projects">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <a class="project" href="#">
-        <div class="project-img"></div>
-        <h3>Project One</h3>
-        <p>Short description of project one.</p>
-      </a>
-      <a class="project" href="#">
-        <div class="project-img"></div>
-        <h3>Project Two</h3>
-        <p>Short description of project two.</p>
-      </a>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section id="experience" class="experience">
-    <h2>Experience</h2>
-
-    <div class="experience-entry">
-      <h3>Mechanical Engineering Intern - Caterpillar</h3>
-      <p>Worked on automation and robotic systems for industrial manufacturing. Designed and improved components using CAD and simulation tools.</p>
-    </div>
-    <div class="experience-entry">
-      <h3>Lead Engineer - Columbia Robotics Team</h3>
-      <p>Led design and development of autonomous lunar and aerial robots, integrating mechanical, electrical, and software subsystems.</p>
-    </div>
-
-    <h3>Education</h3>
-    <div class="education-entry">
-      <h4>Columbia University - B.S. in Mechanical Engineering</h4>
-      <p>2021 – 2025</p>
-    </div>
-
-    <h3>Certifications</h3>
-    <div class="certification-entry">
-      <h4>Certified SolidWorks Professional</h4>
-      <p>Issued by Dassault Systèmes</p>
-    </div>
-    <div class="certification-entry">
-      <h4>MATLAB Onramp</h4>
-      <p>Issued by MathWorks</p>
-    </div>
-  </section>
-
-  <!-- About Me Section -->
-  <section id="about" class="about">
-    <h2>About Me</h2>
-    <div class="about-container">
-      <div class="about-photo"></div>
-      <div class="about-text">
-        <p>Hi! I'm Emiliano, a mechanical engineer with a passion for robotics, automation, and creative problem solving. I build systems that blend hardware and software for impactful results.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact">
-    <h2>Contact</h2>
-    <form class="contact-form">
-      <input type="text" placeholder="Name" required />
-      <input type="email" placeholder="Email" required />
-      <textarea placeholder="Message" required></textarea>
-      <button type="submit">Send</button>
-    </form>
-    <div class="social-links">
-      <a href="#">LinkedIn</a>
-      <a href="#">GitHub</a>
-      <a href="#">Email</a>
-    </div>
-  </section>
-
-  <script>
-    // Placeholder for future interactivity
-  </script>
-</body>
-</html>
