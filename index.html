@@ -105,17 +105,18 @@
     }
 
     .project-grid {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
-      justify-content: center;
-      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 10px;
     }
 
     .project {
       background: white;
       text-align: center;
       padding: 20px;
-      width: 300px;
       text-decoration: none;
       color: inherit;
       border-radius: 10px;
