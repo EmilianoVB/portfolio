@@ -191,27 +191,33 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 24px;
+      gap: 32px;
     }
-    .summary-button .logo-placeholder {
-      width: 60px;
-      height: 60px;
-      background: black;
-      border-radius: 12px;
+    .logo-group {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .logo-group img {
+      height: 40px;
+      width: auto;
+      filter: grayscale(100%);
     }
     .summary-button button {
-      padding: 12px 24px;
-      font-size: 1rem;
+      padding: 8px 16px;
+      font-size: 12px;
       font-weight: 600;
-      border: none;
-      border-radius: 6px;
-      background-color: #111;
-      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: 1px solid black;
+      background: white;
+      color: black;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
     .summary-button button:hover {
-      background-color: #333;
+      background: black;
+      color: white;
     }
     .projects {
       padding: 60px 20px;
@@ -335,9 +341,15 @@
   </section>
 
   <section class="summary-button">
-    <div class="logo-placeholder"></div>
-    <button>Get a 2-Minute Summary</button>
-    <div class="logo-placeholder"></div>
+    <div class="logo-group">
+      <img src="assets/company-logo-1.svg" alt="Company Logo 1">
+      <img src="assets/company-logo-2.svg" alt="Company Logo 2">
+    </div>
+    <button>Get 2-Minute Summary</button>
+    <div class="logo-group">
+      <img src="assets/org-logo-1.svg" alt="Organization Logo 1">
+      <img src="assets/org-logo-2.svg" alt="Organization Logo 2">
+    </div>
   </section>
 
   <section id="projects" class="projects">
