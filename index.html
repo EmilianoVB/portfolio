@@ -106,10 +106,11 @@
       width: 100px;
       height: 100px;
       position: absolute;
-      bottom: 40px;
+      bottom: 60px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, 0);
       transition: all 0.4s ease;
+      z-index: 2;
     }
 
     .arrow-container:hover {
@@ -117,15 +118,15 @@
     }
 
     .arrow-container:hover .arrow {
-      top: 50%;
+      transform: translateY(-5px);
     }
 
     .arrow-container:hover .arrow:before {
-      transform: translate(-50%, -50%) rotateZ(-30deg);
+      transform: translate(-50%, -50%) rotateZ(-45deg);
     }
 
     .arrow-container:hover .arrow:after {
-      transform: translate(-50%, -50%) rotateZ(30deg);
+      transform: translate(-50%, -50%) rotateZ(45deg);
     }
 
     .arrow {
@@ -146,6 +147,7 @@
       height: 50px;
       border-radius: 10px;
       transform: translate(-50%, -50%) rotateZ(-45deg);
+      pointer-events: none;
     }
 
     .arrow:after {
@@ -155,17 +157,20 @@
 
     .arrow:nth-child(1) {
       opacity: 0.3;
-      top: 35%;
+      top: 0;
+      transition: transform 0.2s ease;
     }
 
     .arrow:nth-child(2) {
       opacity: 0.6;
-      top: 55%;
+      top: 15px;
+      transition: transform 0.2s ease 0.1s;
     }
 
     .arrow:nth-child(3) {
       opacity: 0.9;
-      top: 75%;
+      top: 30px;
+      transition: transform 0.2s ease 0.2s;
     }
     .summary-button {
       margin: 40px 0;
