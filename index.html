@@ -163,20 +163,23 @@
       margin-left: -1px;
     }
   
-      .timeline-item {
-        padding: 10px 40px;
-        position: relative;
-        width: 50%;
-        box-sizing: border-box;
+      .timeline-item {        padding: 10px 40px;        position: relative;        width: 50%;        box-sizing: border-box;      }
+
+      .timeline-item::before {
+        content: '';        position: absolute;        width: 40px;        height: 2px;        background: #111;        top: 50%;        transform: translateY(-50%);
       }
-  
-      .timeline-item.left {
+
+      .timeline-item.left::before {
+        right: 0;
+      }
+
+      .timeline-item.right::before {
         left: 0;
       }
   
-      .timeline-item.right {
-        left: 50%;
-      }
+      .timeline-item.left {        left: 0;        padding-right: 80px;      }
+  
+      .timeline-item.right {        left: 50%;        padding-left: 80px;      }
   
       .content {
         padding: 20px;
