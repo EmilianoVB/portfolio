@@ -6,6 +6,7 @@
   <title>Emiliano's Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
     * {
       box-sizing: border-box;
     }
@@ -57,17 +58,46 @@
       color: #aaa;
     }
     .hero {
-      height: 66vh;
-      background: black;
+      height: 100vh;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      overflow: hidden;
     }
-    .hero-overlay h1 {
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(60%) contrast(110%) grayscale(20%);
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content h1 {
       color: white;
-      font-size: 4.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 6vw, 5rem);
       font-weight: 700;
+      letter-spacing: -0.5px;
       margin: 0;
     }
     .summary-button {
@@ -204,7 +234,11 @@
   </header>
 
   <section id="home" class="hero">
-    <div class="hero-overlay">
+    <video class="hero-video" autoplay loop muted playsinline>
+      <source src="assets/hero-background.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
       <h1>Emiliano VB</h1>
     </div>
   </section>
