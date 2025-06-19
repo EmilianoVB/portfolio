@@ -144,24 +144,24 @@
       font-size: 0.95rem;
       color: #555;
     }
-    <style>
-      .timeline {
-        position: relative;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 40px 20px;
-      }
-  
-      .timeline::after {
-        content: '';
-        position: absolute;
-        width: 2px;
-        background: #111;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        margin-left: -1px;
-      }
+    /* Move timeline styles here, outside of the nested style tag */
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      background: #111;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -1px;
+    }
   
       .timeline-item {
         padding: 10px 40px;
@@ -337,7 +337,8 @@
     </div>
   </section>
   
-  <style>
+  <!-- Remove the misplaced <style> tag containing JavaScript and replace with proper <script> tag -->
+  <script>
     const sectionObserver = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -362,9 +363,9 @@
         }
       });
     }, 3000);
-  </style>
-  </body>
-  </html>
+  </script>
+</body>
+</html>
 
   <script>
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -376,4 +377,66 @@
       });
     });
   </script>
+
+  <style>
+    .about {
+      padding: 60px 20px;
+      background: white;
+    }
+
+    .about-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-photo {
+      width: 300px;
+      height: 300px;
+      background: #f0f0f0;
+      border-radius: 50%;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .contact {
+      padding: 60px 20px;
+      background: #f9f9f9;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    .contact-form button {
+      padding: 12px 24px;
+      background: #111;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .social-links {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+  </style>
   
