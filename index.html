@@ -307,6 +307,29 @@
       margin-bottom: 40px;
     }
 
+    /* Stagger the cards vertically */
+    .timeline-item:nth-child(2) {
+      margin-top: 60px;
+    }
+    .timeline-item:nth-child(3) {
+      margin-top: 120px;
+    }
+    .timeline-item:nth-child(4) {
+      margin-top: 180px;
+    }
+    .timeline-item:nth-child(5) {
+      margin-top: 240px;
+    }
+    .timeline-item:nth-child(6) {
+      margin-top: 300px;
+    }
+    .timeline-item:nth-child(7) {
+      margin-top: 360px;
+    }
+    .timeline-item:nth-child(8) {
+      margin-top: 420px;
+    }
+
     .timeline-item:nth-child(odd) {
       justify-self: end;
       padding-right: 40px;
@@ -420,6 +443,10 @@
         left: 20px;
       }
 
+      .timeline-item:nth-child(n) {
+        margin-top: 0 !important;
+      }
+
       .timeline-item:nth-child(odd),
       .timeline-item:nth-child(even) {
         justify-self: start;
@@ -438,6 +465,462 @@
       .timeline-item:nth-child(even)::after {
         left: -26px;
         right: auto;
+      }
+    }
+
+    .about {
+      padding: 60px 20px;
+      background: white;
+    }
+
+    .about h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+    }
+
+    .about-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+    }
+
+    .about-photo {
+      width: 200px;
+      height: 200px;
+      background: #f0f0f0;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #374151;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .about-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+      
+      .about-photo {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .about-text p {
+        font-size: 1rem;
+        text-align: center;
+      }
+    }
+
+    .contact {
+      padding: 60px 20px;
+      background: #f9f9f9;
+    }
+
+    .contact h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      border: 1px solid #d1d5db;
+      padding: 8px 12px;
+      font-size: 14px;
+      border-radius: 4px;
+      background: white;
+      font-family: inherit;
+    }
+
+    .contact-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .contact-form button {
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: 1px solid black;
+      background: white;
+      color: black;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+
+    .contact-form button:hover {
+      background: black;
+      color: white;
+    }
+
+    .contact-form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .form-feedback {
+      text-align: center;
+      font-size: 14px;
+      padding: 8px;
+      border-radius: 4px;
+      min-height: 20px;
+    }
+
+    .form-feedback.success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    .form-feedback.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .social-links {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-links a {
+      color: #374151;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .social-links a:hover {
+      color: #111;
+    }
+
+    .education {
+      padding: 60px 20px 0 20px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .education h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+    }
+    .education-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 75%;
+      min-width: 320px;
+      max-width: 900px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 24px 32px;
+      box-sizing: border-box;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      gap: 32px;
+    }
+    .education-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 2;
+    }
+    .university {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #111;
+      margin-bottom: 8px;
+    }
+    .degree {
+      font-size: 1.05rem;
+      color: #374151;
+      font-weight: 500;
+    }
+    .education-divider {
+      width: 1px;
+      height: 48px;
+      background: #e5e7eb;
+      margin: 0 32px;
+      border-radius: 1px;
+      align-self: stretch;
+    }
+    .education-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      flex: 1.2;
+      min-width: 180px;
+    }
+    .gpa-honors {
+      font-size: 1rem;
+      color: #374151;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .edu-desc {
+      font-size: 0.95rem;
+      color: #6b7280;
+      font-style: italic;
+      text-align: right;
+    }
+    @media (max-width: 900px) {
+      .education-card {
+        width: 98%;
+        padding: 18px 10px;
+        gap: 16px;
+      }
+      .education-divider {
+        margin: 0 12px;
+        height: 36px;
+      }
+    }
+    @media (max-width: 600px) {
+      .education-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 16px 6px;
+      }
+      .education-divider {
+        display: none;
+      }
+      .education-right {
+        align-items: flex-start;
+        text-align: left;
+        min-width: 0;
+      }
+      .edu-desc {
+        text-align: left;
+      }
+    }
+
+    .certifications {
+      padding: 60px 20px 0 20px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .certifications h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+    }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+      width: 80%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .cert-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      border-radius: 10px;
+      padding: 24px 24px 20px 24px;
+      box-sizing: border-box;
+      min-height: 180px;
+      transition: border-color 0.2s, transform 0.18s;
+      cursor: default;
+    }
+    .cert-card:hover {
+      border-color: #a3a3a3;
+      transform: scale(1.025);
+    }
+    .cert-icon {
+      margin-bottom: 18px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cert-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #111;
+      margin-bottom: 6px;
+    }
+    .cert-issuer {
+      font-size: 0.97rem;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    .cert-date {
+      font-size: 0.92rem;
+      color: #9ca3af;
+      margin-top: auto;
+    }
+    @media (max-width: 900px) {
+      .cert-grid {
+        width: 98%;
+        gap: 18px;
+      }
+    }
+    @media (max-width: 600px) {
+      .cert-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+      .cert-card {
+        padding: 16px 10px 14px 10px;
+        min-height: 120px;
+      }
+    }
+
+    .affiliations {
+      padding: 60px 20px 0 20px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .affiliations h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+    }
+    .affil-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      width: 60%;
+      min-width: 320px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .affil-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      border-radius: 10px;
+      padding: 32px 0;
+      min-height: 110px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #111;
+      letter-spacing: 2px;
+      transition: border-color 0.2s, transform 0.18s;
+      cursor: default;
+    }
+    .affil-card:hover {
+      border-color: #a3a3a3;
+      transform: scale(1.025);
+    }
+    @media (max-width: 900px) {
+      .affil-grid {
+        width: 98%;
+        gap: 18px;
+      }
+    }
+    @media (max-width: 600px) {
+      .affil-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+      .affil-card {
+        padding: 20px 0;
+        min-height: 80px;
+        font-size: 1.3rem;
+      }
+    }
+
+    .footer {
+      padding: 40px 20px;
+      background: #f9f9f9;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .footer-divider {
+      border: none;
+      height: 1px;
+      background: #d1d5db;
+      margin: 0 0 24px 0;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #6b7280;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #374151;
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: #6b7280;
+      font-family: 'Courier New', monospace;
+    }
+
+    @media (max-width: 600px) {
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      
+      .footer-links {
+        gap: 16px;
       }
     }
   </style>
@@ -627,18 +1110,19 @@
     <div class="about-container">
       <div class="about-photo"></div>
       <div class="about-text">
-        <p>Hi! I'm Emiliano, a mechanical engineer with a passion for robotics, automation, and creative problem solving. I build systems that blend hardware and software for impactful results.</p>
+        <p>Mechanical engineer focused on robotics, automation, and controls. I build reliable, modular systems with clean mechanical architectures. My work spans from autonomous vehicles to industrial automation, emphasizing robust design and practical implementation. I enjoy solving problems that matter, whether that's improving manufacturing efficiency or advancing robotic capabilities for real-world applications.</p>
       </div>
     </div>
   </section>
   
   <section id="contact" class="contact">
     <h2>Contact</h2>
-    <form class="contact-form">
+    <form class="contact-form" onsubmit="handleContactSubmit(event)">
       <input type="text" placeholder="Name" required />
       <input type="email" placeholder="Email" required />
       <textarea placeholder="Message" required></textarea>
-      <button type="submit">Send</button>
+      <button type="submit">Send Message</button>
+      <div id="form-feedback" class="form-feedback"></div>
     </form>
     <div class="social-links">
       <a href="#">LinkedIn</a>
@@ -646,8 +1130,79 @@
       <a href="#">Email</a>
     </div>
   </section>
-  
-  <!-- Remove the misplaced <style> tag containing JavaScript and replace with proper <script> tag -->
+
+  <section id="education" class="education">
+    <h2>Education</h2>
+    <div class="education-card">
+      <div class="education-left">
+        <div class="university">Columbia University</div>
+        <div class="degree">B.S. in Mechanical Engineering &nbsp; | &nbsp; 2021–2025</div>
+      </div>
+      <div class="education-divider"></div>
+      <div class="education-right">
+        <div class="gpa-honors">GPA: 3.92 &nbsp; | &nbsp; Dean's List</div>
+        <div class="edu-desc">Robotics, automation, and manufacturing focus.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications" class="certifications">
+    <h2>Certifications</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon">
+          <!-- Example SVG icon -->
+          <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="14" stroke="#6b7280" stroke-width="2" fill="#f3f4f6"/></svg>
+        </div>
+        <div class="cert-title">Certified SolidWorks Associate (CSWA)</div>
+        <div class="cert-issuer">Dassault Systèmes</div>
+        <div class="cert-date">Issued: 2023</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">
+          <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="20" height="20" rx="4" stroke="#6b7280" stroke-width="2" fill="#f3f4f6"/></svg>
+        </div>
+        <div class="cert-title">Python for Everybody</div>
+        <div class="cert-issuer">Coursera / University of Michigan</div>
+        <div class="cert-date">Issued: 2022</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">
+          <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="16,4 28,28 4,28" stroke="#6b7280" stroke-width="2" fill="#f3f4f6"/></svg>
+        </div>
+        <div class="cert-title">Machine Learning</div>
+        <div class="cert-issuer">Coursera / Stanford University</div>
+        <div class="cert-date">Issued: 2023</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="affiliations" class="affiliations">
+    <h2>Affiliations</h2>
+    <div class="affil-grid">
+      <div class="affil-card">HSF</div>
+      <div class="affil-card">SHPE</div>
+      <div class="affil-card">CAA</div>
+      <div class="affil-card">CEAA</div>
+      <div class="affil-card">ASME</div>
+      <div class="affil-card">LAACU</div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <hr class="footer-divider">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+        <a href="#">Email</a>
+      </div>
+      <div class="footer-note">
+        Built with HTML, CSS & JavaScript
+      </div>
+    </div>
+  </footer>
+
   <script>
     const sectionObserver = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
@@ -674,8 +1229,6 @@
       });
     }, 3000);
   </script>
-</body>
-</html>
 
   <script>
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -694,66 +1247,6 @@
       });
     });
   </script>
-
-  <style>
-    .about {
-      padding: 60px 20px;
-      background: white;
-    }
-
-    .about-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .about-photo {
-      width: 300px;
-      height: 300px;
-      background: #f0f0f0;
-      border-radius: 50%;
-    }
-
-    .about-text {
-      flex: 1;
-    }
-
-    .contact {
-      padding: 60px 20px;
-      background: #f9f9f9;
-    }
-
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-    }
-
-    .contact-form button {
-      padding: 12px 24px;
-      background: #111;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .social-links {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-  </style>
+</body>
+</html>
   
