@@ -268,203 +268,219 @@
     }
     /* Move timeline styles here, outside of the nested style tag */
     .experience {
-      padding: 40px 20px;
-      background: white;
+      padding: 60px 20px;
+      background: #fafafa;
     }
 
     .experience h2 {
       text-align: center;
       font-size: 2.2rem;
-      margin-bottom: 30px;
+      margin-bottom: 50px;
       font-weight: 700;
+      color: #1f2937;
     }
 
     .timeline {
       position: relative;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      padding: 20px 20px;
+      padding: 40px 0;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      width: 2px;
-      background: #111;
+      width: 3px;
+      background: linear-gradient(to bottom, #e5e7eb 0%, #9ca3af 50%, #e5e7eb 100%);
       top: 0;
       bottom: 0;
       left: 50%;
-      margin-left: -1px;
+      margin-left: -1.5px;
       z-index: 1;
     }
 
     .timeline-item {
       position: relative;
-      max-width: 500px;
-      margin-bottom: 20px;
-    }
-
-    /* Increased staggering for more pronounced zigzag */
-    .timeline-item:nth-child(2) {
-      margin-top: 80px;
-    }
-    .timeline-item:nth-child(3) {
-      margin-top: 160px;
-    }
-    .timeline-item:nth-child(4) {
-      margin-top: 240px;
-    }
-    .timeline-item:nth-child(5) {
-      margin-top: 320px;
-    }
-    .timeline-item:nth-child(6) {
-      margin-top: 400px;
-    }
-    .timeline-item:nth-child(7) {
-      margin-top: 480px;
-    }
-    .timeline-item:nth-child(8) {
-      margin-top: 560px;
+      margin-bottom: 60px;
+      width: 45%;
+      max-width: 400px;
     }
 
     .timeline-item:nth-child(odd) {
-      justify-self: end;
-      padding-right: 40px;
+      left: 0;
+      padding-right: 60px;
     }
 
     .timeline-item:nth-child(even) {
-      justify-self: start;
-      padding-left: 40px;
+      left: 55%;
+      padding-left: 60px;
     }
 
     .timeline-item::before {
       content: '';
       position: absolute;
-      width: 40px;
+      width: 50px;
       height: 2px;
-      background: #111;
+      background: #9ca3af;
       top: 50%;
       transform: translateY(-50%);
       z-index: 2;
     }
 
     .timeline-item:nth-child(odd)::before {
-      right: -40px;
+      right: -50px;
     }
 
     .timeline-item:nth-child(even)::before {
-      left: -40px;
+      left: -50px;
     }
 
     .timeline-item::after {
       content: '';
       position: absolute;
-      width: 12px;
-      height: 12px;
-      background: #111;
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border: 3px solid #9ca3af;
       border-radius: 50%;
       top: 50%;
       transform: translateY(-50%);
       z-index: 3;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .timeline-item:nth-child(odd)::after {
-      right: -46px;
+      right: -58px;
     }
 
     .timeline-item:nth-child(even)::after {
-      left: -46px;
+      left: -58px;
+    }
+
+    .date-label {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #6b7280;
+      background: #f9fafb;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+      white-space: nowrap;
+      z-index: 4;
+    }
+
+    .timeline-item:nth-child(odd) .date-label {
+      right: -120px;
+    }
+
+    .timeline-item:nth-child(even) .date-label {
+      left: -120px;
     }
 
     .content {
-      padding: 20px;
-      background: white;
+      padding: 24px;
+      background: #fff;
       border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      transition: box-shadow 0.2s ease;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      border-radius: 12px 12px 0 0;
     }
 
     .content:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
     }
 
     .content h3 {
       font-family: 'Courier New', monospace;
       font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin: 0 0 8px 0;
-      color: #111;
+      letter-spacing: 0.8px;
+      margin: 0 0 12px 0;
+      color: #1f2937;
     }
 
     .content .employer {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: #6b7280;
-      margin: 0 0 12px 0;
-      font-weight: 500;
+      margin: 0 0 16px 0;
+      font-weight: 600;
     }
 
     .content .description {
-      font-size: 0.9rem;
-      line-height: 1.5;
+      font-size: 0.95rem;
+      line-height: 1.6;
       color: #374151;
-      margin: 0 0 16px 0;
+      margin: 0 0 20px 0;
     }
 
     .skills {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 12px;
+      gap: 8px;
+      margin-top: 16px;
     }
 
     .skill-tag {
       background: #f3f4f6;
       color: #374151;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 0.75rem;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
       font-weight: 500;
       border: 1px solid #e5e7eb;
+      transition: all 0.2s ease;
+    }
+
+    .skill-tag:hover {
+      background: #e5e7eb;
+      transform: scale(1.05);
     }
 
     @media (max-width: 768px) {
-      .timeline {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
       .timeline::before {
-        left: 20px;
+        left: 30px;
       }
 
-      .timeline-item:nth-child(odd),
-      .timeline-item:nth-child(even) {
-        justify-self: start;
-        padding-left: 50px;
-        padding-right: 0;
-        max-width: 100%;
+      .timeline-item {
+        width: calc(100% - 80px);
+        left: 80px !important;
+        padding-left: 40px !important;
+        padding-right: 0 !important;
+        margin-bottom: 40px;
       }
 
-      .timeline-item:nth-child(odd)::before,
-      .timeline-item:nth-child(even)::before {
-        left: -30px;
-        right: auto;
+      .timeline-item::before {
+        left: -40px !important;
+        right: auto !important;
+        width: 30px;
       }
 
-      .timeline-item:nth-child(odd)::after,
-      .timeline-item:nth-child(even)::after {
-        left: -26px;
-        right: auto;
+      .timeline-item::after {
+        left: -38px !important;
+        right: auto !important;
       }
 
-      .timeline-item:nth-child(n) {
-        margin-top: 0 !important;
+      .date-label {
+        left: -120px !important;
+        right: auto !important;
+        font-size: 0.8rem;
       }
     }
 
@@ -972,6 +988,7 @@
     <h2>Experience</h2>
     <div class="timeline">
       <div class="timeline-item">
+        <div class="date-label">Jan 2025</div>
         <div class="content">
           <h3>Undergraduate Researcher</h3>
           <p class="employer">ROAR Lab, Columbia University<br>Jan 2025 – Present</p>
@@ -985,6 +1002,7 @@
         </div>
       </div>
       <div class="timeline-item">
+        <div class="date-label">Sep 2024</div>
         <div class="content">
           <h3>Lead Mechanical Engineer</h3>
           <p class="employer">NASA Lunabotics – Columbia Space Initiative<br>Sep 2024 – Present</p>
@@ -998,6 +1016,7 @@
         </div>
       </div>
       <div class="timeline-item">
+        <div class="date-label">May 2024</div>
         <div class="content">
           <h3>MSOD Intern, Automation Team</h3>
           <p class="employer">Caterpillar Inc.<br>May 2024 – Aug 2024</p>
@@ -1011,6 +1030,7 @@
         </div>
       </div>
       <div class="timeline-item">
+        <div class="date-label">May 2023</div>
         <div class="content">
           <h3>Mechanical Engineering Co-op</h3>
           <p class="employer">Copeland<br>May 2023 – Aug 2023</p>
@@ -1024,6 +1044,7 @@
         </div>
       </div>
       <div class="timeline-item">
+        <div class="date-label">May 2023</div>
         <div class="content">
           <h3>Advanced Manufacturing Co-op</h3>
           <p class="employer">Emerson<br>May 2023 – Aug 2023</p>
@@ -1037,6 +1058,7 @@
         </div>
       </div>
       <div class="timeline-item">
+        <div class="date-label">Sep 2021</div>
         <div class="content">
           <h3>Powertrain Engineer</h3>
           <p class="employer">Columbia Formula Racing<br>Sep 2021 – May 2024</p>
@@ -1050,6 +1072,7 @@
         </div>
       </div>
       <div class="timeline-item">
+        <div class="date-label">Jun 2021</div>
         <div class="content">
           <h3>Project Manager</h3>
           <p class="employer">Global Prep Academy<br>Jun 2021 – Sep 2021</p>
@@ -1063,6 +1086,7 @@
         </div>
       </div>
       <div class="timeline-item">
+        <div class="date-label">Feb 2021</div>
         <div class="content">
           <h3>Project Manager – STEM Global Brigades</h3>
           <p class="employer">Global Brigades, Inc.<br>Feb 2021 – Jun 2021</p>
