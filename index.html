@@ -268,14 +268,14 @@
     }
     /* Move timeline styles here, outside of the nested style tag */
     .experience {
-      padding: 60px 20px;
+      padding: 40px 20px;
       background: white;
     }
 
     .experience h2 {
       text-align: center;
       font-size: 2.2rem;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       font-weight: 700;
     }
 
@@ -285,8 +285,8 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      padding: 40px 20px;
+      gap: 40px;
+      padding: 20px 20px;
     }
 
     .timeline::before {
@@ -304,30 +304,30 @@
     .timeline-item {
       position: relative;
       max-width: 500px;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
-    /* Stagger the cards vertically */
+    /* Increased staggering for more pronounced zigzag */
     .timeline-item:nth-child(2) {
-      margin-top: 60px;
+      margin-top: 80px;
     }
     .timeline-item:nth-child(3) {
-      margin-top: 120px;
+      margin-top: 160px;
     }
     .timeline-item:nth-child(4) {
-      margin-top: 180px;
-    }
-    .timeline-item:nth-child(5) {
       margin-top: 240px;
     }
+    .timeline-item:nth-child(5) {
+      margin-top: 320px;
+    }
     .timeline-item:nth-child(6) {
-      margin-top: 300px;
+      margin-top: 400px;
     }
     .timeline-item:nth-child(7) {
-      margin-top: 360px;
+      margin-top: 480px;
     }
     .timeline-item:nth-child(8) {
-      margin-top: 420px;
+      margin-top: 560px;
     }
 
     .timeline-item:nth-child(odd) {
@@ -380,7 +380,7 @@
     }
 
     .content {
-      padding: 24px;
+      padding: 20px;
       background: white;
       border: 1px solid #e5e7eb;
       border-radius: 8px;
@@ -436,15 +436,11 @@
     @media (max-width: 768px) {
       .timeline {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 20px;
       }
 
       .timeline::before {
         left: 20px;
-      }
-
-      .timeline-item:nth-child(n) {
-        margin-top: 0 !important;
       }
 
       .timeline-item:nth-child(odd),
@@ -465,6 +461,10 @@
       .timeline-item:nth-child(even)::after {
         left: -26px;
         right: auto;
+      }
+
+      .timeline-item:nth-child(n) {
+        margin-top: 0 !important;
       }
     }
 
@@ -537,29 +537,14 @@
       font-weight: 700;
     }
 
-    .contact-form {
+    .contact-mailto {
       max-width: 600px;
       margin: 0 auto;
-      display: grid;
-      gap: 16px;
+      display: flex;
+      justify-content: center;
     }
 
-    .contact-form input,
-    .contact-form textarea {
-      border: 1px solid #d1d5db;
-      padding: 8px 12px;
-      font-size: 14px;
-      border-radius: 4px;
-      background: white;
-      font-family: inherit;
-    }
-
-    .contact-form textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .contact-form button {
+    .mailto-button {
       padding: 8px 16px;
       font-size: 12px;
       font-weight: 600;
@@ -574,34 +559,9 @@
       font-family: inherit;
     }
 
-    .contact-form button:hover {
+    .mailto-button:hover {
       background: black;
       color: white;
-    }
-
-    .contact-form button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .form-feedback {
-      text-align: center;
-      font-size: 14px;
-      padding: 8px;
-      border-radius: 4px;
-      min-height: 20px;
-    }
-
-    .form-feedback.success {
-      background: #d1fae5;
-      color: #065f46;
-      border: 1px solid #a7f3d0;
-    }
-
-    .form-feedback.error {
-      background: #fee2e2;
-      color: #991b1b;
-      border: 1px solid #fecaca;
     }
 
     .social-links {
@@ -1218,12 +1178,9 @@
 
   <section id="contact" class="contact">
     <h2>Contact</h2>
-    <form class="contact-form" action="https://formsubmit.co/ev2492@caa.columbia.edu" method="POST">
-      <input type="text" name="name" placeholder="Name" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <textarea name="message" placeholder="Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+    <div class="contact-mailto">
+      <a href="mailto:ev2492@caa.columbia.edu" class="mailto-button">Send Email</a>
+    </div>
     <div class="social-links">
       <a href="#">LinkedIn</a>
       <a href="#">GitHub</a>
