@@ -1218,12 +1218,11 @@
 
   <section id="contact" class="contact">
     <h2>Contact</h2>
-    <form class="contact-form" onsubmit="handleContactSubmit(event)">
-      <input type="text" placeholder="Name" required />
-      <input type="email" placeholder="Email" required />
-      <textarea placeholder="Message" required></textarea>
+    <form class="contact-form" action="https://formsubmit.co/ev2492@caa.columbia.edu" method="POST">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <textarea name="message" placeholder="Message" required></textarea>
       <button type="submit">Send Message</button>
-      <div id="form-feedback" class="form-feedback"></div>
     </form>
     <div class="social-links">
       <a href="#">LinkedIn</a>
