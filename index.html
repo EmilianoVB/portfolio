@@ -267,14 +267,29 @@
       color: #555;
     }
     /* Move timeline styles here, outside of the nested style tag */
+    .experience {
+      padding: 60px 20px;
+      background: white;
+    }
+
+    .experience h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+    }
+
     .timeline {
       position: relative;
       max-width: 1200px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
       padding: 40px 20px;
     }
 
-    .timeline::after {
+    .timeline::before {
       content: '';
       position: absolute;
       width: 2px;
@@ -283,33 +298,148 @@
       bottom: 0;
       left: 50%;
       margin-left: -1px;
+      z-index: 1;
     }
-  
-      .timeline-item {        padding: 10px 40px;        position: relative;        width: 50%;        box-sizing: border-box;      }
 
-      .timeline-item::before {
-        content: '';        position: absolute;        width: 40px;        height: 2px;        background: #111;        top: 50%;        transform: translateY(-50%);
+    .timeline-item {
+      position: relative;
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+
+    .timeline-item:nth-child(odd) {
+      justify-self: end;
+      padding-right: 40px;
+    }
+
+    .timeline-item:nth-child(even) {
+      justify-self: start;
+      padding-left: 40px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 2px;
+      background: #111;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .timeline-item:nth-child(odd)::before {
+      right: -40px;
+    }
+
+    .timeline-item:nth-child(even)::before {
+      left: -40px;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #111;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+    }
+
+    .timeline-item:nth-child(odd)::after {
+      right: -46px;
+    }
+
+    .timeline-item:nth-child(even)::after {
+      left: -46px;
+    }
+
+    .content {
+      padding: 24px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .content:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .content h3 {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 8px 0;
+      color: #111;
+    }
+
+    .content .employer {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin: 0 0 12px 0;
+      font-weight: 500;
+    }
+
+    .content .description {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #374151;
+      margin: 0 0 16px 0;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .skill-tag {
+      background: #f3f4f6;
+      color: #374151;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 768px) {
+      .timeline {
+        grid-template-columns: 1fr;
+        gap: 30px;
       }
 
-      .timeline-item.left::before {
-        right: 0;
+      .timeline::before {
+        left: 20px;
       }
 
-      .timeline-item.right::before {
-        left: 0;
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
+        justify-self: start;
+        padding-left: 50px;
+        padding-right: 0;
+        max-width: 100%;
       }
-  
-      .timeline-item.left {        left: 0;        padding-right: 80px;      }
-  
-      .timeline-item.right {        left: 50%;        padding-left: 80px;      }
-  
-      .content {
-        padding: 20px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+      .timeline-item:nth-child(odd)::before,
+      .timeline-item:nth-child(even)::before {
+        left: -30px;
+        right: auto;
       }
-    </style>
+
+      .timeline-item:nth-child(odd)::after,
+      .timeline-item:nth-child(even)::after {
+        left: -26px;
+        right: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -385,68 +515,108 @@
   <section id="experience" class="experience">
     <h2>Experience</h2>
     <div class="timeline">
-      <div class="timeline-item left">
+      <div class="timeline-item">
         <div class="content">
           <h3>Undergraduate Researcher</h3>
-          <p><strong>ROAR Lab, Columbia University</strong><br>Jan 2025 – Present</p>
-          <p>Designed robotic exoskeleton components for cerebral palsy rehabilitation. Developed control systems with sensor feedback for patient comfort.</p>
-          <span>Robotics | Sensor Integration | Mechanical Design | Control Systems</span>
+          <p class="employer">ROAR Lab, Columbia University<br>Jan 2025 – Present</p>
+          <p class="description">Designed robotic exoskeleton components for cerebral palsy rehabilitation. Developed control systems with sensor feedback for patient comfort.</p>
+          <div class="skills">
+            <span class="skill-tag">Robotics</span>
+            <span class="skill-tag">Sensor Integration</span>
+            <span class="skill-tag">Mechanical Design</span>
+            <span class="skill-tag">Control Systems</span>
+          </div>
         </div>
       </div>
-      <div class="timeline-item right">
+      <div class="timeline-item">
         <div class="content">
           <h3>Lead Mechanical Engineer</h3>
-          <p><strong>NASA Lunabotics – Columbia Space Initiative</strong><br>Sep 2024 – Present</p>
-          <p>Led design and fabrication of an autonomous robotic excavator. Managed multidisciplinary team and integrated mechanical and electrical systems.</p>
-          <span>Project Management | System Integration | 3D CAD | Finite Element Analysis (FEA)</span>
+          <p class="employer">NASA Lunabotics – Columbia Space Initiative<br>Sep 2024 – Present</p>
+          <p class="description">Led design and fabrication of an autonomous robotic excavator. Managed multidisciplinary team and integrated mechanical and electrical systems.</p>
+          <div class="skills">
+            <span class="skill-tag">Project Management</span>
+            <span class="skill-tag">System Integration</span>
+            <span class="skill-tag">3D CAD</span>
+            <span class="skill-tag">Finite Element Analysis</span>
+          </div>
         </div>
       </div>
-      <div class="timeline-item left">
+      <div class="timeline-item">
         <div class="content">
           <h3>MSOD Intern, Automation Team</h3>
-          <p><strong>Caterpillar Inc.</strong><br>May 2024 – Aug 2024</p>
-          <p>Refactored AutoBagger to boost output 4×. Integrated autonomous robots and conducted safety audits to improve industrial workflows.</p>
-          <span>Automation | Process Improvement | Robotics | Safety Engineering</span>
+          <p class="employer">Caterpillar Inc.<br>May 2024 – Aug 2024</p>
+          <p class="description">Refactored AutoBagger to boost output 4×. Integrated autonomous robots and conducted safety audits to improve industrial workflows.</p>
+          <div class="skills">
+            <span class="skill-tag">Automation</span>
+            <span class="skill-tag">Process Improvement</span>
+            <span class="skill-tag">Robotics</span>
+            <span class="skill-tag">Safety Engineering</span>
+          </div>
         </div>
       </div>
-      <div class="timeline-item right">
+      <div class="timeline-item">
         <div class="content">
           <h3>Mechanical Engineering Co-op</h3>
-          <p><strong>Copeland</strong><br>May 2023 – Aug 2023</p>
-          <p>Engineered liquid desiccant HVAC systems using NX CAD. Supported rapid prototyping and iterative experimental design.</p>
-          <span>HVAC | NX CAD | Rapid Prototyping | Iterative Design</span>
+          <p class="employer">Copeland<br>May 2023 – Aug 2023</p>
+          <p class="description">Engineered liquid desiccant HVAC systems using NX CAD. Supported rapid prototyping and iterative experimental design.</p>
+          <div class="skills">
+            <span class="skill-tag">HVAC</span>
+            <span class="skill-tag">NX CAD</span>
+            <span class="skill-tag">Rapid Prototyping</span>
+            <span class="skill-tag">Iterative Design</span>
+          </div>
         </div>
       </div>
-      <div class="timeline-item left">
+      <div class="timeline-item">
         <div class="content">
           <h3>Advanced Manufacturing Co-op</h3>
-          <p><strong>Emerson</strong><br>May 2023 – Aug 2023</p>
-          <p>Created tools and infrastructure to increase throughput by 30%. Automated inventory management and optimized factory layout.</p>
-          <span>Advanced Manufacturing | Python | Process Automation | Lean Engineering</span>
+          <p class="employer">Emerson<br>May 2023 – Aug 2023</p>
+          <p class="description">Created tools and infrastructure to increase throughput by 30%. Automated inventory management and optimized factory layout.</p>
+          <div class="skills">
+            <span class="skill-tag">Advanced Manufacturing</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Process Automation</span>
+            <span class="skill-tag">Lean Engineering</span>
+          </div>
         </div>
       </div>
-      <div class="timeline-item right">
+      <div class="timeline-item">
         <div class="content">
           <h3>Powertrain Engineer</h3>
-          <p><strong>Columbia Formula Racing</strong><br>Sep 2021 – May 2024</p>
-          <p>Redesigned drivetrain for reduced weight and enhanced durability. Led thermal testing and mechanical analysis.</p>
-          <span>SolidWorks | Mechanical Design | CNC Machining | Thermal Systems</span>
+          <p class="employer">Columbia Formula Racing<br>Sep 2021 – May 2024</p>
+          <p class="description">Redesigned drivetrain for reduced weight and enhanced durability. Led thermal testing and mechanical analysis.</p>
+          <div class="skills">
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Mechanical Design</span>
+            <span class="skill-tag">CNC Machining</span>
+            <span class="skill-tag">Thermal Systems</span>
+          </div>
         </div>
       </div>
-      <div class="timeline-item left">
+      <div class="timeline-item">
         <div class="content">
           <h3>Project Manager</h3>
-          <p><strong>Global Prep Academy</strong><br>Jun 2021 – Sep 2021</p>
-          <p>Taught 20 STEM students and created a 1-week engineering curriculum. Mentored student teams on project development.</p>
-          <span>Teaching | Project Management | STEM Education | Curriculum Design</span>
+          <p class="employer">Global Prep Academy<br>Jun 2021 – Sep 2021</p>
+          <p class="description">Taught 20 STEM students and created a 1-week engineering curriculum. Mentored student teams on project development.</p>
+          <div class="skills">
+            <span class="skill-tag">Teaching</span>
+            <span class="skill-tag">Project Management</span>
+            <span class="skill-tag">STEM Education</span>
+            <span class="skill-tag">Curriculum Design</span>
+          </div>
         </div>
       </div>
-      <div class="timeline-item right">
+      <div class="timeline-item">
         <div class="content">
           <h3>Project Manager – STEM Global Brigades</h3>
-          <p><strong>Global Brigades, Inc.</strong><br>Feb 2021 – Jun 2021</p>
-          <p>Led aqueduct design for Nicaraguan community. Served as translator and liaison with local engineers and stakeholders.</p>
-          <span>EPANET | Engineering Drawings | Spanish Translation | Community Engagement</span>
+          <p class="employer">Global Brigades, Inc.<br>Feb 2021 – Jun 2021</p>
+          <p class="description">Led aqueduct design for Nicaraguan community. Served as translator and liaison with local engineers and stakeholders.</p>
+          <div class="skills">
+            <span class="skill-tag">EPANET</span>
+            <span class="skill-tag">Engineering Drawings</span>
+            <span class="skill-tag">Spanish Translation</span>
+            <span class="skill-tag">Community Engagement</span>
+          </div>
         </div>
       </div>
     </div>
