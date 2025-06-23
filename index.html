@@ -31,16 +31,17 @@
       transform: none !important;
     }
     .header {
-      position: fixed;
+      position: relative;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      transform: none;
       width: 100%;
       max-width: 1200px;
       z-index: 1000;
       background: transparent;
       border: none;
       padding: 0 20px;
+      margin: 0 auto;
     }
     .nav {
       display: flex;
@@ -80,21 +81,8 @@
       border: none;
       transition: color 0.2s;
     }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: #111;
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      transform: translateX(-50%);
-      border-radius: 1px;
-    }
-    .nav-link:hover::after, .nav-link:focus::after {
-      width: 80%;
-      left: 10%;
+    .nav-link:hover, .nav-link:focus {
+      color: #111;
     }
     .nav-link:active {
       color: #555;
@@ -997,22 +985,76 @@
         font-size: 1.1rem;
       }
     }
+    /* Bookmark vertical menu styles */
+    .bookmark-menu {
+      position: fixed;
+      top: 60px;
+      left: 24px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 12px 8px;
+      align-items: center;
+      min-width: 44px;
+      transition: opacity 0.3s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .bookmark-menu.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .bookmark-link {
+      color: #222;
+      text-decoration: none;
+      font-family: 'Montserrat', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 6px 0;
+      border-radius: 8px;
+      transition: background 0.18s, color 0.18s;
+      text-align: center;
+      width: 100%;
+      display: block;
+    }
+    .bookmark-link:hover, .bookmark-link:focus {
+      background: #f3f4f6;
+      color: #111;
+    }
+    @media (max-width: 600px) {
+      .bookmark-menu {
+        left: 4px;
+        top: 8px;
+        padding: 6px 2px;
+        gap: 8px;
+        min-width: 32px;
+      }
+      .bookmark-link {
+        font-size: 9px;
+        padding: 4px 0;
+      }
+    }
   </style>
 </head>
 <body>
-  <header class="header">
-    <nav class="nav">
-      <ul class="nav-list">
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#experience" class="nav-link">Experience</a></li>
-        <li><a href="#credentials" class="nav-link">Credentials</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
   <section id="home" class="hero">
+    <header class="header">
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#credentials" class="nav-link">Credentials</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
     <video class="hero-video" autoplay loop muted playsinline>
       <source src="assets/hero-background.mp4" type="video/mp4">
     </video>
@@ -1026,6 +1068,13 @@
       <div class="arrow"></div>
     </a>
   </section>
+  <div class="bookmark-menu" id="bookmarkMenu">
+    <a href="#projects" class="bookmark-link">Projects</a>
+    <a href="#experience" class="bookmark-link">Experience</a>
+    <a href="#credentials" class="bookmark-link">Credentials</a>
+    <a href="#about" class="bookmark-link">About</a>
+    <a href="#contact" class="bookmark-link">Contact</a>
+  </div>
 
   <section id="summary" class="summary-button">
     <button>Get 2-Minute Summary</button>
@@ -1357,6 +1406,22 @@
         });
       });
     });
+  </script>
+  <script>
+    // Bookmark menu show/hide logic
+    const header = document.querySelector('.header');
+    const bookmarkMenu = document.getElementById('bookmarkMenu');
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          bookmarkMenu.classList.add('visible');
+        } else {
+          bookmarkMenu.classList.remove('visible');
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(header);
   </script>
 </body>
 </html>
