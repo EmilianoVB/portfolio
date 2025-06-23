@@ -27,21 +27,29 @@
       transform: translateY(0);
     }
     .hero {
-      opacity: 1 !important;
-      transform: none !important;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
     }
     .header {
-      position: relative;
+      position: absolute;
       top: 0;
-      left: 0;
-      transform: none;
+      left: 50%;
+      transform: translateX(-50%);
       width: 100%;
       max-width: 1200px;
-      z-index: 1000;
+      z-index: 1;
       background: transparent;
       border: none;
       padding: 0 20px;
       margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .nav {
       display: flex;
@@ -87,16 +95,6 @@
     .nav-link:active {
       color: #555;
     }
-    .hero {
-      height: 100vh;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
-
     .hero-video {
       position: absolute;
       top: 0;
@@ -107,7 +105,6 @@
       filter: brightness(60%) contrast(110%) grayscale(20%);
       z-index: 0;
     }
-
     .hero-overlay {
       position: absolute;
       top: 0;
@@ -118,10 +115,18 @@
       z-index: 1;
     }
     .hero-content {
-      position: relative;
-      z-index: 2;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: auto;
     }
-
     .hero-content h1 {
       color: white;
       font-family: 'Space Grotesk', sans-serif;
@@ -130,7 +135,6 @@
       letter-spacing: -0.5px;
       margin: 0;
     }
-
     .arrow-container {
       display: block;
       width: 100px;
@@ -142,37 +146,30 @@
       transition: all 0.4s ease;
       z-index: 2;
     }
-
     .arrow-container:hover {
       cursor: pointer;
     }
-
     .arrow-container:hover .arrow {
       opacity: 0;
       transform: translateY(20px);
     }
-
     .arrow-container:hover .arrow:nth-child(1) {
       opacity: 1;
       transform: translateY(20px);
     }
-
     .arrow-container:hover .arrow:nth-child(2) {
       opacity: 0;
       transform: translateY(20px);
     }
-
     .arrow-container:hover .arrow:nth-child(3) {
       opacity: 0;
       transform: translateY(20px);
     }
-
     .arrow {
       position: absolute;
       left: 50%;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     .arrow:before,
     .arrow:after {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -187,30 +184,25 @@
       transform: translate(-50%, -50%) rotateZ(-45deg);
       pointer-events: none;
     }
-
     .arrow:after {
       transform-origin: bottom left;
       transform: translate(-50%, -50%) rotateZ(45deg);
     }
-
     .arrow-container:hover .arrow:nth-child(1):before,
     .arrow-container:hover .arrow:nth-child(1):after {
       width: 6px;
       height: 45px;
     }
-
     .arrow:nth-child(1) {
       opacity: 0.3;
       top: 0;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     .arrow:nth-child(2) {
       opacity: 0.6;
       top: 20px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
     }
-
     .arrow:nth-child(3) {
       opacity: 0.9;
       top: 40px;
@@ -296,12 +288,10 @@
       font-size: 0.95rem;
       color: #555;
     }
-    /* Move timeline styles here, outside of the nested style tag */
     .experience {
       padding: 60px 20px;
       background: #fafafa;
     }
-
     .experience h2 {
       text-align: center;
       font-size: 2.2rem;
@@ -309,14 +299,12 @@
       font-weight: 700;
       color: #1f2937;
     }
-
     .timeline {
       position: relative;
       max-width: 1000px;
       margin: 0 auto;
       padding: 40px 0;
     }
-
     .timeline::before {
       content: '';
       position: absolute;
@@ -328,24 +316,20 @@
       margin-left: -1.5px;
       z-index: 1;
     }
-
     .timeline-item {
       position: relative;
       margin-bottom: 60px;
       width: 48%;
       max-width: 500px;
     }
-
     .timeline-item:nth-child(odd) {
       left: 0;
       padding-right: 60px;
     }
-
     .timeline-item:nth-child(even) {
       left: 52%;
       padding-left: 60px;
     }
-
     .timeline-item::before {
       content: '';
       position: absolute;
@@ -356,15 +340,12 @@
       transform: translateY(-50%);
       z-index: 2;
     }
-
     .timeline-item:nth-child(odd)::before {
       right: -50px;
     }
-
     .timeline-item:nth-child(even)::before {
       left: -50px;
     }
-
     .timeline-item::after {
       content: '';
       position: absolute;
@@ -378,15 +359,12 @@
       z-index: 3;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
-
     .timeline-item:nth-child(odd)::after {
       right: -58px;
     }
-
     .timeline-item:nth-child(even)::after {
       left: -58px;
     }
-
     .date-label {
       position: absolute;
       top: 50%;
@@ -401,15 +379,12 @@
       white-space: nowrap;
       z-index: 4;
     }
-
     .timeline-item:nth-child(odd) .date-label {
       right: -120px;
     }
-
     .timeline-item:nth-child(even) .date-label {
       left: -120px;
     }
-
     .content {
       padding: 24px;
       background: #fff;
@@ -419,7 +394,6 @@
       transition: all 0.3s ease;
       position: relative;
     }
-
     .content::before {
       content: '';
       position: absolute;
@@ -430,12 +404,10 @@
       background: linear-gradient(90deg, #3b82f6, #8b5cf6);
       border-radius: 12px 12px 0 0;
     }
-
     .content:hover {
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
     }
-
     .content h3 {
       font-family: 'Courier New', monospace;
       font-size: 0.9rem;
@@ -445,28 +417,24 @@
       margin: 0 0 12px 0;
       color: #1f2937;
     }
-
     .content .employer {
       font-size: 1rem;
       color: #6b7280;
       margin: 0 0 16px 0;
       font-weight: 600;
     }
-
     .content .description {
       font-size: 0.95rem;
       line-height: 1.6;
       color: #374151;
       margin: 0 0 20px 0;
     }
-
     .skills {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 16px;
     }
-
     .skill-tag {
       background: #f3f4f6;
       color: #374151;
@@ -477,17 +445,14 @@
       border: 1px solid #e5e7eb;
       transition: all 0.2s ease;
     }
-
     .skill-tag:hover {
       background: #e5e7eb;
       transform: scale(1.05);
     }
-
     @media (max-width: 768px) {
       .timeline::before {
         left: 30px;
       }
-
       .timeline-item {
         width: calc(100% - 80px);
         left: 80px !important;
@@ -495,37 +460,31 @@
         padding-right: 0 !important;
         margin-bottom: 40px;
       }
-
       .timeline-item::before {
         left: -40px !important;
         right: auto !important;
         width: 30px;
       }
-
       .timeline-item::after {
         left: -38px !important;
         right: auto !important;
       }
-
       .date-label {
         left: -120px !important;
         right: auto !important;
         font-size: 0.8rem;
       }
     }
-
     .about {
       padding: 60px 20px;
       background: white;
     }
-
     .about h2 {
       text-align: center;
       font-size: 2.2rem;
       margin-bottom: 40px;
       font-weight: 700;
     }
-
     .about-container {
       max-width: 1000px;
       margin: 0 auto;
@@ -533,7 +492,6 @@
       gap: 48px;
       align-items: flex-start;
     }
-
     .about-photo {
       width: 250px;
       height: auto;
@@ -542,53 +500,44 @@
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-
     .about-photo img {
       width: 100%;
       height: auto;
       display: block;
     }
-
     .about-text {
       flex: 1;
     }
-
     .about-text p {
       font-size: 1.1rem;
       line-height: 1.7;
       color: #374151;
       margin: 0;
     }
-
     @media (max-width: 768px) {
       .about-container {
         flex-direction: column;
         align-items: center;
         gap: 32px;
       }
-      
       .about-photo {
         width: 150px;
         height: 150px;
       }
-      
       .about-text p {
         font-size: 1rem;
         text-align: center;
       }
     }
-
     .contact {
       padding: 60px 20px;
       background: #f9f9f9;
     }
-
     .contact-content {
       max-width: 600px;
       margin: 0 auto;
       text-align: center;
     }
-
     .contact-text {
       font-size: 1.5rem;
       font-weight: 600;
@@ -596,44 +545,37 @@
       margin: 0 0 20px 0;
       line-height: 1.4;
     }
-
     .contact-links {
       font-size: 1.1rem;
       color: #374151;
       margin: 0;
       line-height: 1.6;
     }
-
     .contact-links a {
       color: #3b82f6;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.2s ease;
     }
-
     .contact-links a:hover {
       color: #1d4ed8;
       text-decoration: underline;
     }
-
     .social-links {
       margin-top: 30px;
       display: flex;
       justify-content: center;
       gap: 20px;
     }
-
     .social-links a {
       color: #374151;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.2s;
     }
-
     .social-links a:hover {
       color: #111;
     }
-
     .education {
       padding: 60px 20px 0 20px;
       background: #fff;
@@ -736,7 +678,6 @@
         text-align: left;
       }
     }
-
     .certifications {
       padding: 60px 20px 0 20px;
       background: #fff;
@@ -815,7 +756,6 @@
         min-height: 120px;
       }
     }
-
     .affiliations {
       padding: 60px 20px 0 20px;
       background: #fff;
@@ -887,20 +827,17 @@
         padding: 12px;
       }
     }
-
     .footer {
       padding: 40px 20px;
       background: #f9f9f9;
       border-top: 1px solid #e5e7eb;
     }
-
     .footer-divider {
       border: none;
       height: 1px;
       background: #d1d5db;
       margin: 0 0 24px 0;
     }
-
     .footer-content {
       max-width: 1200px;
       margin: 0 auto;
@@ -910,12 +847,10 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-
     .footer-links {
       display: flex;
       gap: 24px;
     }
-
     .footer-links a {
       font-size: 12px;
       text-transform: uppercase;
@@ -925,43 +860,36 @@
       letter-spacing: 0.5px;
       transition: color 0.2s;
     }
-
     .footer-links a:hover {
       color: #374151;
     }
-
     .footer-note {
       font-size: 12px;
       color: #6b7280;
       font-family: 'Courier New', monospace;
     }
-
     @media (max-width: 600px) {
       .footer-content {
         flex-direction: column;
         text-align: center;
         gap: 12px;
       }
-      
       .footer-links {
         gap: 16px;
       }
     }
-
     .copyright {
       text-align: center;
       margin-top: 20px;
       padding-top: 20px;
       border-top: 1px solid #e5e7eb;
     }
-
     .copyright p {
       font-size: 12px;
       color: #9ca3af;
       margin: 0;
       font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
     }
-
     @media (max-width: 900px) {
       .header {
         padding: 0 8px;
@@ -985,7 +913,6 @@
         font-size: 1.1rem;
       }
     }
-    /* Bookmark vertical menu styles */
     .bookmark-menu {
       position: fixed;
       top: 60px;
@@ -1049,7 +976,7 @@
         <ul class="nav-list">
           <li><a href="#projects" class="nav-link">Projects</a></li>
           <li><a href="#experience" class="nav-link">Experience</a></li>
-          <li><a href="#credentials" class="nav-link">Credentials</a></li>
+          <li><a href="#education" class="nav-link">Credentials</a></li>
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
@@ -1071,7 +998,7 @@
   <div class="bookmark-menu" id="bookmarkMenu">
     <a href="#projects" class="bookmark-link">Projects</a>
     <a href="#experience" class="bookmark-link">Experience</a>
-    <a href="#credentials" class="bookmark-link">Credentials</a>
+    <a href="#education" class="bookmark-link">Credentials</a>
     <a href="#about" class="bookmark-link">About</a>
     <a href="#contact" class="bookmark-link">Contact</a>
   </div>
