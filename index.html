@@ -1004,7 +1004,7 @@
   </div>
 
   <section id="summary" class="summary-button">
-    <button>Get 2-Minute Summary</button>
+    <button onclick="downloadResume()">Get 2-Minute Summary</button>
   </section>
 
   <section id="projects" class="projects">
@@ -1018,7 +1018,9 @@
         <p>3D CAD | Finite Element Analysis (FEA) | Raspberry Pi | Machine Learning | Thermal Imaging | System Integration | Iterative Design | Mechanical Design</p>
       </a>
       <a class="project" href="#">
-        <div class="project-img"></div>
+        <div class="project-img">
+          <img src="assets/spaceposium.svg" alt="Autonomous Lunar Robot - ATLAS" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+        </div>
         <h3>AUTONOMOUS LUNAR ROBOT – ATLAS</h3>
         <p>3D CAD | Robot Operating System 2 (ROS2) | Arduino | Light Detection and Ranging (Lidar) | Simulink | System Integration | Project Management | Rapid Prototyping</p>
       </a>
@@ -1030,7 +1032,9 @@
         <p>3D CAD | Reinforcement Learning | Raspberry Pi | Motor Control | Generative Design | Mechanical Design | Iterative Design</p>
       </a>
       <a class="project" href="#">
-        <div class="project-img"></div>
+        <div class="project-img">
+          <img src="assets/machined1.png" alt="Automated Robotic Linkage System" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+        </div>
         <h3>AUTOMATED ROBOTIC LINKAGE SYSTEM</h3>
         <p>3D CAD | Computer Numerical Control (CNC) Machining | Proportional-Integral-Derivative (PID) Control | Signal Processing | C++ | Mechanical Design | Process Automation | Team Leadership</p>
       </a>
@@ -1321,6 +1325,15 @@
         }
       });
     }, 3000);
+
+    function downloadResume() {
+      const link = document.createElement('a');
+      link.href = 'Resume_Portfolio_Emiliano_VB.pdf';
+      link.download = 'Resume_Portfolio_Emiliano_VB.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   </script>
 
   <script>
