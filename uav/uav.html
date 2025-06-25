@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autonomous Solar-Electric UAV | Emiliano's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      color: #111;
+      min-height: 100vh;
+    }
+    .back-btn {
+      display: inline-block;
+      margin: 24px 0 0 24px;
+      padding: 8px 18px;
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .back-btn:hover {
+      background: #e5e7eb;
+      color: #111;
+    }
+    .hero-uav {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #222;
+    }
+    .hero-uav video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(60%) contrast(110%) grayscale(20%);
+      z-index: 0;
+    }
+    .hero-uav .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    .hero-uav .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+    }
+    .hero-uav h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+    .hero-uav p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin: 0;
+    }
+    .section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    .section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .gallery {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 270px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: #eee;
+    }
+    .video-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .video-section video {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      background: #000;
+    }
+    .pdf-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 32px;
+    }
+    .pdf-section iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 500px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+    .tech-details {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .tech-details ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+    }
+    @media (max-width: 700px) {
+      .gallery img {
+        max-width: 100%;
+        height: 120px;
+      }
+      .video-section video {
+        max-width: 100%;
+      }
+      .pdf-section iframe {
+        max-width: 100%;
+        height: 320px;
+      }
+      .tech-details {
+        padding: 14px;
+      }
+    }
+    @media (max-width: 500px) {
+      .hero-uav h1 {
+        font-size: 1.5rem;
+      }
+      .hero-uav p {
+        font-size: 1rem;
+      }
+      .section h2 {
+        font-size: 1.2rem;
+      }
+      .gallery img {
+        height: 80px;
+      }
+      .pdf-section iframe {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-btn">← Back to Portfolio</a>
+  <section class="hero-uav">
+    <video autoplay loop muted playsinline>
+      <source src="assets/hero-background.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>Autonomous Solar-Electric UAV</h1>
+      <p>Long-endurance, machine-learning powered aerial robotics for real-world missions.</p>
+    </div>
+  </section>
+
+  <div class="section video-section">
+    <h2>Project Demo Video</h2>
+    <video controls poster="assets/uav1.png">
+      <source src="assets/hero-background.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="section">
+    <h2>Project Gallery</h2>
+    <div class="gallery">
+      <img src="assets/uav1.png" alt="UAV CAD Render" />
+      <img src="assets/uav2.png" alt="UAV Assembly" />
+      <img src="assets/uav3.png" alt="UAV in Flight" />
+    </div>
+  </div>
+
+  <div class="section tech-details">
+    <h2>Technical Details</h2>
+    <ul>
+      <li>3D CAD design and Finite Element Analysis (FEA) for lightweight, robust airframe</li>
+      <li>Solar-electric propulsion for extended flight duration</li>
+      <li>Onboard Raspberry Pi for real-time data processing and control</li>
+      <li>Machine learning for autonomous navigation and object detection</li>
+      <li>Thermal imaging and sensor fusion for environmental awareness</li>
+      <li>Iterative design and system integration for reliability</li>
+    </ul>
+  </div>
+
+  <div class="section pdf-section">
+    <h2>Project Paper</h2>
+    <iframe src="assets/Resume_Portfolio_Emiliano_VB.pdf"></iframe>
+    <p style="margin-top:8px;font-size:0.95rem;">(PDF: placeholder, replace with actual project paper when available)</p>
+  </div>
+</body>
+</html> 
