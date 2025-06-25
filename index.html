@@ -449,6 +449,34 @@
       background: #e5e7eb;
       transform: scale(1.05);
     }
+    @media (max-width: 900px) {
+      .header {
+        padding: 0 8px;
+      }
+      .nav-list {
+        gap: 18px;
+      }
+      .project-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      .footer-links {
+        gap: 16px;
+      }
+      .cert-grid {
+        width: 98%;
+        gap: 18px;
+      }
+      .affil-card-grid {
+        width: 98%;
+        gap: 16px;
+      }
+    }
     @media (max-width: 768px) {
       .timeline::before {
         left: 30px;
@@ -473,6 +501,163 @@
         left: -120px !important;
         right: auto !important;
         font-size: 0.8rem;
+      }
+      .about-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+      .about-photo {
+        width: 150px;
+        height: 150px;
+      }
+      .about-text p {
+        font-size: 1rem;
+        text-align: center;
+      }
+      .education-card {
+        width: 98%;
+        padding: 18px 10px;
+        gap: 16px;
+      }
+      .education-divider {
+        margin: 0 12px;
+        height: 36px;
+      }
+      .cert-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .affil-card-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+    }
+    @media (max-width: 600px) {
+      .header {
+        padding: 0 4px;
+      }
+      .nav-list {
+        gap: 10px;
+      }
+      .nav-link {
+        font-size: 10px;
+        padding: 8px 0;
+      }
+      .nameplate {
+        font-size: 1.1rem;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .arrow-container {
+        width: 60px;
+        height: 60px;
+        bottom: 20px;
+      }
+      .project-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0;
+      }
+      .project-img {
+        height: 180px;
+      }
+      .about-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+      .about-photo {
+        width: 100px;
+        height: 100px;
+      }
+      .about-text p {
+        font-size: 0.95rem;
+        text-align: center;
+      }
+      .education-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 16px 6px;
+        width: 100%;
+      }
+      .education-divider {
+        display: none;
+      }
+      .education-right {
+        align-items: flex-start;
+        text-align: left;
+        min-width: 0;
+      }
+      .edu-desc {
+        text-align: left;
+      }
+      .cert-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 8px;
+      }
+      .cert-card {
+        padding: 12px 6px 10px 6px;
+        min-height: 100px;
+      }
+      .affil-card-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 8px;
+      }
+      .affil-card-compact {
+        min-height: 80px;
+        padding: 8px;
+      }
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+      }
+      .footer-links {
+        gap: 8px;
+      }
+      .bookmark-menu {
+        left: 4px;
+        top: 8px;
+        padding: 6px 2px;
+        gap: 8px;
+        min-width: 32px;
+      }
+      .bookmark-link {
+        font-size: 9px;
+        padding: 4px 0;
+      }
+      .timeline {
+        padding: 20px 0;
+      }
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding-left: 0 !important;
+        margin-bottom: 24px;
+      }
+      .timeline-item::before,
+      .timeline-item::after,
+      .date-label {
+        display: none !important;
+      }
+      .content {
+        padding: 14px;
+      }
+      .content h3 {
+        font-size: 0.85rem;
+      }
+      .skills {
+        gap: 4px;
+        margin-top: 8px;
+      }
+      .skill-tag {
+        font-size: 0.7rem;
+        padding: 4px 8px;
       }
     }
     .about {
@@ -513,21 +698,6 @@
       line-height: 1.7;
       color: #374151;
       margin: 0;
-    }
-    @media (max-width: 768px) {
-      .about-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 32px;
-      }
-      .about-photo {
-        width: 150px;
-        height: 150px;
-      }
-      .about-text p {
-        font-size: 1rem;
-        text-align: center;
-      }
     }
     .contact {
       padding: 60px 20px;
