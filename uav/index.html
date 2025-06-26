@@ -212,22 +212,25 @@
     </div>
   </div>
 
-  <div class="section tech-details">
-    <h2>Technical Details</h2>
-    <ul>
-      <li>3D CAD design and Finite Element Analysis (FEA) for lightweight, robust airframe</li>
-      <li>Solar-electric propulsion for extended flight duration</li>
-      <li>Onboard Raspberry Pi for real-time data processing and control</li>
-      <li>Machine learning for autonomous navigation and object detection</li>
-      <li>Thermal imaging and sensor fusion for environmental awareness</li>
-      <li>Iterative design and system integration for reliability</li>
-    </ul>
-  </div>
-
   <div class="section pdf-section">
     <h2>Project Paper</h2>
     <iframe src="SPMA_Ranger.pdf"></iframe>
     <p style="margin-top:8px;font-size:0.95rem;">SPMA Ranger UAV Project Documentation</p>
+  </div>
+
+  <div class="section">
+    <h2>Technical Features</h2>
+    <p>The SPMA Ranger is an autonomous, solar-powered UAV designed for anti-poaching surveillance. Its frame integrates lightweight carbon fiber rods and 3D-printed PLA parts, optimized through Finite Element Analysis to maintain a factor of safety above 2.0. It uses 40 Sunpower flexible solar panels arranged in dual series parallel configurations to deliver a stable 12V at 8A, enough to power a 3-cell brushless motor drawing up to 10A. A thermal camera connected to an onboard Raspberry Pi enables real-time classification of human presence, and GPS telemetry allows for live intruder alerts. The modular design ensures rapid repairs, field deployment, and extended flight time.</p>
+  </div>
+
+  <div class="section">
+    <h2>Process</h2>
+    <p>We began by defining key sizing constraints, primarily based on solar panel voltage and motor compatibility, which shaped the aircraft's wing, tail, and fuselage design. Our aerodynamic profile was based on the s7055-il airfoil, chosen for its soft curves and ease of manufacturing using monokoting. We selected carbon fiber rods for structural strength and 3D-printed PLA parts for modularity and weight efficiency. To ensure mechanical integrity, we conducted Finite Element Analysis in SolidWorks on critical components, including the wing hinge, wing mount, and motor mount. For each, we calculated expected loads, applied realistic constraints, and confirmed mesh convergence before validating a minimum factor of safety of 2.0 or higher. Our design process adhered to aerospace best practices, using guidance from RC aircraft forums, academic literature, and FAA and ASTM standards to ensure the Ranger would be durable, lightweight, and field-serviceable.</p>
+  </div>
+
+  <div class="section">
+    <h2>Report</h2>
+    <p>During flight testing, the SPMA Ranger successfully lifted off and maintained pitch and yaw stability, confirming the accuracy of our weight estimates, stabilizer sizing, and motor selection. The aircraft came in under the predicted weight of 6.67 lbs, and the 3-cell brushless motor provided adequate thrust for takeoff. However, roll instability caused the UAV to stall and crash, which we traced to undersized and poorly positioned ailerons—designed at only 7.5% of wing area rather than the recommended 10–15%. The outer wing hinge failed on impact, which was expected, and helped localize the damage to an easily replaceable part. All other components, including the carbon fiber wings and motor mount, remained structurally sound, affirming our FEA predictions. The test flight validated most of our design assumptions and demonstrated the viability of a solar-powered, modular UAV for conservation applications.</p>
   </div>
 </body>
 </html> 
