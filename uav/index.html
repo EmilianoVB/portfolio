@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: #fff;
+      background: #222;
       color: #111;
       min-height: 100vh;
     }
@@ -174,17 +174,78 @@
         height: 180px;
       }
     }
+    .carousel {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto 24px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+    }
+    .carousel-track {
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      max-width: 540px;
+      height: 320px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: #eee;
+      position: relative;
+    }
+    .carousel-slide {
+      min-width: 100%;
+      height: 320px;
+      object-fit: cover;
+      transition: opacity 0.5s;
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+    }
+    .carousel-slide.active {
+      opacity: 1;
+      z-index: 2;
+      position: relative;
+    }
+    .carousel-arrow {
+      background: rgba(255,255,255,0.8);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin: 0 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+      transition: background 0.2s;
+      z-index: 3;
+    }
+    .carousel-arrow:hover, .carousel-arrow:focus {
+      background: #f3f4f6;
+    }
+    @media (max-width: 700px) {
+      .carousel-track, .carousel-slide {
+        height: 180px;
+      }
+    }
+    @media (max-width: 500px) {
+      .carousel-track, .carousel-slide {
+        height: 100px;
+      }
+    }
   </style>
 </head>
 <body>
-  <a href="index.html" class="back-btn">← Back to Portfolio</a>
   <section class="hero-uav">
     <video autoplay loop muted playsinline>
       <source src="NEWbackground.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
     <div class="hero-content">
-      <h1>Autonomous Solar-Electric UAV</h1>
+      <h1>SPMA Ranger: Solar-Powered Modular Aerial Ranger</h1>
       <p>Long-endurance, machine-learning powered aerial robotics for real-world missions.</p>
     </div>
   </section>
@@ -205,10 +266,9 @@
 
   <div class="section">
     <h2>Project Gallery</h2>
-    <div class="gallery">
-      <img src="assets/uav1.png" alt="UAV CAD Render" />
-      <img src="assets/uav2.png" alt="UAV Assembly" />
-      <img src="assets/uav3.png" alt="UAV in Flight" />
+    <!-- Canva slideshow embed placeholder -->
+    <div style="width:100%;max-width:600px;margin:0 auto;text-align:center;padding:40px 0;background:#f3f4f6;border-radius:10px;">
+      <p style="color:#888;font-size:1.1rem;">[Canva slideshow embed will go here]</p>
     </div>
   </div>
 
@@ -229,8 +289,85 @@
   </div>
 
   <div class="section">
-    <h2>Report</h2>
+    <h2>Results</h2>
     <p>During flight testing, the SPMA Ranger successfully lifted off and maintained pitch and yaw stability, confirming the accuracy of our weight estimates, stabilizer sizing, and motor selection. The aircraft came in under the predicted weight of 6.67 lbs, and the 3-cell brushless motor provided adequate thrust for takeoff. However, roll instability caused the UAV to stall and crash, which we traced to undersized and poorly positioned ailerons—designed at only 7.5% of wing area rather than the recommended 10–15%. The outer wing hinge failed on impact, which was expected, and helped localize the damage to an easily replaceable part. All other components, including the carbon fiber wings and motor mount, remained structurally sound, affirming our FEA predictions. The test flight validated most of our design assumptions and demonstrated the viability of a solar-powered, modular UAV for conservation applications.</p>
   </div>
+
+  <a href="index.html" class="back-btn">← Back to Portfolio</a>
+  <script>
+    (function() {
+      const carousel = document.querySelector('.carousel');
+      const slides = document.querySelectorAll('.carousel-slide');
+      const leftArrow = document.querySelector('.carousel-arrow.left');
+      const rightArrow = document.querySelector('.carousel-arrow.right');
+      let current = 0;
+      let interval = null;
+      let isPaused = false;
+      const AUTO_SCROLL_DELAY = 3000;
+
+      function showSlide(idx) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === idx);
+        });
+        current = idx;
+      }
+
+      function nextSlide() {
+        showSlide((current + 1) % slides.length);
+      }
+
+      function prevSlide() {
+        showSlide((current - 1 + slides.length) % slides.length);
+      }
+
+      function startAutoScroll() {
+        if (interval) clearInterval(interval);
+        interval = setInterval(() => {
+          if (!isPaused) nextSlide();
+        }, AUTO_SCROLL_DELAY);
+      }
+
+      function pauseAutoScroll() {
+        isPaused = true;
+      }
+
+      function resumeAutoScroll() {
+        isPaused = false;
+      }
+
+      leftArrow.addEventListener('click', () => {
+        prevSlide();
+        pauseAutoScroll();
+        setTimeout(resumeAutoScroll, 6000);
+      });
+      rightArrow.addEventListener('click', () => {
+        nextSlide();
+        pauseAutoScroll();
+        setTimeout(resumeAutoScroll, 6000);
+      });
+      carousel.addEventListener('mouseenter', pauseAutoScroll);
+      carousel.addEventListener('mouseleave', resumeAutoScroll);
+      carousel.addEventListener('touchstart', pauseAutoScroll);
+      carousel.addEventListener('touchend', resumeAutoScroll);
+      carousel.addEventListener('focusin', pauseAutoScroll);
+      carousel.addEventListener('focusout', resumeAutoScroll);
+
+      // Keyboard navigation
+      carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          prevSlide();
+          pauseAutoScroll();
+          setTimeout(resumeAutoScroll, 6000);
+        } else if (e.key === 'ArrowRight') {
+          nextSlide();
+          pauseAutoScroll();
+          setTimeout(resumeAutoScroll, 6000);
+        }
+      });
+
+      showSlide(0);
+      startAutoScroll();
+    })();
+  </script>
 </body>
 </html> 
