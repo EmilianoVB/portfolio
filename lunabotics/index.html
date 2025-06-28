@@ -287,8 +287,33 @@
   </div>
 
   <div style="width:100%;text-align:center;margin:32px 0;">
-    <img src="../assets/spaceposium.svg" alt="ATLAS Project Logo" style="max-width:220px;width:60vw;height:auto;display:inline-block;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.08));">
+    <img id="atlasLogo" src="../assets/spaceposium.svg" alt="ATLAS Project Logo" style="width:66vw;max-width:600px;height:auto;display:inline-block;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.08));cursor:pointer;">
   </div>
+
+  <!-- Modal for fullscreen SVG -->
+  <div id="logoModal" style="display:none;position:fixed;z-index:2000;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;">
+    <button id="closeLogoModal" style="position:absolute;top:32px;right:48px;font-size:2.2rem;background:none;border:none;color:#fff;cursor:pointer;z-index:2100;">&times;</button>
+    <img src="../assets/spaceposium.svg" alt="ATLAS Project Logo Fullscreen" style="max-width:90vw;max-height:85vh;box-shadow:0 4px 32px rgba(0,0,0,0.25);border-radius:12px;">
+  </div>
+
+  <script>
+    const atlasLogo = document.getElementById('atlasLogo');
+    const logoModal = document.getElementById('logoModal');
+    const closeLogoModal = document.getElementById('closeLogoModal');
+    atlasLogo.addEventListener('click', () => {
+      logoModal.style.display = 'flex';
+    });
+    closeLogoModal.addEventListener('click', () => {
+      logoModal.style.display = 'none';
+    });
+    // Optional: close modal on overlay click or ESC key
+    logoModal.addEventListener('click', (e) => {
+      if (e.target === logoModal) logoModal.style.display = 'none';
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') logoModal.style.display = 'none';
+    });
+  </script>
 
   <div class="section">
     <h2>My Role</h2>
