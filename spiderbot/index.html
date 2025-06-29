@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spider-Bot - Reinforcement Learning Legged Robot | Emiliano's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      color: #111;
+      min-height: 100vh;
+    }
+    .back-btn {
+      display: inline-block;
+      margin: 24px 0 0 24px;
+      padding: 8px 18px;
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .back-btn:hover {
+      background: #e5e7eb;
+      color: #111;
+    }
+    .sticky-back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(243, 244, 246, 0.95);
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .sticky-back-btn:hover {
+      background: rgba(229, 231, 235, 0.95);
+      color: #111;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .hero-spiderbot {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+    .hero-spiderbot::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+    .hero-spiderbot .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+    }
+    .hero-spiderbot h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+    .hero-spiderbot p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin: 0;
+    }
+    .section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    .section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .tag {
+      padding: 6px 12px;
+      background: #f3f4f6;
+      color: #374151;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid #e5e7eb;
+    }
+    .project-overview {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .project-overview p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #4b5563;
+      margin-bottom: 16px;
+    }
+    .project-overview p:last-child {
+      margin-bottom: 0;
+    }
+    .slides-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 32px 0;
+    }
+    .slides-section iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 500px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      background: #fafafa;
+    }
+    .video-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 32px 0;
+    }
+    .video-section iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      background: #000;
+    }
+    .tech-details {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .tech-details h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1f2937;
+    }
+    .tech-details ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .tech-details li {
+      margin-bottom: 8px;
+    }
+    .challenges-section {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .challenges-section h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #92400e;
+    }
+    .challenges-section ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #78350f;
+    }
+    .challenges-section li {
+      margin-bottom: 8px;
+    }
+    .results-section {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .results-section h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #065f46;
+    }
+    .results-section ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #047857;
+    }
+    .results-section li {
+      margin-bottom: 8px;
+    }
+    @media (max-width: 700px) {
+      .slides-section iframe {
+        max-width: 100%;
+        height: 320px;
+      }
+      .video-section iframe {
+        max-width: 100%;
+        height: 250px;
+      }
+      .tech-details, .challenges-section, .results-section {
+        padding: 14px;
+      }
+    }
+    @media (max-width: 500px) {
+      .hero-spiderbot h1 {
+        font-size: 1.5rem;
+      }
+      .hero-spiderbot p {
+        font-size: 1rem;
+      }
+      .section h2 {
+        font-size: 1.2rem;
+      }
+      .slides-section iframe {
+        height: 200px;
+      }
+      .video-section iframe {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html" class="sticky-back-btn">← Back</a>
+
+  <div class="hero-spiderbot">
+    <div class="hero-content">
+      <h1>Spider-Bot</h1>
+      <p>Reinforcement Learning Legged Robot</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="tags">
+      <span class="tag">Reinforcement Learning</span>
+      <span class="tag">Robotics</span>
+      <span class="tag">Python</span>
+      <span class="tag">PyBullet</span>
+      <span class="tag">Deep Learning</span>
+      <span class="tag">Control Systems</span>
+    </div>
+
+    <div class="project-overview">
+      <p>
+        Spider-Bot is an innovative legged robot project that leverages reinforcement learning to achieve dynamic locomotion and navigation capabilities. The project focuses on developing a six-legged robot that can learn to walk, navigate obstacles, and adapt to different terrains through advanced machine learning algorithms.
+      </p>
+      <p>
+        The robot features a biologically-inspired design with six articulated legs, each equipped with multiple degrees of freedom. Using PyBullet physics engine for simulation and deep reinforcement learning techniques, the Spider-Bot learns complex locomotion patterns through trial and error, demonstrating remarkable adaptability and stability across various challenging environments.
+      </p>
+    </div>
+
+    <h2>Project Presentation</h2>
+    <div class="slides-section">
+      <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQnXaBYyUzGrXMIfrXOjiIuVlfdTmDRtcsTnwolOKpz_lYSXxOG1RpJQOavXiXMy-KCkWGESgknA0gP/pubembed?start=false&loop=true&delayms=3000" 
+              frameborder="0" 
+              allowfullscreen="true" 
+              mozallowfullscreen="true" 
+              webkitallowfullscreen="true">
+      </iframe>
+    </div>
+
+    <h2>Technical Implementation</h2>
+    <div class="tech-details">
+      <h3>Core Technologies & Methods</h3>
+      <ul>
+        <li><strong>Simulation Environment:</strong> PyBullet physics engine for realistic robot simulation</li>
+        <li><strong>Reinforcement Learning:</strong> Deep Q-Network (DQN) and Proximal Policy Optimization (PPO) algorithms</li>
+        <li><strong>Robot Design:</strong> Six-legged hexapod with 18 degrees of freedom (3 per leg)</li>
+        <li><strong>Control System:</strong> Hierarchical control architecture with gait pattern generation</li>
+        <li><strong>Training Framework:</strong> Custom RL environment with reward shaping for locomotion</li>
+        <li><strong>Hardware Interface:</strong> ROS (Robot Operating System) for real-world deployment</li>
+      </ul>
+    </div>
+
+    <h2>Journey Video</h2>
+    <div class="video-section">
+      <iframe src="https://www.youtube.com/embed/qtuCOoZlg-8" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+      </iframe>
+    </div>
+
+    <h2>Key Challenges</h2>
+    <div class="challenges-section">
+      <h3>Technical Challenges Overcome</h3>
+      <ul>
+        <li><strong>Gait Optimization:</strong> Developing stable walking patterns for six-legged locomotion</li>
+        <li><strong>Reward Function Design:</strong> Creating effective reward signals for complex locomotion tasks</li>
+        <li><strong>Sim-to-Real Transfer:</strong> Bridging the gap between simulation and real-world performance</li>
+        <li><strong>Terrain Adaptation:</strong> Enabling the robot to navigate various surface types and obstacles</li>
+        <li><strong>Energy Efficiency:</strong> Optimizing movement patterns for minimal power consumption</li>
+        <li><strong>Stability Control:</strong> Maintaining balance during dynamic movements and external disturbances</li>
+      </ul>
+    </div>
+
+    <h2>Results & Achievements</h2>
+    <div class="results-section">
+      <h3>Project Outcomes</h3>
+      <ul>
+        <li><strong>Successful Locomotion:</strong> Achieved stable walking patterns across multiple terrains</li>
+        <li><strong>Learning Efficiency:</strong> Reduced training time by 40% through improved reward shaping</li>
+        <li><strong>Terrain Versatility:</strong> Demonstrated navigation capabilities on flat, inclined, and obstacle-laden surfaces</li>
+        <li><strong>Real-world Validation:</strong> Successfully transferred learned behaviors to physical robot hardware</li>
+        <li><strong>Performance Metrics:</strong> Achieved 85% success rate in navigation tasks and 90% stability during locomotion</li>
+        <li><strong>Research Contribution:</strong> Developed novel approaches to multi-legged robot control using RL</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Fade in sections on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section > *').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
