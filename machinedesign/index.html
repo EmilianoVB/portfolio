@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automated Robotic Linkage System | Emiliano's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      color: #111;
+      min-height: 100vh;
+    }
+    .back-btn {
+      display: inline-block;
+      margin: 24px 0 0 24px;
+      padding: 8px 18px;
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .back-btn:hover {
+      background: #e5e7eb;
+      color: #111;
+    }
+    .sticky-back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(243, 244, 246, 0.95);
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .sticky-back-btn:hover {
+      background: rgba(229, 231, 235, 0.95);
+      color: #111;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .hero-spiderbot {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+    .hero-spiderbot::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+    .hero-spiderbot .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+    }
+    .hero-spiderbot h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+    .hero-spiderbot p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin: 0;
+    }
+    .section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    .section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .tag {
+      padding: 6px 12px;
+      background: #f3f4f6;
+      color: #374151;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid #e5e7eb;
+    }
+    .project-overview {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .project-overview p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #4b5563;
+      margin-bottom: 16px;
+    }
+    .project-overview p:last-child {
+      margin-bottom: 0;
+    }
+    .slides-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 32px 0;
+    }
+    .slides-section iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 500px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      background: #fafafa;
+    }
+    .video-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 32px 0;
+    }
+    .video-section iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      background: #000;
+    }
+    .tech-details {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .tech-details h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1f2937;
+    }
+    .tech-details ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .tech-details li {
+      margin-bottom: 8px;
+    }
+    .challenges-section {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .challenges-section h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1e293b;
+    }
+    .challenges-section ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #475569;
+    }
+    .challenges-section li {
+      margin-bottom: 8px;
+    }
+    .results-section {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .results-section h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1e293b;
+    }
+    .results-section ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #475569;
+    }
+    .results-section li {
+      margin-bottom: 8px;
+    }
+    .parts-table {
+      margin-top: 16px;
+    }
+    .parts-table table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .parts-table th {
+      background: #f8fafc;
+      color: #1f2937;
+      font-weight: 700;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 2px solid #e5e7eb;
+      font-size: 0.95rem;
+    }
+    .parts-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #f3f4f6;
+      color: #4b5563;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .parts-table tr:last-child td {
+      border-bottom: none;
+    }
+    .parts-table tr:hover {
+      background: #f9fafb;
+    }
+    @media (max-width: 700px) {
+      .slides-section iframe {
+        max-width: 100%;
+        height: 320px;
+      }
+      .video-section iframe {
+        max-width: 100%;
+        height: 250px;
+      }
+      .tech-details, .challenges-section, .results-section {
+        padding: 14px;
+      }
+    }
+    @media (max-width: 500px) {
+      .hero-spiderbot h1 {
+        font-size: 1.5rem;
+      }
+      .hero-spiderbot p {
+        font-size: 1rem;
+      }
+      .section h2 {
+        font-size: 1.2rem;
+      }
+      .slides-section iframe {
+        height: 200px;
+      }
+      .video-section iframe {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html" class="sticky-back-btn">← Back to Portfolio</a>
+
+  <div class="hero-spiderbot">
+    <div class="hero-content">
+      <h1>Automated Robotic Linkage System</h1>
+      <p>Machine Design - Button Pressing Competition Machine</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="tags">
+      <span class="tag">Mechanical Design</span>
+      <span class="tag">Arduino</span>
+      <span class="tag">PID Control</span>
+      <span class="tag">MATLAB</span>
+      <span class="tag">FEA</span>
+      <span class="tag">CNC Machining</span>
+      <span class="tag">CAD</span>
+      <span class="tag">Linkage Synthesis</span>
+    </div>
+
+    <div class="project-overview">
+      <p>
+        As a team, we were tasked with designing, building, coding, and tuning a machine to hit buttons in a randomly generated order on the "playing field" as quickly as possible while minimizing mechanism volume and transmission angle deviation. We received a $100 budget, not including the motor, Arduino, and aluminum stock.
+      </p>
+      <p>
+        On the project management side, I pushed the team with early brainstorming sessions and progress checkpoints while creating documentation and spreadsheets to track deliverables and spending. On the technical side, I did 100% of the electronics, Arduino coding, and PID control tuning while also contributing to CNC machining, linkage system synthesis, and CAD modeling.
+      </p>
+    </div>
+
+    <h2>Project Presentation</h2>
+    <div class="slides-section">
+      <p style="text-align: center; color: #6b7280; font-style: italic;">Google Slides presentation will be added here</p>
+    </div>
+
+    <h2>Technical Implementation</h2>
+    <div class="tech-details">
+      <h3>Core Technologies & Methods</h3>
+      <ul>
+        <li><strong>Linkage Optimization:</strong> Minimized transmission angle deviation using random search algorithm in MATLAB</li>
+        <li><strong>Finite Element Analysis:</strong> Optimized individual linkage morphology and material through FEA</li>
+        <li><strong>Transmission Refinement:</strong> Used inertia matching to maximize linkage acceleration</li>
+        <li><strong>Electronics & Control:</strong> Complete Arduino system with PID control tuning for precise button pressing</li>
+        <li><strong>Manufacturing:</strong> CNC machining, additive manufacturing for prototyping, and laser cutting</li>
+        <li><strong>Innovative Mechanism:</strong> Designed folding mechanism for bonus button access using gate latch concept</li>
+      </ul>
+    </div>
+
+    <div class="tech-details">
+      <h3>Parts Manufacturing Process</h3>
+      <div class="parts-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Manufacturing Task</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ground Link</td>
+              <td>Waterjet, drilled holes, reamed holes, press fit dowel pins and sleeve bearings</td>
+            </tr>
+            <tr>
+              <td>Gear</td>
+              <td>Drilled holes through gear for mounting to input link, press fit sleeve bearing</td>
+            </tr>
+            <tr>
+              <td>Pinion</td>
+              <td>Drilled hole through gear for set screw attachment, tapped hole</td>
+            </tr>
+            <tr>
+              <td>Input Link</td>
+              <td>Waterjet, drilled holes, reamed holes, press fit sleeve bearings</td>
+            </tr>
+            <tr>
+              <td>Hard Stop 2</td>
+              <td>Lathe</td>
+            </tr>
+            <tr>
+              <td>Follower link</td>
+              <td>Waterjet, drilled holes, reamed holes, press fit sleeve bearings</td>
+            </tr>
+            <tr>
+              <td>Hard stop 1</td>
+              <td>Lathe</td>
+            </tr>
+            <tr>
+              <td>Spacer 1</td>
+              <td>Lathe</td>
+            </tr>
+            <tr>
+              <td>Coupler</td>
+              <td>Waterjet, drilled holes, reamed holes, press fit sleeve bearings</td>
+            </tr>
+            <tr>
+              <td>Spacers 2-4</td>
+              <td>Lathe</td>
+            </tr>
+            <tr>
+              <td>3-D Printed Bonus Button Pieces</td>
+              <td>Designed, 3D printed, finished</td>
+            </tr>
+            <tr>
+              <td>Spacer 5</td>
+              <td>Lathe</td>
+            </tr>
+            <tr>
+              <td>3-D Printed Pieces for Solenoid</td>
+              <td>Designed, 3D printed, filed down</td>
+            </tr>
+            <tr>
+              <td>Motor Mounting Piece</td>
+              <td>Designed, 3D printed, filed down</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h2>Journey Video</h2>
+    <div class="video-section">
+      <p style="text-align: center; color: #6b7280; font-style: italic;">YouTube video will be added here</p>
+    </div>
+
+    <h2>Key Challenges</h2>
+    <div class="challenges-section">
+      <h3>Technical Challenges Overcome</h3>
+      <ul>
+        <li><strong>Bonus Button Mechanism:</strong> Designing a button pressing mechanism for the optional Bonus Button with constraints of 1 DC motor and 1 linear actuator</li>
+        <li><strong>Size Optimization:</strong> Creating the smallest volume system while maintaining functionality and accuracy</li>
+        <li><strong>Folding Mechanism Design:</strong> Developing a compact folding mechanism that unfolds and locks during homing sequence</li>
+        <li><strong>Linkage Synthesis:</strong> Optimizing four-bar linkage transmission angle deviation through MATLAB algorithms</li>
+        <li><strong>Material & Manufacturing:</strong> Balancing cost constraints with performance requirements through FEA and prototyping</li>
+        <li><strong>Control System Integration:</strong> Synchronizing mechanical and electronic systems for reliable button pressing</li>
+      </ul>
+    </div>
+
+    <h2>Results & Achievements</h2>
+    <div class="results-section">
+      <h3>Project Outcomes</h3>
+      <ul>
+        <li><strong>Class Performance:</strong> Achieved the smallest volume in the class while maintaining high functionality</li>
+        <li><strong>Competition Success:</strong> Earned one of the highest scores in the button pressing competition</li>
+        <li><strong>Scoring System:</strong> Successfully implemented system that earns +1 point for correct button pairs, -1 for wrong pairs, and +3 for bonus button</li>
+        <li><strong>Optimization Success:</strong> Effectively minimized transmission angle deviation and system volume through MATLAB optimization</li>
+        <li><strong>Prototyping Validation:</strong> Used additive manufacturing to catch design issues early, saving time and resources</li>
+        <li><strong>Innovative Design:</strong> Successfully implemented folding mechanism concept based on gate latch for bonus button access</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Fade in sections on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section > *').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
