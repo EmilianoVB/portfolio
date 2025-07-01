@@ -76,6 +76,30 @@
     .guide-link:hover {
       background: #2561a7;
     }
+    .sticky-back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(243, 244, 246, 0.95);
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .sticky-back-btn:hover {
+      background: rgba(229, 231, 235, 0.95);
+      color: #111;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
     .tech-details, .future-work {
       background: #f0f4f8;
       border-radius: 8px;
@@ -91,6 +115,8 @@
   </style>
 </head>
 <body>
+  <a href="../index.html" class="sticky-back-btn">← Back to Portfolio</a>
+  
   <div class="container">
     <h1>Expanding Holonomic Platform <span style="font-size:1rem; color:#888;">(Work in Progress)</span></h1>
     <div class="intro">
