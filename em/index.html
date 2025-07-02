@@ -406,12 +406,15 @@
       constructor(x, y, charge, speed) {
         this.x = x;
         this.y = y;
-        this.vx = speed * (Math.random() - 0.5) * 2;
-        this.vy = speed * (Math.random() - 0.5) * 2;
+        // Random initial direction
+        const angle = Math.random() * 2 * Math.PI;
+        this.vx = speed * Math.cos(angle);
+        this.vy = speed * Math.sin(angle);
         this.charge = charge;
-        this.radius = 4;
+        this.radius = 7;
         this.trail = [];
-        this.maxTrailLength = 20;
+        this.maxTrailLength = 30;
+        this.lastForce = {fx: 0, fy: 0};
       }
 
       update(magneticField) {
@@ -422,41 +425,52 @@
         }
 
         // Calculate Lorentz Force: F = q(v × B)
-        // For 2D, we'll use a magnetic field pointing out of the screen (positive z)
-        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-        const lorentzForce = this.charge * speed * magneticField * 0.01;
-        
-        // Force is perpendicular to velocity
-        const forceX = -this.vy * lorentzForce;
-        const forceY = this.vx * lorentzForce;
+        // For 2D, B is out of the screen (z), v is (vx, vy)
+        // F_x = q * vy * B, F_y = -q * vx * B
+        const B = magneticField;
+        const q = this.charge;
+        const fx = q * this.vy * B * 0.01;
+        const fy = -q * this.vx * B * 0.01;
+        this.lastForce = {fx, fy};
 
-        // Update velocity (simplified physics)
-        this.vx += forceX * 0.1;
-        this.vy += forceY * 0.1;
+        // Update velocity (Euler integration)
+        this.vx += fx * 0.1;
+        this.vy += fy * 0.1;
 
         // Update position
-        this.x += this.vx;
-        this.y += this.vy;
+        this.x += this.vx * 0.05;
+        this.y += this.vy * 0.05;
 
         // Bounce off walls
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -0.8;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -0.8;
-
-        // Keep particles in bounds
-        this.x = Math.max(0, Math.min(canvas.width, this.x));
-        this.y = Math.max(0, Math.min(canvas.height, this.y));
+        if (this.x < this.radius) {
+          this.x = this.radius;
+          this.vx *= -0.7;
+        }
+        if (this.x > canvas.width - this.radius) {
+          this.x = canvas.width - this.radius;
+          this.vx *= -0.7;
+        }
+        if (this.y < this.radius) {
+          this.y = this.radius;
+          this.vy *= -0.7;
+        }
+        if (this.y > canvas.height - this.radius) {
+          this.y = canvas.height - this.radius;
+          this.vy *= -0.7;
+        }
       }
 
       draw(ctx) {
         // Draw trail
+        ctx.save();
         ctx.beginPath();
         for (let i = 0; i < this.trail.length; i++) {
           const alpha = i / this.trail.length;
           const point = this.trail[i];
           ctx.strokeStyle = this.charge > 0 ? 
-            `rgba(255, 107, 107, ${alpha * 0.3})` : 
-            `rgba(78, 205, 196, ${alpha * 0.3})`;
-          ctx.lineWidth = 2 * alpha;
+            `rgba(255, 107, 107, ${alpha * 0.5})` : 
+            `rgba(78, 205, 196, ${alpha * 0.5})`;
+          ctx.lineWidth = 2;
           if (i === 0) {
             ctx.moveTo(point.x, point.y);
           } else {
@@ -464,6 +478,7 @@
           }
         }
         ctx.stroke();
+        ctx.restore();
 
         // Draw particle
         ctx.beginPath();
@@ -471,48 +486,77 @@
         ctx.fillStyle = this.charge > 0 ? '#ff6b6b' : '#4ecdc4';
         ctx.fill();
         ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 2;
         ctx.stroke();
 
         // Draw charge indicator
         ctx.fillStyle = '#fff';
-        ctx.font = '12px Arial';
+        ctx.font = 'bold 15px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText(this.charge > 0 ? '+' : '-', this.x, this.y + 4);
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.charge > 0 ? '+' : '-', this.x, this.y);
+
+        // Draw force vector (arrow)
+        const {fx, fy} = this.lastForce;
+        const scale = 30; // Arrow length scaling
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x + fx * scale, this.y + fy * scale);
+        ctx.strokeStyle = '#f9ca24';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        // Arrowhead
+        const angle = Math.atan2(fy, fx);
+        if (fx !== 0 || fy !== 0) {
+          ctx.beginPath();
+          ctx.moveTo(this.x + fx * scale, this.y + fy * scale);
+          ctx.lineTo(this.x + fx * scale - 8 * Math.cos(angle - 0.4), this.y + fy * scale - 8 * Math.sin(angle - 0.4));
+          ctx.lineTo(this.x + fx * scale - 8 * Math.cos(angle + 0.4), this.y + fy * scale - 8 * Math.sin(angle + 0.4));
+          ctx.lineTo(this.x + fx * scale, this.y + fy * scale);
+          ctx.fillStyle = '#f9ca24';
+          ctx.fill();
+        }
+        ctx.restore();
       }
     }
 
     class MagneticField {
       constructor() {
         this.lines = [];
-        this.generateLines();
       }
-
-      generateLines() {
+      generateLines(width, height) {
         this.lines = [];
-        for (let i = 0; i < 8; i++) {
+        const n = 8;
+        for (let i = 0; i < n; i++) {
+          const x = (i + 1) * width / (n + 1);
           this.lines.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            length: 30 + Math.random() * 20,
-            angle: Math.random() * Math.PI * 2
+            x: x,
+            y1: 30,
+            y2: height - 30
           });
         }
       }
-
-      draw(ctx, strength) {
-        ctx.strokeStyle = `rgba(69, 183, 209, ${strength * 0.01})`;
-        ctx.lineWidth = 2;
-        
+      draw(ctx, width, height, strength) {
+        ctx.save();
+        ctx.strokeStyle = `rgba(69, 183, 209, ${0.2 + 0.5 * strength / 100})`;
+        ctx.lineWidth = 3;
         for (const line of this.lines) {
           ctx.beginPath();
-          ctx.moveTo(line.x, line.y);
-          ctx.lineTo(
-            line.x + Math.cos(line.angle) * line.length,
-            line.y + Math.sin(line.angle) * line.length
-          );
+          ctx.moveTo(line.x, line.y1);
+          ctx.lineTo(line.x, line.y2);
+          ctx.stroke();
+          // Draw arrowheads to indicate direction (out of screen)
+          ctx.beginPath();
+          ctx.arc(line.x, line.y1 + 20, 7, 0, 2 * Math.PI);
+          ctx.strokeStyle = '#45b7d1';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(line.x, line.y2 - 20, 7, 0, 2 * Math.PI);
           ctx.stroke();
         }
+        ctx.restore();
       }
     }
 
@@ -525,10 +569,9 @@
       const container = canvas.parentElement;
       canvas.width = container.clientWidth;
       canvas.height = 300;
+      magneticField.generateLines(canvas.width, canvas.height);
+      initializeParticles();
     }
-
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
 
     // Simulation variables
     let particles = [];
@@ -552,12 +595,11 @@
       particles = [];
       const count = parseInt(particleCountSlider.value);
       const charge = parseInt(particleChargeSlider.value);
-      const speed = parseInt(particleSpeedSlider.value);
-
+      const speed = parseInt(particleSpeedSlider.value) / 5;
       for (let i = 0; i < count; i++) {
         particles.push(new Particle(
-          Math.random() * canvas.width,
-          Math.random() * canvas.height,
+          Math.random() * (canvas.width - 40) + 20,
+          Math.random() * (canvas.height - 40) + 20,
           charge,
           speed
         ));
@@ -567,16 +609,13 @@
     // Animation loop
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       // Draw magnetic field
-      magneticField.draw(ctx, parseInt(magneticFieldSlider.value));
-
+      magneticField.draw(ctx, canvas.width, canvas.height, parseInt(magneticFieldSlider.value));
       // Update and draw particles
       for (const particle of particles) {
         particle.update(parseInt(magneticFieldSlider.value));
         particle.draw(ctx);
       }
-
       animationId = requestAnimationFrame(animate);
     }
 
@@ -584,17 +623,14 @@
     magneticFieldSlider.addEventListener('input', function() {
       magneticFieldValue.textContent = this.value;
     });
-
     particleChargeSlider.addEventListener('input', function() {
       particleChargeValue.textContent = this.value;
       initializeParticles();
     });
-
     particleSpeedSlider.addEventListener('input', function() {
       particleSpeedValue.textContent = this.value;
       initializeParticles();
     });
-
     particleCountSlider.addEventListener('input', function() {
       particleCountValue.textContent = this.value;
       initializeParticles();
@@ -606,17 +642,22 @@
       particleChargeSlider.value = 50;
       particleSpeedSlider.value = 50;
       particleCountSlider.value = 10;
-      
       magneticFieldValue.textContent = '50';
       particleChargeValue.textContent = '50';
       particleSpeedValue.textContent = '50';
       particleCountValue.textContent = '10';
-      
       initializeParticles();
     }
 
+    // Responsive
+    window.addEventListener('resize', resizeCanvas);
+
     // Start simulation
-    initializeParticles();
+    resizeCanvas();
+    magneticFieldValue.textContent = magneticFieldSlider.value;
+    particleChargeValue.textContent = particleChargeSlider.value;
+    particleSpeedValue.textContent = particleSpeedSlider.value;
+    particleCountValue.textContent = particleCountSlider.value;
     animate();
   </script>
 </body>
