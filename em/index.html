@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automated Electromagnetic Transportation System - Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #f7f9fa;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem 1rem;
+    }
+    h1, h2, h3 {
+      color: #1a4a7c;
+      margin-top: 2rem;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2.5rem;
+    }
+    .intro {
+      background: #e3ecf7;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(26,74,124,0.05);
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      background: #fff;
+      object-fit: cover;
+      max-height: 300px;
+    }
+    .cad-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .cad-section img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      background: #fff;
+      object-fit: cover;
+      max-height: 300px;
+    }
+    .sticky-back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(243, 244, 246, 0.95);
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .sticky-back-btn:hover {
+      background: rgba(229, 231, 235, 0.95);
+      color: #111;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .tech-details, .inspiration, .advantages {
+      background: #f0f4f8;
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 4px rgba(26,74,124,0.04);
+    }
+    .principle-diagram {
+      background: #fff;
+      border: 2px solid #e3ecf7;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    .principle-diagram h3 {
+      color: #1a4a7c;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .visualization-container {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border: 1px solid #e9ecef;
+    }
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    #lorentzCanvas {
+      display: block;
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .control-group label {
+      font-weight: 600;
+      color: #1a4a7c;
+      font-size: 0.9rem;
+    }
+    .control-group input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #e3ecf7;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    .control-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #1a4a7c;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .control-group input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #1a4a7c;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .value-display {
+      font-size: 0.8rem;
+      color: #666;
+      font-family: monospace;
+    }
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: #666;
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .reset-btn {
+      background: #1a4a7c;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .reset-btn:hover {
+      background: #2561a7;
+    }
+    .system-components {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .component {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      border-left: 4px solid #1a4a7c;
+    }
+    .component h4 {
+      color: #1a4a7c;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    @media (max-width: 600px) {
+      .cad-section {
+        flex-direction: column;
+      }
+      .system-components {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html" class="sticky-back-btn">← Back to Portfolio</a>
+  
+  <div class="container">
+    <h1>Automated Electromagnetic Transportation System</h1>
+    <div class="intro">
+      <p>
+        An innovative automated transportation system that leverages electromagnetic forces to move small items along a track. 
+        This project demonstrates the application of Lorentz Force principles in practical automation, offering a scalable 
+        alternative to traditional conveyor systems for small product movement.
+      </p>
+    </div>
+
+    <h2>CAD Renders</h2>
+    <div class="cad-section">
+      <img src="../assets/em1.png" alt="Electromagnetic Transportation System CAD Render 1">
+      <img src="../assets/em2.png" alt="Electromagnetic Transportation System CAD Render 2">
+    </div>
+
+    <h2>How It Works</h2>
+    <div class="principle-diagram">
+      <h3>Lorentz Force Principle</h3>
+      <p>
+        The system operates on the fundamental principle of the Lorentz Force, where a charged particle moving through a 
+        magnetic field experiences a force perpendicular to both the velocity and magnetic field directions. In this application, 
+        controlled electric current creates the necessary electromagnetic interaction to propel the platform.
+      </p>
+    </div>
+
+    <div class="visualization-container">
+      <h3>Interactive Lorentz Force Visualization</h3>
+      <p>Adjust the parameters below to see how the Lorentz Force affects charged particles in a magnetic field:</p>
+      
+      <div class="canvas-container">
+        <canvas id="lorentzCanvas"></canvas>
+      </div>
+      
+      <div class="controls">
+        <div class="control-group">
+          <label for="magneticField">Magnetic Field Strength</label>
+          <input type="range" id="magneticField" min="0" max="100" value="50">
+          <div class="value-display">Value: <span id="magneticFieldValue">50</span></div>
+        </div>
+        <div class="control-group">
+          <label for="particleCharge">Particle Charge</label>
+          <input type="range" id="particleCharge" min="-100" max="100" value="50">
+          <div class="value-display">Value: <span id="particleChargeValue">50</span></div>
+        </div>
+        <div class="control-group">
+          <label for="particleSpeed">Particle Speed</label>
+          <input type="range" id="particleSpeed" min="10" max="100" value="50">
+          <div class="value-display">Value: <span id="particleSpeedValue">50</span></div>
+        </div>
+        <div class="control-group">
+          <label for="particleCount">Number of Particles</label>
+          <input type="range" id="particleCount" min="5" max="20" value="10">
+          <div class="value-display">Value: <span id="particleCountValue">10</span></div>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 1rem;">
+        <button class="reset-btn" onclick="resetSimulation()">Reset Simulation</button>
+      </div>
+      
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-color" style="background: #ff6b6b;"></div>
+          <span>Positive Charge</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #4ecdc4;"></div>
+          <span>Negative Charge</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #45b7d1;"></div>
+          <span>Magnetic Field Lines</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #f9ca24;"></div>
+          <span>Force Vector</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>System Components</h2>
+    <div class="system-components">
+      <div class="component">
+        <h4>ESP32 Microcontroller</h4>
+        <p>Controls the H-bridge circuit to toggle current flow direction and magnitude, enabling precise acceleration, propulsion, and deceleration of the platform.</p>
+      </div>
+      <div class="component">
+        <h4>H-Bridge Circuit</h4>
+        <p>Enables bidirectional current flow through the electromagnetic coils, allowing for forward and reverse motion control.</p>
+      </div>
+      <div class="component">
+        <h4>Magnetic Track</h4>
+        <p>The track is embedded with permanent magnets that create the necessary magnetic field for the Lorentz Force interaction.</p>
+      </div>
+      <div class="component">
+        <h4>Moving Platform</h4>
+        <p>A small platform equipped with electromagnetic coils that carries a tote for item transportation.</p>
+      </div>
+    </div>
+
+    <h2>Technical Implementation</h2>
+    <div class="tech-details">
+      <ul>
+        <li><strong>Control System:</strong> ESP32 microcontroller manages the entire operation</li>
+        <li><strong>Power Management:</strong> H-bridge circuit controls current flow direction and intensity</li>
+        <li><strong>Magnetic Field:</strong> Permanent magnets embedded in the track provide the required magnetic field</li>
+        <li><strong>Motion Control:</strong> Variable current flow enables precise speed and direction control</li>
+        <li><strong>Load Capacity:</strong> Small item tote mounted on the platform for product transportation</li>
+        <li><strong>Bidirectional Operation:</strong> System can move items in both directions along the track</li>
+      </ul>
+    </div>
+
+    <h2>Project Inspiration</h2>
+    <div class="inspiration">
+      <p>
+        This project was inspired by my experience working in automation at Caterpillar. During my time there, I observed 
+        that expanding and rerouting traditional conveyor systems was extremely costly and often not economically viable 
+        for moving small products. The high costs and inflexibility of conventional conveyor systems motivated me to 
+        explore alternative solutions.
+      </p>
+      <p>
+        The electromagnetic transportation system addresses these limitations by creating a modular, infinitely expandable 
+        solution where motion is purely dependent on individual units rather than complex mechanical infrastructure.
+      </p>
+    </div>
+
+    <h2>Key Advantages</h2>
+    <div class="advantages">
+      <ul>
+        <li><strong>Infinite Scalability:</strong> Simply extend the track length to expand the system</li>
+        <li><strong>Bidirectional Operation:</strong> Items can be moved in both directions along the track</li>
+        <li><strong>Modular Design:</strong> Individual units operate independently, reducing system complexity</li>
+        <li><strong>Cost Effective:</strong> Significantly lower infrastructure costs compared to traditional conveyors</li>
+        <li><strong>Flexible Layout:</strong> Easy to modify and adapt to changing production needs</li>
+        <li><strong>Precise Control:</strong> Electronic control enables fine-tuned speed and positioning</li>
+        <li><strong>Low Maintenance:</strong> Fewer moving parts compared to mechanical conveyor systems</li>
+      </ul>
+    </div>
+
+    <h2>Future Development</h2>
+    <div class="tech-details">
+      <ul>
+        <li>Integration with industrial automation systems</li>
+        <li>Advanced control algorithms for optimal energy efficiency</li>
+        <li>Multi-platform coordination for complex routing</li>
+        <li>Sensor integration for collision avoidance and positioning</li>
+        <li>Wireless communication between platforms</li>
+        <li>Scalable manufacturing for commercial applications</li>
+      </ul>
+    </div>
+
+    <footer style="text-align:center; color:#aaa; font-size:0.95em; margin-top:2rem;">
+      &copy; 2025 Automated Electromagnetic Transportation System | <a href="../index.html" style="color:#888;">Back to Home</a>
+    </footer>
+  </div>
+
+  <script>
+    // Lorentz Force Visualization
+    class Particle {
+      constructor(x, y, charge, speed) {
+        this.x = x;
+        this.y = y;
+        this.vx = speed * (Math.random() - 0.5) * 2;
+        this.vy = speed * (Math.random() - 0.5) * 2;
+        this.charge = charge;
+        this.radius = 4;
+        this.trail = [];
+        this.maxTrailLength = 20;
+      }
+
+      update(magneticField) {
+        // Store position in trail
+        this.trail.push({ x: this.x, y: this.y });
+        if (this.trail.length > this.maxTrailLength) {
+          this.trail.shift();
+        }
+
+        // Calculate Lorentz Force: F = q(v × B)
+        // For 2D, we'll use a magnetic field pointing out of the screen (positive z)
+        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        const lorentzForce = this.charge * speed * magneticField * 0.01;
+        
+        // Force is perpendicular to velocity
+        const forceX = -this.vy * lorentzForce;
+        const forceY = this.vx * lorentzForce;
+
+        // Update velocity (simplified physics)
+        this.vx += forceX * 0.1;
+        this.vy += forceY * 0.1;
+
+        // Update position
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce off walls
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -0.8;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -0.8;
+
+        // Keep particles in bounds
+        this.x = Math.max(0, Math.min(canvas.width, this.x));
+        this.y = Math.max(0, Math.min(canvas.height, this.y));
+      }
+
+      draw(ctx) {
+        // Draw trail
+        ctx.beginPath();
+        for (let i = 0; i < this.trail.length; i++) {
+          const alpha = i / this.trail.length;
+          const point = this.trail[i];
+          ctx.strokeStyle = this.charge > 0 ? 
+            `rgba(255, 107, 107, ${alpha * 0.3})` : 
+            `rgba(78, 205, 196, ${alpha * 0.3})`;
+          ctx.lineWidth = 2 * alpha;
+          if (i === 0) {
+            ctx.moveTo(point.x, point.y);
+          } else {
+            ctx.lineTo(point.x, point.y);
+          }
+        }
+        ctx.stroke();
+
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.charge > 0 ? '#ff6b6b' : '#4ecdc4';
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Draw charge indicator
+        ctx.fillStyle = '#fff';
+        ctx.font = '12px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(this.charge > 0 ? '+' : '-', this.x, this.y + 4);
+      }
+    }
+
+    class MagneticField {
+      constructor() {
+        this.lines = [];
+        this.generateLines();
+      }
+
+      generateLines() {
+        this.lines = [];
+        for (let i = 0; i < 8; i++) {
+          this.lines.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            length: 30 + Math.random() * 20,
+            angle: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      draw(ctx, strength) {
+        ctx.strokeStyle = `rgba(69, 183, 209, ${strength * 0.01})`;
+        ctx.lineWidth = 2;
+        
+        for (const line of this.lines) {
+          ctx.beginPath();
+          ctx.moveTo(line.x, line.y);
+          ctx.lineTo(
+            line.x + Math.cos(line.angle) * line.length,
+            line.y + Math.sin(line.angle) * line.length
+          );
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Canvas setup
+    const canvas = document.getElementById('lorentzCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Set canvas size
+    function resizeCanvas() {
+      const container = canvas.parentElement;
+      canvas.width = container.clientWidth;
+      canvas.height = 300;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Simulation variables
+    let particles = [];
+    let magneticField = new MagneticField();
+    let animationId;
+
+    // Control elements
+    const magneticFieldSlider = document.getElementById('magneticField');
+    const particleChargeSlider = document.getElementById('particleCharge');
+    const particleSpeedSlider = document.getElementById('particleSpeed');
+    const particleCountSlider = document.getElementById('particleCount');
+
+    // Value displays
+    const magneticFieldValue = document.getElementById('magneticFieldValue');
+    const particleChargeValue = document.getElementById('particleChargeValue');
+    const particleSpeedValue = document.getElementById('particleSpeedValue');
+    const particleCountValue = document.getElementById('particleCountValue');
+
+    // Initialize particles
+    function initializeParticles() {
+      particles = [];
+      const count = parseInt(particleCountSlider.value);
+      const charge = parseInt(particleChargeSlider.value);
+      const speed = parseInt(particleSpeedSlider.value);
+
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle(
+          Math.random() * canvas.width,
+          Math.random() * canvas.height,
+          charge,
+          speed
+        ));
+      }
+    }
+
+    // Animation loop
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw magnetic field
+      magneticField.draw(ctx, parseInt(magneticFieldSlider.value));
+
+      // Update and draw particles
+      for (const particle of particles) {
+        particle.update(parseInt(magneticFieldSlider.value));
+        particle.draw(ctx);
+      }
+
+      animationId = requestAnimationFrame(animate);
+    }
+
+    // Event listeners
+    magneticFieldSlider.addEventListener('input', function() {
+      magneticFieldValue.textContent = this.value;
+    });
+
+    particleChargeSlider.addEventListener('input', function() {
+      particleChargeValue.textContent = this.value;
+      initializeParticles();
+    });
+
+    particleSpeedSlider.addEventListener('input', function() {
+      particleSpeedValue.textContent = this.value;
+      initializeParticles();
+    });
+
+    particleCountSlider.addEventListener('input', function() {
+      particleCountValue.textContent = this.value;
+      initializeParticles();
+    });
+
+    // Reset function
+    function resetSimulation() {
+      magneticFieldSlider.value = 50;
+      particleChargeSlider.value = 50;
+      particleSpeedSlider.value = 50;
+      particleCountSlider.value = 10;
+      
+      magneticFieldValue.textContent = '50';
+      particleChargeValue.textContent = '50';
+      particleSpeedValue.textContent = '50';
+      particleCountValue.textContent = '10';
+      
+      initializeParticles();
+    }
+
+    // Start simulation
+    initializeParticles();
+    animate();
+  </script>
+</body>
+</html>
