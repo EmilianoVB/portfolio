@@ -1,373 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Autonomous Solar-Electric UAV | Emiliano's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expanding Holonomic Platform - Project WIP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #f7f9fa;
+      color: #222;
       margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #fff;
-      color: #111;
-      min-height: 100vh;
+      padding: 0;
     }
-    .back-btn {
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem 1rem;
+    }
+    h1, h2, h3 {
+      color: #1a4a7c;
+      margin-top: 2rem;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2.5rem;
+    }
+    .intro {
+      background: #e3ecf7;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(26,74,124,0.05);
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      background: #fff;
+      object-fit: cover;
+      max-height: 260px;
+    }
+    .cad-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .cad-section img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      background: #fff;
+      object-fit: cover;
+      max-height: 260px;
+    }
+    .guide-link {
       display: inline-block;
-      margin: 24px 0 0 24px;
-      padding: 8px 18px;
-      background: #f3f4f6;
+      margin: 1rem 0;
+      padding: 0.7rem 1.2rem;
+      background: #1a4a7c;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+    .guide-link:hover {
+      background: #2561a7;
+    }
+    .sticky-back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(243, 244, 246, 0.95);
       color: #374151;
       border: 1px solid #e5e7eb;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
       font-size: 1rem;
-      transition: background 0.2s, color 0.2s;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    .back-btn:hover {
-      background: #e5e7eb;
+    .sticky-back-btn:hover {
+      background: rgba(229, 231, 235, 0.95);
       color: #111;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-    .hero-uav {
-      position: relative;
-      width: 100%;
-      height: 40vh;
-      min-height: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: #222;
-    }
-    .hero-uav video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      filter: brightness(60%) contrast(110%) grayscale(20%);
-      z-index: 0;
-      display: block;
-    }
-    .hero-uav .overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.18);
-      z-index: 1;
-    }
-    .hero-uav .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      width: 100%;
-    }
-    .hero-uav h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 700;
-      margin: 0 0 10px 0;
-    }
-    .hero-uav p {
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin: 0;
-    }
-    .section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-    .section h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-      text-align: center;
-    }
-    .gallery {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-    .gallery img {
-      width: 100%;
-      max-width: 270px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      background: #eee;
-    }
-    .video-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 32px;
-    }
-    .video-section video {
-      width: 100%;
-      max-width: 600px;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-      background: #000;
-    }
-    .pdf-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 32px;
-    }
-    .pdf-section iframe {
-      width: 100%;
-      max-width: 700px;
-      height: 500px;
-      border: 1px solid #e5e7eb;
+    .tech-details, .future-work {
+      background: #f0f4f8;
       border-radius: 8px;
-      background: #fafafa;
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 4px rgba(26,74,124,0.04);
     }
-    .tech-details {
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .tech-details ul {
-      margin: 0 0 0 18px;
-      padding: 0;
-      font-size: 1.05rem;
-    }
-    @media (max-width: 700px) {
-      .gallery img {
-        max-width: 100%;
-        height: 120px;
-      }
-      .video-section video {
-        max-width: 100%;
-      }
-      .pdf-section iframe {
-        max-width: 100%;
-        height: 320px;
-      }
-      .tech-details {
-        padding: 14px;
-      }
-    }
-    @media (max-width: 500px) {
-      .hero-uav h1 {
-        font-size: 1.5rem;
-      }
-      .hero-uav p {
-        font-size: 1rem;
-      }
-      .section h2 {
-        font-size: 1.2rem;
-      }
-      .gallery img {
-        height: 80px;
-      }
-      .pdf-section iframe {
-        height: 180px;
-      }
-    }
-    .carousel {
-      position: relative;
-      max-width: 600px;
-      margin: 0 auto 24px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      outline: none;
-    }
-    .carousel-track {
-      display: flex;
-      overflow: hidden;
-      width: 100%;
-      max-width: 540px;
-      height: 320px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      background: #eee;
-      position: relative;
-    }
-    .carousel-slide {
-      min-width: 100%;
-      height: 320px;
-      object-fit: cover;
-      transition: opacity 0.5s;
-      opacity: 0;
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 1;
-    }
-    .carousel-slide.active {
-      opacity: 1;
-      z-index: 2;
-      position: relative;
-    }
-    .carousel-arrow {
-      background: rgba(255,255,255,0.8);
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      margin: 0 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
-      transition: background 0.2s;
-      z-index: 3;
-    }
-    .carousel-arrow:hover, .carousel-arrow:focus {
-      background: #f3f4f6;
-    }
-    @media (max-width: 700px) {
-      .carousel-track, .carousel-slide {
-        height: 180px;
-      }
-    }
-    @media (max-width: 500px) {
-      .carousel-track, .carousel-slide {
-        height: 100px;
+    @media (max-width: 600px) {
+      .cad-section {
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
-  <section class="hero-uav">
-    <video autoplay loop muted playsinline>
-      <source src="NEWbackground.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h1>SPMA Ranger: Solar-Powered Modular Aerial Ranger</h1>
-      <p>Long-endurance, machine-learning powered aerial robotics for real-world missions.</p>
+  <a href="../index.html" class="sticky-back-btn">← Back to Portfolio</a>
+  
+  <div class="container">
+    <h1>Expanding Holonomic Platform <span style="font-size:1rem; color:#888;">(Work in Progress)</span></h1>
+    <div class="intro">
+      <p>
+        This project documents the development of a modular, expanding holonomic platform. The goal is to create a robust, scalable robot base capable of omnidirectional movement, with a focus on open-source hardware and accessible electronics. The project is currently a work in progress, with ongoing mechanical, electrical, and software development.
+      </p>
     </div>
-  </section>
 
-  <div class="section video-section">
-    <h2>Project Pitch Video</h2>
-    <iframe 
-      width="100%" 
-      height="400" 
-      src="https://www.youtube.com/embed/_aRKtXb8_gg" 
-      title="UAV Project Demo Video" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-      allowfullscreen
-      style="border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); background: #000;">
-    </iframe>
-  </div>
-
-  <div class="section">
-    <h2>Project Gallery</h2>
-    <!-- Canva slideshow embed placeholder -->
-    <div style="width:100%;max-width:600px;margin:0 auto;text-align:center;padding:40px 0;background:#f3f4f6;border-radius:10px;">
-      <iframe style="border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.10);background:#fff;" width="100%" height="400" src="https://www.canva.com/design/DAGreHCSiTk/AVyk1A1lVV5PMi7AS1wb8Q/view?embed" allowfullscreen loading="lazy" frameborder="0"></iframe>
+    <h2>Progress Gallery</h2>
+    <div class="gallery">
+      <img src="expanded.JPG" alt="Platform Expanded">
+      <img src="contracted.JPG" alt="Platform Contracted">
+      <img src="expandedOnWorkbench.JPG" alt="Platform Expanded on Workbench">
+      <img src="contractedOnWorkbench.JPG" alt="Platform Contracted on Workbench">
+      <img src="onlyelectronics.JPG" alt="Electronics Setup">
+      <img src="i2cESP32wiring.png" alt="I2C ESP32 Wiring Diagram">
+      <img src="4motors.png" alt="4 Motors Setup">
+      <img src="singlemotor.png" alt="Single Motor Test">
+      <img src="sketch1.png" alt="Project Sketch 1">
+      <img src="sketch2.png" alt="Project Sketch 2">
     </div>
+
+    <h2>CAD Renders</h2>
+    <div class="cad-section">
+      <img src="cad1.png" alt="CAD Render 1">
+      <img src="cad2.png" alt="CAD Render 2">
+    </div>
+
+    <h2>Step-by-Step Guide</h2>
+    <p>
+      For a detailed, step-by-step build guide—including wiring, code, and troubleshooting—check out the Instructables tutorial:
+    </p>
+    <a class="guide-link" href="https://www.instructables.com/How-to-Control-4-Motors-With-Two-ESP32s-Over-I2C-A/" target="_blank">Read the Instructables Guide</a>
+
+    <h2>Technical Details</h2>
+    <div class="tech-details">
+      <ul>
+        <li><strong>Microcontrollers:</strong> 2x ESP32 (Master & Slave, communicating via I2C)</li>
+        <li><strong>Motor Drivers:</strong> 4x L298N modules (each controls one DC motor)</li>
+        <li><strong>Motors:</strong> 4x DC motors with encoders (for closed-loop control)</li>
+        <li><strong>Power:</strong> Dedicated 12V rail for motor drivers, common ground for all electronics</li>
+        <li><strong>Programming:</strong> Arduino IDE, using <code>Wire</code> library for I2C and <code>analogWrite()</code> for PWM</li>
+        <li><strong>Control:</strong> Master ESP32 sends commands to Slave over I2C, each controls two motors</li>
+        <li><strong>Encoders:</strong> Integrated for future PID speed/position control</li>
+      </ul>
+      <p style="margin-top:1rem; font-size:0.98em; color:#444;">
+        For full wiring diagrams, code examples, and troubleshooting tips, see the <a href="https://www.instructables.com/How-to-Control-4-Motors-With-Two-ESP32s-Over-I2C-A/" target="_blank">Instructables guide</a>.
+      </p>
+    </div>
+
+    <h2>Future Work</h2>
+    <div class="future-work">
+      <ul>
+        <li>Integrate and tune PID control for precise motor speed and position</li>
+        <li>Expand platform with additional sensors (IMU, distance, etc.)</li>
+        <li>Develop a wireless control interface</li>
+        <li>Release a full build log and video journey (coming soon!)</li>
+        <li>Open-source all CAD and code files</li>
+      </ul>
+    </div>
+
+    <footer style="text-align:center; color:#aaa; font-size:0.95em; margin-top:2rem;">
+      &copy; 2025 Expanding Holonomic Platform Project | <a href="../index.html" style="color:#888;">Back to Home</a>
+    </footer>
   </div>
-
-  <div class="section pdf-section">
-    <h2>Project Paper</h2>
-    <iframe src="SPMA_Ranger.pdf"></iframe>
-    <p style="margin-top:8px;font-size:0.95rem;">SPMA Ranger UAV Project Documentation</p>
-  </div>
-
-  <div class="section">
-    <h2>Technical Features</h2>
-    <p>The SPMA Ranger is an autonomous, solar-powered UAV designed for anti-poaching surveillance. Its frame integrates lightweight carbon fiber rods and 3D-printed PLA parts, optimized through Finite Element Analysis to maintain a factor of safety above 2.0. It uses 40 Sunpower flexible solar panels arranged in dual series parallel configurations to deliver a stable 12V at 8A, enough to power a 3-cell brushless motor drawing up to 10A. A thermal camera connected to an onboard Raspberry Pi enables real-time classification of human presence, and GPS telemetry allows for live intruder alerts. The modular design ensures rapid repairs, field deployment, and extended flight time.</p>
-  </div>
-
-  <div class="section">
-    <h2>Process</h2>
-    <p>We began by defining key sizing constraints, primarily based on solar panel voltage and motor compatibility, which shaped the aircraft's wing, tail, and fuselage design. Our aerodynamic profile was based on the s7055-il airfoil, chosen for its soft curves and ease of manufacturing using monokoting. We selected carbon fiber rods for structural strength and 3D-printed PLA parts for modularity and weight efficiency. To ensure mechanical integrity, we conducted Finite Element Analysis in SolidWorks on critical components, including the wing hinge, wing mount, and motor mount. For each, we calculated expected loads, applied realistic constraints, and confirmed mesh convergence before validating a minimum factor of safety of 2.0 or higher. Our design process adhered to aerospace best practices, using guidance from RC aircraft forums, academic literature, and FAA and ASTM standards to ensure the Ranger would be durable, lightweight, and field-serviceable.</p>
-  </div>
-
-  <div class="section">
-    <h2>Results</h2>
-    <p>During flight testing, the SPMA Ranger successfully lifted off and maintained pitch and yaw stability, confirming the accuracy of our weight estimates, stabilizer sizing, and motor selection. The aircraft came in under the predicted weight of 6.67 lbs, and the 3-cell brushless motor provided adequate thrust for takeoff. However, roll instability caused the UAV to stall and crash, which we traced to undersized and poorly positioned ailerons—designed at only 7.5% of wing area rather than the recommended 10–15%. The outer wing hinge failed on impact, which was expected, and helped localize the damage to an easily replaceable part. All other components, including the carbon fiber wings and motor mount, remained structurally sound, affirming our FEA predictions. The test flight validated most of our design assumptions and demonstrated the viability of a solar-powered, modular UAV for conservation applications.</p>
-  </div>
-
-  <a href="index.html" class="back-btn">← Back to Portfolio</a>
-  <script>
-    (function() {
-      const carousel = document.querySelector('.carousel');
-      const slides = document.querySelectorAll('.carousel-slide');
-      const leftArrow = document.querySelector('.carousel-arrow.left');
-      const rightArrow = document.querySelector('.carousel-arrow.right');
-      let current = 0;
-      let interval = null;
-      let isPaused = false;
-      const AUTO_SCROLL_DELAY = 3000;
-
-      function showSlide(idx) {
-        slides.forEach((slide, i) => {
-          slide.classList.toggle('active', i === idx);
-        });
-        current = idx;
-      }
-
-      function nextSlide() {
-        showSlide((current + 1) % slides.length);
-      }
-
-      function prevSlide() {
-        showSlide((current - 1 + slides.length) % slides.length);
-      }
-
-      function startAutoScroll() {
-        if (interval) clearInterval(interval);
-        interval = setInterval(() => {
-          if (!isPaused) nextSlide();
-        }, AUTO_SCROLL_DELAY);
-      }
-
-      function pauseAutoScroll() {
-        isPaused = true;
-      }
-
-      function resumeAutoScroll() {
-        isPaused = false;
-      }
-
-      leftArrow.addEventListener('click', () => {
-        prevSlide();
-        pauseAutoScroll();
-        setTimeout(resumeAutoScroll, 6000);
-      });
-      rightArrow.addEventListener('click', () => {
-        nextSlide();
-        pauseAutoScroll();
-        setTimeout(resumeAutoScroll, 6000);
-      });
-      carousel.addEventListener('mouseenter', pauseAutoScroll);
-      carousel.addEventListener('mouseleave', resumeAutoScroll);
-      carousel.addEventListener('touchstart', pauseAutoScroll);
-      carousel.addEventListener('touchend', resumeAutoScroll);
-      carousel.addEventListener('focusin', pauseAutoScroll);
-      carousel.addEventListener('focusout', resumeAutoScroll);
-
-      // Keyboard navigation
-      carousel.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-          prevSlide();
-          pauseAutoScroll();
-          setTimeout(resumeAutoScroll, 6000);
-        } else if (e.key === 'ArrowRight') {
-          nextSlide();
-          pauseAutoScroll();
-          setTimeout(resumeAutoScroll, 6000);
-        }
-      });
-
-      showSlide(0);
-      startAutoScroll();
-    })();
-  </script>
 </body>
-</html> 
+</html>
