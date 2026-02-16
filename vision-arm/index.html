@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real-Time Vision-Guided Robotic Arm Simulation | Emiliano's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      color: #111;
+      min-height: 100vh;
+    }
+    .sticky-back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(243, 244, 246, 0.95);
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .sticky-back-btn:hover {
+      background: rgba(229, 231, 235, 0.95);
+      color: #111;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0ea5e9 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.25);
+      z-index: 1;
+    }
+    .hero .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin: 0;
+      opacity: 0.9;
+    }
+    .section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    .section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .tag {
+      padding: 6px 12px;
+      background: #f3f4f6;
+      color: #374151;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid #e5e7eb;
+    }
+    .project-overview {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .project-overview p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #4b5563;
+      margin-bottom: 16px;
+    }
+    .project-overview p:last-child {
+      margin-bottom: 0;
+    }
+    .placeholder-img {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      margin: 0 auto 32px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      color: #94a3b8;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .tech-details {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .tech-details h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1f2937;
+    }
+    .tech-details ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .tech-details li {
+      margin-bottom: 8px;
+    }
+    .results-section {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .results-section h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1e293b;
+    }
+    .results-section ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #475569;
+    }
+    .results-section li {
+      margin-bottom: 8px;
+    }
+    @media (max-width: 700px) {
+      .placeholder-img { height: 240px; }
+      .tech-details, .results-section { padding: 14px; }
+    }
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 1.5rem; }
+      .hero p { font-size: 1rem; }
+      .section h2 { font-size: 1.2rem; }
+      .placeholder-img { height: 160px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="sticky-back-btn">&larr; Back to Portfolio</a>
+
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Real-Time Vision-Guided Robotic Arm</h1>
+      <p>IK-driven manipulation with dynamic visual object tracking</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="tags">
+      <span class="tag">Inverse Kinematics</span>
+      <span class="tag">Computer Vision</span>
+      <span class="tag">Motion Planning</span>
+      <span class="tag">Real-Time Control</span>
+      <span class="tag">Multi-DOF Manipulator</span>
+      <span class="tag">Trajectory Planning</span>
+    </div>
+
+    <div class="project-overview">
+      <p>
+        This project demonstrates a real-time vision-guided robotic arm simulation where a multi-DOF manipulator tracks and reaches for dynamically moving objects using computer vision input. An Inverse Kinematics solver maps Cartesian coordinates from visual detections directly to joint-space configurations, enabling precise and responsive end-effector positioning.
+      </p>
+      <p>
+        A continuous control loop updates target trajectories based on live object tracking data, minimizing steady-state error and ensuring smooth, collision-free motion. The simulation validates workspace constraints and joint limits before hardware deployment, bridging the gap between algorithmic development and physical robot control.
+      </p>
+    </div>
+
+    <h2>Demo</h2>
+    <div class="placeholder-img">
+      [ Demo video / screenshot placeholder ]
+    </div>
+
+    <h2>Technical Implementation</h2>
+    <div class="tech-details">
+      <h3>Core Technologies & Methods</h3>
+      <ul>
+        <li><strong>Inverse Kinematics:</strong> Implemented IK algorithms to map Cartesian coordinates from visual input to joint-space configurations for precise end-effector positioning</li>
+        <li><strong>Real-Time Control Loop:</strong> Developed a continuous control loop that updates target trajectories based on dynamic object tracking, minimizing steady-state error</li>
+        <li><strong>Workspace Simulation:</strong> Modeled workspace constraints and joint limits of the multi-DOF manipulator to validate motion planning algorithms</li>
+        <li><strong>Visual Object Tracking:</strong> Integrated computer vision pipeline to detect and track objects in real time, feeding positional data to the IK solver</li>
+        <li><strong>Trajectory Planning:</strong> Implemented smooth trajectory generation to ensure continuous, jerk-limited motion between waypoints</li>
+      </ul>
+    </div>
+
+    <h2>Results</h2>
+    <div class="results-section">
+      <h3>Project Outcomes</h3>
+      <ul>
+        <li><strong>Real-Time Tracking:</strong> Achieved responsive end-effector positioning that dynamically follows moving objects with minimal latency</li>
+        <li><strong>IK Accuracy:</strong> Successfully mapped visual coordinates to joint configurations within the manipulator's workspace constraints</li>
+        <li><strong>Simulation Validation:</strong> Verified motion planning algorithms in simulation, confirming joint limit compliance and collision-free operation</li>
+        <li><strong>Hardware Readiness:</strong> Validated control algorithms for deployment on physical robotic arm hardware</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.section > *').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rocker-Bogie Rover Digital Twin | Emiliano's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      color: #111;
+      min-height: 100vh;
+    }
+    .sticky-back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(243, 244, 246, 0.95);
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .sticky-back-btn:hover {
+      background: rgba(229, 231, 235, 0.95);
+      color: #111;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #e45a3b 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+    .hero .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin: 0;
+      opacity: 0.9;
+    }
+    .section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    .section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .tag {
+      padding: 6px 12px;
+      background: #f3f4f6;
+      color: #374151;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid #e5e7eb;
+    }
+    .project-overview {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .project-overview p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #4b5563;
+      margin-bottom: 16px;
+    }
+    .project-overview p:last-child {
+      margin-bottom: 0;
+    }
+    .placeholder-img {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      margin: 0 auto 32px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      color: #94a3b8;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .tech-details {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .tech-details h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1f2937;
+    }
+    .tech-details ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .tech-details li {
+      margin-bottom: 8px;
+    }
+    .pipeline-section {
+      background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .pipeline-section h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1e293b;
+    }
+    .pipeline-section ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #475569;
+    }
+    .pipeline-section li {
+      margin-bottom: 8px;
+    }
+    .results-section {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .results-section h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1e293b;
+    }
+    .results-section ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #475569;
+    }
+    .results-section li {
+      margin-bottom: 8px;
+    }
+    @media (max-width: 700px) {
+      .placeholder-img { height: 240px; }
+      .tech-details, .pipeline-section, .results-section { padding: 14px; }
+    }
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 1.5rem; }
+      .hero p { font-size: 1rem; }
+      .section h2 { font-size: 1.2rem; }
+      .placeholder-img { height: 160px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="sticky-back-btn">&larr; Back to Portfolio</a>
+
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Rocker-Bogie Rover Digital Twin</h1>
+      <p>Full-stack ROS2 simulation from SolidWorks to Isaac Sim</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="tags">
+      <span class="tag">ROS2</span>
+      <span class="tag">URDF/Xacro</span>
+      <span class="tag">SolidWorks</span>
+      <span class="tag">Gazebo</span>
+      <span class="tag">Isaac Sim</span>
+      <span class="tag">RViz2</span>
+      <span class="tag">Swerve-Drive Control</span>
+      <span class="tag">Sim2Real</span>
+    </div>
+
+    <div class="project-overview">
+      <p>
+        This project delivers a complete digital twin of a rocker-bogie rover, starting from a SolidWorks CAD model and extending through URDF/Xacro representation, ROS2 integration, and multi-simulator deployment. The full kinematic structure of the rocker-bogie suspension is captured in URDF Xacro files for seamless use with ROS2 tools and simulation environments.
+      </p>
+      <p>
+        A custom swerve-drive controller enables precise omnidirectional motion including pivot-in-place maneuvers, while a ROS2-to-Isaac Sim pipeline supports teleoperation, rapid control algorithm iteration, and Sim2Real-style autonomy testing. The rover has been validated in both Gazebo and NVIDIA Isaac Sim environments.
+      </p>
+    </div>
+
+    <h2>Simulation Gallery</h2>
+    <div class="placeholder-img">
+      [ Gazebo / Isaac Sim screenshots placeholder ]
+    </div>
+
+    <h2>Technical Implementation</h2>
+    <div class="tech-details">
+      <h3>ROS2 Architecture</h3>
+      <ul>
+        <li><strong>URDF/Xacro Modeling:</strong> Designed the rocker-bogie rover in SolidWorks and represented the full kinematic structure in URDF Xacro for ROS2 and simulation tool integration</li>
+        <li><strong>ROS2 Node Graph:</strong> Implemented joint state publishers (position & velocity), robot_state_publisher, and URDF-based description topics for real-time state synchronization</li>
+        <li><strong>Swerve-Drive Controller:</strong> Developed a custom ROS2 controller to coordinate steering and drive joints, enabling omnidirectional motion and pivot-in-place maneuvers</li>
+        <li><strong>Visualization & Validation:</strong> Configured RViz2 and Gazebo to visualize the digital twin, validate rocker-bogie suspension kinematics, and test motion behaviors</li>
+      </ul>
+    </div>
+
+    <h2>Isaac Sim Pipeline</h2>
+    <div class="pipeline-section">
+      <h3>NVIDIA Isaac Sim Integration</h3>
+      <ul>
+        <li><strong>ROS2-Isaac Sim Bridge:</strong> Built a pipeline to run the rover digital twin in NVIDIA Isaac Sim for high-fidelity physics simulation</li>
+        <li><strong>Teleoperation:</strong> Enabled real-time teleoperation of the rover through the Isaac Sim environment</li>
+        <li><strong>Rapid Iteration:</strong> Supported fast iteration of control algorithms with immediate visual and physics feedback</li>
+        <li><strong>Sim2Real Testing:</strong> Established a Sim2Real-style workflow for testing autonomy stacks before physical deployment</li>
+      </ul>
+    </div>
+
+    <h2>Results</h2>
+    <div class="results-section">
+      <h3>Project Outcomes</h3>
+      <ul>
+        <li><strong>Multi-Simulator Deployment:</strong> Successfully deployed the rover digital twin across RViz2, Gazebo, and NVIDIA Isaac Sim</li>
+        <li><strong>Kinematic Validation:</strong> Confirmed accurate rocker-bogie suspension behavior in physics-based simulation environments</li>
+        <li><strong>Omnidirectional Control:</strong> Achieved precise swerve-drive locomotion including forward, lateral, and pivot-in-place maneuvers</li>
+        <li><strong>Sim2Real Pipeline:</strong> Established a repeatable workflow for transitioning control algorithms from simulation to hardware</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.section > *').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

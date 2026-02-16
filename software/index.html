@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Software Development | Emiliano's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      color: #111;
+      min-height: 100vh;
+    }
+    .sticky-back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(243, 244, 246, 0.95);
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .sticky-back-btn:hover {
+      background: rgba(229, 231, 235, 0.95);
+      color: #111;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #059669 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    .hero .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin: 0;
+      opacity: 0.9;
+    }
+    .section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    .section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .tag {
+      padding: 6px 12px;
+      background: #f3f4f6;
+      color: #374151;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid #e5e7eb;
+    }
+    .project-overview {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .project-overview p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #4b5563;
+      margin-bottom: 16px;
+    }
+    .project-overview p:last-child {
+      margin-bottom: 0;
+    }
+    .app-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 0;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .app-card-header {
+      padding: 24px 28px 0 28px;
+    }
+    .app-card-header h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+      color: #111;
+    }
+    .app-card-header .app-subtitle {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+    .app-card-body {
+      padding: 0 28px 28px 28px;
+    }
+    .app-card-body p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #4b5563;
+      margin-bottom: 16px;
+    }
+    .app-card-body p:last-child {
+      margin-bottom: 0;
+    }
+    .app-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .app-tag {
+      padding: 4px 10px;
+      background: #e0f2fe;
+      color: #0369a1;
+      border-radius: 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .app-tag.green {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .placeholder-img {
+      width: 100%;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      color: #94a3b8;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .features-list {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #4b5563;
+    }
+    .features-list li {
+      margin-bottom: 6px;
+    }
+    @media (max-width: 700px) {
+      .app-card-header { padding: 16px 16px 0 16px; }
+      .app-card-body { padding: 0 16px 16px 16px; }
+      .placeholder-img { height: 200px; }
+    }
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 1.5rem; }
+      .hero p { font-size: 1rem; }
+      .section h2 { font-size: 1.2rem; }
+      .placeholder-img { height: 140px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="sticky-back-btn">&larr; Back to Portfolio</a>
+
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Software Development</h1>
+      <p>Desktop and web applications built from scratch</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">CustomTkinter</span>
+      <span class="tag">Pillow</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">HTML/CSS</span>
+      <span class="tag">Canvas API</span>
+      <span class="tag">LocalStorage</span>
+      <span class="tag">Desktop & Web Apps</span>
+    </div>
+
+    <div class="project-overview">
+      <p>
+        A collection of software tools built to solve real, everyday problems. These projects span desktop GUI applications and standalone web apps, each designed with a focus on usability, clean interfaces, and practical functionality. They demonstrate proficiency in both Python and JavaScript ecosystems, from image processing and GUI development to interactive data visualization.
+      </p>
+    </div>
+
+    <!-- App 1: Instagram Carousel Generator -->
+    <div class="app-card">
+      <div class="placeholder-img">
+        [ Carousel Generator screenshot placeholder ]
+      </div>
+      <div class="app-card-header">
+        <h3>Instagram Carousel Generator</h3>
+        <div class="app-subtitle">Desktop Application &mdash; Python</div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-tags">
+          <span class="app-tag">Python</span>
+          <span class="app-tag">CustomTkinter</span>
+          <span class="app-tag">Pillow</span>
+          <span class="app-tag">Image Processing</span>
+          <span class="app-tag">GUI</span>
+        </div>
+        <p>
+          A desktop application for creating polished Instagram carousel slides from images and text. Features multiple visual themes (Lifestyle, Corporate, and more), automatic background brightness detection for optimal text contrast, font management, watermarking, and live preview. Built with CustomTkinter for a modern GUI and Pillow for image compositing and rendering.
+        </p>
+        <h4 style="font-weight: 700; margin: 16px 0 8px 0;">Key Features</h4>
+        <ul class="features-list">
+          <li>Multiple theme presets with adaptive brightness-aware color schemes</li>
+          <li>Rich text formatting with title, subtitle, and body text layers</li>
+          <li>Automatic EXIF-aware image orientation handling</li>
+          <li>Live canvas preview with real-time slide editing</li>
+          <li>Batch export of multi-slide carousels as individual images</li>
+          <li>Customizable watermarks and font sizing</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- App 2: Time Tracker -->
+    <div class="app-card">
+      <div class="placeholder-img">
+        [ Time Tracker screenshot placeholder ]
+      </div>
+      <div class="app-card-header">
+        <h3>Time Tracker</h3>
+        <div class="app-subtitle">Standalone Web Application &mdash; JavaScript</div>
+      </div>
+      <div class="app-card-body">
+        <div class="app-tags">
+          <span class="app-tag green">JavaScript</span>
+          <span class="app-tag green">HTML/CSS</span>
+          <span class="app-tag green">Canvas API</span>
+          <span class="app-tag green">LocalStorage</span>
+        </div>
+        <p>
+          A single-file web application for tracking how time is spent throughout each day. Features an hourly activity logger, a full-year heatmap visualization rendered on HTML Canvas, analytics with category breakdowns, and customizable activity categories. All data is stored in the browser via LocalStorage, requiring no server or database.
+        </p>
+        <h4 style="font-weight: 700; margin: 16px 0 8px 0;">Key Features</h4>
+        <ul class="features-list">
+          <li>Hour-by-hour daily activity logging with color-coded categories</li>
+          <li>Year-at-a-glance heatmap rendered on HTML Canvas (24 hours x 365 days)</li>
+          <li>Analytics dashboard with time distribution and visual breakdowns</li>
+          <li>Custom categories with user-defined names and colors</li>
+          <li>Weight tracking integrated into daily logs</li>
+          <li>JSON backup and restore for data portability</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.section > *').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
