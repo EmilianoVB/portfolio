@@ -209,39 +209,6 @@
       top: 40px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
     }
-    .summary-button {
-      margin: 40px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-    }
-    .logo-group {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-    .logo-group img {
-      height: 40px;
-      width: auto;
-      filter: grayscale(100%);
-    }
-    .summary-button button {
-      padding: 8px 16px;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border: 1px solid black;
-      background: white;
-      color: black;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .summary-button button:hover {
-      background: black;
-      color: white;
-    }
     .projects {
       padding: 60px 20px;
       background: #f9f9f9;
@@ -1174,10 +1141,6 @@
     <a href="#contact" class="bookmark-link">Contact</a>
   </div>
 
-  <section id="summary" class="summary-button">
-    <button onclick="downloadResume()">Get 2-Minute Summary</button>
-  </section>
-
   <section id="projects" class="projects">
     <h2>Projects</h2>
     <div class="project-grid">
@@ -1578,14 +1541,6 @@
       });
     }, 3000);
 
-    function downloadResume() {
-      const link = document.createElement('a');
-      link.href = 'Resume_Portfolio_Emiliano_VB.pdf';
-      link.download = 'Resume_Portfolio_Emiliano_VB.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
   </script>
 
   <script>
