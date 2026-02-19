@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vecinos: A Latino-focused LLM Council | Emiliano's Portfolio</title>
+  <title>La Colonia: A Multi-LLM Council | Emiliano's Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -119,43 +119,82 @@
     .project-overview p:last-child {
       margin-bottom: 0;
     }
-    .placeholder-img {
-      width: 100%;
-      max-width: 700px;
-      height: 400px;
-      margin: 0 auto 32px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      color: #94a3b8;
-      font-size: 1.1rem;
-      font-weight: 600;
+    /* Screenshot gallery */
+    .screenshot-main {
+      margin-bottom: 16px;
     }
-    .arch-section {
+    .screenshot-main img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      display: block;
+    }
+    .screenshot-flow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .flow-step img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+      display: block;
+    }
+    .flow-step .step-label {
+      font-size: 0.8rem;
+      color: #6b7280;
+      font-weight: 700;
+      margin-top: 8px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .flow-step .step-desc {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      text-align: center;
+      margin-top: 2px;
+    }
+    /* 3-stage cards */
+    .stages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stage-card {
       background: #f9f9f9;
       border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 32px;
+      padding: 20px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      text-align: center;
+      border-top: 4px solid #c2410c;
     }
-    .arch-section h3 {
-      font-size: 1.3rem;
+    .stage-number {
+      font-size: 1.6rem;
       font-weight: 700;
-      margin-bottom: 16px;
+      color: #c2410c;
+      margin-bottom: 6px;
+    }
+    .stage-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 0 0 8px 0;
       color: #1f2937;
     }
-    .arch-section ul {
-      margin: 0 0 0 18px;
-      padding: 0;
-      font-size: 1.05rem;
-      line-height: 1.6;
+    .stage-card p {
+      font-size: 0.85rem;
+      color: #6b7280;
+      line-height: 1.5;
+      margin: 0;
     }
-    .arch-section li {
-      margin-bottom: 8px;
-    }
+    /* Tech stack */
     .stack-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -209,14 +248,13 @@
     }
     @media (max-width: 700px) {
       .stack-grid { grid-template-columns: 1fr; }
-      .placeholder-img { height: 240px; }
-      .arch-section, .stack-card, .results-section { padding: 14px; }
+      .stages-grid { grid-template-columns: 1fr; }
+      .screenshot-flow { grid-template-columns: 1fr; }
     }
     @media (max-width: 500px) {
       .hero h1 { font-size: 1.5rem; }
       .hero p { font-size: 1rem; }
       .section h2 { font-size: 1.2rem; }
-      .placeholder-img { height: 160px; }
     }
   </style>
 </head>
@@ -225,46 +263,73 @@
 
   <div class="hero">
     <div class="hero-content">
-      <h1>Vecinos</h1>
-      <p>A Latino-focused LLM Council</p>
+      <h1>La Colonia</h1>
+      <p>A 3-stage multi-LLM deliberation council</p>
     </div>
   </div>
 
   <div class="section">
     <div class="tags">
       <span class="tag">FastAPI</span>
-      <span class="tag">React</span>
+      <span class="tag">React 19</span>
       <span class="tag">Vite</span>
-      <span class="tag">OpenRouter API</span>
+      <span class="tag">OpenRouter</span>
+      <span class="tag">Ollama</span>
       <span class="tag">Python</span>
-      <span class="tag">Async HTTP</span>
+      <span class="tag">SSE Streaming</span>
+      <span class="tag">Async httpx</span>
       <span class="tag">react-markdown</span>
       <span class="tag">uv</span>
     </div>
 
     <div class="project-overview">
       <p>
-        Vecinos is a full-stack AI application that brings together multiple large language models into a council-style conversation interface, designed with the Latino community in mind. Users pose questions or topics, and multiple LLMs respond in parallel, offering diverse perspectives that can be compared side by side.
+        La Colonia replaces single-model AI responses with a council of LLMs that deliberate, rank each other's answers, and synthesize a final verdict. Models take on Spanish-language personas — <em>El Profesor</em>, <em>La Abogada</em>, <em>El Patrón</em> — grounding the experience in Latino culture.
       </p>
       <p>
-        The application is built with a FastAPI backend that asynchronously queries multiple models through the OpenRouter API, and a React + Vite frontend that renders rich markdown responses in real time. Conversations are persisted as JSON files, making the system lightweight and easy to deploy without a database.
+        Built on Andrej Karpathy's <em>llm-council</em> concept and extended into a full-stack app: FastAPI backend streaming results over SSE, React 19 frontend with a radial deliberation view, and support for 9 LLM providers (OpenRouter, Ollama, Groq, OpenAI, Anthropic, and more).
       </p>
     </div>
 
-    <h2>Application Screenshot</h2>
-    <div class="placeholder-img">
-      [ App screenshot placeholder ]
+    <h2>App in Action</h2>
+    <div class="screenshot-main">
+      <img src="Start%20Page.png" alt="La Colonia start page showing council members" />
+    </div>
+    <div class="screenshot-flow">
+      <div class="flow-step">
+        <img src="Question%20sent.png" alt="Question sent to council" />
+        <div class="step-label">Stage 1 — Deliberation</div>
+        <div class="step-desc">Models query in parallel over SSE</div>
+      </div>
+      <div class="flow-step">
+        <img src="final%20ranking.png" alt="Peer ranking leaderboard" />
+        <div class="step-label">Stage 2 — Peer Review</div>
+        <div class="step-desc">Models anonymously rank each other</div>
+      </div>
+      <div class="flow-step">
+        <img src="final%20verdict.png" alt="Final verdict from El Patrón" />
+        <div class="step-label">Stage 3 — Synthesis</div>
+        <div class="step-desc">El Patrón delivers the final verdict</div>
+      </div>
     </div>
 
-    <h2>Architecture</h2>
-    <div class="arch-section">
-      <h3>System Design</h3>
-      <ul>
-        <li><strong>Multi-LLM Council:</strong> Queries multiple language models in parallel through OpenRouter, presenting diverse AI perspectives on each topic</li>
-        <li><strong>Async Backend:</strong> FastAPI with async httpx for non-blocking, concurrent API requests to multiple LLM providers</li>
-        <li><strong>Real-Time Rendering:</strong> React frontend with react-markdown for rich, formatted AI responses as they arrive</li>
-        <li><strong>Lightweight Persistence:</strong> Conversations stored as JSON files in data/conversations/, eliminating database dependencies</li>
-      </ul>
+    <h2>How It Works</h2>
+    <div class="stages-grid">
+      <div class="stage-card">
+        <div class="stage-number">01</div>
+        <h3>Deliberation</h3>
+        <p>4–8 council models answer in parallel. Results stream back as they arrive via Server-Sent Events.</p>
+      </div>
+      <div class="stage-card">
+        <div class="stage-number">02</div>
+        <h3>Peer Ranking</h3>
+        <p>Each model anonymously scores all other responses. Aggregate rankings surface the best answers.</p>
+      </div>
+      <div class="stage-card">
+        <div class="stage-number">03</div>
+        <h3>Synthesis</h3>
+        <p>A designated Chairman model reads all answers and rankings, then delivers a single authoritative verdict.</p>
+      </div>
     </div>
 
     <h2>Tech Stack</h2>
@@ -272,32 +337,36 @@
       <div class="stack-card">
         <h3>Backend</h3>
         <ul>
-          <li>FastAPI (Python 3.10+)</li>
-          <li>Async httpx for concurrent requests</li>
-          <li>OpenRouter API integration</li>
-          <li>JSON file-based storage</li>
+          <li>FastAPI + uvicorn (port 8001)</li>
+          <li>Async httpx — concurrent LLM requests</li>
+          <li>SSE streaming to frontend</li>
+          <li>9 provider adapters (OpenRouter, Ollama, Groq, OpenAI, Anthropic, Google, Mistral, DeepSeek, custom)</li>
+          <li>DuckDuckGo / Tavily / Brave web search</li>
+          <li>JSON file storage — no database</li>
           <li>uv for package management</li>
         </ul>
       </div>
       <div class="stack-card">
         <h3>Frontend</h3>
         <ul>
-          <li>React with Vite</li>
-          <li>react-markdown for rendering</li>
-          <li>npm for package management</li>
-          <li>Responsive design</li>
+          <li>React 19 + Vite</li>
+          <li>Radial deliberation view</li>
+          <li>react-markdown for responses</li>
+          <li>3-mode execution: chat only, + ranking, full deliberation</li>
+          <li>Configurable personas per model</li>
+          <li>Responsive, CSS-native design</li>
         </ul>
       </div>
     </div>
 
-    <h2>Results</h2>
+    <h2>Highlights</h2>
     <div class="results-section">
-      <h3>Project Outcomes</h3>
+      <h3>Key Outcomes</h3>
       <ul>
-        <li><strong>Multi-Model Comparison:</strong> Successfully queries and displays responses from multiple LLMs in a unified, council-style interface</li>
-        <li><strong>Full-Stack Deployment:</strong> End-to-end application with decoupled backend and frontend, ready for local or cloud deployment</li>
-        <li><strong>Community Focus:</strong> Designed to serve the Latino community with culturally relevant AI interactions</li>
-        <li><strong>Lightweight Architecture:</strong> No database required, making the application easy to set up and run anywhere</li>
+        <li><strong>Real-time streaming:</strong> SSE delivers partial results as each model finishes — no waiting for the slowest model</li>
+        <li><strong>Provider agnostic:</strong> Mix cloud (OpenRouter, Groq) and local (Ollama) models in the same council</li>
+        <li><strong>Culturally grounded:</strong> Spanish-language personas and prompts designed for the Latino community</li>
+        <li><strong>Zero-database deploy:</strong> Conversations persist as JSON; runs anywhere with <code>uv</code> and <code>npm</code></li>
       </ul>
     </div>
   </div>

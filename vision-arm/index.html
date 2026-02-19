@@ -119,20 +119,48 @@
     .project-overview p:last-child {
       margin-bottom: 0;
     }
-    .placeholder-img {
-      width: 100%;
-      max-width: 700px;
-      height: 400px;
-      margin: 0 auto 32px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    /* Responsive YouTube embed */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
       border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      margin-bottom: 32px;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    /* Image gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      color: #94a3b8;
-      font-size: 1.1rem;
+      background: #f1f5f9;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-item figcaption {
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      color: #64748b;
       font-weight: 600;
+      text-align: center;
     }
     .tech-details {
       background: #f9f9f9;
@@ -156,38 +184,15 @@
     .tech-details li {
       margin-bottom: 8px;
     }
-    .results-section {
-      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .results-section h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #1e293b;
-    }
-    .results-section ul {
-      margin: 0 0 0 18px;
-      padding: 0;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #475569;
-    }
-    .results-section li {
-      margin-bottom: 8px;
-    }
-    @media (max-width: 700px) {
-      .placeholder-img { height: 240px; }
-      .tech-details, .results-section { padding: 14px; }
+    @media (max-width: 600px) {
+      .gallery { grid-template-columns: 1fr; }
+      .gallery-item img { height: 180px; }
+      .tech-details { padding: 14px; }
     }
     @media (max-width: 500px) {
       .hero h1 { font-size: 1.5rem; }
       .hero p { font-size: 1rem; }
       .section h2 { font-size: 1.2rem; }
-      .placeholder-img { height: 160px; }
     }
   </style>
 </head>
@@ -197,54 +202,58 @@
   <div class="hero">
     <div class="hero-content">
       <h1>Real-Time Vision-Guided Robotic Arm</h1>
-      <p>IK-driven manipulation with dynamic visual object tracking</p>
+      <p>YOLOE segmentation + WebSocket control pipeline</p>
     </div>
   </div>
 
   <div class="section">
     <div class="tags">
+      <span class="tag">YOLOE</span>
+      <span class="tag">ONNX</span>
+      <span class="tag">OpenCV</span>
+      <span class="tag">WebSocket</span>
       <span class="tag">Inverse Kinematics</span>
-      <span class="tag">Computer Vision</span>
-      <span class="tag">Motion Planning</span>
-      <span class="tag">Real-Time Control</span>
-      <span class="tag">Multi-DOF Manipulator</span>
-      <span class="tag">Trajectory Planning</span>
+      <span class="tag">Raspberry Pi</span>
+      <span class="tag">Edge Inference</span>
+      <span class="tag">Custom Fine-Tuning</span>
     </div>
 
     <div class="project-overview">
       <p>
-        This project demonstrates a real-time vision-guided robotic arm simulation where a multi-DOF manipulator tracks and reaches for dynamically moving objects using computer vision input. An Inverse Kinematics solver maps Cartesian coordinates from visual detections directly to joint-space configurations, enabling precise and responsive end-effector positioning.
+        A real-time object detection and tracking pipeline that streams normalized coordinates to a robotic arm via WebSocket. YOLOE-11 segmentation models are fine-tuned on custom classes using visual or text prompts, then exported to ONNX for low-latency edge inference on Raspberry Pi or standard USB cameras.
       </p>
       <p>
-        A continuous control loop updates target trajectories based on live object tracking data, minimizing steady-state error and ensuring smooth, collision-free motion. The simulation validates workspace constraints and joint limits before hardware deployment, bridging the gap between algorithmic development and physical robot control.
+        The robot receives continuous JSON payloads — pixel coordinates, normalized (0–1) position, and confidence — which feed directly into an IK solver for end-effector targeting. Demonstrated on coin detection (Mexican pesos, dining tokens, USD) and building/logo recognition.
       </p>
     </div>
 
     <h2>Demo</h2>
-    <div class="placeholder-img">
-      [ Demo video / screenshot placeholder ]
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/8YOqC8PnFhg?si=DXzqVehKbw5rSG93" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <h2>Detection Examples</h2>
+    <div class="gallery">
+      <figure class="gallery-item">
+        <img src="Columbia%20and%20WashU%20magnet%20recognition.png" alt="Columbia and WashU magnet recognition" loading="lazy" />
+        <figcaption>Building/logo recognition — Columbia & WashU magnets</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img src="Coins%20recognition_Columbia%20University%20Dining%20coin_%20Mexican%2020%20pesos%20coin_%20and%201%20dollar%20coin.png" alt="Coin recognition: Columbia dining token, Mexican 20-peso coin, 1 dollar coin" loading="lazy" />
+        <figcaption>Multi-class coin detection — dining token, 20 pesos, 1 USD</figcaption>
+      </figure>
     </div>
 
     <h2>Technical Implementation</h2>
     <div class="tech-details">
-      <h3>Core Technologies & Methods</h3>
+      <h3>Pipeline</h3>
       <ul>
-        <li><strong>Inverse Kinematics:</strong> Implemented IK algorithms to map Cartesian coordinates from visual input to joint-space configurations for precise end-effector positioning</li>
-        <li><strong>Real-Time Control Loop:</strong> Developed a continuous control loop that updates target trajectories based on dynamic object tracking, minimizing steady-state error</li>
-        <li><strong>Workspace Simulation:</strong> Modeled workspace constraints and joint limits of the multi-DOF manipulator to validate motion planning algorithms</li>
-        <li><strong>Visual Object Tracking:</strong> Integrated computer vision pipeline to detect and track objects in real time, feeding positional data to the IK solver</li>
-        <li><strong>Trajectory Planning:</strong> Implemented smooth trajectory generation to ensure continuous, jerk-limited motion between waypoints</li>
-      </ul>
-    </div>
-
-    <h2>Results</h2>
-    <div class="results-section">
-      <h3>Project Outcomes</h3>
-      <ul>
-        <li><strong>Real-Time Tracking:</strong> Achieved responsive end-effector positioning that dynamically follows moving objects with minimal latency</li>
-        <li><strong>IK Accuracy:</strong> Successfully mapped visual coordinates to joint configurations within the manipulator's workspace constraints</li>
-        <li><strong>Simulation Validation:</strong> Verified motion planning algorithms in simulation, confirming joint limit compliance and collision-free operation</li>
-        <li><strong>Hardware Readiness:</strong> Validated control algorithms for deployment on physical robotic arm hardware</li>
+        <li><strong>Model:</strong> YOLOE-11L-Seg fine-tuned via visual prompts (drawn bounding boxes) or text prompts; exported to ONNX at 640 px for cross-platform deployment</li>
+        <li><strong>Inference:</strong> OpenCV + Ultralytics ONNX runtime; confidence threshold at 0.2, FPS measured per frame via <code>results[0].speed['inference']</code></li>
+        <li><strong>Coordinate output:</strong> Center point as both pixel coords and normalized (0–1) values, streamed as JSON over WebSocket (port 8765) at ~10 Hz</li>
+        <li><strong>IK integration:</strong> Normalized coordinates feed a continuous IK control loop for end-effector positioning without hardcoded pixel-to-joint mappings</li>
+        <li><strong>Edge deployment:</strong> Picamera2 integration enables onboard Raspberry Pi inference; ONNX runtime runs ~2–4× faster than native PyTorch on ARM</li>
+        <li><strong>Web dashboard:</strong> WebSocket-connected HTML interface for real-time monitoring of detections and robot state</li>
       </ul>
     </div>
   </div>

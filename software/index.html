@@ -183,6 +183,31 @@
       font-size: 1.1rem;
       font-weight: 600;
     }
+    .screenshot-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      background: #111;
+    }
+    .screenshot-gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: opacity 0.2s;
+    }
+    .screenshot-gallery img:hover {
+      opacity: 0.88;
+    }
+    @media (max-width: 600px) {
+      .screenshot-gallery {
+        grid-template-columns: 1fr;
+      }
+      .screenshot-gallery img {
+        height: 200px;
+      }
+    }
     .features-list {
       margin: 0 0 0 18px;
       padding: 0;
@@ -236,12 +261,14 @@
 
     <!-- App 1: Instagram Carousel Generator -->
     <div class="app-card">
-      <div class="placeholder-img">
-        [ Carousel Generator screenshot placeholder ]
+      <div class="screenshot-gallery">
+        <img src="Carousel%20Creator_Start%20Blank%20UI.png" alt="Carousel Creator — blank start UI" />
+        <img src="Carousel%20Creator_changed%20theme%20to%20Robot%20Learning.png" alt="Carousel Creator — Robot Learning theme" />
+        <img src="Carousel%20Generator_loaded%20photos%20and%20generated%20with%20input%20text.png" alt="Carousel Generator — loaded photos with generated text" />
       </div>
       <div class="app-card-header">
-        <h3>Instagram Carousel Generator</h3>
-        <div class="app-subtitle">Desktop Application &mdash; Python</div>
+        <h3>Instagram Carousel Creator</h3>
+        <div class="app-subtitle">Desktop Application &mdash; Python &bull; v1.3.1</div>
       </div>
       <div class="app-card-body">
         <div class="app-tags">
@@ -252,24 +279,22 @@
           <span class="app-tag">GUI</span>
         </div>
         <p>
-          A desktop application for creating polished Instagram carousel slides from images and text. Features multiple visual themes (Lifestyle, Corporate, and more), automatic background brightness detection for optimal text contrast, font management, watermarking, and live preview. Built with CustomTkinter for a modern GUI and Pillow for image compositing and rendering.
+          Desktop app for producing polished Instagram carousel slides. Load images, pick a theme (Lifestyle, Corporate, Creative, Robot Learning, and more), add text layers, and export — all with a live canvas preview.
         </p>
-        <h4 style="font-weight: 700; margin: 16px 0 8px 0;">Key Features</h4>
         <ul class="features-list">
-          <li>Multiple theme presets with adaptive brightness-aware color schemes</li>
-          <li>Rich text formatting with title, subtitle, and body text layers</li>
-          <li>Automatic EXIF-aware image orientation handling</li>
-          <li>Live canvas preview with real-time slide editing</li>
-          <li>Batch export of multi-slide carousels as individual images</li>
-          <li>Customizable watermarks and font sizing</li>
+          <li>Adaptive brightness detection — text colors adjust automatically to each photo</li>
+          <li>Title, subtitle, and body text layers with per-theme font presets</li>
+          <li>EXIF-aware image orientation, watermarking, and batch export</li>
         </ul>
       </div>
     </div>
 
     <!-- App 2: Time Tracker -->
     <div class="app-card">
-      <div class="placeholder-img">
-        [ Time Tracker screenshot placeholder ]
+      <div class="screenshot-gallery">
+        <img src="Time%20Tracker%20hourly%20input%20page.png" alt="Time Tracker — hourly input page" />
+        <img src="Time%20Tracker%20Year%20view%20with%20January%20Filled%20in.png" alt="Time Tracker — year view with January filled in" />
+        <img src="Time%20Tracker%20Analysis%20Page.png" alt="Time Tracker — analysis page" />
       </div>
       <div class="app-card-header">
         <h3>Time Tracker</h3>
@@ -283,16 +308,12 @@
           <span class="app-tag green">LocalStorage</span>
         </div>
         <p>
-          A single-file web application for tracking how time is spent throughout each day. Features an hourly activity logger, a full-year heatmap visualization rendered on HTML Canvas, analytics with category breakdowns, and customizable activity categories. All data is stored in the browser via LocalStorage, requiring no server or database.
+          Single-file web app for logging how every hour of each day is spent. No server required — all data lives in the browser.
         </p>
-        <h4 style="font-weight: 700; margin: 16px 0 8px 0;">Key Features</h4>
         <ul class="features-list">
-          <li>Hour-by-hour daily activity logging with color-coded categories</li>
-          <li>Year-at-a-glance heatmap rendered on HTML Canvas (24 hours x 365 days)</li>
-          <li>Analytics dashboard with time distribution and visual breakdowns</li>
-          <li>Custom categories with user-defined names and colors</li>
-          <li>Weight tracking integrated into daily logs</li>
-          <li>JSON backup and restore for data portability</li>
+          <li>Hour-by-hour daily logger with color-coded activity categories</li>
+          <li>Year-at-a-glance heatmap (24 hrs × 365 days) rendered on HTML Canvas</li>
+          <li>Analytics dashboard with time distribution breakdowns and weight log</li>
         </ul>
       </div>
     </div>
