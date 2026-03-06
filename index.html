@@ -3,1579 +3,1306 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Emiliano's Portfolio</title>
+  <title>Emiliano VB — Robotics & Mechatronics Engineer</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
-    * {
-      box-sizing: border-box;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:   #0D0D0D;
+      --paper: #F7F4EE;
+      --red:   #C83200;
+      --gray:  #888;
+      --rule:  #DDDAD3;
+      --mono:  'JetBrains Mono', 'Courier New', monospace;
+      --sans:  'Space Grotesk', system-ui, sans-serif;
     }
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #fff;
-      color: #111;
-      min-height: 100vh;
-    }
-    section {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .hero {
-      height: 100vh;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
-    .header {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 1200px;
-      z-index: 10000;
-      background: transparent;
-      border: none;
-      padding: 0 20px;
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); overflow-x: hidden; }
+
+    /* ── MAX-WIDTH WRAPPER (ultrawide safety) ── */
+    .wrap {
+      max-width: 1400px;
       margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 0 60px;
     }
+
+    /* ── NAV ── */
     .nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
       height: 56px;
-      max-width: 1200px;
-      margin: 0 auto;
     }
-    .nameplate {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: white;
-      text-decoration: none;
+    .nav-inner {
+      max-width: 1400px; margin: 0 auto; padding: 0 60px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: row;
-      gap: 36px;
-      align-items: center;
+    .nav-bg {
+      position: absolute; inset: 0;
+      background: rgba(247,244,238,0);
+      backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
     }
+    .nav.scrolled .nav-bg {
+      background: rgba(247,244,238,0.96);
+      backdrop-filter: blur(8px);
+      border-color: var(--rule);
+    }
+    .nav-name {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 700;
+      color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 0.15em;
+      transition: color 0.4s; position: relative; z-index: 1;
+    }
+    .nav.scrolled .nav-name { color: var(--ink); }
+    .nav-links { list-style: none; display: flex; gap: 36px; position: relative; z-index: 1; }
     .nav-link {
-      color: white;
-      text-decoration: none;
-      font-family: 'Montserrat', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 8px 0;
-      position: relative;
-      background: none;
-      border: none;
-      transition: color 0.2s;
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+      color: rgba(255,255,255,0.8); text-decoration: none;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      position: relative; transition: color 0.3s;
     }
-    .nav-link:hover, .nav-link:focus {
-      color: #f0f0f0;
+    .nav.scrolled .nav-link { color: var(--gray); }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: var(--red); transition: width 0.25s;
     }
-    .nav-link:active {
-      color: #ccc;
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: white; }
+    .nav.scrolled .nav-link:hover { color: var(--ink); }
+
+    /* Dark nav state (over experience section) */
+    .nav.dark .nav-bg {
+      background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(8px);
+      border-color: rgba(255,255,255,0.08);
+    }
+    .nav.dark .nav-name { color: white; }
+    .nav.dark .nav-link { color: rgba(255,255,255,0.6); }
+    .nav.dark .nav-link:hover { color: white; }
+
+    /* ── HERO ── */
+    #home {
+      height: 100vh; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; background: #050505;
     }
     .hero-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(60%) contrast(110%) grayscale(20%);
-      z-index: 0;
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0.4; filter: grayscale(25%) contrast(115%);
     }
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 1;
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 64px 64px; z-index: 1;
     }
-    .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: auto;
+    .hero-scan {
+      position: absolute; inset: 0; z-index: 2; overflow: hidden; pointer-events: none;
     }
-    .hero-content h1 {
-      color: white;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 6vw, 5rem);
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin: 0;
+    .hero-scan::after {
+      content: ''; position: absolute; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg,
+        transparent, rgba(200,50,0,0) 10%, rgba(200,50,0,0.7) 35%,
+        rgba(200,50,0,1) 50%, rgba(200,50,0,0.7) 65%, rgba(200,50,0,0) 90%, transparent);
+      animation: scan 7s linear infinite; top: 0;
     }
-    .arrow-container {
-      display: block;
-      width: 100px;
-      height: 100px;
-      position: absolute;
-      bottom: 60px;
-      left: 50%;
-      transform: translate(-50%, 0);
-      transition: all 0.4s ease;
-      z-index: 2;
+    @keyframes scan {
+      0% { transform: translateY(-4px); opacity: 0; } 5% { opacity: 1; }
+      95% { opacity: 1; } 100% { transform: translateY(100vh); opacity: 0; }
     }
-    .arrow-container:hover {
-      cursor: pointer;
+    .corner { position: absolute; width: 28px; height: 28px; z-index: 3; }
+    .corner--tl { top: 24px; left: 24px; border-top: 1px solid rgba(255,255,255,0.3); border-left: 1px solid rgba(255,255,255,0.3); }
+    .corner--tr { top: 24px; right: 24px; border-top: 1px solid rgba(255,255,255,0.3); border-right: 1px solid rgba(255,255,255,0.3); }
+    .corner--bl { bottom: 24px; left: 24px; border-bottom: 1px solid rgba(255,255,255,0.3); border-left: 1px solid rgba(255,255,255,0.3); }
+    .corner--br { bottom: 24px; right: 24px; border-bottom: 1px solid rgba(255,255,255,0.3); border-right: 1px solid rgba(255,255,255,0.3); }
+    .hud {
+      position: absolute; font-family: var(--mono); font-size: 0.58rem;
+      color: rgba(255,255,255,0.32); z-index: 4; letter-spacing: 0.06em; line-height: 1.9;
     }
-    .arrow-container:hover .arrow {
-      opacity: 0;
-      transform: translateY(20px);
+    .hud--bl { bottom: 32px; left: 32px; }
+    .hud--br { bottom: 32px; right: 32px; text-align: right; }
+    .hud--tr { top: 68px; right: 32px; text-align: right; }
+    .blink { animation: blink 1.1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-content { position: relative; z-index: 5; text-align: center; color: white; user-select: none; }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.28em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 24px;
     }
-    .arrow-container:hover .arrow:nth-child(1) {
-      opacity: 1;
-      transform: translateY(20px);
+    .hero-name {
+      font-size: clamp(4rem, 11vw, 9rem); font-weight: 700;
+      line-height: 0.9; letter-spacing: -0.03em; overflow: hidden; white-space: nowrap;
     }
-    .arrow-container:hover .arrow:nth-child(2) {
-      opacity: 0;
-      transform: translateY(20px);
+    .hero-name .w1, .hero-name .w2 {
+      display: inline-block; color: white;
+      transform: translateY(110%); opacity: 0;
+      animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    .arrow-container:hover .arrow:nth-child(3) {
-      opacity: 0;
-      transform: translateY(20px);
+    .hero-name .w1 { animation-delay: 0.1s; }
+    .hero-name .w2 { animation-delay: 0.28s; margin-left: 0.25em; }
+    @keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
+    .hero-sub {
+      margin-top: 28px; font-family: var(--mono);
+      font-size: 0.72rem; color: rgba(255,255,255,0.45); letter-spacing: 0.12em; min-height: 1.2em;
     }
-    .arrow {
-      position: absolute;
-      left: 50%;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    .scroll-cue {
+      position: absolute; bottom: 36px; left: 50%;
+      transform: translateX(-50%); z-index: 5;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      animation: fadeInUp 1s ease 1.4s both;
     }
-    .arrow:before,
-    .arrow:after {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      content: '';
-      display: block;
-      position: absolute;
-      transform-origin: bottom right;
-      background: #fff;
-      width: 4px;
-      height: 40px;
-      border-radius: 10px;
-      transform: translate(-50%, -50%) rotateZ(-45deg);
-      pointer-events: none;
+    .scroll-cue span {
+      font-family: var(--mono); font-size: 0.55rem;
+      color: rgba(255,255,255,0.28); text-transform: uppercase; letter-spacing: 0.2em;
     }
-    .arrow:after {
-      transform-origin: bottom left;
-      transform: translate(-50%, -50%) rotateZ(45deg);
+    .scroll-cue-line {
+      width: 1px; height: 44px; background: rgba(255,255,255,0.18); overflow: hidden; position: relative;
     }
-    .arrow-container:hover .arrow:nth-child(1):before,
-    .arrow-container:hover .arrow:nth-child(1):after {
-      width: 6px;
-      height: 45px;
+    .scroll-cue-line::after {
+      content: ''; position: absolute; top: -50%; left: 0; right: 0; height: 50%;
+      background: rgba(255,255,255,0.7); animation: drip 1.6s ease-in-out infinite;
     }
-    .arrow:nth-child(1) {
-      opacity: 0.3;
-      top: 0;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    @keyframes drip { 0% { transform: translateY(0); } 100% { transform: translateY(200%); } }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
-    .arrow:nth-child(2) {
-      opacity: 0.6;
-      top: 20px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.05s;
+
+    /* ── SHARED ── */
+    .s-header { display: flex; align-items: center; gap: 16px; margin-bottom: 64px; }
+    .s-label {
+      font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.22em; color: var(--red); white-space: nowrap;
     }
-    .arrow:nth-child(3) {
-      opacity: 0.9;
-      top: 40px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+    .s-rule { flex: 1; height: 1px; background: var(--rule); }
+    .s-num { font-family: var(--mono); font-size: 0.6rem; color: var(--gray); white-space: nowrap; }
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .projects {
-      padding: 60px 20px;
-      background: #f9f9f9;
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* tag pill (shared) */
+    .proj-tag {
+      font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase;
+      letter-spacing: 0.09em; color: var(--gray);
+      border: 1px solid var(--rule); padding: 2px 7px;
     }
-    .projects h2 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 40px;
-      font-weight: 700;
+
+    /* ── PROJECTS — staggered gallery grid ── */
+    #projects {
+      padding: 112px 0 96px; background: var(--paper);
+      position: relative; overflow: hidden;
     }
+    /* Canvas background — physics dot field */
+    #projects canvas {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    #projects .wrap { position: relative; z-index: 1; }
+
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 40px;
+      row-gap: 0; /* rows managed per-card via padding */
+      align-items: start;
     }
-    .project {
-      background: white;
-      text-align: center;
-      padding: 30px;
-      text-decoration: none;
-      color: inherit;
-      border-radius: 15px;
-      transition: box-shadow 0.3s, transform 0.2s;
-    }
-    .project:hover {
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      transform: translateY(-4px);
-    }
-    .project-img {
-      width: 100%;
-      height: 300px;
-      background: black;
-      margin-bottom: 25px;
-      border-radius: 12px;
-    }
-    .project h3 {
-      font-size: 1.4rem;
-      margin: 0 0 15px 0;
-      font-weight: 700;
-    }
-    .project p {
-      font-size: 0.95rem;
-      color: #555;
-    }
-    .experience {
-      padding: 60px 20px;
-      background: #fafafa;
-    }
-    .experience h2 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 50px;
-      font-weight: 700;
-      color: #1f2937;
-    }
-    .timeline {
+
+    .proj-card {
+      display: block; text-decoration: none; color: inherit;
       position: relative;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 40px 0;
+      padding-bottom: 72px; /* row gap between cards */
     }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      width: 3px;
-      background: linear-gradient(to bottom, #e5e7eb 0%, #9ca3af 50%, #e5e7eb 100%);
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      margin-left: -1.5px;
-      z-index: 1;
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 60px;
-      width: 48%;
-      max-width: 500px;
-    }
-    .timeline-item:nth-child(odd) {
-      left: 0;
-      padding-right: 60px;
-    }
-    .timeline-item:nth-child(even) {
-      left: 52%;
-      padding-left: 60px;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      width: 50px;
-      height: 2px;
-      background: #9ca3af;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
-    }
-    .timeline-item:nth-child(odd)::before {
-      right: -50px;
-    }
-    .timeline-item:nth-child(even)::before {
-      left: -50px;
-    }
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      background: #fff;
-      border: 3px solid #9ca3af;
-      border-radius: 50%;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 3;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    .timeline-item:nth-child(odd)::after {
-      right: -58px;
-    }
-    .timeline-item:nth-child(even)::after {
-      left: -58px;
-    }
-    .date-label {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #6b7280;
-      background: #f9fafb;
-      padding: 4px 8px;
-      border-radius: 6px;
-      border: 1px solid #e5e7eb;
-      white-space: nowrap;
-      z-index: 4;
-    }
-    .timeline-item:nth-child(odd) .date-label {
-      right: -120px;
-    }
-    .timeline-item:nth-child(even) .date-label {
-      left: -120px;
-    }
-    .content {
-      padding: 24px;
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    .content::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-      border-radius: 12px 12px 0 0;
-    }
-    .content:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-      transform: translateY(-2px);
-    }
-    .content h3 {
-      font-family: 'Courier New', monospace;
-      font-size: 0.9rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin: 0 0 12px 0;
-      color: #1f2937;
-    }
-    .content .employer {
-      font-size: 1rem;
-      color: #6b7280;
-      margin: 0 0 16px 0;
-      font-weight: 600;
-    }
-    .content .description {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #374151;
-      margin: 0 0 20px 0;
-    }
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-    }
-    .skill-tag {
-      background: #f3f4f6;
-      color: #374151;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      border: 1px solid #e5e7eb;
-      transition: all 0.2s ease;
-    }
-    .skill-tag:hover {
-      background: #e5e7eb;
-      transform: scale(1.05);
-    }
-    @media (max-width: 900px) {
-      .header {
-        padding: 0 8px;
-      }
-      .nav-list {
-        gap: 18px;
-      }
-      .project-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-      }
-      .footer-links {
-        gap: 16px;
-      }
-      .cert-grid {
-        width: 98%;
-        gap: 18px;
-      }
-      .affil-card-grid {
-        width: 98%;
-        gap: 16px;
-      }
-    }
-    @media (max-width: 768px) {
-      .timeline::before {
-        left: 30px;
-      }
-      .timeline-item {
-        width: calc(100% - 80px);
-        left: 80px !important;
-        padding-left: 40px !important;
-        padding-right: 0 !important;
-        margin-bottom: 40px;
-      }
-      .timeline-item::before {
-        left: -40px !important;
-        right: auto !important;
-        width: 30px;
-      }
-      .timeline-item::after {
-        left: -38px !important;
-        right: auto !important;
-      }
-      .date-label {
-        left: -120px !important;
-        right: auto !important;
-        font-size: 0.8rem;
-      }
-      .about-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 32px;
-      }
-      .about-photo {
-        width: 150px;
-        height: 150px;
-      }
-      .about-text p {
-        font-size: 1rem;
-        text-align: center;
-      }
-      .education-card {
-        width: 98%;
-        padding: 18px 10px;
-        gap: 16px;
-      }
-      .education-divider {
-        margin: 0 12px;
-        height: 36px;
-      }
-      .cert-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-      .affil-card-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-    }
-    @media (max-width: 600px) {
-      .header {
-        padding: 0 4px;
-      }
-      .nav-list {
-        gap: 10px;
-      }
-      .nav-link {
-        font-size: 10px;
-        padding: 8px 0;
-      }
-      .nameplate {
-        font-size: 1.1rem;
-      }
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      .arrow-container {
-        width: 60px;
-        height: 60px;
-        bottom: 20px;
-      }
-      .project-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        padding: 0;
-      }
-      .project-img {
-        height: 180px;
-      }
-      .about-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 24px;
-      }
-      .about-photo {
-        width: 100px;
-        height: 100px;
-      }
-      .about-text p {
-        font-size: 0.95rem;
-        text-align: center;
-      }
-      .education-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 16px 6px;
-        width: 100%;
-      }
-      .education-divider {
-        display: none;
-      }
-      .education-right {
-        align-items: flex-start;
-        text-align: left;
-        min-width: 0;
-      }
-      .edu-desc {
-        text-align: left;
-      }
-      .cert-grid {
-        grid-template-columns: 1fr;
-        width: 100%;
-        gap: 8px;
-      }
-      .cert-card {
-        padding: 12px 6px 10px 6px;
-        min-height: 100px;
-      }
-      .affil-card-grid {
-        grid-template-columns: 1fr;
-        width: 100%;
-        gap: 8px;
-      }
-      .affil-card-compact {
-        min-height: 80px;
-        padding: 8px;
-      }
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-      }
-      .footer-links {
-        gap: 8px;
-      }
-      .bookmark-menu {
-        left: 4px;
-        top: 8px;
-        padding: 6px 2px;
-        gap: 8px;
-        min-width: 32px;
-      }
-      .bookmark-link {
-        font-size: 9px;
-        padding: 4px 0;
-      }
-      .timeline {
-        padding: 20px 0;
-      }
-      .timeline-item {
-        width: 100%;
-        left: 0 !important;
-        padding-left: 0 !important;
-        margin-bottom: 24px;
-      }
-      .timeline-item::before,
-      .timeline-item::after,
-      .date-label {
-        display: none !important;
-      }
-      .content {
-        padding: 14px;
-      }
-      .content h3 {
-        font-size: 0.85rem;
-      }
-      .skills {
-        gap: 4px;
-        margin-top: 8px;
-      }
-      .skill-tag {
-        font-size: 0.7rem;
-        padding: 4px 8px;
-      }
-    }
-    .about {
-      padding: 60px 20px;
-      background: white;
-    }
-    .about h2 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 40px;
-      font-weight: 700;
-    }
-    .about-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      gap: 48px;
-      align-items: flex-start;
-    }
-    .about-photo {
-      width: 250px;
-      height: auto;
-      flex-shrink: 0;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .about-photo img {
-      width: 100%;
-      height: auto;
+    /* Right-column cards stagger down */
+    .proj-card:nth-child(even) { margin-top: 100px; }
+
+    /* Ghost index number — sits above image, overlaps it slightly */
+    .proj-card-num {
       display: block;
+      font-family: var(--mono); font-weight: 700;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      letter-spacing: -0.06em; line-height: 1;
+      color: rgba(13,13,13,0.06);
+      margin-bottom: -1.6rem;  /* pulls image up over the number */
+      padding-left: 6px;
+      position: relative; z-index: 2;
+      pointer-events: none;
+      transition: color 0.4s;
     }
-    .about-text {
-      flex: 1;
+    .proj-card:hover .proj-card-num { color: rgba(200,50,0,0.12); }
+
+    /* Image container */
+    .proj-card-img {
+      position: relative; z-index: 1; overflow: hidden;
+      border: 1px solid var(--rule);
+      background: #ECEAE3;
     }
-    .about-text p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: #374151;
-      margin: 0;
+    .proj-card-img img {
+      width: 100%; height: auto; display: block;
+      transition: transform 0.65s cubic-bezier(0.16,1,0.3,1);
     }
-    .contact {
-      padding: 60px 20px;
-      background: #f9f9f9;
+    .proj-card:hover .proj-card-img img { transform: scale(1.03); }
+
+    /* Red line that sweeps across top of image on hover */
+    .proj-card-img::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--red);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      z-index: 3;
     }
-    .contact-content {
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
+    .proj-card:hover .proj-card-img::after { transform: scaleX(1); }
+
+    /* Card body */
+    .proj-card-body { padding: 18px 0 0; }
+    .proj-card-title {
+      font-size: clamp(1.1rem, 1.6vw, 1.4rem); font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.25;
+      margin-bottom: 10px;
+      transition: transform 0.25s ease;
     }
-    .contact-text {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #1f2937;
-      margin: 0 0 20px 0;
-      line-height: 1.4;
+    .proj-card:hover .proj-card-title { transform: translateX(4px); }
+    .proj-card-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+
+    /* ── EXPERIENCE ── */
+    #experience {
+      padding: 96px 0; background: var(--ink); color: white;
+      position: relative; overflow: hidden;
     }
-    .contact-links {
-      font-size: 1.1rem;
-      color: #374151;
-      margin: 0;
-      line-height: 1.6;
+    @keyframes workIn {
+      from { transform: translate(-50%, calc(-50% + 80px)); color: rgba(255,255,255,0); }
+      to   { transform: translate(-50%, -50%);              color: rgba(255,255,255,0.022); }
     }
-    .contact-links a {
-      color: #3b82f6;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
+    @keyframes workBob {
+      0%, 100% { transform: translate(-50%, -50%); }
+      50%      { transform: translate(-50%, calc(-50% - 28px)); }
     }
-    .contact-links a:hover {
-      color: #1d4ed8;
-      text-decoration: underline;
+    #experience::before {
+      content: 'WORK';
+      position: absolute; top: 50%; left: 50%;
+      font-size: 28vw; font-weight: 700; letter-spacing: -0.05em;
+      color: rgba(255,255,255,0.022); pointer-events: none; white-space: nowrap; z-index: 0;
+      animation: workIn 1.6s cubic-bezier(0.22, 1, 0.36, 1) both,
+                 workBob 9s ease-in-out 1.6s infinite;
+      will-change: transform;
     }
-    .social-links {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
+    #experience .wrap { position: relative; z-index: 1; }
+    #experience .s-label { color: var(--red); }
+    #experience .s-rule { background: rgba(255,255,255,0.1); }
+    #experience .s-num { color: rgba(255,255,255,0.3); }
+
+    /* Timeline spine */
+    .exp-timeline { position: relative; padding: 8px 0; }
+    .exp-timeline::before {
+      content: '';
+      position: absolute; left: 50%; top: 0; bottom: 0;
+      width: 1px; background: rgba(255,255,255,0.1);
+      transform: translateX(-50%);
     }
-    .social-links a {
-      color: #374151;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .social-links a:hover {
-      color: #111;
-    }
-    .education {
-      padding: 60px 20px 0 20px;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .education h2 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 40px;
-      font-weight: 700;
-    }
-    .education-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 75%;
-      min-width: 320px;
-      max-width: 900px;
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 24px 32px;
-      box-sizing: border-box;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-      gap: 32px;
-    }
-    .education-left {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      flex: 2;
-    }
-    .university {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #111;
-      margin-bottom: 8px;
-    }
-    .degree {
-      font-size: 1.05rem;
-      color: #374151;
-      font-weight: 500;
-    }
-    .education-divider {
-      width: 1px;
-      height: 48px;
-      background: #e5e7eb;
-      margin: 0 32px;
-      border-radius: 1px;
-      align-self: stretch;
-    }
-    .education-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      flex: 1.2;
-      min-width: 180px;
-    }
-    .gpa-honors {
-      font-size: 1rem;
-      color: #374151;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .edu-desc {
-      font-size: 0.95rem;
-      color: #6b7280;
-      font-style: italic;
-      text-align: right;
-    }
-    @media (max-width: 900px) {
-      .education-card {
-        width: 98%;
-        padding: 18px 10px;
-        gap: 16px;
-      }
-      .education-divider {
-        margin: 0 12px;
-        height: 36px;
-      }
-    }
-    @media (max-width: 600px) {
-      .education-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 16px 6px;
-      }
-      .education-divider {
-        display: none;
-      }
-      .education-right {
-        align-items: flex-start;
-        text-align: left;
-        min-width: 0;
-      }
-      .edu-desc {
-        text-align: left;
-      }
-    }
-    .certifications {
-      padding: 60px 20px 0 20px;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .certifications h2 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 40px;
-      font-weight: 700;
-    }
-    .cert-grid {
+
+    .exp-node {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 32px;
-      width: 80%;
-      max-width: 1000px;
-      margin: 0 auto;
+      grid-template-columns: 1fr 56px 1fr;
+      margin-bottom: 48px;
+      align-items: start;
     }
-    .cert-card {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      border: 1px solid #e5e7eb;
-      background: #fff;
-      border-radius: 10px;
-      padding: 24px 24px 20px 24px;
-      box-sizing: border-box;
-      min-height: 180px;
-      transition: border-color 0.2s, transform 0.18s;
+
+    /* Odd entries: everything on LEFT, dot in center */
+    .exp-node:nth-child(odd) .exp-block   { grid-column: 1; grid-row: 1; padding-right: 32px; text-align: right; }
+    .exp-node:nth-child(odd) .exp-dot-wrap { grid-column: 2; grid-row: 1; }
+    .exp-node:nth-child(odd) .exp-skills  { justify-content: flex-end; }
+
+    /* Even entries: dot in center, everything on RIGHT */
+    .exp-node:nth-child(even) .exp-block  { grid-column: 3; grid-row: 1; padding-left: 32px; }
+    .exp-node:nth-child(even) .exp-dot-wrap { grid-column: 2; grid-row: 1; }
+
+    .exp-dot-wrap { display: flex; justify-content: center; padding-top: 12px; }
+    @keyframes dotPulse {
+      0%   { box-shadow: 0 0 0 0   rgba(200,50,0,0.5), 0 0 0 3px rgba(200,50,0,0.2); }
+      70%  { box-shadow: 0 0 0 10px rgba(200,50,0,0),  0 0 0 3px rgba(200,50,0,0.2); }
+      100% { box-shadow: 0 0 0 0   rgba(200,50,0,0),   0 0 0 3px rgba(200,50,0,0.2); }
+    }
+    .exp-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--red); flex-shrink: 0;
+      animation: dotPulse 2.4s ease-out infinite;
+    }
+    /* Stagger pulse so dots don't all fire at once */
+    .exp-node:nth-child(2) .exp-dot { animation-delay: 0.3s; }
+    .exp-node:nth-child(3) .exp-dot { animation-delay: 0.6s; }
+    .exp-node:nth-child(4) .exp-dot { animation-delay: 0.9s; }
+    .exp-node:nth-child(5) .exp-dot { animation-delay: 1.2s; }
+    .exp-node:nth-child(6) .exp-dot { animation-delay: 1.5s; }
+    .exp-node:nth-child(7) .exp-dot { animation-delay: 1.8s; }
+    .exp-node:nth-child(8) .exp-dot { animation-delay: 2.1s; }
+    .exp-node:nth-child(9) .exp-dot { animation-delay: 2.4s; }
+    .exp-node:nth-child(10) .exp-dot { animation-delay: 2.7s; }
+
+    .exp-co {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--red);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px;
+    }
+    .exp-date {
+      font-family: var(--mono); font-size: 0.68rem;
+      color: rgba(255,255,255,0.3); letter-spacing: 0.04em; margin-bottom: 10px;
+    }
+    .exp-role {
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem); font-weight: 700;
+      letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .exp-desc {
+      font-size: 0.97rem; color: rgba(255,255,255,0.5);
+      line-height: 1.7; margin-bottom: 10px;
+    }
+    .exp-skills { display: flex; flex-wrap: wrap; gap: 4px; }
+    .exp-skill {
+      font-family: var(--mono); font-size: 0.67rem; text-transform: uppercase;
+      letter-spacing: 0.08em; color: rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.1); padding: 2px 6px;
+    }
+
+    /* ── CREDENTIALS ── */
+    #education { padding: 96px 0; background: var(--paper); position: relative; overflow: hidden; }
+    #education::before {
+      content: 'CRED';
+      position: absolute; bottom: -4vw; right: -2vw;
+      font-size: 22vw; font-weight: 700; letter-spacing: -0.05em;
+      color: rgba(0,0,0,0.03); pointer-events: none; white-space: nowrap; z-index: 0;
+    }
+    #education .wrap { position: relative; z-index: 1; }
+
+    .cred-sub {
+      font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.2em; color: var(--gray);
+      margin-bottom: 20px; display: block;
+    }
+    .cred-section { margin-bottom: 72px; }
+
+    /* Education — full-width display banner */
+    .edu-banner {
+      border-top: 3px solid var(--red);
+      padding-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 24px;
+    }
+    .edu-school {
+      font-size: clamp(2.4rem, 5.5vw, 4.8rem); font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1; margin-bottom: 18px;
+    }
+    .edu-meta { display: flex; gap: 20px; align-items: baseline; flex-wrap: wrap; margin-bottom: 8px; }
+    .edu-degree {
+      font-family: var(--mono); font-size: 0.66rem;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray);
+    }
+    .edu-dates { font-family: var(--mono); font-size: 0.62rem; color: var(--red); letter-spacing: 0.05em; }
+    .edu-focus { font-size: 0.9rem; color: var(--gray); }
+    .edu-ghost-year {
+      font-size: clamp(4rem, 8vw, 7rem); font-weight: 700;
+      letter-spacing: -0.06em; color: rgba(0,0,0,0.05); line-height: 1;
+    }
+
+    /* Certifications — departure-board rows */
+    .cert-list { border-top: 1px solid var(--rule); margin-bottom: 0; }
+    .cert-row {
+      display: grid;
+      grid-template-columns: 40px 160px 1fr auto;
+      gap: 20px; align-items: baseline;
+      padding: 20px 16px;
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.2s, box-shadow 0.2s;
       cursor: default;
     }
-    .cert-card:hover {
-      border-color: #a3a3a3;
-      transform: scale(1.025);
+    .cert-row:hover { background: rgba(200,50,0,0.03); box-shadow: inset 3px 0 0 var(--red); }
+    .cert-num { font-family: var(--mono); font-size: 0.6rem; color: rgba(0,0,0,0.2); }
+    .cert-cat {
+      font-family: var(--mono); font-size: 0.62rem;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--red);
     }
-    .cert-icon {
-      margin-bottom: 18px;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .cert-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #111;
-      margin-bottom: 6px;
-    }
+    .cert-name { font-size: 0.97rem; font-weight: 600; letter-spacing: -0.01em; }
     .cert-issuer {
-      font-size: 0.97rem;
-      color: #6b7280;
-      margin-bottom: 4px;
+      font-family: var(--mono); font-size: 0.58rem;
+      color: var(--gray); text-align: right; white-space: nowrap;
     }
-    .cert-date {
-      font-size: 0.92rem;
-      color: #9ca3af;
-      margin-top: auto;
-    }
-    @media (max-width: 900px) {
-      .cert-grid {
-        width: 98%;
-        gap: 18px;
-      }
-    }
-    @media (max-width: 600px) {
-      .cert-grid {
-        grid-template-columns: 1fr;
-        width: 100%;
-      }
-      .cert-card {
-        padding: 16px 10px 14px 10px;
-        min-height: 120px;
-      }
-    }
-    .affiliations {
-      padding: 60px 20px 0 20px;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .affiliations h2 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 40px;
-      font-weight: 700;
-    }
-    .affil-card-grid {
+
+    /* Affiliations — detailed card grid */
+    .affil-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
-      width: 80%;
-      max-width: 900px;
-      margin: 0 auto;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--rule);
+      border: 1px solid var(--rule);
     }
-    .affil-card-compact {
-      min-height: 160px;
-      padding: 16px;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      box-sizing: border-box;
-      transition: border-color 0.2s, transform 0.18s;
+    .affil-card {
+      background: var(--paper); padding: 28px 28px 24px;
+      border-left: 3px solid transparent;
+      transition: border-color 0.25s, background 0.25s;
+      cursor: default;
     }
-    .affil-card-compact:hover {
-      border-color: #a3a3a3;
-      transform: scale(1.025);
+    .affil-card:hover { border-left-color: var(--red); background: rgba(200,50,0,0.02); }
+    .affil-acronym {
+      font-size: clamp(1.5rem, 2.8vw, 2.4rem); font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1; margin-bottom: 10px;
     }
-    .affil-org {
-      font-weight: bold;
-      font-size: 1.1rem;
-      margin-bottom: 2px;
-      color: #111;
+    .affil-full { font-size: 0.8rem; color: var(--gray); line-height: 1.4; margin-bottom: 10px; }
+    .affil-meta {
+      font-family: var(--mono); font-size: 0.57rem;
+      color: var(--red); text-transform: uppercase; letter-spacing: 0.1em;
     }
-    .affil-role, .affil-date {
-      font-size: 0.92rem;
-      color: #6b7280;
-      margin-bottom: 2px;
+
+    /* ── ABOUT ── */
+    #about {
+      padding: 64px 0; background: var(--ink); color: white;
+      position: relative; overflow: hidden;
     }
-    .affil-desc {
-      font-size: 0.93rem;
-      color: #9ca3af;
-      font-style: italic;
-      margin-top: 6px;
+    #about .wrap { position: relative; z-index: 2; }
+    #about .s-label { color: var(--red); }
+    #about .s-rule { background: rgba(255,255,255,0.1); }
+    #about .s-num { color: rgba(255,255,255,0.3); }
+
+    #about .s-header { margin-bottom: 40px; }
+
+    .about-layout {
+      display: grid; grid-template-columns: 380px 1fr; gap: 56px;
+      align-items: start;
     }
-    @media (max-width: 900px) {
-      .affil-card-grid {
-        width: 98%;
-        gap: 16px;
-      }
+    .about-photo-wrap { position: relative; }
+    .about-photo-wrap img { width: 100%; display: block; }
+    .photo-corner { position: absolute; width: 18px; height: 18px; }
+    .photo-corner--tl { top: 6px; left: 6px; border-top: 1px solid rgba(200,50,0,0.6); border-left: 1px solid rgba(200,50,0,0.6); }
+    .photo-corner--tr { top: 6px; right: 6px; border-top: 1px solid rgba(200,50,0,0.6); border-right: 1px solid rgba(200,50,0,0.6); }
+    .photo-corner--bl { bottom: 6px; left: 6px; border-bottom: 1px solid rgba(200,50,0,0.6); border-left: 1px solid rgba(200,50,0,0.6); }
+    .photo-corner--br { bottom: 6px; right: 6px; border-bottom: 1px solid rgba(200,50,0,0.6); border-right: 1px solid rgba(200,50,0,0.6); }
+    .photo-label {
+      margin-top: 10px; font-family: var(--mono); font-size: 0.55rem;
+      color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.1em;
     }
-    @media (max-width: 600px) {
-      .affil-card-grid {
-        grid-template-columns: 1fr;
-        width: 100%;
-      }
-      .affil-card-compact {
-        min-height: 120px;
-        padding: 12px;
-      }
+    .about-bio { font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.85; color: rgba(255,255,255,0.68); }
+    .about-bio p + p { margin-top: 24px; }
+
+    /* ASCII terminal — grid column, not floating */
+    .ascii-terminal { border: 1px solid rgba(255,255,255,0.1); }
+    .ascii-terminal-header {
+      background: rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 6px 12px; font-family: var(--mono); font-size: 0.56rem;
+      color: rgba(255,255,255,0.4); letter-spacing: 0.1em;
+      display: flex; justify-content: space-between; align-items: center;
     }
-    .footer {
-      padding: 40px 20px;
-      background: #f9f9f9;
-      border-top: 1px solid #e5e7eb;
+    .ascii-terminal-dots { display: flex; gap: 5px; }
+    .ascii-terminal-dots span { width: 7px; height: 7px; border-radius: 50%; }
+    .ascii-terminal-dots span:nth-child(1) { background: rgba(255,90,90,0.5); }
+    .ascii-terminal-dots span:nth-child(2) { background: rgba(255,180,50,0.5); }
+    .ascii-terminal-dots span:nth-child(3) { background: rgba(80,200,80,0.5); }
+    .ascii-anim {
+      font-family: var(--mono); font-size: 0.44rem; line-height: 1.38;
+      color: rgba(255,255,255,0.55); padding: 10px 12px;
+      white-space: pre; letter-spacing: 0;
     }
-    .footer-divider {
-      border: none;
-      height: 1px;
-      background: #d1d5db;
-      margin: 0 0 24px 0;
+    .ascii-status {
+      font-family: var(--mono); font-size: 0.54rem; color: var(--red);
+      padding: 6px 12px; border-top: 1px solid rgba(255,255,255,0.08); letter-spacing: 0.08em;
     }
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
+
+    /* ── CONTACT ── */
+    #contact { padding: 96px 0; background: var(--paper); }
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr auto; gap: 64px; align-items: start;
     }
-    .footer-links {
-      display: flex;
-      gap: 24px;
+    .contact-heading {
+      font-size: clamp(2.2rem, 5.5vw, 4.5rem); font-weight: 700;
+      line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 48px;
     }
-    .footer-links a {
-      font-size: 12px;
-      text-transform: uppercase;
-      color: #6b7280;
-      text-decoration: none;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      transition: color 0.2s;
+    .contact-links { display: flex; gap: 28px; flex-wrap: wrap; }
+    .contact-link {
+      font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--ink); text-decoration: none;
+      border-bottom: 1px solid var(--ink); padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s;
     }
-    .footer-links a:hover {
-      color: #374151;
+    .contact-link:hover { color: var(--red); border-color: var(--red); }
+    /* ASCII terminal in contact — light-mode version */
+    #contact .ascii-terminal { border-color: var(--rule); }
+    #contact .ascii-terminal-header { background: rgba(0,0,0,0.03); border-color: var(--rule); color: var(--gray); }
+    #contact .ascii-anim { color: rgba(0,0,0,0.55); }
+    #contact .ascii-status { border-color: var(--rule); color: var(--red); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--rule); }
+    .footer-inner {
+      max-width: 1400px; margin: 0 auto; padding: 26px 60px;
+      display: flex; justify-content: space-between; align-items: center;
     }
-    .footer-note {
-      font-size: 12px;
-      color: #6b7280;
-      font-family: 'Courier New', monospace;
+    .footer-mono {
+      font-family: var(--mono); font-size: 0.6rem;
+      color: var(--gray); text-transform: uppercase; letter-spacing: 0.1em;
     }
-    @media (max-width: 600px) {
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-      }
-      .footer-links {
-        gap: 16px;
-      }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .about-layout { grid-template-columns: 300px 1fr; }
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-layout .ascii-terminal { display: none; }
     }
-    .copyright {
-      text-align: center;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid #e5e7eb;
-    }
-    .copyright p {
-      font-size: 12px;
-      color: #9ca3af;
-      margin: 0;
-      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-    }
-    @media (max-width: 900px) {
-      .header {
-        padding: 0 8px;
-      }
-      .nav-list {
-        gap: 18px;
-      }
-    }
-    @media (max-width: 600px) {
-      .header {
-        padding: 0 4px;
-      }
-      .nav-list {
-        gap: 10px;
-      }
-      .nav-link {
-        font-size: 10px;
-        padding: 8px 0;
-      }
-      .nameplate {
-        font-size: 1.1rem;
-      }
-    }
-    .bookmark-menu {
-      position: fixed;
-      top: 60px;
-      left: 24px;
-      z-index: 2000;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      background: rgba(255,255,255,0.95);
-      border-radius: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      padding: 12px 8px;
-      align-items: center;
-      min-width: 44px;
-      transition: opacity 0.3s;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .bookmark-menu.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .bookmark-link {
-      color: #222;
-      text-decoration: none;
-      font-family: 'Montserrat', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 6px 0;
-      border-radius: 8px;
-      transition: background 0.18s, color 0.18s;
-      text-align: center;
-      width: 100%;
-      display: block;
-    }
-    .bookmark-link:hover, .bookmark-link:focus {
-      background: #f3f4f6;
-      color: #111;
+    @media (max-width: 960px) {
+      .wrap { padding: 0 32px; }
+      .nav-inner { padding: 0 32px; }
+      .footer-inner { padding: 20px 32px; }
+      .nav-links { gap: 18px; }
+
+      /* Tighten section padding and header spacing */
+      .s-header { margin-bottom: 40px; }
+      #about .s-header { margin-bottom: 28px; }
+      #projects { padding: 72px 0 56px; }
+      #experience { padding: 64px 0; }
+      #education { padding: 64px 0; }
+      #about { padding: 48px 0; }
+      #contact { padding: 64px 0; }
+
+      /* Hide hero HUD overlays — too cluttered on mobile */
+      .hud { display: none; }
+
+      /* Projects: single column, no stagger */
+      .project-grid { grid-template-columns: 1fr; column-gap: 0; }
+      .proj-card:nth-child(even) { margin-top: 0; }
+      .proj-card { padding-bottom: 48px; }
+      .proj-card-num { font-size: 3rem; margin-bottom: -1rem; }
+
+      .exp-timeline::before { left: 20px; transform: none; }
+      .exp-node { display: block; padding-left: 44px; position: relative; margin-bottom: 40px; }
+      .exp-dot-wrap { position: absolute; left: 15px; top: 0; padding-top: 10px; }
+      .exp-node:nth-child(odd) .exp-block,
+      .exp-node:nth-child(even) .exp-block { text-align: left; padding: 0; }
+      .exp-node:nth-child(odd) .exp-skills { justify-content: flex-start; }
+
+      .edu-banner { grid-template-columns: 1fr; }
+      .edu-ghost-year { display: none; }
+      /* Cert rows: hide number, stack cat / name / issuer */
+      .cert-row { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; }
+      .cert-num { display: none; }
+      .cert-cat { grid-column: 1; grid-row: 1; }
+      .cert-name { grid-column: 1; grid-row: 2; }
+      .cert-issuer { grid-column: 1; grid-row: 3; text-align: left; white-space: normal; }
+      .affil-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .about-layout { grid-template-columns: 1fr; gap: 40px; }
+      .about-photo-wrap { max-width: 380px; }
     }
     @media (max-width: 600px) {
-      .bookmark-menu {
-        left: 4px;
-        top: 8px;
-        padding: 6px 2px;
-        gap: 8px;
-        min-width: 32px;
-      }
-      .bookmark-link {
-        font-size: 9px;
-        padding: 4px 0;
-      }
+      .wrap { padding: 0 20px; }
+      .nav-inner { padding: 0 20px; }
+      .footer-inner { padding: 18px 20px; }
+      .nav-links { gap: 12px; }
+      .nav-link { font-size: 0.58rem; }
+      /* Allow hero name to wrap on very narrow screens */
+      .hero-name { font-size: clamp(2.8rem, 11vw, 4rem); white-space: normal; }
+      .exp-node { padding-left: 36px; }
+      .affil-grid { grid-template-columns: 1fr; }
+      .cred-section { margin-bottom: 48px; }
     }
   </style>
 </head>
 <body>
-  <section id="home" class="hero">
-    <header class="header">
-      <nav class="nav">
-        <ul class="nav-list">
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#experience" class="nav-link">Experience</a></li>
-          <li><a href="#education" class="nav-link">Credentials</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+
+  <!-- NAV -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-bg"></div>
+    <div class="nav-inner">
+      <a href="#home" class="nav-name">EVB</a>
+      <ul class="nav-links">
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#education" class="nav-link">Credentials</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
     <video class="hero-video" autoplay loop muted playsinline>
       <source src="assets/hero-background.mp4" type="video/mp4">
     </video>
-    <div class="hero-overlay"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-scan"></div>
+    <div class="corner corner--tl"></div>
+    <div class="corner corner--tr"></div>
+    <div class="corner corner--bl"></div>
+    <div class="corner corner--br"></div>
+    <div class="hud hud--bl">
+      <div>SYS: ONLINE <span class="blink">▮</span></div>
+      <div>LAT 40.8075° / LON -73.9626°</div>
+    </div>
+    <div class="hud hud--br">
+      <div>PORTFOLIO v2026.03</div>
+      <div>FRAME <span id="frameCount">0000</span></div>
+    </div>
+    <div class="hud hud--tr">
+      <div>EMILIANO VILLICANA BRUGADA</div>
+      <div>MECHANICAL · ROBOTICS · MECHATRONICS</div>
+    </div>
     <div class="hero-content">
-      <h1>Emiliano VB</h1>
+      <div class="hero-eyebrow">Mechanical Engineer &amp; Roboticist</div>
+      <h1 class="hero-name"><span class="w1">Emiliano</span><span class="w2">VB</span></h1>
+      <div class="hero-sub" id="heroSub">&nbsp;</div>
     </div>
-    <a href="#summary" class="arrow-container">
-      <div class="arrow"></div>
-      <div class="arrow"></div>
-      <div class="arrow"></div>
-    </a>
-  </section>
-  <div class="bookmark-menu" id="bookmarkMenu">
-    <a href="#projects" class="bookmark-link">Projects</a>
-    <a href="#experience" class="bookmark-link">Experience</a>
-    <a href="#education" class="bookmark-link">Credentials</a>
-    <a href="#about" class="bookmark-link">About</a>
-    <a href="#contact" class="bookmark-link">Contact</a>
-  </div>
-
-  <section id="projects" class="projects">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <a class="project" href="vision-arm/">
-        <div class="project-img">
-          <img src="vision-arm/Coins%20recognition_Columbia%20University%20Dining%20coin_%20Mexican%2020%20pesos%20coin_%20and%201%20dollar%20coin.png" alt="Real-Time Vision-Guided Robotic Arm Simulation" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-        </div>
-        <h3>REAL-TIME VISION-GUIDED ROBOTIC ARM SIMULATION</h3>
-        <p>Inverse Kinematics | Computer Vision | Motion Planning | Real-Time Control | Multi-DOF Manipulator | Trajectory Planning</p>
-      </a>
-      <a class="project" href="rover-twin/">
-        <div class="project-img">
-          <img src="rover-twin/simplified%20CAD%20Model%20with%20rocker%20bogie%20pivot%20highlighted.png" alt="Rocker-Bogie Rover Digital Twin" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-        </div>
-        <h3>ROCKER-BOGIE ROVER DIGITAL TWIN</h3>
-        <p>ROS2 | URDF/Xacro | SolidWorks | Gazebo | Isaac Sim | RViz2 | Swerve-Drive Control | Sim2Real</p>
-      </a>
-      <a class="project" href="teleop-arms/">
-        <div class="project-img">
-          <img src="teleop-arms/thumnail.png" alt="Teleoperated 6DOF Robot Arms" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-        </div>
-        <h3>TELEOPERATED 6DOF ROBOT ARMS</h3>
-        <p>LeRobot | SO-100 | Ubuntu | Teleoperation | 6-DOF Manipulator | Motor Control | Real-Time Control</p>
-      </a>
-      <a class="project" href="la-colonia/">
-        <div class="project-img">
-          <img src="la-colonia/Start%20Page.png" alt="La Colonia: A Multi-LLM Council" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-        </div>
-        <h3>LA COLONIA: A MULTI-LLM COUNCIL</h3>
-        <p>FastAPI | React 19 | Vite | SSE | OpenRouter | Ollama | Groq | OpenAI | Anthropic</p>
-      </a>
-      <a class="project" href="software/">
-        <div class="project-img">
-          <img src="software/Carousel%20Generator_loaded%20photos%20and%20generated%20with%20input%20text.png" alt="Software Development" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-        </div>
-        <h3>SOFTWARE DEVELOPMENT</h3>
-        <p>Python | CustomTkinter | Pillow | JavaScript | HTML/CSS | Canvas API | LocalStorage | Desktop & Web Apps</p>
-      </a>
-      <a class="project" href="uav/">
-        <div class="project-img">
-          <img src="assets/uav1.png" alt="Autonomous Solar-Electric UAV" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-        </div>
-        <h3>AUTONOMOUS SOLAR-ELECTRIC UAV</h3>
-        <p>3D CAD | Finite Element Analysis (FEA) | Raspberry Pi | Machine Learning | Thermal Imaging | System Integration | Iterative Design | Mechanical Design</p>
-      </a>
-      <a class="project" href="lunabotics/">
-        <div class="project-img">
-          <img src="assets/spaceposium.svg" alt="Autonomous Lunar Robot - ATLAS" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-        </div>
-        <h3>AUTONOMOUS LUNAR ROBOT – ATLAS</h3>
-        <p>3D CAD | Robot Operating System 2 (ROS2) | Arduino | Light Detection and Ranging (Lidar) | Simulink | System Integration | Project Management | Rapid Prototyping</p>
-      </a>
-      <a class="project" href="spiderbot/">
-        <div class="project-img">
-          <img src="assets/spiderbot1.png" alt="Reinforcement Learning Legged Robot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-        </div>
-        <h3>REINFORCEMENT LEARNING LEGGED ROBOT</h3>
-        <p>3D CAD | Reinforcement Learning | Raspberry Pi | Motor Control | Generative Design | Mechanical Design | Iterative Design</p>
-      </a>
-      <a class="project" href="machinedesign/">
-        <div class="project-img" style="background: white;">
-          <img src="assets/machined1.png" alt="Automated Robotic Linkage System" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
-        </div>
-        <h3>AUTOMATED ROBOTIC LINKAGE SYSTEM</h3>
-        <p>3D CAD | Computer Numerical Control (CNC) Machining | Proportional-Integral-Derivative (PID) Control | Signal Processing | C++ | Mechanical Design | Process Automation </p>
-      </a>
-      <a class="project" href="holonomic/">
-        <div class="project-img">
-          <img src="assets/holonomic1.png" alt="Expanding Holonomic Platform for Industrial Applications" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-        </div>
-        <h3>EXPANDING HOLONOMIC PLATFORM FOR INDUSTRIAL APPLICATIONS</h3>
-        <p>3D CAD | Holonomic Drive | Industrial Automation | System Integration | Mechanical Design | Control Systems | Rapid Prototyping | Project Management</p>
-      </a>
-      <a class="project" href="em/">
-        <div class="project-img">
-          <img src="assets/em1.png" alt="Automated Electromagnetic Item Transportation System" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-        </div>
-        <h3>AUTOMATED ELECTROMAGNETIC ITEM TRANSPORTATION SYSTEM</h3>
-        <p>3D CAD | ESP32 Microcontroller | Circuit Design | KiCad | C++ | System Integration | Process Automation | Rapid Prototyping</p>
-      </a>
+    <div class="scroll-cue">
+      <div class="scroll-cue-line"></div>
+      <span>Scroll</span>
     </div>
   </section>
 
-  <section id="experience" class="experience">
-    <h2>Experience</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="date-label">Dec 2025</div>
-        <div class="content">
-          <h3>Freelance Robotics Engineer</h3>
-          <p class="employer">Self-Employed (Remote)<br>Dec 2025 – Present</p>
-          <p class="description">Build simulation-ready digital twins in Gazebo and Isaac Sim from robot CAD, including URDF/Xacro modeling and controller configurations. Develop Isaac Sim action graphs for ROS2 integration, enabling teleoperation and sensor data streaming.</p>
-          <div class="skills">
-            <span class="skill-tag">URDF/Xacro</span>
-            <span class="skill-tag">Gazebo</span>
-            <span class="skill-tag">Isaac Sim</span>
-            <span class="skill-tag">ROS2</span>
-          </div>
-        </div>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <canvas id="projCanvas" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Selected Work</span>
+        <div class="s-rule"></div>
+        <span class="s-num">01 / 05</span>
       </div>
-      <div class="timeline-item">
-        <div class="date-label">Oct 2025</div>
-        <div class="content">
-          <h3>Mechanical Engineer & Project Manager</h3>
-          <p class="employer">ASC Process Systems<br>Oct 2025 – Present</p>
-          <p class="description">Design and manage aerospace-grade autoclave projects from purchase to commissioning. Validate pressure vessel designs to ASME code and perform fluid flow and structural simulations to optimize system performance.</p>
-          <div class="skills">
-            <span class="skill-tag">Project Management</span>
-            <span class="skill-tag">ASME Pressure Vessels</span>
-            <span class="skill-tag">ANSYS FEA</span>
-            <span class="skill-tag">Fluid Systems</span>
+
+      <div class="project-grid">
+
+        <a class="proj-card reveal" href="vision-arm/">
+          <span class="proj-card-num">01</span>
+          <div class="proj-card-img">
+            <img src="vision-arm/Coins%20recognition_Columbia%20University%20Dining%20coin_%20Mexican%2020%20pesos%20coin_%20and%201%20dollar%20coin.png" alt="Vision-Guided Robotic Arm">
           </div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="date-label">Jan 2025</div>
-        <div class="content">
-          <h3>Volunteer</h3>
-          <p class="employer">ROAR Lab, Columbia University<br>Jan 2025 – May 2025</p>
-          <p class="description">Designed robotic exoskeleton components for cerebral palsy rehabilitation.</p>
-          <div class="skills">
-            <span class="skill-tag">Robotics</span>
-            <span class="skill-tag">Sensor Integration</span>
-            <span class="skill-tag">Mechanical Design</span>
-            <span class="skill-tag">Control Systems</span>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Real-Time Vision-Guided Robotic Arm Simulation</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">Inverse Kinematics</span><span class="proj-tag">Computer Vision</span>
+              <span class="proj-tag">Motion Planning</span><span class="proj-tag">Real-Time Control</span>
+              <span class="proj-tag">Multi-DOF Manipulator</span>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="date-label">Sep 2024</div>
-        <div class="content">
-          <h3>Lead Mechanical Engineer</h3>
-          <p class="employer">NASA Lunabotics – Columbia Space Initiative<br>Sep 2024 – Present</p>
-          <p class="description">Led design and fabrication of an autonomous robotic excavator. Managed multidisciplinary team and integrated mechanical and electrical systems.</p>
-          <div class="skills">
-            <span class="skill-tag">Project Management</span>
-            <span class="skill-tag">System Integration</span>
-            <span class="skill-tag">3D CAD</span>
-            <span class="skill-tag">Finite Element Analysis</span>
+        </a>
+
+        <a class="proj-card reveal" href="rover-twin/">
+          <span class="proj-card-num">02</span>
+          <div class="proj-card-img">
+            <img src="rover-twin/simplified%20CAD%20Model%20with%20rocker%20bogie%20pivot%20highlighted.png" alt="Rocker-Bogie Rover">
           </div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="date-label">May 2024</div>
-        <div class="content">
-          <h3>MSOD Intern, Automation Team</h3>
-          <p class="employer">Caterpillar Inc.<br>May 2024 – Aug 2024</p>
-          <p class="description">Refactored AutoBagger to boost output 4×. Integrated autonomous robots and conducted safety audits to improve industrial workflows.</p>
-          <div class="skills">
-            <span class="skill-tag">Automation</span>
-            <span class="skill-tag">Process Improvement</span>
-            <span class="skill-tag">Robotics</span>
-            <span class="skill-tag">Safety Engineering</span>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Rocker-Bogie Rover Digital Twin</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">ROS2</span><span class="proj-tag">URDF/Xacro</span>
+              <span class="proj-tag">SolidWorks</span><span class="proj-tag">Gazebo</span>
+              <span class="proj-tag">Isaac Sim</span><span class="proj-tag">Sim2Real</span>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="date-label">May 2023</div>
-        <div class="content">
-          <h3>Mechanical Engineering Co-op</h3>
-          <p class="employer">Copeland<br>May 2023 – Aug 2023</p>
-          <p class="description">Engineered liquid desiccant HVAC systems using NX CAD. Supported rapid prototyping and iterative experimental design.</p>
-          <div class="skills">
-            <span class="skill-tag">HVAC</span>
-            <span class="skill-tag">NX CAD</span>
-            <span class="skill-tag">Rapid Prototyping</span>
-            <span class="skill-tag">Iterative Design</span>
+        </a>
+
+        <a class="proj-card reveal" href="teleop-arms/">
+          <span class="proj-card-num">03</span>
+          <div class="proj-card-img">
+            <img src="teleop-arms/thumnail.png" alt="Teleoperated Robot Arms">
           </div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="date-label">May 2023</div>
-        <div class="content">
-          <h3>Advanced Manufacturing Co-op</h3>
-          <p class="employer">Emerson<br>May 2023 – Aug 2023</p>
-          <p class="description">Created tools and infrastructure to increase throughput by 30%. Automated inventory management and optimized factory layout.</p>
-          <div class="skills">
-            <span class="skill-tag">Advanced Manufacturing</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">Process Automation</span>
-            <span class="skill-tag">Lean Engineering</span>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Teleoperated 6DOF Robot Arms</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">LeRobot</span><span class="proj-tag">SO-100</span>
+              <span class="proj-tag">Teleoperation</span><span class="proj-tag">6-DOF Manipulator</span>
+              <span class="proj-tag">Motor Control</span>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="date-label">Sep 2021</div>
-        <div class="content">
-          <h3>Powertrain Engineer</h3>
-          <p class="employer">Columbia Formula Racing<br>Sep 2021 – May 2024</p>
-          <p class="description">Redesigned drivetrain for reduced weight and enhanced durability. Led thermal testing and mechanical analysis.</p>
-          <div class="skills">
-            <span class="skill-tag">SolidWorks</span>
-            <span class="skill-tag">Mechanical Design</span>
-            <span class="skill-tag">CNC Machining</span>
-            <span class="skill-tag">Thermal Systems</span>
+        </a>
+
+        <a class="proj-card reveal" href="la-colonia/">
+          <span class="proj-card-num">04</span>
+          <div class="proj-card-img">
+            <img src="la-colonia/Start%20Page.png" alt="La Colonia Multi-LLM">
           </div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="date-label">Jun 2021</div>
-        <div class="content">
-          <h3>Project Manager</h3>
-          <p class="employer">Global Prep Academy<br>Jun 2021 – Sep 2021</p>
-          <p class="description">Taught 20 STEM students and created a 1-week engineering curriculum. Mentored student teams on project development.</p>
-          <div class="skills">
-            <span class="skill-tag">Teaching</span>
-            <span class="skill-tag">Project Management</span>
-            <span class="skill-tag">STEM Education</span>
-            <span class="skill-tag">Curriculum Design</span>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">La Colonia: A Multi-LLM Council</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">FastAPI</span><span class="proj-tag">React 19</span>
+              <span class="proj-tag">SSE</span><span class="proj-tag">OpenRouter</span>
+              <span class="proj-tag">Ollama</span><span class="proj-tag">Anthropic</span>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="date-label">Feb 2021</div>
-        <div class="content">
-          <h3>Project Manager – STEM Global Brigades</h3>
-          <p class="employer">Global Brigades, Inc.<br>Feb 2021 – Jun 2021</p>
-          <p class="description">Led aqueduct design for Nicaraguan community. Served as translator and liaison with local engineers and stakeholders.</p>
-          <div class="skills">
-            <span class="skill-tag">EPANET</span>
-            <span class="skill-tag">Engineering Drawings</span>
-            <span class="skill-tag">Spanish Translation</span>
-            <span class="skill-tag">Community Engagement</span>
+        </a>
+
+        <a class="proj-card reveal" href="software/">
+          <span class="proj-card-num">05</span>
+          <div class="proj-card-img">
+            <img src="software/Carousel%20Generator_loaded%20photos%20and%20generated%20with%20input%20text.png" alt="Software Development">
           </div>
-        </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Software Development</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">Python</span><span class="proj-tag">CustomTkinter</span>
+              <span class="proj-tag">JavaScript</span><span class="proj-tag">Canvas API</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-card reveal" href="uav/">
+          <span class="proj-card-num">06</span>
+          <div class="proj-card-img">
+            <img src="assets/uav1.png" alt="Solar-Electric UAV">
+          </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Autonomous Solar-Electric UAV</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">3D CAD</span><span class="proj-tag">FEA</span>
+              <span class="proj-tag">Raspberry Pi</span><span class="proj-tag">Machine Learning</span>
+              <span class="proj-tag">Thermal Imaging</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-card reveal" href="lunabotics/">
+          <span class="proj-card-num">07</span>
+          <div class="proj-card-img">
+            <img src="assets/spaceposium.svg" alt="ATLAS Lunar Robot">
+          </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Autonomous Lunar Robot – ATLAS</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">ROS2</span><span class="proj-tag">Arduino</span>
+              <span class="proj-tag">LiDAR</span><span class="proj-tag">Simulink</span>
+              <span class="proj-tag">3D CAD</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-card reveal" href="spiderbot/">
+          <span class="proj-card-num">08</span>
+          <div class="proj-card-img">
+            <img src="assets/spiderbot1.png" alt="RL Legged Robot">
+          </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Reinforcement Learning Legged Robot</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">3D CAD</span><span class="proj-tag">Reinforcement Learning</span>
+              <span class="proj-tag">Raspberry Pi</span><span class="proj-tag">Generative Design</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-card reveal" href="machinedesign/">
+          <span class="proj-card-num">09</span>
+          <div class="proj-card-img" style="background:#F0EDE6; padding: 24px;">
+            <img src="assets/machined1.png" alt="Robotic Linkage System" style="object-fit:contain; max-height:320px; margin:0 auto; display:block;">
+          </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Automated Robotic Linkage System</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">3D CAD</span><span class="proj-tag">CNC Machining</span>
+              <span class="proj-tag">PID Control</span><span class="proj-tag">C++</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-card reveal" href="holonomic/">
+          <span class="proj-card-num">10</span>
+          <div class="proj-card-img">
+            <img src="assets/holonomic1.png" alt="Holonomic Platform">
+          </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Expanding Holonomic Platform</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">3D CAD</span><span class="proj-tag">Holonomic Drive</span>
+              <span class="proj-tag">Industrial Automation</span><span class="proj-tag">Control Systems</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-card reveal" href="em/">
+          <span class="proj-card-num">11</span>
+          <div class="proj-card-img">
+            <img src="assets/em1.png" alt="EM Transportation System">
+          </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Automated Electromagnetic Item Transportation System</h3>
+            <div class="proj-card-tags">
+              <span class="proj-tag">3D CAD</span><span class="proj-tag">ESP32</span>
+              <span class="proj-tag">KiCad</span><span class="proj-tag">C++</span>
+            </div>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
 
-  <section id="education" class="education">
-    <h2>Education</h2>
-    <div class="education-card">
-      <div class="education-left">
-        <div class="university">Columbia University</div>
-        <div class="degree">B.S. in Mechanical Engineering &nbsp; | &nbsp; 2021–2025</div>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Experience</span>
+        <div class="s-rule"></div>
+        <span class="s-num">02 / 05</span>
       </div>
-      <div class="education-divider"></div>
-      <div class="education-right">
-<div class="edu-desc">Robotics, automation, and manufacturing focus.</div>
-      </div>
-    </div>
-  </section>
+      <div class="exp-timeline">
 
-  <section id="certifications" class="certifications">
-    <h2>Certifications</h2>
-    <div class="cert-grid">
-      <div class="cert-card">
-        <div class="cert-icon">
-          <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="14" stroke="#6b7280" stroke-width="2" fill="#f3f4f6"/></svg>
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">Self-Employed</div>
+            <div class="exp-date">Dec 2025 – Present</div>
+            <div class="exp-role">Freelance Robotics Engineer</div>
+            <p class="exp-desc">Build simulation-ready digital twins in Gazebo and Isaac Sim. URDF/Xacro modeling, controller configuration, action graphs for ROS2 integration.</p>
+            <div class="exp-skills"><span class="exp-skill">URDF/Xacro</span><span class="exp-skill">Gazebo</span><span class="exp-skill">Isaac Sim</span><span class="exp-skill">ROS2</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
         </div>
-        <div class="cert-title">Robotics Foundations I - Robot Modeling</div>
-        <div class="cert-issuer">FedericaX / Università di Napoli Federico II</div>
-        <div class="cert-date">Issued: February 2026</div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">
-          <!-- Example SVG icon -->
-          <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="14" stroke="#6b7280" stroke-width="2" fill="#f3f4f6"/></svg>
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">ASC Process Systems</div>
+            <div class="exp-date">Oct 2025 – Present</div>
+            <div class="exp-role">Mechanical Engineer &amp; Project Manager</div>
+            <p class="exp-desc">Design and manage aerospace-grade autoclave projects. Validate pressure vessel designs to ASME code, fluid flow and structural simulations.</p>
+            <div class="exp-skills"><span class="exp-skill">Project Management</span><span class="exp-skill">ASME</span><span class="exp-skill">ANSYS FEA</span><span class="exp-skill">Fluid Systems</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
         </div>
-        <div class="cert-title">Introduction to Deep RL from a Robotics Perspective</div>
-        <div class="cert-issuer">Columbia+ / Columbia University</div>
-        <div class="cert-date">Issued: December 2025</div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">
-          <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="16,4 28,28 4,28" stroke="#6b7280" stroke-width="2" fill="#f3f4f6"/></svg>
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">ROAR Lab, Columbia</div>
+            <div class="exp-date">Jan – May 2025</div>
+            <div class="exp-role">Volunteer Researcher</div>
+            <p class="exp-desc">Designed robotic exoskeleton components for cerebral palsy rehabilitation.</p>
+            <div class="exp-skills"><span class="exp-skill">Robotics</span><span class="exp-skill">Sensor Integration</span><span class="exp-skill">Mechanical Design</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
         </div>
-        <div class="cert-title">OSHA 10</div>
-        <div class="cert-issuer">HSI</div>
-        <div class="cert-date">Issued: May 2024</div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">
-          <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="20" height="20" rx="4" stroke="#6b7280" stroke-width="2" fill="#f3f4f6"/></svg>
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">Columbia Space Initiative</div>
+            <div class="exp-date">Sep 2024 – Present</div>
+            <div class="exp-role">Lead Mechanical Engineer</div>
+            <p class="exp-desc">Led design and fabrication of an autonomous robotic excavator for NASA Lunabotics. Managed a multidisciplinary team.</p>
+            <div class="exp-skills"><span class="exp-skill">Project Management</span><span class="exp-skill">3D CAD</span><span class="exp-skill">FEA</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
         </div>
-        <div class="cert-title">Seal of Biliteracy</div>
-        <div class="cert-issuer">California Department of Education</div>
-        <div class="cert-date">Issued: May 2021</div>
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">Caterpillar Inc.</div>
+            <div class="exp-date">May – Aug 2024</div>
+            <div class="exp-role">MSOD Intern, Automation Team</div>
+            <p class="exp-desc">Refactored AutoBagger to boost output 4×. Integrated autonomous robots and conducted safety audits.</p>
+            <div class="exp-skills"><span class="exp-skill">Automation</span><span class="exp-skill">Process Improvement</span><span class="exp-skill">Safety Engineering</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
+        </div>
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">Copeland</div>
+            <div class="exp-date">May – Aug 2023</div>
+            <div class="exp-role">Mechanical Engineering Co-op</div>
+            <p class="exp-desc">Engineered liquid desiccant HVAC systems using NX CAD. Supported rapid prototyping and iterative experimental design.</p>
+            <div class="exp-skills"><span class="exp-skill">HVAC</span><span class="exp-skill">NX CAD</span><span class="exp-skill">Rapid Prototyping</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
+        </div>
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">Emerson</div>
+            <div class="exp-date">May – Aug 2023</div>
+            <div class="exp-role">Advanced Manufacturing Co-op</div>
+            <p class="exp-desc">Created tools and infrastructure to increase throughput by 30%. Automated inventory management and optimized factory layout.</p>
+            <div class="exp-skills"><span class="exp-skill">Advanced Manufacturing</span><span class="exp-skill">Python</span><span class="exp-skill">Lean Engineering</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
+        </div>
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">Columbia Formula Racing</div>
+            <div class="exp-date">Sep 2021 – May 2024</div>
+            <div class="exp-role">Powertrain Engineer</div>
+            <p class="exp-desc">Redesigned drivetrain for reduced weight and enhanced durability. Led thermal testing and mechanical analysis.</p>
+            <div class="exp-skills"><span class="exp-skill">SolidWorks</span><span class="exp-skill">CNC Machining</span><span class="exp-skill">Thermal Systems</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
+        </div>
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">Global Prep Academy</div>
+            <div class="exp-date">Jun – Sep 2021</div>
+            <div class="exp-role">Project Manager</div>
+            <p class="exp-desc">Taught 20 STEM students and created a 1-week engineering curriculum. Mentored student teams.</p>
+            <div class="exp-skills"><span class="exp-skill">Teaching</span><span class="exp-skill">STEM Education</span><span class="exp-skill">Curriculum Design</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
+        </div>
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">Global Brigades, Inc.</div>
+            <div class="exp-date">Feb – Jun 2021</div>
+            <div class="exp-role">Project Manager – STEM Global Brigades</div>
+            <p class="exp-desc">Led aqueduct design for a Nicaraguan community. Served as translator and liaison with local engineers.</p>
+            <div class="exp-skills"><span class="exp-skill">EPANET</span><span class="exp-skill">Spanish Translation</span><span class="exp-skill">Community Engagement</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <section id="affiliations" class="affiliations">
-    <h2>Affiliations</h2>
-    <div class="affil-card-grid">
-      <div class="affil-card-compact">
-        <div class="affil-org">SHPE</div>
-        <div class="affil-role">Columbia chapter committee</div>
-        <div class="affil-date">2021–Present</div>
-        <div class="affil-desc">Society of Hispanic Professional Engineers. Led Dia de Ciencias workshops for visiting high school students.</div>
+  <!-- CREDENTIALS -->
+  <section id="education">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Credentials</span>
+        <div class="s-rule"></div>
+        <span class="s-num">03 / 05</span>
       </div>
-      <div class="affil-card-compact">
-        <div class="affil-org">ASME</div>
-        <div class="affil-role">Member</div>
-        <div class="affil-date">2021–Present</div>
-        <div class="affil-desc">American Society of Mechanical Engineers.</div>
+
+      <!-- Education -->
+      <div class="cred-section reveal">
+        <span class="cred-sub">Education</span>
+        <div class="edu-banner">
+          <div>
+            <div class="edu-school">Columbia University</div>
+            <div class="edu-meta">
+              <span class="edu-degree">B.S. Mechanical Engineering</span>
+              <span class="edu-dates">2021 – 2025</span>
+            </div>
+            <div class="edu-focus">Robotics &nbsp;·&nbsp; Automation &nbsp;·&nbsp; Manufacturing</div>
+          </div>
+          <div class="edu-ghost-year">2025</div>
+        </div>
       </div>
-      <div class="affil-card-compact">
-        <div class="affil-org">IEEE</div>
-        <div class="affil-role">Student Member</div>
-        <div class="affil-date">2021–Present</div>
-        <div class="affil-desc">Institute of Electrical and Electronics Engineers.</div>
+
+      <!-- Certifications -->
+      <div class="cred-section reveal">
+        <span class="cred-sub">Certifications</span>
+        <div class="cert-list">
+          <div class="cert-row">
+            <span class="cert-num">01</span>
+            <span class="cert-cat">Robot Modeling</span>
+            <span class="cert-name">Robotics Foundations I – Robot Modeling</span>
+            <span class="cert-issuer">FedericaX · Università di Napoli Federico II · Feb 2026</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-num">02</span>
+            <span class="cert-cat">Machine Learning</span>
+            <span class="cert-name">Introduction to Deep RL from a Robotics Perspective</span>
+            <span class="cert-issuer">Columbia+ · Columbia University · Dec 2025</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-num">03</span>
+            <span class="cert-cat">Safety</span>
+            <span class="cert-name">OSHA 10</span>
+            <span class="cert-issuer">HSI · May 2024</span>
+          </div>
+          <div class="cert-row">
+            <span class="cert-num">04</span>
+            <span class="cert-cat">Language</span>
+            <span class="cert-name">Seal of Biliteracy</span>
+            <span class="cert-issuer">California Department of Education · May 2021</span>
+          </div>
+        </div>
       </div>
-      <div class="affil-card-compact">
-        <div class="affil-org">HSF</div>
-        <div class="affil-role">Scholar</div>
-        <div class="affil-date">2023–Present</div>
-        <div class="affil-desc">Hispanic Scholarship Fund scholar and mentor.</div>
+
+      <!-- Affiliations -->
+      <div class="cred-section reveal">
+        <span class="cred-sub">Affiliations</span>
+        <div class="affil-grid">
+          <div class="affil-card">
+            <div class="affil-acronym">SHPE</div>
+            <div class="affil-full">Society of Hispanic Professional Engineers</div>
+            <div class="affil-meta">Columbia Chapter · 2021–Present</div>
+          </div>
+          <div class="affil-card">
+            <div class="affil-acronym">ASME</div>
+            <div class="affil-full">American Society of Mechanical Engineers</div>
+            <div class="affil-meta">Member · 2021–Present</div>
+          </div>
+          <div class="affil-card">
+            <div class="affil-acronym">IEEE</div>
+            <div class="affil-full">Institute of Electrical and Electronics Engineers</div>
+            <div class="affil-meta">Student Member · 2021–Present</div>
+          </div>
+          <div class="affil-card">
+            <div class="affil-acronym">HSF</div>
+            <div class="affil-full">Hispanic Scholarship Fund</div>
+            <div class="affil-meta">Scholar &amp; Mentor · 2023–Present</div>
+          </div>
+          <div class="affil-card">
+            <div class="affil-acronym">e4c</div>
+            <div class="affil-full">Engineering for Change</div>
+            <div class="affil-meta">Community Member · 2024–Present</div>
+          </div>
+          <div class="affil-card">
+            <div class="affil-acronym">CAA</div>
+            <div class="affil-full">Columbia Alumni Association</div>
+            <div class="affil-meta">Member · 2025–Present</div>
+          </div>
+          <div class="affil-card">
+            <div class="affil-acronym">CEAA</div>
+            <div class="affil-full">Columbia Engineering Alumni Association</div>
+            <div class="affil-meta">Member · 2025–Present</div>
+          </div>
+          <div class="affil-card">
+            <div class="affil-acronym">LAACU</div>
+            <div class="affil-full">Latino Alumni Association of Columbia University</div>
+            <div class="affil-meta">Member · 2025–Present</div>
+          </div>
+          <div class="affil-card">
+            <div class="affil-acronym">S1S2</div>
+            <div class="affil-full">S1S2 Robotics Community</div>
+            <div class="affil-meta">Founding Member · 2025–Present</div>
+          </div>
+        </div>
       </div>
-      <div class="affil-card-compact">
-        <div class="affil-org">e4c</div>
-        <div class="affil-role">Member</div>
-        <div class="affil-date">2024–Present</div>
-        <div class="affil-desc">Engineering for Change community member.</div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">About</span>
+        <div class="s-rule"></div>
+        <span class="s-num">04 / 05</span>
       </div>
-      <div class="affil-card-compact">
-        <div class="affil-org">CAA</div>
-        <div class="affil-role">Member</div>
-        <div class="affil-date">2025–Present</div>
-        <div class="affil-desc">Columbia Alumni Association.</div>
-      </div>
-      <div class="affil-card-compact">
-        <div class="affil-org">CEAA</div>
-        <div class="affil-role">Member</div>
-        <div class="affil-date">2025–Present</div>
-        <div class="affil-desc">Columbia Engineering Alumni Association.</div>
-      </div>
-      <div class="affil-card-compact">
-        <div class="affil-org">LAACU</div>
-        <div class="affil-role">Member</div>
-        <div class="affil-date">2025–Present</div>
-        <div class="affil-desc">Latino Alumni Association of Columbia University.</div>
-      </div>
-      <div class="affil-card-compact">
-        <div class="affil-org">S1S2</div>
-        <div class="affil-role">Founding Member</div>
-        <div class="affil-date">2025–Present</div>
-        <div class="affil-desc">S1S2 Robotics Community.</div>
+      <div class="about-layout">
+        <div class="about-photo-wrap reveal">
+          <img src="assets/headshot.jpg" alt="Emiliano Villicana Brugada">
+          <div class="photo-corner photo-corner--tl"></div>
+          <div class="photo-corner photo-corner--tr"></div>
+          <div class="photo-corner photo-corner--bl"></div>
+          <div class="photo-corner photo-corner--br"></div>
+          <div class="photo-label">Emiliano Villicana Brugada</div>
+        </div>
+        <div class="about-bio reveal">
+          <p>Hi, I'm Emiliano — a mechanical engineer driven by curiosity and a desire to build things that actually matter. I chose engineering not just for the technical challenge, but because I enjoy solving real-world problems where every solution has to balance precision, efficiency, and creativity.</p>
+          <p>My experience spans mechanical design, manufacturing, automation, and robotics, with a growing interest in how AI can complement and enhance these fields. I'm hands-on by nature, whether I'm designing parts, improving processes, or integrating systems. I take pride in learning fast, adapting quickly, and always asking how something can be made better.</p>
+          <p>If you're working on something cool — let's talk.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="about" class="about">
-    <h2>About Me</h2>
-    <div class="about-container">
-      <div class="about-photo">
-        <img src="assets/headshot.jpg" alt="Emiliano Villicana Brugada" />
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Contact</span>
+        <div class="s-rule"></div>
+        <span class="s-num">05 / 05</span>
       </div>
-      <div class="about-text">
-        <p>Hi, I’m Emiliano — a mechanical engineer driven by curiosity and a desire to build things that actually matter. I chose engineering not just for the technical challenge, but because I enjoy solving real-world problems where every solution has to balance precision, efficiency, and creativity.<br></p>
-
-        <p><br>My experience spans mechanical design, manufacturing, automation, and robotics, with a growing interest in how AI can complement and enhance these fields. I’m hands-on by nature, whether I’m designing parts, improving processes, or integrating systems. I take pride in learning fast, adapting quickly, and always asking how something can be made better.<br></p>
-
-        <p><br>If you're working on something cool — let’s talk.</p>
+      <div class="contact-layout">
+        <div>
+          <p class="contact-heading reveal">Ready to solve<br>meaningful problems<br>together?</p>
+          <div class="contact-links reveal">
+            <a href="https://www.linkedin.com/in/emilianovillicana/" target="_blank" class="contact-link">LinkedIn ↗</a>
+            <a href="mailto:evillicanabrugada@gmail.com" class="contact-link">Email ↗</a>
+          </div>
+        </div>
+        <div class="ascii-terminal reveal">
+          <div class="ascii-terminal-header">
+            <div class="ascii-terminal-dots"><span></span><span></span><span></span></div>
+            <span>C-3PO &amp; R2-D2</span>
+          </div>
+          <pre class="ascii-anim" id="asciiAnim"></pre>
+          <div class="ascii-status">▶ STANDING BY</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="contact">
-    <div class="contact-content">
-      <p class="contact-text">Ready to solve meaningful problems together?</p>
-      <p class="contact-links">Connect with me on <a href="https://www.linkedin.com/in/emilianovillicana/" target="_blank">LinkedIn ↗︎</a>, or drop me an <a href="mailto:evillicanabrugada@gmail.com">email ↗︎</a>.</p>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <hr class="footer-divider">
-    <div class="footer-content">
-    </div>
-    <div class="copyright">
-      <p>© Emiliano Villicana Brugada 2026.</p>
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-mono">Emiliano Villicana Brugada</span>
+      <span class="footer-mono">© 2026</span>
     </div>
   </footer>
 
   <script>
-    const sectionObserver = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-  
-    document.querySelectorAll('section').forEach(section => {
-      if (!section.classList.contains('hero')) {
-        sectionObserver.observe(section);
+    // ── Nav scrolled state ──
+    const nav = document.getElementById('mainNav');
+    new IntersectionObserver(([e]) => {
+      nav.classList.toggle('scrolled', !e.isIntersecting);
+    }, { threshold: 0.05 }).observe(document.getElementById('home'));
+
+    // ── Nav dark mode: dark over experience, light over credentials+ ──
+    (function() {
+      const projects   = document.getElementById('projects');
+      const experience = document.getElementById('experience');
+      const NAV_H = 56;
+      window.addEventListener('scroll', () => {
+        const pastProjects   = projects.getBoundingClientRect().bottom   < NAV_H;
+        const pastExperience = experience.getBoundingClientRect().bottom < NAV_H;
+        nav.classList.toggle('dark', pastProjects && !pastExperience);
+      }, { passive: true });
+    })();
+
+    // ── Hero typewriter ──
+    const phrases = ['Mechanical Engineer', 'Roboticist', 'Building things that matter.'];
+    let pIdx = 0, cIdx = 0, deleting = false;
+    const subEl = document.getElementById('heroSub');
+    function type() {
+      const cur = phrases[pIdx];
+      if (!deleting) {
+        subEl.textContent = cur.slice(0, ++cIdx) + '▮';
+        if (cIdx === cur.length) { deleting = true; setTimeout(type, 2200); return; }
       } else {
-        section.classList.add('visible');
+        subEl.textContent = cur.slice(0, --cIdx) + '▮';
+        if (cIdx === 0) { deleting = false; pIdx = (pIdx + 1) % phrases.length; }
       }
-    });
-  
-    setTimeout(() => {
-      document.querySelectorAll('section').forEach(section => {
-        if (!section.classList.contains('visible')) {
-          section.classList.add('visible');
-        }
+      setTimeout(type, deleting ? 35 : 65);
+    }
+    setTimeout(type, 1500);
+
+    // ── Frame counter ──
+    let fc = 0;
+    const fcEl = document.getElementById('frameCount');
+    setInterval(() => { fcEl.textContent = String(++fc).padStart(4, '0'); }, 33);
+
+    // ── Scroll reveal ──
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
       });
-    }, 3000);
+    }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = (i % 4) * 0.07 + 's';
+      obs.observe(el);
+    });
 
-  </script>
+    // ── ASCII C-3PO + R2-D2 (static) ──
+    const animEl = document.getElementById('asciiAnim');
+    if (animEl) animEl.textContent = `                             /~\\
+                            |oo )
+                            _\\=/_
+          _-=-_            /  _  \\
+         // - \\\\          //|/.\\| \\
+        (  [O]  )         \\\\ \\_/  ||
+        []=__○_[]          \\|\\ /| ||
+       -|_-----_|-         # _ _/  #
+      | | | ≡ | | |         | | |
+       || | ≡ | ||          | | |
+       ||_|:@:|_||          []|[]
+      .|| _____ ||.         | | |
+______(__)_(_)_(__)________/_]_[_\\________________________`;
 
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        const headerOffset = 100;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    // ── Projects: physics dot-field canvas ──
+    (function () {
+      const section = document.getElementById('projects');
+      const canvas  = document.getElementById('projCanvas');
+      if (!canvas || !section) return;
+      const ctx = canvas.getContext('2d');
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+      const GAP     = 30;   // grid spacing px
+      const R_ZONE  = 100;  // repulsion radius px
+      const R_FORCE = 60;   // max displacement px
+      const SPRING  = 0.055;
+      const DAMP    = 0.76;
+
+      let dots = [], W = 0, H = 0, dpr = 1;
+      let mx = -9999, my = -9999;
+
+      function resize() {
+        dpr = window.devicePixelRatio || 1;
+        W   = section.offsetWidth;
+        H   = section.offsetHeight;
+        canvas.width  = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width  = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.scale(dpr, dpr);
+        buildDots();
+      }
+
+      function buildDots() {
+        dots = [];
+        const cols = Math.ceil(W / GAP) + 1;
+        const rows = Math.ceil(H / GAP) + 1;
+        for (let r = 0; r <= rows; r++) {
+          for (let c = 0; c <= cols; c++) {
+            const hx = c * GAP, hy = r * GAP;
+            dots.push({ hx, hy, baseHY: hy, x: hx, y: hy, vx: 0, vy: 0 });
+          }
+        }
+      }
+
+      function frame() {
+        ctx.clearRect(0, 0, W, H);
+
+        for (const d of dots) {
+          // Repel from cursor
+          const dx = d.x - mx, dy = d.y - my;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < R_ZONE * R_ZONE && d2 > 0) {
+            const dist  = Math.sqrt(d2);
+            const force = (1 - dist / R_ZONE) * R_FORCE;
+            d.vx += (dx / dist) * force * 0.14;
+            d.vy += (dy / dist) * force * 0.14;
+          }
+
+          // Spring home
+          d.vx += (d.hx - d.x) * SPRING;
+          d.vy += (d.hy - d.y) * SPRING;
+          d.vx *= DAMP;
+          d.vy *= DAMP;
+          d.x  += d.vx;
+          d.y  += d.vy;
+
+          // Size & opacity scale with displacement energy
+          const disp   = Math.sqrt((d.x-d.hx)**2 + (d.y-d.hy)**2);
+          const energy = Math.min(disp / R_FORCE, 1);
+          const radius = 1.4 + energy * 1.2;        // 1.4 → 2.6 px
+          const alpha  = 0.11 + energy * 0.18;      // 0.11 → 0.29
+
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, radius, 0, 6.2832);
+          ctx.fillStyle = `rgba(13,13,13,${alpha.toFixed(3)})`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(frame);
+      }
+
+      // Mouse — relative to section top-left
+      section.addEventListener('mousemove', e => {
+        const r = section.getBoundingClientRect();
+        mx = e.clientX - r.left;
+        my = e.clientY - r.top;
+      });
+      section.addEventListener('mouseleave', () => { mx = -9999; my = -9999; });
+
+      // Scroll — parallax home drift (spring target shifts, never jolts)
+      window.addEventListener('scroll', () => {
+        const r = section.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+          const progress = -r.top / (r.height + window.innerHeight);
+          for (const d of dots) {
+            d.hy = d.baseHY + progress * 50;
+          }
+        }
+      }, { passive: true });
+
+      resize();
+      window.addEventListener('resize', resize);
+      requestAnimationFrame(frame);
+    })();
+
+    // ── Smooth anchor scroll ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       });
     });
-  </script>
-  <script>
-    // Bookmark menu show/hide logic
-    const header = document.querySelector('.header');
-    const bookmarkMenu = document.getElementById('bookmarkMenu');
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          bookmarkMenu.classList.add('visible');
-        } else {
-          bookmarkMenu.classList.remove('visible');
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(header);
   </script>
 </body>
 </html>
-  
