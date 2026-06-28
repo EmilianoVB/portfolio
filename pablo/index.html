@@ -68,11 +68,9 @@
       <div class="prose reveal" style="margin-bottom: 24px;">
         <p>A browser or phone hits nginx on the VPS, which either reads the dashboard's data files or writes a new capture through a local API. A background watcher rebuilds the capture index on every change, and Syncthing mirrors the whole folder back to my Windows machine, where Claude Desktop and Obsidian pick up whatever changed. Telegram routes mobile messages to Pablo, the agent running directly on the VPS.</p>
       </div>
-      <figure class="reveal">
-        <div class="placeholder-img">
-          <div class="placeholder-img-label">Block Diagram &middot; Full System Architecture<span class="filename">block-diagram.png</span></div>
-        </div>
-        <figcaption>Two machines, two agents, one synced filesystem</figcaption>
+      <figure class="fig reveal" style="max-width: 720px; margin: 0 auto;">
+        <img src="system-map.png" alt="Full system map: home PC and Hostinger VPS, Claude Desktop/Cowork and Pablo agents, the shared ~/cowork/ data layer, and the access/workflow paths between them" />
+        <figcaption>Full system map &middot; two machines, two agents, one synced filesystem</figcaption>
       </figure>
     </div>
   </section>
