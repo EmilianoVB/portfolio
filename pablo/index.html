@@ -152,11 +152,9 @@
         <div class="s-rule"></div>
         <span class="s-num">06 / 07</span>
       </div>
-      <figure class="reveal" style="margin-bottom: 24px;">
-        <div class="placeholder-img aspect-16-9">
-          <div class="placeholder-img-label">Screenshot &middot; capture.html<span class="filename">capture-ui.png</span></div>
-        </div>
-        <figcaption>Dark, monospace capture UI, served straight off the VPS</figcaption>
+      <figure class="fig reveal" style="margin-bottom: 24px;">
+        <img src="pablo-ui.png" alt="Capture and dashboard UI synced into Obsidian, shown alongside the graph view and a project canvas" />
+        <figcaption>Capture and dashboard, synced into Obsidian alongside the graph view and a project canvas</figcaption>
       </figure>
       <div class="prose reveal">
         <p>I open <code>capture.html</code> on whatever device is in my hand, type a note, tag it (context tags like <code>video</code> or <code>robotics</code>, a <code>today</code> or <code>task</code> flag, project tags like <code>drone</code> or <code>tank</code>), and save. That posts to a local API, which writes a Markdown file with YAML frontmatter into <code>Cowork/captures/</code>. A background watcher notices the new file and rebuilds <code>index.json</code>, which is what the page's recent list and task checkboxes actually read from.</p>
@@ -173,12 +171,6 @@
         <div class="s-rule"></div>
         <span class="s-num">07 / 07</span>
       </div>
-      <figure class="reveal" style="margin-bottom: 24px;">
-        <div class="placeholder-img aspect-16-9">
-          <div class="placeholder-img-label">Screenshot &middot; dashboard.html<span class="filename">dashboard-ui.png</span></div>
-        </div>
-        <figcaption>Always-on status dashboard, all domains in one view</figcaption>
-      </figure>
       <div class="prose reveal">
         <p>Syncthing is the only thing keeping the two machines honest. Pablo writes a file on the VPS and it appears on my Windows machine within seconds; I write a capture from my phone and it lands in Obsidian the same way, no manual export, no cloud drive in between. nginx just serves the result: the dashboard, the capture page, the daily briefs, all statically off <code>~/cowork/</code> on port 8888.</p>
         <p>The Telegram bot is how I reach Pablo without opening a terminal. A message from my phone routes to the bot, the bot hands it to Pablo, Pablo reads or writes against <code>~/cowork/</code>, and the reply comes back the same way.</p>
