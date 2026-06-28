@@ -46,31 +46,42 @@
       <div class="s-header reveal">
         <span class="s-label">Overview</span>
         <div class="s-rule"></div>
-        <span class="s-num">01 / 04</span>
+        <span class="s-num">01 / 05</span>
       </div>
       <div class="prose reveal">
         <p>ATLAS is Columbia University's reentry into the NASA Lunabotics Challenge, a national competition built around autonomous lunar excavation. Teams design a robot that crosses simulated terrain and builds a berm out of lunar regolith simulant.</p>
         <p>This year revived Columbia's Lunabotics program after a multi-year hiatus. As co-lead, I chose to pivot from a full competition entry toward team formation, research, and foundational design, since a strong technical and organizational base mattered more than rushing into a field of legacy programs.</p>
         <p>That first year produced a fully fabricated chassis, two wheel designs, a material-testing pipeline, and an unbuilt core-drilling subsystem, while training a new group of engineers to carry the project into next year.</p>
       </div>
+    </div>
+  </section>
 
-      <figure class="reveal" style="margin-top: 36px; max-width: 360px; cursor: zoom-in;" id="atlasLogoWrap">
-        <img id="atlasLogo" src="../assets/spaceposium.svg" alt="ATLAS project logo" style="width: 100%; display: block;" />
-        <figcaption>ATLAS program logo &middot; click to enlarge</figcaption>
+  <!-- RESEARCH POSTER -->
+  <section id="poster">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Research Poster</span>
+        <div class="s-rule"></div>
+        <span class="s-num">02 / 05</span>
+      </div>
+      <p class="prose reveal" style="margin-bottom: 20px;">Presented at Spaceposium, covering the chassis design, wheel concepts, and core-drill subsystem in full.</p>
+      <figure class="reveal" style="max-width: 760px; cursor: zoom-in;" id="atlasPosterWrap">
+        <img id="atlasPoster" src="../assets/spaceposium.svg" alt="ATLAS research poster presented at Spaceposium" style="width: 100%; display: block; border: 1px solid var(--rule);" />
+        <figcaption>ATLAS research poster &middot; click to enlarge</figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- Fullscreen logo modal -->
-  <div id="logoModal" style="display:none; position:fixed; z-index:9999; inset:0; background:rgba(0,0,0,0.92); align-items:center; justify-content:center;">
-    <button id="closeLogoModal" aria-label="Close" style="position:absolute; top:28px; right:36px; font-size:2rem; background:none; border:none; color:#fff; cursor:pointer;">&times;</button>
-    <img src="../assets/spaceposium.svg" alt="ATLAS project logo, fullscreen" style="max-width:90vw; max-height:85vh;">
+  <!-- Fullscreen poster modal -->
+  <div id="posterModal" style="display:none; position:fixed; z-index:9999; inset:0; background:rgba(0,0,0,0.92); align-items:center; justify-content:center;">
+    <button id="closePosterModal" aria-label="Close" style="position:absolute; top:28px; right:36px; font-size:2rem; background:none; border:none; color:#fff; cursor:pointer;">&times;</button>
+    <img src="../assets/spaceposium.svg" alt="ATLAS research poster, fullscreen" style="max-width:90vw; max-height:85vh;">
   </div>
   <script>
     (function () {
-      const trigger = document.getElementById('atlasLogoWrap');
-      const modal = document.getElementById('logoModal');
-      const closeBtn = document.getElementById('closeLogoModal');
+      const trigger = document.getElementById('atlasPosterWrap');
+      const modal = document.getElementById('posterModal');
+      const closeBtn = document.getElementById('closePosterModal');
       trigger.addEventListener('click', () => { modal.style.display = 'flex'; });
       closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
       modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
@@ -84,7 +95,7 @@
       <div class="s-header reveal">
         <span class="s-label">My Role</span>
         <div class="s-rule"></div>
-        <span class="s-num">02 / 04</span>
+        <span class="s-num">03 / 05</span>
       </div>
       <div class="page-sub" style="color: var(--gray); margin-bottom: 20px;">Co-Lead &amp; Lead Mechanical Engineer &middot; Sep 2024&ndash;Present</div>
       <div class="prose reveal">
@@ -111,7 +122,7 @@
       <div class="s-header reveal">
         <span class="s-label">First-Year Milestones</span>
         <div class="s-rule"></div>
-        <span class="s-num">03 / 04</span>
+        <span class="s-num">04 / 05</span>
       </div>
       <ul class="bullets reveal">
         <li>
@@ -148,7 +159,7 @@
       <div class="s-header reveal">
         <span class="s-label">Reflection &amp; Next Steps</span>
         <div class="s-rule"></div>
-        <span class="s-num">04 / 04</span>
+        <span class="s-num">05 / 05</span>
       </div>
       <div class="prose reveal">
         <p>We revived Columbia's Lunabotics presence and built a team that should outlast any single year: a fabricated test chassis, two wheel prototypes, a complete core-drill design, an autonomy framework running on ROS2 and RViz2, and a group of new members trained in mechanical design, programming, and systems integration.</p>
