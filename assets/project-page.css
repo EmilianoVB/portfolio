@@ -248,6 +248,32 @@ section.dark code {
 .fig.contain img { object-fit: contain; }
 .fig.crop img { aspect-ratio: 16/10; object-fit: cover; }
 
+/* ── PLACEHOLDER IMAGE — stand-in until a real screenshot/diagram lands ── */
+.placeholder-img {
+  position: relative;
+  width: 100%; aspect-ratio: 16 / 10;
+  border: 1px dashed var(--rule);
+  background:
+    repeating-linear-gradient(45deg, rgba(13,13,13,0.025) 0 2px, transparent 2px 14px);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 24px;
+}
+.placeholder-img.aspect-16-9 { aspect-ratio: 16 / 9; }
+.placeholder-img.aspect-4-3 { aspect-ratio: 4 / 3; }
+.placeholder-img-label {
+  font-family: var(--mono); font-size: 0.66rem;
+  text-transform: uppercase; letter-spacing: 0.12em; color: var(--gray);
+  line-height: 1.7;
+}
+.placeholder-img-label .filename {
+  display: block; margin-top: 6px; color: var(--red); font-size: 0.62rem;
+}
+section.dark .placeholder-img {
+  border-color: rgba(255,255,255,0.16);
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 14px);
+}
+section.dark .placeholder-img-label { color: rgba(255,255,255,0.4); }
+
 /* ── GRIDS ── */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }

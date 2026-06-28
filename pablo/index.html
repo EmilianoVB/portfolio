@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pablo: A Personal AI Operating System · Emiliano VB</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-back"><span class="arrow">←</span>Back</a>
+      <span class="nav-meta">Project 12 / 12</span>
+    </div>
+  </nav>
+
+  <!-- HERO (gradient) -->
+  <header class="page-hero" style="--page-gradient: linear-gradient(135deg, #0a1f1c 0%, #134e4a 50%, #14b8a6 100%);">
+    <div class="wrap">
+      <div class="page-eyebrow">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Project 12</span>
+        <span class="sep">/</span>
+        <span class="meta-text">Infrastructure &middot; Personal AI Systems</span>
+      </div>
+      <h1 class="page-title">Pablo: A Personal AI Operating System</h1>
+      <p class="page-sub">Two Machines &rsaquo; Two Agents &rsaquo; One Synced Filesystem</p>
+      <div class="tags">
+        <span class="tag">Syncthing</span>
+        <span class="tag">nginx</span>
+        <span class="tag">Claude Code</span>
+        <span class="tag">Claude Desktop</span>
+        <span class="tag">Telegram Bot</span>
+        <span class="tag">Python</span>
+        <span class="tag">Bash</span>
+        <span class="tag">Markdown</span>
+        <span class="tag">JSON</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- OVERVIEW -->
+  <section id="overview" class="lead">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Overview</span>
+        <div class="s-rule"></div>
+        <span class="s-num">01 / 07</span>
+      </div>
+      <div class="prose reveal">
+        <p>I built a personal AI operating system that spans two machines, my home PC and a Hostinger VPS, kept in sync through Syncthing, with two AI agents working in that shared filesystem. Everything lives as a plain file. No database, no cloud storage dependency.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEM ARCHITECTURE -->
+  <section id="architecture">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">System Architecture</span>
+        <div class="s-rule"></div>
+        <span class="s-num">02 / 07</span>
+      </div>
+      <div class="prose reveal" style="margin-bottom: 24px;">
+        <p>A browser or phone hits nginx on the VPS, which either reads the dashboard's data files or writes a new capture through a local API. A background watcher rebuilds the capture index on every change, and Syncthing mirrors the whole folder back to my Windows machine, where Claude Desktop and Obsidian pick up whatever changed. Telegram routes mobile messages to Pablo, the agent running directly on the VPS.</p>
+      </div>
+      <figure class="reveal">
+        <div class="placeholder-img">
+          <div class="placeholder-img-label">Block Diagram &middot; Full System Architecture<span class="filename">block-diagram.png</span></div>
+        </div>
+        <figcaption>Two machines, two agents, one synced filesystem</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- THE MACHINES -->
+  <section id="machines">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">The Machines</span>
+        <div class="s-rule"></div>
+        <span class="s-num">03 / 07</span>
+      </div>
+      <div class="grid-2">
+        <div class="prose reveal">
+          <p><strong>Home PC (Windows)</strong><br>Claude Desktop runs here in Cowork mode, which is where the Cowork agent lives and operates. Syncthing also runs here, sharing <code>~/cowork/</code> bidirectionally with the VPS.</p>
+        </div>
+        <div class="prose reveal">
+          <p><strong>Hostinger VPS</strong><br>An always-on Ubuntu box at a static IP. <code>~/cowork/</code> here is the synced mirror of the Windows folder. nginx serves it statically on port 8888, Pablo (Claude Code CLI) operates directly on this filesystem, and a background watcher rebuilds the capture index on every change.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE TWO AGENTS -->
+  <section id="agents">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">The Two Agents</span>
+        <div class="s-rule"></div>
+        <span class="s-num">04 / 07</span>
+      </div>
+      <div class="grid-2">
+        <div class="prose reveal">
+          <p><strong>Cowork (Claude Desktop, Windows)</strong><br>The brain for scheduled and on-demand workflows. It executes skills from <code>toolbox/</code>, a morning brief, inbox triage, script generation, CRM updates, and more, and it's the only side with live connectors: Gmail, Calendar, Drive, Canva. Scheduled tasks (a morning brief at 7am, a weekly review on Mondays) fire whenever Claude Desktop is open, and every output it writes gets pushed to the VPS by Syncthing.</p>
+        </div>
+        <div class="prose reveal">
+          <p><strong>Pablo (Claude Code CLI, VPS)</strong><br>Operates directly on the VPS copy of the filesystem: running bash commands, editing scripts, debugging the infrastructure itself. It has no Gmail or Calendar access, those connectors live on the Cowork side only, but it's reachable from my phone through a Telegram bot that routes messages straight to it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE DATA LAYER -->
+  <section id="data-layer">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">The Data Layer</span>
+        <div class="s-rule"></div>
+        <span class="s-num">05 / 07</span>
+      </div>
+      <div class="prose reveal" style="margin-bottom: 24px;">
+        <p><code>~/cowork/</code> is the single source of truth. Every domain (robotics, video pipeline, content growth, grad school, career, finances, health) follows the same three-folder pattern: <code>inputs/</code> that I maintain by hand and the agents never touch, <code>data/</code> that gets refreshed automatically, and <code>outputs/</code> for dated artifacts.</p>
+      </div>
+      <pre class="reveal" style="overflow-x: auto; border: 1px solid var(--rule); background: rgba(13,13,13,0.03); padding: 20px 24px; font-family: var(--mono); font-size: 0.78rem; line-height: 1.7; color: var(--ink);">~/cowork/
+├── CLAUDE.md              root identity/memory, read every session
+├── capture.html           quick capture UI, served by nginx
+├── dashboard.html         always-on status dashboard
+├── toolbox/               skill definitions Pablo and Cowork execute
+│   ├── morning-brief.md   one of 15 skill prompts
+│   ├── rebuild-captures.py
+│   └── watch-captures.sh
+├── Cowork/
+│   ├── captures/          one .md file per note, plus index.json
+│   └── daily/             daily log files
+├── memory/                persistent context across sessions
+├── briefs/                daily morning briefs
+└── {domain}/              robotics, career, finances, health...
+    ├── inputs/            human-maintained, never machine-written
+    ├── data/               machine-refreshed JSON
+    └── outputs/           dated artifacts</pre>
+    </div>
+  </section>
+
+  <!-- QUICK CAPTURE UI -->
+  <section id="capture-ui">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Quick Capture UI</span>
+        <div class="s-rule"></div>
+        <span class="s-num">06 / 07</span>
+      </div>
+      <figure class="reveal" style="margin-bottom: 24px;">
+        <div class="placeholder-img aspect-16-9">
+          <div class="placeholder-img-label">Screenshot &middot; capture.html<span class="filename">capture-ui.png</span></div>
+        </div>
+        <figcaption>Dark, monospace capture UI, served straight off the VPS</figcaption>
+      </figure>
+      <div class="prose reveal">
+        <p>I open <code>capture.html</code> on whatever device is in my hand, type a note, tag it (context tags like <code>video</code> or <code>robotics</code>, a <code>today</code> or <code>task</code> flag, project tags like <code>drone</code> or <code>tank</code>), and save. That posts to a local API, which writes a Markdown file with YAML frontmatter into <code>Cowork/captures/</code>. A background watcher notices the new file and rebuilds <code>index.json</code>, which is what the page's recent list and task checkboxes actually read from.</p>
+        <p>Tasks float to the top and stay checked through localStorage. A "today's log" button compiles everything tagged <code>today</code> into a downloadable Markdown summary. Syncthing carries every capture over to Obsidian on my home PC, so the same note shows up there without me doing anything.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYNC & ACCESS -->
+  <section id="sync">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Sync &amp; Access</span>
+        <div class="s-rule"></div>
+        <span class="s-num">07 / 07</span>
+      </div>
+      <figure class="reveal" style="margin-bottom: 24px;">
+        <div class="placeholder-img aspect-16-9">
+          <div class="placeholder-img-label">Screenshot &middot; dashboard.html<span class="filename">dashboard-ui.png</span></div>
+        </div>
+        <figcaption>Always-on status dashboard, all domains in one view</figcaption>
+      </figure>
+      <div class="prose reveal">
+        <p>Syncthing is the only thing keeping the two machines honest. Pablo writes a file on the VPS and it appears on my Windows machine within seconds; I write a capture from my phone and it lands in Obsidian the same way, no manual export, no cloud drive in between. nginx just serves the result: the dashboard, the capture page, the daily briefs, all statically off <code>~/cowork/</code> on port 8888.</p>
+        <p>The Telegram bot is how I reach Pablo without opening a terminal. A message from my phone routes to the bot, the bot hands it to Pablo, Pablo reads or writes against <code>~/cowork/</code>, and the reply comes back the same way.</p>
+      </div>
+
+      <dl class="stats-row reveal">
+        <div class="stat-cell">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Synced Machines</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Resident AI Agents</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">15</div>
+          <div class="stat-label">Toolbox Skill Prompts</div>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-mono">Emiliano Villicana Brugada</span>
+      <span class="footer-mono"><a href="/">← Portfolio</a></span>
+      <span class="footer-mono">&copy; 2026</span>
+    </div>
+  </footer>
+
+  <script src="../assets/project-page.js"></script>
+</body>
+</html>
