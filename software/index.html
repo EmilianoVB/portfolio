@@ -3,339 +3,151 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Software Development | Emiliano's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #fff;
-      color: #111;
-      min-height: 100vh;
-    }
-    .sticky-back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      display: inline-block;
-      padding: 10px 20px;
-      background: rgba(243, 244, 246, 0.95);
-      color: #374151;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .sticky-back-btn:hover {
-      background: rgba(229, 231, 235, 0.95);
-      color: #111;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 40vh;
-      min-height: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #059669 100%);
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-    .hero .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      width: 100%;
-      padding: 0 20px;
-    }
-    .hero h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 700;
-      margin: 0 0 10px 0;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin: 0;
-      opacity: 0.9;
-    }
-    .section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-    .section h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-      text-align: center;
-    }
-    .tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 20px 0;
-    }
-    .tag {
-      padding: 6px 12px;
-      background: #f3f4f6;
-      color: #374151;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      border: 1px solid #e5e7eb;
-    }
-    .project-overview {
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .project-overview p {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #4b5563;
-      margin-bottom: 16px;
-    }
-    .project-overview p:last-child {
-      margin-bottom: 0;
-    }
-    .app-card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 0;
-      margin-bottom: 40px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-      overflow: hidden;
-    }
-    .app-card-header {
-      padding: 24px 28px 0 28px;
-    }
-    .app-card-header h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin: 0 0 4px 0;
-      color: #111;
-    }
-    .app-card-header .app-subtitle {
-      font-size: 0.95rem;
-      color: #6b7280;
-      margin-bottom: 16px;
-    }
-    .app-card-body {
-      padding: 0 28px 28px 28px;
-    }
-    .app-card-body p {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #4b5563;
-      margin-bottom: 16px;
-    }
-    .app-card-body p:last-child {
-      margin-bottom: 0;
-    }
-    .app-tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-    .app-tag {
-      padding: 4px 10px;
-      background: #e0f2fe;
-      color: #0369a1;
-      border-radius: 14px;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-    .app-tag.green {
-      background: #dcfce7;
-      color: #166534;
-    }
-    .placeholder-img {
-      width: 100%;
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-      color: #94a3b8;
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-    .screenshot-gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      background: #111;
-    }
-    .screenshot-gallery img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      object-position: top;
-      display: block;
-      transition: opacity 0.2s;
-    }
-    .screenshot-gallery img:hover {
-      opacity: 0.88;
-    }
-    @media (max-width: 600px) {
-      .screenshot-gallery {
-        grid-template-columns: 1fr;
-      }
-      .screenshot-gallery img {
-        height: 200px;
-      }
-    }
-    .features-list {
-      margin: 0 0 0 18px;
-      padding: 0;
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #4b5563;
-    }
-    .features-list li {
-      margin-bottom: 6px;
-    }
-    @media (max-width: 700px) {
-      .app-card-header { padding: 16px 16px 0 16px; }
-      .app-card-body { padding: 0 16px 16px 16px; }
-      .placeholder-img { height: 200px; }
-    }
-    @media (max-width: 500px) {
-      .hero h1 { font-size: 1.5rem; }
-      .hero p { font-size: 1rem; }
-      .section h2 { font-size: 1.2rem; }
-      .placeholder-img { height: 140px; }
-    }
-  </style>
+  <title>Software Development · Emiliano VB</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
 </head>
 <body>
-  <a href="/" class="sticky-back-btn">&larr; Back to Portfolio</a>
 
-  <div class="hero">
-    <div class="hero-content">
-      <h1>Software Development</h1>
-      <p>Desktop and web applications built from scratch</p>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-back"><span class="arrow">←</span>Back</a>
+      <span class="nav-meta">Project 05 / 11</span>
     </div>
-  </div>
+  </nav>
 
-  <div class="section">
-    <div class="tags">
-      <span class="tag">Python</span>
-      <span class="tag">CustomTkinter</span>
-      <span class="tag">Pillow</span>
-      <span class="tag">JavaScript</span>
-      <span class="tag">HTML/CSS</span>
-      <span class="tag">Canvas API</span>
-      <span class="tag">LocalStorage</span>
-      <span class="tag">Desktop & Web Apps</span>
-    </div>
-
-    <div class="project-overview">
-      <p>
-        A collection of software tools built to solve real, everyday problems. These projects span desktop GUI applications and standalone web apps, each designed with a focus on usability, clean interfaces, and practical functionality. They demonstrate proficiency in both Python and JavaScript ecosystems, from image processing and GUI development to interactive data visualization.
-      </p>
-    </div>
-
-    <!-- App 1: Instagram Carousel Generator -->
-    <div class="app-card">
-      <div class="screenshot-gallery">
-        <img src="Carousel%20Creator_Start%20Blank%20UI.png" alt="Carousel Creator — blank start UI" />
-        <img src="Carousel%20Creator_changed%20theme%20to%20Robot%20Learning.png" alt="Carousel Creator — Robot Learning theme" />
-        <img src="Carousel%20Generator_loaded%20photos%20and%20generated%20with%20input%20text.png" alt="Carousel Generator — loaded photos with generated text" />
+  <!-- HERO (gradient) -->
+  <header class="page-hero" style="--page-gradient: linear-gradient(135deg, #111827 0%, #1f2937 50%, #059669 100%);">
+    <div class="wrap">
+      <div class="page-eyebrow">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Project 05</span>
+        <span class="sep">/</span>
+        <span class="meta-text">Software</span>
       </div>
-      <div class="app-card-header">
-        <h3>Instagram Carousel Creator</h3>
-        <div class="app-subtitle">Desktop Application &mdash; Python &bull; v1.3.1</div>
-      </div>
-      <div class="app-card-body">
-        <div class="app-tags">
-          <span class="app-tag">Python</span>
-          <span class="app-tag">CustomTkinter</span>
-          <span class="app-tag">Pillow</span>
-          <span class="app-tag">Image Processing</span>
-          <span class="app-tag">GUI</span>
-        </div>
-        <p>
-          Desktop app for producing polished Instagram carousel slides. Load images, pick a theme (Lifestyle, Corporate, Creative, Robot Learning, and more), add text layers, and export — all with a live canvas preview.
-        </p>
-        <ul class="features-list">
-          <li>Adaptive brightness detection — text colors adjust automatically to each photo</li>
-          <li>Title, subtitle, and body text layers with per-theme font presets</li>
-          <li>EXIF-aware image orientation, watermarking, and batch export</li>
-        </ul>
+      <h1 class="page-title">Software Development</h1>
+      <p class="page-sub">Desktop and Web Applications Built From Scratch</p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">CustomTkinter</span>
+        <span class="tag">Pillow</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">HTML/CSS</span>
+        <span class="tag">Canvas API</span>
+        <span class="tag">LocalStorage</span>
       </div>
     </div>
+  </header>
 
-    <!-- App 2: Time Tracker -->
-    <div class="app-card">
-      <div class="screenshot-gallery">
-        <img src="Time%20Tracker%20hourly%20input%20page.png" alt="Time Tracker — hourly input page" />
-        <img src="Time%20Tracker%20Year%20view%20with%20January%20Filled%20in.png" alt="Time Tracker — year view with January filled in" />
-        <img src="Time%20Tracker%20Analysis%20Page.png" alt="Time Tracker — analysis page" />
+  <!-- OVERVIEW -->
+  <section id="overview" class="lead">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Overview</span>
+        <div class="s-rule"></div>
+        <span class="s-num">01 / 03</span>
       </div>
-      <div class="app-card-header">
-        <h3>Time Tracker</h3>
-        <div class="app-subtitle">Standalone Web Application &mdash; JavaScript</div>
-      </div>
-      <div class="app-card-body">
-        <div class="app-tags">
-          <span class="app-tag green">JavaScript</span>
-          <span class="app-tag green">HTML/CSS</span>
-          <span class="app-tag green">Canvas API</span>
-          <span class="app-tag green">LocalStorage</span>
-        </div>
-        <p>
-          Single-file web app for logging how every hour of each day is spent. No server required — all data lives in the browser.
-        </p>
-        <ul class="features-list">
-          <li>Hour-by-hour daily logger with color-coded activity categories</li>
-          <li>Year-at-a-glance heatmap (24 hrs × 365 days) rendered on HTML Canvas</li>
-          <li>Analytics dashboard with time distribution breakdowns and weight log</li>
-        </ul>
+      <div class="prose reveal">
+        <p>Two tools I built to solve problems I kept running into myself. One packages photos into ready-to-post Instagram carousels. The other tracks where every hour of my day actually goes. Both started as one-off scripts and grew into full applications: one in Python with a native GUI, one in plain JavaScript running entirely in the browser.</p>
       </div>
     </div>
+  </section>
 
-  </div>
+  <!-- CAROUSEL CREATOR -->
+  <section id="carousel-creator">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Instagram Carousel Creator</span>
+        <div class="s-rule"></div>
+        <span class="s-num">02 / 03</span>
+      </div>
+      <div class="grid-3" style="margin-bottom: 28px;">
+        <figure class="fig crop reveal">
+          <img src="Carousel%20Creator_Start%20Blank%20UI.png" alt="Carousel Creator blank start UI" />
+          <figcaption>Blank start UI</figcaption>
+        </figure>
+        <figure class="fig crop reveal">
+          <img src="Carousel%20Creator_changed%20theme%20to%20Robot%20Learning.png" alt="Carousel Creator with Robot Learning theme" />
+          <figcaption>Robot Learning theme</figcaption>
+        </figure>
+        <figure class="fig crop reveal">
+          <img src="Carousel%20Generator_loaded%20photos%20and%20generated%20with%20input%20text.png" alt="Carousel Generator with loaded photos and generated text" />
+          <figcaption>Loaded photos &middot; generated text</figcaption>
+        </figure>
+      </div>
+      <div class="prose reveal">
+        <p>A desktop app for producing Instagram carousel slides. Load a batch of images, pick a theme (Lifestyle, Corporate, Creative, Robot Learning, and more), add text layers, and export, all from a live canvas preview built with CustomTkinter and Pillow.</p>
+      </div>
+      <ul class="bullets reveal">
+        <li>
+          <strong>Adaptive Brightness</strong>
+          Text color shifts automatically to stay readable against each photo.
+        </li>
+        <li>
+          <strong>Layered Text</strong>
+          Title, subtitle, and body layers each carry their own per-theme font preset.
+        </li>
+        <li>
+          <strong>Batch Export</strong>
+          EXIF-aware orientation correction, watermarking, and batch export in one pass.
+        </li>
+      </ul>
+    </div>
+  </section>
 
-  <script>
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-    document.querySelectorAll('.section > *').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-  </script>
+  <!-- TIME TRACKER -->
+  <section id="time-tracker">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Time Tracker</span>
+        <div class="s-rule"></div>
+        <span class="s-num">03 / 03</span>
+      </div>
+      <div class="grid-3" style="margin-bottom: 28px;">
+        <figure class="fig crop reveal">
+          <img src="Time%20Tracker%20hourly%20input%20page.png" alt="Time Tracker hourly input page" />
+          <figcaption>Hourly input page</figcaption>
+        </figure>
+        <figure class="fig crop reveal">
+          <img src="Time%20Tracker%20Year%20view%20with%20January%20Filled%20in.png" alt="Time Tracker year view with January filled in" />
+          <figcaption>Year view, January filled in</figcaption>
+        </figure>
+        <figure class="fig crop reveal">
+          <img src="Time%20Tracker%20Analysis%20Page.png" alt="Time Tracker analysis page" />
+          <figcaption>Analysis page</figcaption>
+        </figure>
+      </div>
+      <div class="prose reveal">
+        <p>A single-file web app for logging how every hour of the day actually gets spent. There's no server; everything lives in the browser's localStorage.</p>
+      </div>
+      <ul class="bullets reveal">
+        <li>
+          <strong>Daily Logger</strong>
+          Hour-by-hour entry with color-coded activity categories.
+        </li>
+        <li>
+          <strong>Year Heatmap</strong>
+          A 24-hour by 365-day grid rendered straight onto HTML Canvas.
+        </li>
+        <li>
+          <strong>Analytics Dashboard</strong>
+          Time-distribution breakdowns alongside a running weight log.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-mono">Emiliano Villicana Brugada</span>
+      <span class="footer-mono"><a href="/">← Portfolio</a></span>
+      <span class="footer-mono">&copy; 2026</span>
+    </div>
+  </footer>
+
+  <script src="../assets/project-page.js"></script>
 </body>
 </html>

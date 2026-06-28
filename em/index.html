@@ -1,374 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Automated Electromagnetic Transportation System - Project</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Roboto', Arial, sans-serif;
-      background: #f7f9fa;
-      color: #222;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 1rem 3rem 1rem;
-    }
-    h1, h2, h3 {
-      color: #1a4a7c;
-      margin-top: 2rem;
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 2.5rem;
-    }
-    .intro {
-      background: #e3ecf7;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 2px 8px rgba(26,74,124,0.05);
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .gallery img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      background: #fff;
-      object-fit: cover;
-      max-height: 300px;
-    }
-    .cad-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .cad-section img {
-      width: 100%;
-      max-width: 400px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      background: #fff;
-      object-fit: cover;
-      max-height: 300px;
-    }
-    .sticky-back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      display: inline-block;
-      padding: 10px 20px;
-      background: rgba(243, 244, 246, 0.95);
-      color: #374151;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .sticky-back-btn:hover {
-      background: rgba(229, 231, 235, 0.95);
-      color: #111;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .tech-details, .inspiration, .advantages {
-      background: #f0f4f8;
-      border-radius: 8px;
-      padding: 1.2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 1px 4px rgba(26,74,124,0.04);
-    }
-    .principle-diagram {
-      background: #fff;
-      border: 2px solid #e3ecf7;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      text-align: center;
-    }
-    .principle-diagram h3 {
-      color: #1a4a7c;
-      margin-top: 0;
-      margin-bottom: 1rem;
-    }
-    .visualization-container {
-      background: #f8f9fa;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      border: 1px solid #e9ecef;
-    }
-    .canvas-container {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      background: #000;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    #lorentzCanvas {
-      display: block;
-      width: 100%;
-      height: 300px;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    }
-    .controls {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-      padding: 1rem;
-      background: #fff;
-      border-radius: 6px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    .control-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .control-group label {
-      font-weight: 600;
-      color: #1a4a7c;
-      font-size: 0.9rem;
-    }
-    .control-group input[type="range"] {
-      width: 100%;
-      height: 6px;
-      border-radius: 3px;
-      background: #e3ecf7;
-      outline: none;
-      -webkit-appearance: none;
-    }
-    .control-group input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #1a4a7c;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    .control-group input[type="range"]::-moz-range-thumb {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #1a4a7c;
-      cursor: pointer;
-      border: none;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    .value-display {
-      font-size: 0.8rem;
-      color: #666;
-      font-family: monospace;
-    }
-    .legend {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.85rem;
-      color: #666;
-    }
-    .legend-color {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-    .reset-btn {
-      background: #1a4a7c;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-    .reset-btn:hover {
-      background: #2561a7;
-    }
-    .system-components {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-    .component {
-      background: #fff;
-      border-radius: 8px;
-      padding: 1rem;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-      border-left: 4px solid #1a4a7c;
-    }
-    .component h4 {
-      color: #1a4a7c;
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-    }
-    @media (max-width: 600px) {
-      .cad-section {
-        flex-direction: column;
-      }
-      .system-components {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automated Electromagnetic Transportation System · Emiliano VB</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
 </head>
 <body>
-  <a href="/" class="sticky-back-btn">← Back to Portfolio</a>
-  
-  <div class="container">
-    <h1>Automated Electromagnetic Transportation System</h1>
-    <div class="intro">
-      <p>
-        An innovative automated transportation system that leverages electromagnetic forces to move small items along a track. 
-        This project demonstrates the application of Lorentz Force principles in practical automation, offering a scalable 
-        alternative to traditional conveyor systems for small product movement.
-      </p>
-    </div>
 
-    <h2>CAD Renders</h2>
-    <div class="cad-section">
-      <img src="../assets/em1.png" alt="Electromagnetic Transportation System CAD Render 1">
-      <img src="../assets/em2.png" alt="Electromagnetic Transportation System CAD Render 2">
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-back"><span class="arrow">←</span>Back</a>
+      <span class="nav-meta">Project 11 / 11</span>
     </div>
+  </nav>
 
-    <h2>How It Works</h2>
-    <div class="principle-diagram">
-      <h3>Lorentz Force Principle</h3>
-      <p>
-        The system operates on the fundamental principle of the Lorentz Force, where a charged particle moving through a 
-        magnetic field experiences a force perpendicular to both the velocity and magnetic field directions. In this application, 
-        controlled electric current creates the necessary electromagnetic interaction to propel the platform.
-      </p>
-    </div>
-
-    <div class="visualization-container">
-      <h3>Visualizing the Lorentz Force</h3>
-      <p style="margin-bottom:1.5rem;">The Lorentz force acts perpendicular to both the velocity of a charged particle and the magnetic field. In this example, the magnetic field points into the page, the particle moves to the right, and the force is upward (for a positive charge).</p>
-      <div class="canvas-container" style="background:#fff;max-width:420px;">
-        <canvas id="lorentzStatic" width="400" height="300" style="background:#fff;display:block;margin:0 auto;"></canvas>
+  <!-- HERO (gradient) -->
+  <header class="page-hero" style="--page-gradient: linear-gradient(135deg, #0c1a3a 0%, #1e3a8a 50%, #3b82f6 100%);">
+    <div class="wrap">
+      <div class="page-eyebrow">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Project 11</span>
+        <span class="sep">/</span>
+        <span class="meta-text">Mechatronics · Automation</span>
       </div>
-      <div style="margin-top:1rem;font-size:0.98em;color:#444;text-align:center;">
-        <span style="color:#ff6b6b;font-weight:bold;">v</span>: Velocity &nbsp;|
-        <span style="color:#45b7d1;font-weight:bold;">B</span>: Magnetic Field (into page, ×) &nbsp;|
-        <span style="color:#f9ca24;font-weight:bold;">F</span>: Lorentz Force
+      <h1 class="page-title">Automated Electromagnetic Transportation System</h1>
+      <p class="page-sub">Lorentz-Force Driven Conveyor Alternative</p>
+      <div class="tags">
+        <span class="tag">3D CAD</span>
+        <span class="tag">ESP32</span>
+        <span class="tag">KiCad</span>
+        <span class="tag">C++</span>
+        <span class="tag">Electromagnetics</span>
       </div>
     </div>
+  </header>
 
-    <h2>System Components</h2>
-    <div class="system-components">
-      <div class="component">
-        <h4>ESP32 Microcontroller</h4>
-        <p>Controls the H-bridge circuit to toggle current flow direction and magnitude, enabling precise acceleration, propulsion, and deceleration of the platform.</p>
+  <!-- OVERVIEW -->
+  <section id="overview" class="lead">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Overview</span>
+        <div class="s-rule"></div>
+        <span class="s-num">01 / 04</span>
       </div>
-      <div class="component">
-        <h4>H-Bridge Circuit</h4>
-        <p>Enables bidirectional current flow through the electromagnetic coils, allowing for forward and reverse motion control.</p>
+      <div class="prose reveal" style="margin-bottom: 28px;">
+        <p>An automated transportation system that moves small items along a track using electromagnetic force instead of belts or rollers. It applies the Lorentz force to practical automation, as a scalable alternative to conveyor systems for moving small products.</p>
       </div>
-      <div class="component">
-        <h4>Magnetic Track</h4>
-        <p>The track is embedded with permanent magnets that create the necessary magnetic field for the Lorentz Force interaction.</p>
-      </div>
-      <div class="component">
-        <h4>Moving Platform</h4>
-        <p>A small platform equipped with electromagnetic coils that carries a tote for item transportation.</p>
+      <div class="grid-2">
+        <figure class="fig reveal">
+          <img src="../assets/em1.png" alt="Electromagnetic transportation system CAD render 1" />
+          <figcaption>CAD render &middot; platform assembly</figcaption>
+        </figure>
+        <figure class="fig reveal">
+          <img src="../assets/em2.png" alt="Electromagnetic transportation system CAD render 2" />
+          <figcaption>CAD render &middot; track detail</figcaption>
+        </figure>
       </div>
     </div>
+  </section>
 
-    <h2>Technical Implementation</h2>
-    <div class="tech-details">
-      <ul>
-        <li><strong>Control System:</strong> ESP32 microcontroller manages the entire operation</li>
-        <li><strong>Power Management:</strong> H-bridge circuit controls current flow direction and intensity</li>
-        <li><strong>Magnetic Field:</strong> Permanent magnets embedded in the track provide the required magnetic field</li>
-        <li><strong>Motion Control:</strong> Variable current flow enables precise speed and direction control</li>
-        <li><strong>Load Capacity:</strong> Small item tote mounted on the platform for product transportation</li>
-        <li><strong>Bidirectional Operation:</strong> System can move items in both directions along the track</li>
+  <!-- HOW IT WORKS -->
+  <section id="technical">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">How It Works</span>
+        <div class="s-rule"></div>
+        <span class="s-num">02 / 04</span>
+      </div>
+      <div class="prose reveal">
+        <p>The system runs on the Lorentz force: a charged particle moving through a magnetic field feels a force perpendicular to both its velocity and the field. Here, controlled current through the platform's coils creates that interaction and propels the platform along the track.</p>
+      </div>
+
+      <div class="reveal" style="margin-top: 28px; max-width: 460px;">
+        <div style="border: 1px solid var(--rule); background: #fff; padding: 20px;">
+          <canvas id="lorentzStatic" width="400" height="300" style="display: block; margin: 0 auto; max-width: 100%;"></canvas>
+        </div>
+        <div class="media-caption" style="margin-top: 10px; line-height: 1.6; text-transform: none; letter-spacing: 0.02em; font-size: 0.78rem; color: var(--gray);">
+          The Lorentz force acts perpendicular to both the particle's velocity and the magnetic field. Here, the field points into the page, the particle moves right, and the resulting force points up, for a positive charge.
+          <br><span style="color:#ff6b6b; font-weight:700;">v</span> velocity &middot;
+          <span style="color:#45b7d1; font-weight:700;">B</span> magnetic field (into page) &middot;
+          <span style="color:#f9ca24; font-weight:700;">F</span> Lorentz force
+        </div>
+      </div>
+
+      <ul class="bullets reveal" style="margin-top: 36px;">
+        <li>
+          <strong>ESP32 Microcontroller</strong>
+          Controls the H-bridge circuit to toggle current direction and magnitude, which drives acceleration, propulsion, and deceleration of the platform.
+        </li>
+        <li>
+          <strong>H-Bridge Circuit</strong>
+          Switches current direction through the coils, which is what makes forward and reverse motion possible.
+        </li>
+        <li>
+          <strong>Magnetic Track</strong>
+          Permanent magnets embedded along the track supply the magnetic field the Lorentz force needs.
+        </li>
+        <li>
+          <strong>Moving Platform</strong>
+          Carries the electromagnetic coils and a small tote, and travels in both directions along the track.
+        </li>
       </ul>
     </div>
+  </section>
 
-    <h2>Project Inspiration</h2>
-    <div class="inspiration">
-      <p>
-        This project was inspired by my experience working in automation at Caterpillar. During my time there, I observed 
-        that expanding and rerouting traditional conveyor systems was extremely costly and often not economically viable 
-        for moving small products. The high costs and inflexibility of conventional conveyor systems motivated me to 
-        explore alternative solutions.
-      </p>
-      <p>
-        The electromagnetic transportation system addresses these limitations by creating a modular, infinitely expandable 
-        solution where motion is purely dependent on individual units rather than complex mechanical infrastructure.
-      </p>
+  <!-- INSPIRATION -->
+  <section id="inspiration">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Inspiration</span>
+        <div class="s-rule"></div>
+        <span class="s-num">03 / 04</span>
+      </div>
+      <div class="prose reveal">
+        <p>This project grew out of my time in automation at Caterpillar, where I saw firsthand how costly it was to expand or reroute a traditional conveyor system for moving small products. That inflexibility pushed me to look for alternatives.</p>
+        <p>The electromagnetic system answers that problem with a modular, infinitely expandable track: motion lives in each individual unit instead of in shared mechanical infrastructure, so extending the line is just adding more track.</p>
+      </div>
     </div>
+  </section>
 
-    <h2>Key Advantages</h2>
-    <div class="advantages">
-      <ul>
-        <li><strong>Infinite Scalability:</strong> Simply extend the track length to expand the system</li>
-        <li><strong>Bidirectional Operation:</strong> Items can be moved in both directions along the track</li>
-        <li><strong>Modular Design:</strong> Individual units operate independently, reducing system complexity</li>
-        <li><strong>Cost Effective:</strong> Significantly lower infrastructure costs compared to traditional conveyors</li>
-        <li><strong>Flexible Layout:</strong> Easy to modify and adapt to changing production needs</li>
-        <li><strong>Precise Control:</strong> Electronic control enables fine-tuned speed and positioning</li>
-        <li><strong>Low Maintenance:</strong> Fewer moving parts compared to mechanical conveyor systems</li>
+  <!-- ADVANTAGES & WHAT'S NEXT -->
+  <section id="advantages">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Advantages &amp; What's Next</span>
+        <div class="s-rule"></div>
+        <span class="s-num">04 / 04</span>
+      </div>
+      <div class="prose reveal" style="margin-bottom: 28px;">
+        <p>Extending the track is the only scaling step required, since each unit moves independently rather than through shared mechanical infrastructure. The same independence keeps maintenance simple: fewer moving parts than a conventional conveyor, and a layout that's easy to reshape as production needs change.</p>
+      </div>
+      <ul class="bullets reveal">
+        <li>
+          <strong>Sensor Integration</strong>
+          Collision avoidance and position sensing for each platform unit.
+        </li>
+        <li>
+          <strong>Multi-Platform Coordination</strong>
+          Routing logic for several platforms sharing one track network.
+        </li>
+        <li>
+          <strong>Wireless Communication</strong>
+          Platform-to-platform signaling without a wired backbone.
+        </li>
+        <li>
+          <strong>Industrial Integration</strong>
+          Wiring the system into existing automation and control infrastructure.
+        </li>
       </ul>
     </div>
+  </section>
 
-    <h2>Future Development</h2>
-    <div class="tech-details">
-      <ul>
-        <li>Integration with industrial automation systems</li>
-        <li>Advanced control algorithms for optimal energy efficiency</li>
-        <li>Multi-platform coordination for complex routing</li>
-        <li>Sensor integration for collision avoidance and positioning</li>
-        <li>Wireless communication between platforms</li>
-        <li>Scalable manufacturing for commercial applications</li>
-      </ul>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-mono">Emiliano Villicana Brugada</span>
+      <span class="footer-mono"><a href="/">← Portfolio</a></span>
+      <span class="footer-mono">&copy; 2026</span>
     </div>
+  </footer>
 
-    <footer style="text-align:center; color:#aaa; font-size:0.95em; margin-top:2rem;">
-      &copy; 2025 Automated Electromagnetic Transportation System | <a href="../index.html" style="color:#888;">Back to Home</a>
-    </footer>
-  </div>
-
+  <script src="../assets/project-page.js"></script>
   <script>
     // Lorentz force static diagram
     const canvas = document.getElementById('lorentzStatic');
     const ctx = canvas.getContext('2d');
 
-    // Particle position
     const px = 120, py = 150;
-    // Velocity vector
     const vx = 120, vy = 0;
-    // Magnetic field (into page)
-    // Lorentz force (upwards for positive charge)
     const fx = 0, fy = -80;
 
     function drawArrow(ctx, fromx, fromy, tox, toy, color, label, labelOffsetX=0, labelOffsetY=0) {
@@ -383,7 +186,6 @@
       ctx.strokeStyle = color;
       ctx.lineWidth = 4;
       ctx.stroke();
-      // Arrowhead
       ctx.beginPath();
       ctx.moveTo(tox, toy);
       ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI/7), toy - headlen * Math.sin(angle - Math.PI/7));
@@ -392,7 +194,6 @@
       ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI/7), toy - headlen * Math.sin(angle - Math.PI/7));
       ctx.fillStyle = color;
       ctx.fill();
-      // Label
       ctx.font = 'bold 20px Arial';
       ctx.fillStyle = color;
       ctx.textAlign = 'center';
@@ -401,7 +202,6 @@
     }
 
     function drawBField(ctx, x, y, size=28) {
-      // Draw a circle with an X (field into page)
       ctx.save();
       ctx.beginPath();
       ctx.arc(x, y, size/2, 0, 2*Math.PI);
@@ -444,14 +244,10 @@
 
     function render() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // Draw B field symbols
       drawBField(ctx, px + 120, py - 60);
       drawBField(ctx, px + 120, py + 60);
-      // Draw particle
       drawParticle(ctx, px, py);
-      // Draw velocity vector
       drawArrow(ctx, px, py, px + vx, py + vy, '#ff6b6b', 'v', 22, -10);
-      // Draw force vector
       drawArrow(ctx, px, py, px + fx, py + fy, '#f9ca24', 'F', -18, -10);
     }
 

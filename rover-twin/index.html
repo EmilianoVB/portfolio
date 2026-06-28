@@ -3,346 +3,164 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rocker-Bogie Rover Digital Twin | Emiliano's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #fff;
-      color: #111;
-      min-height: 100vh;
-    }
-    .sticky-back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      display: inline-block;
-      padding: 10px 20px;
-      background: rgba(243, 244, 246, 0.95);
-      color: #374151;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .sticky-back-btn:hover {
-      background: rgba(229, 231, 235, 0.95);
-      color: #111;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 40vh;
-      min-height: 240px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #e45a3b 100%);
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.3);
-      z-index: 1;
-    }
-    .hero .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      padding: 0 20px;
-    }
-    .hero h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.8rem, 5vw, 3.2rem);
-      font-weight: 700;
-      margin: 0 0 10px 0;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin: 0;
-      opacity: 0.9;
-    }
-    .section {
-      max-width: 960px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    .section h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-align: center;
-      color: #1f2937;
-    }
-    .tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 24px 0;
-    }
-    .tag {
-      padding: 6px 14px;
-      background: #f3f4f6;
-      color: #374151;
-      border-radius: 20px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      border: 1px solid #e5e7eb;
-    }
-    .overview {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 40px auto;
-      font-size: 1.05rem;
-      line-height: 1.65;
-      color: #4b5563;
-    }
-
-    /* Videos */
-    .video-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 48px;
-    }
-    .video-card {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .video-card .label {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #6b7280;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-    }
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
-    }
-
-    /* CAD image */
-    .cad-block {
-      margin-bottom: 48px;
-      text-align: center;
-    }
-    .cad-block img {
-      width: 100%;
-      max-width: 680px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    .img-caption {
-      margin-top: 10px;
-      font-size: 0.875rem;
-      color: #9ca3af;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    /* Drive modes grid */
-    .drive-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 48px;
-    }
-    .drive-card {
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      background: #f9f9f9;
-      display: flex;
-      flex-direction: column;
-    }
-    .drive-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-    }
-    .drive-card .drive-label {
-      padding: 10px 14px;
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: #374151;
-      text-align: center;
-    }
-
-    /* Highlights */
-    .highlights {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 48px;
-    }
-    .highlight-card {
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 20px 16px;
-      text-align: center;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    }
-    .highlight-card .icon {
-      font-size: 1.6rem;
-      margin-bottom: 8px;
-    }
-    .highlight-card .title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #1f2937;
-      margin-bottom: 4px;
-    }
-    .highlight-card .desc {
-      font-size: 0.8rem;
-      color: #6b7280;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 700px) {
-      .video-grid { grid-template-columns: 1fr; }
-      .drive-grid { grid-template-columns: 1fr; }
-      .highlights { grid-template-columns: 1fr; }
-      .drive-card img { height: 180px; }
-    }
-    @media (max-width: 500px) {
-      .hero h1 { font-size: 1.5rem; }
-      .hero p { font-size: 0.95rem; }
-    }
-  </style>
+  <title>Rocker-Bogie Rover Digital Twin · Emiliano VB</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
 </head>
 <body>
-  <a href="/" class="sticky-back-btn">&larr; Back to Portfolio</a>
 
-  <div class="hero">
-    <div class="hero-content">
-      <h1>Rocker-Bogie Rover Digital Twin</h1>
-      <p>SolidWorks &rarr; URDF/Xacro &rarr; ROS2 &rarr; Isaac Sim</p>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-back"><span class="arrow">←</span>Back</a>
+      <span class="nav-meta">Project 02 / 11</span>
     </div>
-  </div>
+  </nav>
 
-  <div class="section">
-    <div class="tags">
-      <span class="tag">ROS2</span>
-      <span class="tag">URDF/Xacro</span>
-      <span class="tag">SolidWorks</span>
-      <span class="tag">Isaac Sim</span>
-      <span class="tag">RViz2</span>
-      <span class="tag">Gazebo</span>
-      <span class="tag">Swerve-Drive Control</span>
-      <span class="tag">Sim2Real</span>
+  <!-- HERO (gradient) -->
+  <header class="page-hero" style="--page-gradient: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #e45a3b 100%);">
+    <div class="wrap">
+      <div class="page-eyebrow">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Project 02</span>
+        <span class="sep">/</span>
+        <span class="meta-text">Robotics · Simulation</span>
+      </div>
+      <h1 class="page-title">Rocker-Bogie Rover Digital Twin</h1>
+      <p class="page-sub">SolidWorks &rsaquo; URDF/Xacro &rsaquo; ROS2 &rsaquo; Isaac Sim</p>
+      <div class="tags">
+        <span class="tag">ROS2</span>
+        <span class="tag">URDF/Xacro</span>
+        <span class="tag">SolidWorks</span>
+        <span class="tag">Isaac Sim</span>
+        <span class="tag">RViz2</span>
+        <span class="tag">Gazebo</span>
+        <span class="tag">Swerve-Drive Control</span>
+        <span class="tag">Sim2Real</span>
+      </div>
     </div>
+  </header>
 
-    <p class="overview">
-      Full digital twin of a rocker-bogie rover — from SolidWorks CAD to multi-simulator deployment.
-      Features a custom swerve-drive controller enabling omnidirectional motion, validated in both Gazebo and NVIDIA Isaac Sim via a ROS2 bridge.
-    </p>
+  <!-- OVERVIEW -->
+  <section id="overview" class="lead">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Overview</span>
+        <div class="s-rule"></div>
+        <span class="s-num">01 / 05</span>
+      </div>
+      <div class="prose reveal">
+        <p>A full digital twin of a rocker-bogie rover, built from SolidWorks CAD through URDF/Xacro export to a ROS2 control stack. A custom swerve-drive controller handles omnidirectional motion: straight runs, lateral strafes, diagonal strafes, and Ackermann steering.</p>
+        <p>I validated the same controller across three environments, RViz2, Gazebo, and NVIDIA Isaac Sim, all driven through one ROS2 bridge so the path from simulation to hardware stays short.</p>
+      </div>
+    </div>
+  </section>
 
-    <h2>Demo Videos</h2>
-    <div class="video-grid">
-      <div class="video-card">
-        <div class="label">NVIDIA Isaac Sim</div>
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/PNPP2_99Osw?si=Py0aMmPnp4nGReC2" title="Rover in Isaac Sim" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <!-- SIMULATION -->
+  <section id="simulation">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Simulation</span>
+        <div class="s-rule"></div>
+        <span class="s-num">02 / 05</span>
+      </div>
+      <div class="grid-2">
+        <div class="reveal">
+          <div class="media">
+            <iframe src="https://www.youtube.com/embed/PNPP2_99Osw?si=Py0aMmPnp4nGReC2" title="Rover in Isaac Sim" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="media-caption">NVIDIA Isaac Sim</div>
+        </div>
+        <div class="reveal">
+          <div class="media">
+            <iframe src="https://www.youtube.com/embed/7mxjTRIymGc?si=tJkHWYPgrPbEFW4H" title="Joint State Publisher in RViz" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="media-caption">Joint State Publisher · RViz2</div>
         </div>
       </div>
-      <div class="video-card">
-        <div class="label">Joint State Publisher — RViz2</div>
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/7mxjTRIymGc?si=tJkHWYPgrPbEFW4H" title="Joint State Publisher in RViz" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- MECHANICAL DESIGN -->
+  <section id="design">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Mechanical Design</span>
+        <div class="s-rule"></div>
+        <span class="s-num">03 / 05</span>
+      </div>
+      <figure class="fig reveal" style="max-width: 680px;">
+        <img src="simplified%20CAD%20Model%20with%20rocker%20bogie%20pivot%20highlighted.png" alt="Simplified CAD model with rocker-bogie pivot highlighted" />
+        <figcaption>Rocker-bogie pivot · SolidWorks CAD model</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- DRIVE MODES -->
+  <section id="drive-modes">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Drive Modes</span>
+        <div class="s-rule"></div>
+        <span class="s-num">04 / 05</span>
+      </div>
+      <div class="grid-4">
+        <figure class="fig crop reveal">
+          <img src="forward-back-drive.png" alt="Forward and backward drive mode" />
+          <figcaption>Forward / Backward</figcaption>
+        </figure>
+        <figure class="fig crop reveal">
+          <img src="left-right-drive.png" alt="Left and right lateral drive mode" />
+          <figcaption>Lateral Strafe</figcaption>
+        </figure>
+        <figure class="fig crop reveal">
+          <img src="diagonal-strafe-drive.png" alt="Diagonal strafe drive mode" />
+          <figcaption>Diagonal Strafe</figcaption>
+        </figure>
+        <figure class="fig crop reveal">
+          <img src="ackerman%20steering.png" alt="Ackermann steering mode" />
+          <figcaption>Ackermann Steering</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="technical">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">How It Works</span>
+        <div class="s-rule"></div>
+        <span class="s-num">05 / 05</span>
+      </div>
+      <div class="prose reveal">
+        <p>The kinematic model starts in SolidWorks, where I lay out the rocker-bogie suspension and the pivot linkages that let each side of the chassis articulate independently over uneven terrain. I export the assembly to URDF/Xacro, preserving joint limits and inertial properties so the simulated rover matches the physical one.</p>
+        <p>The swerve-drive controller runs on ROS2 and computes independent wheel angle and speed for each of the four corners, which is what makes forward, lateral, diagonal, and Ackermann motion possible from the same hardware. I run that controller unmodified across RViz2, Gazebo, and Isaac Sim, so behavior validated in simulation carries over to a real build without a separate control rewrite.</p>
+      </div>
+
+      <dl class="stats-row reveal">
+        <div class="stat-cell">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Independent Drive Modes</div>
         </div>
-      </div>
+        <div class="stat-cell">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Simulators Validated</div>
+        </div>
+      </dl>
     </div>
+  </section>
 
-    <h2>Mechanical Design</h2>
-    <div class="cad-block">
-      <img src="simplified%20CAD%20Model%20with%20rocker%20bogie%20pivot%20highlighted.png" alt="Simplified CAD model with rocker-bogie pivot highlighted" />
-      <div class="img-caption">Rocker-bogie pivot — SolidWorks CAD Model</div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-mono">Emiliano Villicana Brugada</span>
+      <span class="footer-mono"><a href="/">← Portfolio</a></span>
+      <span class="footer-mono">&copy; 2026</span>
     </div>
+  </footer>
 
-    <h2>Drive Modes</h2>
-    <div class="drive-grid">
-      <div class="drive-card">
-        <img src="forward-back-drive.png" alt="Forward and backward drive mode" />
-        <div class="drive-label">Forward / Backward</div>
-      </div>
-      <div class="drive-card">
-        <img src="left-right-drive.png" alt="Left and right lateral drive mode" />
-        <div class="drive-label">Lateral Strafe</div>
-      </div>
-      <div class="drive-card">
-        <img src="diagonal-strafe-drive.png" alt="Diagonal strafe drive mode" />
-        <div class="drive-label">Diagonal Strafe</div>
-      </div>
-      <div class="drive-card">
-        <img src="ackerman%20steering.png" alt="Ackermann steering mode" />
-        <div class="drive-label">Ackermann Steering</div>
-      </div>
-    </div>
-
-    <h2>Key Highlights</h2>
-    <div class="highlights">
-      <div class="highlight-card">
-        <div class="icon">🤖</div>
-        <div class="title">Full Kinematic Model</div>
-        <div class="desc">SolidWorks CAD exported to URDF/Xacro with complete rocker-bogie suspension linkages</div>
-      </div>
-      <div class="highlight-card">
-        <div class="icon">🕹️</div>
-        <div class="title">Omnidirectional Control</div>
-        <div class="desc">Custom swerve-drive ROS2 controller — forward, lateral, diagonal, and pivot-in-place</div>
-      </div>
-      <div class="highlight-card">
-        <div class="icon">🔬</div>
-        <div class="title">Multi-Sim Deployment</div>
-        <div class="desc">Validated across RViz2, Gazebo, and NVIDIA Isaac Sim via ROS2 bridge for Sim2Real testing</div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.section > *').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(18px)';
-      el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
-      observer.observe(el);
-    });
-  </script>
+  <script src="../assets/project-page.js"></script>
 </body>
 </html>

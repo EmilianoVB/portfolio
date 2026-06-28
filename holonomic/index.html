@@ -1,186 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Expanding Holonomic Platform - Project WIP</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Roboto', Arial, sans-serif;
-      background: #f7f9fa;
-      color: #222;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 1rem 3rem 1rem;
-    }
-    h1, h2, h3 {
-      color: #1a4a7c;
-      margin-top: 2rem;
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 2.5rem;
-    }
-    .intro {
-      background: #e3ecf7;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 2px 8px rgba(26,74,124,0.05);
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
-      margin-bottom: 2rem;
-    }
-    .gallery img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      background: #fff;
-      object-fit: cover;
-      max-height: 260px;
-    }
-    .cad-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      margin-bottom: 2rem;
-    }
-    .cad-section img {
-      width: 100%;
-      max-width: 400px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      background: #fff;
-      object-fit: cover;
-      max-height: 260px;
-    }
-    .guide-link {
-      display: inline-block;
-      margin: 1rem 0;
-      padding: 0.7rem 1.2rem;
-      background: #1a4a7c;
-      color: #fff;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: background 0.2s;
-    }
-    .guide-link:hover {
-      background: #2561a7;
-    }
-    .sticky-back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      display: inline-block;
-      padding: 10px 20px;
-      background: rgba(243, 244, 246, 0.95);
-      color: #374151;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .sticky-back-btn:hover {
-      background: rgba(229, 231, 235, 0.95);
-      color: #111;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .tech-details, .future-work {
-      background: #f0f4f8;
-      border-radius: 8px;
-      padding: 1.2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 1px 4px rgba(26,74,124,0.04);
-    }
-    @media (max-width: 600px) {
-      .cad-section {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expanding Holonomic Platform · Emiliano VB</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
 </head>
 <body>
-  <a href="/" class="sticky-back-btn">← Back to Portfolio</a>
-  
-  <div class="container">
-    <h1>Expanding Holonomic Platform <span style="font-size:1rem; color:#888;">(Work in Progress)</span></h1>
-    <div class="intro">
-      <p>
-        This project documents the development of a modular, expanding holonomic platform. The goal is to create a robust, scalable robot base capable of omnidirectional movement, with a focus on open-source hardware and accessible electronics. The project is currently a work in progress, with ongoing mechanical, electrical, and software development.
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-back"><span class="arrow">←</span>Back</a>
+      <span class="nav-meta">Project 10 / 11</span>
+    </div>
+  </nav>
+
+  <!-- HERO (gradient) -->
+  <header class="page-hero" style="--page-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #475569 100%);">
+    <div class="wrap">
+      <div class="page-eyebrow">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Project 10</span>
+        <span class="sep">/</span>
+        <span class="meta-text">Robotics &middot; Work in Progress</span>
+      </div>
+      <h1 class="page-title">Expanding Holonomic Platform</h1>
+      <p class="page-sub">Open-Source Omnidirectional Robot Base</p>
+      <div class="tags">
+        <span class="tag">3D CAD</span>
+        <span class="tag">Holonomic Drive</span>
+        <span class="tag">ESP32</span>
+        <span class="tag">Industrial Automation</span>
+        <span class="tag">Control Systems</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- OVERVIEW -->
+  <section id="overview" class="lead">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Overview</span>
+        <div class="s-rule"></div>
+        <span class="s-num">01 / 05</span>
+      </div>
+      <div class="prose reveal">
+        <p>A modular, expanding holonomic platform built around open-source hardware and accessible electronics. The goal is a robot base that scales and moves omnidirectionally without custom silicon or proprietary parts. Mechanical, electrical, and software development are all still active.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRESS GALLERY -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Progress Gallery</span>
+        <div class="s-rule"></div>
+        <span class="s-num">02 / 05</span>
+      </div>
+      <div class="grid-4">
+        <figure class="fig crop reveal"><img src="expanded.JPG" alt="Platform expanded" /><figcaption>Expanded</figcaption></figure>
+        <figure class="fig crop reveal"><img src="contracted.JPG" alt="Platform contracted" /><figcaption>Contracted</figcaption></figure>
+        <figure class="fig crop reveal"><img src="expandedOnWorkbench.JPG" alt="Platform expanded on workbench" /><figcaption>Expanded, on bench</figcaption></figure>
+        <figure class="fig crop reveal"><img src="contractedOnWorkbench.JPG" alt="Platform contracted on workbench" /><figcaption>Contracted, on bench</figcaption></figure>
+        <figure class="fig crop reveal"><img src="onlyelectronics.JPG" alt="Electronics setup" /><figcaption>Electronics setup</figcaption></figure>
+        <figure class="fig crop reveal"><img src="i2cESP32wiring.png" alt="I2C ESP32 wiring diagram" /><figcaption>I2C wiring, two ESP32s</figcaption></figure>
+        <figure class="fig crop reveal"><img src="4motors.png" alt="Four-motor setup" /><figcaption>Four-motor setup</figcaption></figure>
+        <figure class="fig crop reveal"><img src="singlemotor.png" alt="Single motor test" /><figcaption>Single-motor test</figcaption></figure>
+        <figure class="fig crop reveal"><img src="sketch1.png" alt="Project sketch 1" /><figcaption>Early sketch</figcaption></figure>
+        <figure class="fig crop reveal"><img src="sketch2.png" alt="Project sketch 2" /><figcaption>Early sketch</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- MECHANICAL DESIGN -->
+  <section id="design">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Mechanical Design</span>
+        <div class="s-rule"></div>
+        <span class="s-num">03 / 05</span>
+      </div>
+      <div class="grid-2">
+        <figure class="fig reveal">
+          <img src="cad1.png" alt="CAD render 1" />
+          <figcaption>CAD render</figcaption>
+        </figure>
+        <figure class="fig reveal">
+          <img src="cad2.png" alt="CAD render 2" />
+          <figcaption>CAD render</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="technical">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">How It Works</span>
+        <div class="s-rule"></div>
+        <span class="s-num">04 / 05</span>
+      </div>
+      <div class="prose reveal">
+        <p>Two ESP32s split the motor load over I2C: one acts as master, the other as slave, each driving two of the platform's four DC motors through its own L298N driver. A dedicated 12V rail powers the drivers, with a common ground tying every board together.</p>
+        <p>Firmware runs on the Arduino IDE, using the Wire library for I2C and <code>analogWrite()</code> for PWM speed control. All four motors carry encoders, wired in now so closed-loop PID control on speed and position is a firmware change away rather than a hardware one.</p>
+      </div>
+
+      <dl class="stats-row reveal">
+        <div class="stat-cell">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Master/Slave ESP32 Controllers</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">4</div>
+          <div class="stat-label">DC Motors With Encoders</div>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- BUILD GUIDE & WHAT'S NEXT -->
+  <section id="next">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Build Guide &amp; What's Next</span>
+        <div class="s-rule"></div>
+        <span class="s-num">05 / 05</span>
+      </div>
+      <p class="prose reveal" style="margin-bottom: 28px;">
+        <a class="mono-link" href="https://www.instructables.com/How-to-Control-4-Motors-With-Two-ESP32s-Over-I2C-A/" target="_blank">Full Instructables Build Guide<span class="arrow">&rarr;</span></a>
       </p>
-    </div>
-
-    <h2>Progress Gallery</h2>
-    <div class="gallery">
-      <img src="expanded.JPG" alt="Platform Expanded">
-      <img src="contracted.JPG" alt="Platform Contracted">
-      <img src="expandedOnWorkbench.JPG" alt="Platform Expanded on Workbench">
-      <img src="contractedOnWorkbench.JPG" alt="Platform Contracted on Workbench">
-      <img src="onlyelectronics.JPG" alt="Electronics Setup">
-      <img src="i2cESP32wiring.png" alt="I2C ESP32 Wiring Diagram">
-      <img src="4motors.png" alt="4 Motors Setup">
-      <img src="singlemotor.png" alt="Single Motor Test">
-      <img src="sketch1.png" alt="Project Sketch 1">
-      <img src="sketch2.png" alt="Project Sketch 2">
-    </div>
-
-    <h2>CAD Renders</h2>
-    <div class="cad-section">
-      <img src="cad1.png" alt="CAD Render 1">
-      <img src="cad2.png" alt="CAD Render 2">
-    </div>
-
-    <h2>Step-by-Step Guide</h2>
-    <p>
-      For a detailed, step-by-step build guide—including wiring, code, and troubleshooting—check out the Instructables tutorial:
-    </p>
-    <a class="guide-link" href="https://www.instructables.com/How-to-Control-4-Motors-With-Two-ESP32s-Over-I2C-A/" target="_blank">Read the Instructables Guide</a>
-
-    <h2>Technical Details</h2>
-    <div class="tech-details">
-      <ul>
-        <li><strong>Microcontrollers:</strong> 2x ESP32 (Master & Slave, communicating via I2C)</li>
-        <li><strong>Motor Drivers:</strong> 4x L298N modules (each controls one DC motor)</li>
-        <li><strong>Motors:</strong> 4x DC motors with encoders (for closed-loop control)</li>
-        <li><strong>Power:</strong> Dedicated 12V rail for motor drivers, common ground for all electronics</li>
-        <li><strong>Programming:</strong> Arduino IDE, using <code>Wire</code> library for I2C and <code>analogWrite()</code> for PWM</li>
-        <li><strong>Control:</strong> Master ESP32 sends commands to Slave over I2C, each controls two motors</li>
-        <li><strong>Encoders:</strong> Integrated for future PID speed/position control</li>
-      </ul>
-      <p style="margin-top:1rem; font-size:0.98em; color:#444;">
-        For full wiring diagrams, code examples, and troubleshooting tips, see the <a href="https://www.instructables.com/How-to-Control-4-Motors-With-Two-ESP32s-Over-I2C-A/" target="_blank">Instructables guide</a>.
-      </p>
-    </div>
-
-    <h2>Future Work</h2>
-    <div class="future-work">
-      <ul>
-        <li>Integrate and tune PID control for precise motor speed and position</li>
-        <li>Expand platform with additional sensors (IMU, distance, etc.)</li>
-        <li>Develop a wireless control interface</li>
-        <li>Release a full build log and video journey (coming soon!)</li>
-        <li>Open-source all CAD and code files</li>
+      <ul class="bullets reveal">
+        <li>
+          <strong>PID Tuning</strong>
+          Closing the loop on motor speed and position using the encoders already wired in.
+        </li>
+        <li>
+          <strong>Sensor Integration</strong>
+          Adding an IMU and distance sensors for obstacle awareness.
+        </li>
+        <li>
+          <strong>Wireless Control</strong>
+          A control interface that doesn't depend on a tethered connection.
+        </li>
+        <li>
+          <strong>Open Hardware Release</strong>
+          Publishing the CAD and firmware so others can build on it.
+        </li>
       </ul>
     </div>
+  </section>
 
-    <footer style="text-align:center; color:#aaa; font-size:0.95em; margin-top:2rem;">
-      &copy; 2025 Expanding Holonomic Platform Project | <a href="../index.html" style="color:#888;">Back to Home</a>
-    </footer>
-  </div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-mono">Emiliano Villicana Brugada</span>
+      <span class="footer-mono"><a href="/">← Portfolio</a></span>
+      <span class="footer-mono">&copy; 2026</span>
+    </div>
+  </footer>
+
+  <script src="../assets/project-page.js"></script>
 </body>
 </html>

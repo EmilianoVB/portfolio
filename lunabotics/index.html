@@ -3,429 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ATLAS - Autonomous Lunar Robot | Emiliano's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #fff;
-      color: #111;
-      min-height: 100vh;
-    }
-    .back-btn {
-      display: inline-block;
-      margin: 24px 0 0 24px;
-      padding: 8px 18px;
-      background: #f3f4f6;
-      color: #374151;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background 0.2s, color 0.2s;
-    }
-    .back-btn:hover {
-      background: #e5e7eb;
-      color: #111;
-    }
-    .sticky-back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      display: inline-block;
-      padding: 10px 20px;
-      background: rgba(243, 244, 246, 0.95);
-      color: #374151;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .sticky-back-btn:hover {
-      background: rgba(229, 231, 235, 0.95);
-      color: #111;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .hero-lunabotics {
-      position: relative;
-      width: 100%;
-      height: 40vh;
-      min-height: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: url('moon.jpg') center center;
-      background-size: cover;
-    }
-    .hero-lunabotics::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4);
-      z-index: 1;
-    }
-    .hero-lunabotics .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      width: 100%;
-    }
-    .hero-lunabotics h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 700;
-      margin: 0 0 10px 0;
-    }
-    .hero-lunabotics p {
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin: 0;
-    }
-    .section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-    .section h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-      text-align: center;
-    }
-    .tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 20px 0;
-    }
-    .tag {
-      padding: 6px 12px;
-      background: #f3f4f6;
-      color: #374151;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      border: 1px solid #e5e7eb;
-    }
-    .role-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 32px;
-      margin: 32px 0;
-    }
-    .role-content h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #1f2937;
-    }
-    .role-content ul {
-      margin: 0 0 0 18px;
-      padding: 0;
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
-    .role-content li {
-      margin-bottom: 8px;
-    }
-    .quick-facts {
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .quick-facts h4 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #1f2937;
-    }
-    .fact-item {
-      margin-bottom: 12px;
-    }
-    .fact-label {
-      font-weight: 600;
-      color: #6b7280;
-      font-size: 0.9rem;
-    }
-    .fact-value {
-      font-weight: 500;
-      color: #1f2937;
-      margin-top: 2px;
-    }
-    .highlights-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin: 32px 0;
-    }
-    .highlight-card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .highlight-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    }
-    .highlight-card h4 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #1f2937;
-    }
-    .highlight-card p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #4b5563;
-      margin-bottom: 16px;
-    }
-    .reflection {
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-      border-radius: 12px;
-      padding: 32px;
-      margin: 32px 0;
-      border-left: 4px solid #3b82f6;
-    }
-    .reflection h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #1f2937;
-    }
-    .reflection-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
-      margin-top: 20px;
-    }
-    .reflection-item h4 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #1f2937;
-    }
-    .reflection-item p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: #4b5563;
-      margin: 0;
-    }
-    @media (max-width: 700px) {
-      .role-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .highlights-grid {
-        grid-template-columns: 1fr;
-      }
-      .snapshot-grid {
-        grid-template-columns: 1fr;
-      }
-      .reflection-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    @media (max-width: 500px) {
-      .hero-lunabotics h1 {
-        font-size: 1.5rem;
-      }
-      .hero-lunabotics p {
-        font-size: 1rem;
-      }
-      .section h2 {
-        font-size: 1.2rem;
-      }
-      .highlight-card {
-        padding: 16px;
-      }
-      .tech-snapshots {
-        padding: 20px;
-      }
-      .reflection {
-        padding: 20px;
-      }
-    }
-  </style>
+  <title>ATLAS &middot; Autonomous Lunar Robot · Emiliano VB</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
 </head>
 <body>
-  <a href="/" class="sticky-back-btn">← Back to Portfolio</a>
-  <section class="hero-lunabotics">
-    <div class="hero-content">
-      <h1>ATLAS – Autonomous Lunar Robot</h1>
-      <p>Lunabotics @ Columbia</p>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-back"><span class="arrow">←</span>Back</a>
+      <span class="nav-meta">Project 07 / 11</span>
+    </div>
+  </nav>
+
+  <!-- HERO (moon photo over dark gradient) -->
+  <header class="page-hero" style="--page-gradient: linear-gradient(135deg, #05070d 0%, #11141c 60%, #1c2030 100%);">
+    <img class="page-hero-bg" src="moon.jpg" alt="" style="opacity: 0.4; filter: grayscale(10%) contrast(108%);" />
+    <div class="wrap">
+      <div class="page-eyebrow">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Project 07</span>
+        <span class="sep">/</span>
+        <span class="meta-text">Robotics · Lunabotics @ Columbia</span>
+      </div>
+      <h1 class="page-title">ATLAS &mdash; Autonomous Lunar Robot</h1>
+      <p class="page-sub">NASA Lunabotics Challenge &rsaquo; Columbia University</p>
+      <div class="tags">
+        <span class="tag">Mechanical Design</span>
+        <span class="tag">Project Management</span>
+        <span class="tag">Prototyping</span>
+        <span class="tag">Manufacturing</span>
+        <span class="tag">Material Research</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- OVERVIEW -->
+  <section id="overview" class="lead">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Overview</span>
+        <div class="s-rule"></div>
+        <span class="s-num">01 / 04</span>
+      </div>
+      <div class="prose reveal">
+        <p>ATLAS is Columbia University's reentry into the NASA Lunabotics Challenge, a national competition built around autonomous lunar excavation. Teams design a robot that crosses simulated terrain and builds a berm out of lunar regolith simulant.</p>
+        <p>This year revived Columbia's Lunabotics program after a multi-year hiatus. As co-lead, I chose to pivot from a full competition entry toward team formation, research, and foundational design, since a strong technical and organizational base mattered more than rushing into a field of legacy programs.</p>
+        <p>That first year produced a fully fabricated chassis, two wheel designs, a material-testing pipeline, and an unbuilt core-drilling subsystem, while training a new group of engineers to carry the project into next year.</p>
+      </div>
+
+      <figure class="reveal" style="margin-top: 36px; max-width: 360px; cursor: zoom-in;" id="atlasLogoWrap">
+        <img id="atlasLogo" src="../assets/spaceposium.svg" alt="ATLAS project logo" style="width: 100%; display: block;" />
+        <figcaption>ATLAS program logo &middot; click to enlarge</figcaption>
+      </figure>
     </div>
   </section>
 
-  <div class="section" id="overview">
-    <h2>Project Overview</h2>
-    <p>ATLAS is Columbia University's reentry into the NASA Lunabotics Challenge, a national engineering competition focused on autonomous lunar excavation. The goal: design a robot capable of traversing simulated terrain and constructing a berm using lunar regolith simulant.</p>
-    <p>This year marked the revival of Columbia's Lunabotics program after a multi-year hiatus. As co-leads, we chose to pivot from full competition entry to team formation, research, and foundational design, recognizing that building a strong technical and organizational base was essential before competing with legacy programs.</p>
-    <p>The result: a high-impact first year that produced a fully fabricated chassis, detailed wheel designs, material testing infrastructure, and a novel unbuilt core-drilling subsystem, while training a new generation of engineers to carry the project forward.</p>
-    <div class="tags">
-      <span class="tag">MechanicalDesign</span>
-      <span class="tag">ProjectManagement</span>
-      <span class="tag">Prototyping</span>
-      <span class="tag">Manufacturing</span>
-      <span class="tag">MaterialResearch</span>
-    </div>
+  <!-- Fullscreen logo modal -->
+  <div id="logoModal" style="display:none; position:fixed; z-index:9999; inset:0; background:rgba(0,0,0,0.92); align-items:center; justify-content:center;">
+    <button id="closeLogoModal" aria-label="Close" style="position:absolute; top:28px; right:36px; font-size:2rem; background:none; border:none; color:#fff; cursor:pointer;">&times;</button>
+    <img src="../assets/spaceposium.svg" alt="ATLAS project logo, fullscreen" style="max-width:90vw; max-height:85vh;">
   </div>
-
-  <div style="width:100%;text-align:center;margin:32px 0;">
-    <img id="atlasLogo" src="../assets/spaceposium.svg" alt="ATLAS Project Logo" style="width:66vw;max-width:600px;height:auto;display:inline-block;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.08));cursor:pointer;">
-  </div>
-
-  <!-- Modal for fullscreen SVG -->
-  <div id="logoModal" style="display:none;position:fixed;z-index:2000;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;">
-    <button id="closeLogoModal" style="position:absolute;top:32px;right:48px;font-size:2.2rem;background:none;border:none;color:#fff;cursor:pointer;z-index:2100;">&times;</button>
-    <img src="../assets/spaceposium.svg" alt="ATLAS Project Logo Fullscreen" style="max-width:90vw;max-height:85vh;box-shadow:0 4px 32px rgba(0,0,0,0.25);border-radius:12px;">
-  </div>
-
   <script>
-    const atlasLogo = document.getElementById('atlasLogo');
-    const logoModal = document.getElementById('logoModal');
-    const closeLogoModal = document.getElementById('closeLogoModal');
-    atlasLogo.addEventListener('click', () => {
-      logoModal.style.display = 'flex';
-    });
-    closeLogoModal.addEventListener('click', () => {
-      logoModal.style.display = 'none';
-    });
-    // Optional: close modal on overlay click or ESC key
-    logoModal.addEventListener('click', (e) => {
-      if (e.target === logoModal) logoModal.style.display = 'none';
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') logoModal.style.display = 'none';
-    });
+    (function () {
+      const trigger = document.getElementById('atlasLogoWrap');
+      const modal = document.getElementById('logoModal');
+      const closeBtn = document.getElementById('closeLogoModal');
+      trigger.addEventListener('click', () => { modal.style.display = 'flex'; });
+      closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+      modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal.style.display = 'none'; });
+    })();
   </script>
 
-  <div class="section">
-    <h2>My Role</h2>
-    <div class="role-grid">
-      <div class="role-content">
-        <h3>Co-Lead & Lead Mechanical Engineer</h3>
-        <p><strong>September 2024 – Present</strong></p>
-        <ul>
-          <li><strong>Program Revival & Leadership:</strong> Relaunched Columbia's Lunabotics program from scratch. Recruited a multidisciplinary team of undergrads and graduate students, built operational structure, and re-established faculty sponsorship.</li>
-          <li><strong>Design Ownership:</strong> Led mechanical architecture including CAD modeling, frame layout, and integration planning. Designed the full chassis for fabrication and modular testing.</li>
-          <li><strong>Innovative Subsystem Design:</strong> Designed a barrel-style core drill that served both as an excavation and containment system for regolith. The mechanism is driven by twin worm gears, coupling translation and rotation while still allowing independent control of each motion. This provided a unique solution to regolith transport and volume maximization, though it was not fabricated due to time constraints.</li>
-          <li><strong>Fabrication & Testing:</strong> Manufactured and assembled a testable chassis using abrasive waterjet cutting and break forming. Conducted early material tests on 3D-printed TPU and aluminum components.</li>
-          <li><strong>Mentorship & Technical Training:</strong> Taught underclassmen foundational skills in SolidWorks, manufacturing, ROS2, MATLAB, 3D printing, and mechanics of solids to build continuity for future years.</li>
-          <li><strong>Project Management & Documentation:</strong> Managed meetings, timelines, and a $15,000 budget. Authored formal reports and proposals following NASA's systems engineering process.</li>
-        </ul>
+  <!-- MY ROLE -->
+  <section id="role">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">My Role</span>
+        <div class="s-rule"></div>
+        <span class="s-num">02 / 04</span>
       </div>
-      <div class="quick-facts">
-        <h4>Quick Facts</h4>
-        <div class="fact-item">
-          <div class="fact-label">Team Size</div>
-          <div class="fact-value">15 Engineers</div>
-        </div>
-        <div class="fact-item">
-          <div class="fact-label">Year</div>
-          <div class="fact-value">2024–2025</div>
-        </div>
-        <div class="fact-item">
-          <div class="fact-label">Tools Used</div>
-          <div class="fact-value">SolidWorks, ROS2, MATLAB, Simulink, RViz2, Autodesk Fusion, Excel</div>
-        </div>
-        <div class="fact-item">
-          <div class="fact-label">Budget</div>
-          <div class="fact-value">$15,000</div>
-        </div>
+      <div class="page-sub" style="color: var(--gray); margin-bottom: 20px;">Co-Lead &amp; Lead Mechanical Engineer &middot; Sep 2024&ndash;Present</div>
+      <div class="prose reveal">
+        <p>As co-lead and lead mechanical engineer, I relaunched Columbia's Lunabotics program from nothing: recruiting a multidisciplinary team of undergrads and grad students, rebuilding the operational structure, and re-establishing faculty sponsorship. I owned the mechanical architecture, CAD modeling, and frame layout, and designed the full chassis for fabrication and modular testing.</p>
+        <p>I designed a barrel-style core drill driven by twin worm gears that couple translation and rotation while keeping each motion independently controllable, a solution to regolith transport that we didn't have time to fabricate. On the shop floor, I manufactured and assembled a testable chassis with abrasive waterjet cutting and brake forming, and ran early material tests on 3D-printed TPU and aluminum. I also taught underclassmen SolidWorks, manufacturing, ROS2, MATLAB, 3D printing, and mechanics of solids, and managed meetings, timelines, and a $15,000 budget while writing reports and proposals against NASA's systems engineering process.</p>
       </div>
-    </div>
-  </div>
 
-  <!-- First-Year Milestones Timeline -->
-  <div class="section">
-    <h2>First-Year Milestones</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="content">
-          <h3>Mission Focus</h3>
-          <p>We made a strategic decision: rather than rush toward a fragile competition entry, we focused on building a robust foundation including hardware prototyping, subsystem R&D, recruitment, and engineering education.</p>
-          <p><strong>Outcome:</strong> Delivered designs, prototypes, documentation, and trained leadership for next year's build.</p>
+      <dl class="stats-row reveal">
+        <div class="stat-cell">
+          <div class="stat-num">15</div>
+          <div class="stat-label">Engineers on the Team</div>
         </div>
-      </div>
-      <div class="timeline-item">
-        <div class="content">
-          <h3>Chassis Fabrication</h3>
-          <p>Designed and built a full-scale chassis via waterjet and break forming. Optimized geometry for debris clearance and modular integration with autonomy and power systems.</p>
-          <p><strong>Status:</strong> Completed and assembled for static and interface testing.</p>
+        <div class="stat-cell">
+          <div class="stat-num">$15K</div>
+          <div class="stat-label">Budget Managed</div>
         </div>
-      </div>
-      <div class="timeline-item">
-        <div class="content">
-          <h3>Wheel Design</h3>
-          <p>Created two distinct wheel concepts:</p>
-          <ul>
-            <li>Flexible TPU Mesh Wheel for compliant traction</li>
-            <li>Rigid Aluminum Cleated Wheel for robust regolith propulsion</li>
-          </ul>
-          <p>Performed CAD, FEA, and early testing with regolith simulant.</p>
-          <p><strong>Status:</strong> Fully designed and analyzed, fabrication pending.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="content">
-          <h3>Core Drill Excavation System</h3>
-          <p>Designed a barrel-style core drill that served both as an excavation and containment system for regolith. The mechanism is driven by twin worm gears, coupling translation and rotation while still allowing independent control of each motion. This enabled a compact, mechanically robust design suited for lunar excavation constraints.</p>
-          <p><strong>Status:</strong> Fully designed but not fabricated.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="content">
-          <h3>Material Research</h3>
-          <p>Tested 3D-printed TPU anisotropy, performed abrasion tests with LM-1 lunar regolith simulant, and compared aluminum, titanium, and composites for structural use.</p>
-          <p><strong>Status:</strong> Material selection matrix complete, findings handed off to future team.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="content">
-          <h3>Autonomy Infrastructure</h3>
-          <p>Set up control architecture using Raspberry Pi with Ubuntu and ROS2, integrated LiDAR sensors, and successfully visualized data using RViz2. Began work on a Simulink digital twin for motion planning simulations.</p>
-          <p><strong>Status:</strong> LiDAR visualization achieved, localization and navigation in progress.</p>
-        </div>
-      </div>
+      </dl>
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <h2>Reflection & Next Steps</h2>
-    <div class="reflection">
-      <h3>What We Accomplished</h3>
-      <ul>
-        <li>Revived Columbia's Lunabotics presence and built a sustainable, cross-year team</li>
-        <li>Designed and fabricated a test chassis and two wheel prototypes</li>
-        <li>Completed a core drill design ready for fabrication</li>
-        <li>Established autonomy framework with ROS2 and RViz2 integration</li>
-        <li>Trained new members in mechanical design, programming, and systems integration</li>
+  <!-- MILESTONES -->
+  <section id="milestones">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">First-Year Milestones</span>
+        <div class="s-rule"></div>
+        <span class="s-num">03 / 04</span>
+      </div>
+      <ul class="bullets reveal">
+        <li>
+          <strong>Mission Focus</strong>
+          Rather than rush toward a competition entry, we built the foundation first: hardware prototyping, subsystem research, recruitment, and engineering education. That left next year's team with working designs, prototypes, documentation, and trained leadership to build on.
+        </li>
+        <li>
+          <strong>Chassis Fabrication</strong>
+          We designed and built a full-scale chassis with waterjet cutting and brake forming, optimizing the geometry for debris clearance and modular integration with the autonomy and power systems. It's assembled and ready for static and interface testing.
+        </li>
+        <li>
+          <strong>Wheel Design</strong>
+          We designed two wheel concepts: a flexible TPU mesh wheel for compliant traction and a rigid aluminum cleated wheel for regolith propulsion, both run through CAD, FEA, and early simulant testing. Both designs are complete; fabrication is next.
+        </li>
+        <li>
+          <strong>Core Drill Excavation System</strong>
+          The core drill doubles as an excavation and containment system for regolith, with twin worm gears coupling translation and rotation while keeping each motion independently controllable. The design is finished; fabrication didn't happen this year.
+        </li>
+        <li>
+          <strong>Material Research</strong>
+          We tested 3D-printed TPU for anisotropy, ran abrasion tests against LM-1 lunar regolith simulant, and compared aluminum, titanium, and composites for structural use. The material-selection matrix is complete and handed off to next year's team.
+        </li>
+        <li>
+          <strong>Autonomy Infrastructure</strong>
+          We set up a control stack on Raspberry Pi running Ubuntu and ROS2, integrated LiDAR, and got it visualizing live in RViz2. A Simulink digital twin for motion planning is in progress. LiDAR visualization works; localization and navigation are still open.
+        </li>
       </ul>
-      <h3>Challenges Faced</h3>
-      <ul>
-        <li>Balancing high design ambition with realistic fabrication timelines</li>
-        <li>Building team culture and knowledge from scratch post-hiatus</li>
-        <li>Managing coordination across subsystems while onboarding new members</li>
-      </ul>
-      <h3>The Road Ahead</h3>
-      <p>We are proud of this year's pivot and progress. By laying a solid technical and organizational foundation, we have positioned Columbia to reenter the competition field with a mature, well-trained team ready to compete seriously in future Lunabotics challenges.</p>
     </div>
-  </div>
+  </section>
+
+  <!-- REFLECTION -->
+  <section id="reflection">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Reflection &amp; Next Steps</span>
+        <div class="s-rule"></div>
+        <span class="s-num">04 / 04</span>
+      </div>
+      <div class="prose reveal">
+        <p>We revived Columbia's Lunabotics presence and built a team that should outlast any single year: a fabricated test chassis, two wheel prototypes, a complete core-drill design, an autonomy framework running on ROS2 and RViz2, and a group of new members trained in mechanical design, programming, and systems integration.</p>
+        <p>The harder parts were less technical. Balancing design ambition against a realistic fabrication timeline took constant negotiation, and so did building team culture and shared knowledge from scratch after the hiatus, all while onboarding new members and coordinating across subsystems.</p>
+        <p>I'm proud of the pivot. Laying a solid technical and organizational foundation this year puts Columbia in a position to reenter the competition field with a mature, trained team ready to compete in future Lunabotics challenges.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-mono">Emiliano Villicana Brugada</span>
+      <span class="footer-mono"><a href="/">← Portfolio</a></span>
+      <span class="footer-mono">&copy; 2026</span>
+    </div>
+  </footer>
+
+  <script src="../assets/project-page.js"></script>
 </body>
-</html> 
+</html>

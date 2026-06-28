@@ -3,388 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spider-Bot - Reinforcement Learning Legged Robot | Emiliano's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #fff;
-      color: #111;
-      min-height: 100vh;
-    }
-    .back-btn {
-      display: inline-block;
-      margin: 24px 0 0 24px;
-      padding: 8px 18px;
-      background: #f3f4f6;
-      color: #374151;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background 0.2s, color 0.2s;
-    }
-    .back-btn:hover {
-      background: #e5e7eb;
-      color: #111;
-    }
-    .sticky-back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      display: inline-block;
-      padding: 10px 20px;
-      background: rgba(243, 244, 246, 0.95);
-      color: #374151;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .sticky-back-btn:hover {
-      background: rgba(229, 231, 235, 0.95);
-      color: #111;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .hero-spiderbot {
-      position: relative;
-      width: 100%;
-      height: 40vh;
-      min-height: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    }
-    .hero-spiderbot::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.3);
-      z-index: 1;
-    }
-    .hero-spiderbot .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      width: 100%;
-    }
-    .hero-spiderbot h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 700;
-      margin: 0 0 10px 0;
-    }
-    .hero-spiderbot p {
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin: 0;
-    }
-    .section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-    .section h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-      text-align: center;
-    }
-    .tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 20px 0;
-    }
-    .tag {
-      padding: 6px 12px;
-      background: #f3f4f6;
-      color: #374151;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      border: 1px solid #e5e7eb;
-    }
-    .project-overview {
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .project-overview p {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #4b5563;
-      margin-bottom: 16px;
-    }
-    .project-overview p:last-child {
-      margin-bottom: 0;
-    }
-    .slides-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 32px 0;
-    }
-    .slides-section iframe {
-      width: 100%;
-      max-width: 800px;
-      height: 500px;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      background: #fafafa;
-    }
-    .video-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 32px 0;
-    }
-    .video-section iframe {
-      width: 100%;
-      max-width: 700px;
-      height: 400px;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      background: #000;
-    }
-    .tech-details {
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .tech-details h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #1f2937;
-    }
-    .tech-details ul {
-      margin: 0 0 0 18px;
-      padding: 0;
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
-    .tech-details li {
-      margin-bottom: 8px;
-    }
-    .challenges-section {
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .challenges-section h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #1e293b;
-    }
-    .challenges-section ul {
-      margin: 0 0 0 18px;
-      padding: 0;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #475569;
-    }
-    .challenges-section li {
-      margin-bottom: 8px;
-    }
-    .results-section {
-      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .results-section h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #1e293b;
-    }
-    .results-section ul {
-      margin: 0 0 0 18px;
-      padding: 0;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #475569;
-    }
-    .results-section li {
-      margin-bottom: 8px;
-    }
-    @media (max-width: 700px) {
-      .slides-section iframe {
-        max-width: 100%;
-        height: 320px;
-      }
-      .video-section iframe {
-        max-width: 100%;
-        height: 250px;
-      }
-      .tech-details, .challenges-section, .results-section {
-        padding: 14px;
-      }
-    }
-    @media (max-width: 500px) {
-      .hero-spiderbot h1 {
-        font-size: 1.5rem;
-      }
-      .hero-spiderbot p {
-        font-size: 1rem;
-      }
-      .section h2 {
-        font-size: 1.2rem;
-      }
-      .slides-section iframe {
-        height: 200px;
-      }
-      .video-section iframe {
-        height: 180px;
-      }
-    }
-  </style>
+  <title>Spider-Bot · Emiliano VB</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
 </head>
 <body>
-  <a href="/" class="sticky-back-btn">← Back to Portfolio</a>
 
-  <div class="hero-spiderbot">
-    <div class="hero-content">
-      <h1>Spider-Bot</h1>
-      <p>Reinforcement Learning Legged Robot</p>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-back"><span class="arrow">←</span>Back</a>
+      <span class="nav-meta">Project 08 / 11</span>
     </div>
-  </div>
+  </nav>
 
-  <div class="section">
-    <div class="tags">
-      <span class="tag">Reinforcement Learning</span>
-      <span class="tag">Robotics</span>
-      <span class="tag">Python</span>
-      <span class="tag">PyBullet</span>
-      <span class="tag">Deep Learning</span>
-      <span class="tag">Control Systems</span>
+  <!-- HERO (gradient) -->
+  <header class="page-hero" style="--page-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+    <div class="wrap">
+      <div class="page-eyebrow">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Project 08</span>
+        <span class="sep">/</span>
+        <span class="meta-text">Robotics · Reinforcement Learning</span>
+      </div>
+      <h1 class="page-title">Spider-Bot</h1>
+      <p class="page-sub">Reinforcement Learning Legged Robot</p>
+      <div class="tags">
+        <span class="tag">Reinforcement Learning</span>
+        <span class="tag">Robotics</span>
+        <span class="tag">Python</span>
+        <span class="tag">PyBullet</span>
+        <span class="tag">Deep Learning</span>
+        <span class="tag">Control Systems</span>
+      </div>
     </div>
+  </header>
 
-    <div class="project-overview">
-      <p>
-        Spider-Bot is an innovative legged robot project that leverages reinforcement learning to achieve dynamic locomotion and navigation capabilities. The project focuses on developing a four-legged robot that can learn to walk, navigate obstacles, and adapt to different terrains through advanced machine learning algorithms.
-      </p>
-      <p>
-        The robot features a biologically-inspired design with four articulated legs, each equipped with multiple degrees of freedom. Using PyBullet physics engine for simulation and deep reinforcement learning techniques, the Spider-Bot learns complex locomotion patterns through trial and error, demonstrating remarkable adaptability and stability across various challenging environments.
-      </p>
+  <!-- OVERVIEW -->
+  <section id="overview" class="lead">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Overview</span>
+        <div class="s-rule"></div>
+        <span class="s-num">01 / 04</span>
+      </div>
+      <div class="prose reveal">
+        <p>Spider-Bot is a four-legged robot that learns to walk through reinforcement learning instead of hand-tuned gait equations. Each leg carries multiple degrees of freedom in a biologically inspired layout, giving the controller enough range of motion to adapt to different terrain.</p>
+        <p>I trained it in PyBullet, letting the controller discover stable locomotion patterns through trial and error rather than scripting them by hand.</p>
+      </div>
     </div>
+  </section>
 
-    <h2>Project Presentation</h2>
-    <div class="slides-section">
-      <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQnXaBYyUzGrXMIfrXOjiIuVlfdTmDRtcsTnwolOKpz_lYSXxOG1RpJQOavXiXMy-KCkWGESgknA0gP/pubembed?start=false&loop=true&delayms=3000" 
-              frameborder="0" 
-              allowfullscreen="true" 
-              mozallowfullscreen="true" 
-              webkitallowfullscreen="true">
-      </iframe>
+  <!-- PRESENTATION -->
+  <section id="presentation">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Project Presentation</span>
+        <div class="s-rule"></div>
+        <span class="s-num">02 / 04</span>
+      </div>
+      <div class="reveal">
+        <div class="media aspect-letter">
+          <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQnXaBYyUzGrXMIfrXOjiIuVlfdTmDRtcsTnwolOKpz_lYSXxOG1RpJQOavXiXMy-KCkWGESgknA0gP/pubembed?start=false&loop=true&delayms=3000" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <h2>Technical Implementation</h2>
-    <div class="tech-details">
-      <h3>Core Technologies & Methods</h3>
-      <ul>
-        <li><strong>Locomotion Performance:</strong> Achieved speeds up to 20 cm/sec</li>
-        <li><strong>Versatile Actions:</strong> Implemented crawl/amble gait and creep gait patterns</li>
-        <li><strong>Advanced Design & Manufacturing:</strong> Leveraged CAD, FEA, Additive Manufacturing, and Laser Cutting for fabrication</li>
-        <li><strong>Control Systems:</strong> Raspberry Pi served as the central processor, interfacing with servo motors and controllers for synchronized movements</li>
-        <li><strong>Simulation & Optimization:</strong> Used PyBullet to simulate and optimize gait patterns</li>
-        <li><strong>Python Programming:</strong> Developed scripts to generate complex and stable gaits</li>
-      </ul>
+  <!-- JOURNEY -->
+  <section id="journey">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Journey Video</span>
+        <div class="s-rule"></div>
+        <span class="s-num">03 / 04</span>
+      </div>
+      <div class="reveal">
+        <div class="media">
+          <iframe src="https://www.youtube.com/embed/qtuCOoZlg-8" title="Spider-Bot Journey" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <h2>Journey Video</h2>
-    <div class="video-section">
-      <iframe src="https://www.youtube.com/embed/qtuCOoZlg-8" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-      </iframe>
+  <!-- HOW IT WORKS -->
+  <section id="technical">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">How It Works</span>
+        <div class="s-rule"></div>
+        <span class="s-num">04 / 04</span>
+      </div>
+      <div class="prose reveal">
+        <p>The frame mixes CAD-designed parts with FEA-checked joints, fabricated through a combination of additive manufacturing and laser cutting. A Raspberry Pi sits at the center of the electronics, driving the servo motors and controllers that move all four legs in sync.</p>
+        <p>I used PyBullet to simulate and tune gait patterns before they touched hardware, then wrote the Python scripts that generate and execute them on the real robot. The hardest part wasn't the simulation, it was getting gaits that looked stable in PyBullet to hold up once weight, friction, and motor backlash entered the picture. Two gaits made the cut: a crawl/amble pattern for steady terrain and a creep gait for more cautious footing, together carrying the robot at speeds up to 20 cm/s.</p>
+      </div>
+
+      <dl class="stats-row reveal">
+        <div class="stat-cell">
+          <div class="stat-num">20<span class="unit">cm/s</span></div>
+          <div class="stat-label">Top Locomotion Speed</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Distinct Gait Patterns</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Articulated Legs</div>
+        </div>
+      </dl>
     </div>
+  </section>
 
-    <h2>Key Challenges</h2>
-    <div class="challenges-section">
-      <h3>Technical Challenges Overcome</h3>
-      <ul>
-        <li><strong>Gait Pattern Development:</strong> Designing and implementing stable crawl/amble and creep gait patterns for four-legged locomotion</li>
-        <li><strong>Mechanical Design:</strong> Creating a robust quadrapod structure that could support the robot's weight and movement requirements</li>
-        <li><strong>Control System Integration:</strong> Synchronizing multiple servo motors and controllers through the Raspberry Pi for coordinated movement</li>
-        <li><strong>Manufacturing Process:</strong> Combining CAD design, FEA analysis, additive manufacturing, and laser cutting for precise fabrication</li>
-        <li><strong>Python Script Optimization:</strong> Developing efficient algorithms to generate and execute complex gait patterns</li>
-        <li><strong>Simulation-to-Reality Transfer:</strong> Bridging the gap between PyBullet simulation results and real-world robot performance</li>
-      </ul>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-mono">Emiliano Villicana Brugada</span>
+      <span class="footer-mono"><a href="/">← Portfolio</a></span>
+      <span class="footer-mono">&copy; 2026</span>
     </div>
+  </footer>
 
-    <h2>Results & Achievements</h2>
-    <div class="results-section">
-      <h3>Project Outcomes</h3>
-      <ul>
-        <li><strong>Successful Locomotion:</strong> Achieved stable movement at speeds up to 20 cm/sec with multiple gait patterns</li>
-        <li><strong>Versatile Movement Capabilities:</strong> Successfully implemented both crawl/amble gait and creep gait for different terrain conditions</li>
-        <li><strong>Advanced Manufacturing:</strong> Successfully integrated CAD, FEA, additive manufacturing, and laser cutting for robot fabrication</li>
-        <li><strong>Control System Performance:</strong> Developed a reliable Raspberry Pi-based control system for synchronized servo motor operation</li>
-        <li><strong>Simulation Integration:</strong> Effectively used PyBullet for gait pattern optimization and validation</li>
-        <li><strong>Python Development:</strong> Created robust scripts for generating and executing complex, stable gait patterns</li>
-      </ul>
-    </div>
-  </div>
-
-  <script>
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-
-    // Fade in sections on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.section > *').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-  </script>
+  <script src="../assets/project-page.js"></script>
 </body>
 </html>

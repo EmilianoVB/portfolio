@@ -3,390 +3,155 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Colonia: A Multi-LLM Council | Emiliano's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #fff;
-      color: #111;
-      min-height: 100vh;
-    }
-    .sticky-back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      display: inline-block;
-      padding: 10px 20px;
-      background: rgba(243, 244, 246, 0.95);
-      color: #374151;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .sticky-back-btn:hover {
-      background: rgba(229, 231, 235, 0.95);
-      color: #111;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 40vh;
-      min-height: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: linear-gradient(135deg, #7c2d12 0%, #c2410c 40%, #f59e0b 100%);
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-    .hero .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      width: 100%;
-      padding: 0 20px;
-    }
-    .hero h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 700;
-      margin: 0 0 10px 0;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin: 0;
-      opacity: 0.9;
-    }
-    .section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-    .section h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-      text-align: center;
-    }
-    .tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 20px 0;
-    }
-    .tag {
-      padding: 6px 12px;
-      background: #f3f4f6;
-      color: #374151;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      border: 1px solid #e5e7eb;
-    }
-    .project-overview {
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .project-overview p {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #4b5563;
-      margin-bottom: 16px;
-    }
-    .project-overview p:last-child {
-      margin-bottom: 0;
-    }
-    /* Screenshot gallery */
-    .screenshot-main {
-      margin-bottom: 16px;
-    }
-    .screenshot-main img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-      display: block;
-    }
-    .screenshot-flow {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    .flow-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .flow-step img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
-      display: block;
-    }
-    .flow-step .step-label {
-      font-size: 0.8rem;
-      color: #6b7280;
-      font-weight: 700;
-      margin-top: 8px;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .flow-step .step-desc {
-      font-size: 0.78rem;
-      color: #9ca3af;
-      text-align: center;
-      margin-top: 2px;
-    }
-    /* 3-stage cards */
-    .stages-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-    .stage-card {
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-      text-align: center;
-      border-top: 4px solid #c2410c;
-    }
-    .stage-number {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #c2410c;
-      margin-bottom: 6px;
-    }
-    .stage-card h3 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin: 0 0 8px 0;
-      color: #1f2937;
-    }
-    .stage-card p {
-      font-size: 0.85rem;
-      color: #6b7280;
-      line-height: 1.5;
-      margin: 0;
-    }
-    /* Tech stack */
-    .stack-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 32px;
-    }
-    .stack-card {
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .stack-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #1f2937;
-    }
-    .stack-card ul {
-      margin: 0 0 0 16px;
-      padding: 0;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #4b5563;
-    }
-    .stack-card li {
-      margin-bottom: 6px;
-    }
-    .results-section {
-      background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .results-section h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #1e293b;
-    }
-    .results-section ul {
-      margin: 0 0 0 18px;
-      padding: 0;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #475569;
-    }
-    .results-section li {
-      margin-bottom: 8px;
-    }
-    @media (max-width: 700px) {
-      .stack-grid { grid-template-columns: 1fr; }
-      .stages-grid { grid-template-columns: 1fr; }
-      .screenshot-flow { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 500px) {
-      .hero h1 { font-size: 1.5rem; }
-      .hero p { font-size: 1rem; }
-      .section h2 { font-size: 1.2rem; }
-    }
-  </style>
+  <title>La Colonia: A Multi-LLM Council · Emiliano VB</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
 </head>
 <body>
-  <a href="/" class="sticky-back-btn">&larr; Back to Portfolio</a>
 
-  <div class="hero">
-    <div class="hero-content">
-      <h1>La Colonia</h1>
-      <p>A 3-stage multi-LLM deliberation council</p>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-back"><span class="arrow">←</span>Back</a>
+      <span class="nav-meta">Project 04 / 11</span>
     </div>
-  </div>
+  </nav>
 
-  <div class="section">
-    <div class="tags">
-      <span class="tag">FastAPI</span>
-      <span class="tag">React 19</span>
-      <span class="tag">Vite</span>
-      <span class="tag">OpenRouter</span>
-      <span class="tag">Ollama</span>
-      <span class="tag">Python</span>
-      <span class="tag">SSE Streaming</span>
-      <span class="tag">Async httpx</span>
-      <span class="tag">react-markdown</span>
-      <span class="tag">uv</span>
-    </div>
-
-    <div class="project-overview">
-      <p>
-        La Colonia replaces single-model AI responses with a council of LLMs that deliberate, rank each other's answers, and synthesize a final verdict. Models take on Spanish-language personas — <em>El Profesor</em>, <em>La Abogada</em>, <em>El Patrón</em> — grounding the experience in Latino culture.
-      </p>
-      <p>
-        Built on Andrej Karpathy's <em>llm-council</em> concept and extended into a full-stack app: FastAPI backend streaming results over SSE, React 19 frontend with a radial deliberation view, and support for 9 LLM providers (OpenRouter, Ollama, Groq, OpenAI, Anthropic, and more).
-      </p>
-    </div>
-
-    <h2>App in Action</h2>
-    <div class="screenshot-main">
-      <img src="Start%20Page.png" alt="La Colonia start page showing council members" />
-    </div>
-    <div class="screenshot-flow">
-      <div class="flow-step">
-        <img src="Question%20sent.png" alt="Question sent to council" />
-        <div class="step-label">Stage 1 — Deliberation</div>
-        <div class="step-desc">Models query in parallel over SSE</div>
+  <!-- HERO (gradient) -->
+  <header class="page-hero" style="--page-gradient: linear-gradient(135deg, #7c2d12 0%, #c2410c 40%, #f59e0b 100%);">
+    <div class="wrap">
+      <div class="page-eyebrow">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Project 04</span>
+        <span class="sep">/</span>
+        <span class="meta-text">Full-Stack &middot; AI</span>
       </div>
-      <div class="flow-step">
-        <img src="final%20ranking.png" alt="Peer ranking leaderboard" />
-        <div class="step-label">Stage 2 — Peer Review</div>
-        <div class="step-desc">Models anonymously rank each other</div>
-      </div>
-      <div class="flow-step">
-        <img src="final%20verdict.png" alt="Final verdict from El Patrón" />
-        <div class="step-label">Stage 3 — Synthesis</div>
-        <div class="step-desc">El Patrón delivers the final verdict</div>
+      <h1 class="page-title">La Colonia: A Multi-LLM Council</h1>
+      <p class="page-sub">A 3-Stage Multi-LLM Deliberation Council</p>
+      <div class="tags">
+        <span class="tag">FastAPI</span>
+        <span class="tag">React 19</span>
+        <span class="tag">Vite</span>
+        <span class="tag">OpenRouter</span>
+        <span class="tag">Ollama</span>
+        <span class="tag">Python</span>
+        <span class="tag">SSE Streaming</span>
+        <span class="tag">Async httpx</span>
+        <span class="tag">react-markdown</span>
+        <span class="tag">uv</span>
       </div>
     </div>
+  </header>
 
-    <h2>How It Works</h2>
-    <div class="stages-grid">
-      <div class="stage-card">
-        <div class="stage-number">01</div>
-        <h3>Deliberation</h3>
-        <p>4–8 council models answer in parallel. Results stream back as they arrive via Server-Sent Events.</p>
+  <!-- OVERVIEW -->
+  <section id="overview" class="lead">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Overview</span>
+        <div class="s-rule"></div>
+        <span class="s-num">01 / 04</span>
       </div>
-      <div class="stage-card">
-        <div class="stage-number">02</div>
-        <h3>Peer Ranking</h3>
-        <p>Each model anonymously scores all other responses. Aggregate rankings surface the best answers.</p>
-      </div>
-      <div class="stage-card">
-        <div class="stage-number">03</div>
-        <h3>Synthesis</h3>
-        <p>A designated Chairman model reads all answers and rankings, then delivers a single authoritative verdict.</p>
+      <div class="prose reveal">
+        <p>La Colonia runs a council of LLMs instead of a single model. The models deliberate, rank each other's answers, and synthesize one verdict. Each model takes on a Spanish-language persona, El Profesor, La Abogada, El Patr&oacute;n, grounding the experience in Latino culture instead of a generic chat interface.</p>
+        <p>I built it on top of Andrej Karpathy's <em>llm-council</em> concept and extended it into a full-stack app: a FastAPI backend that streams results over SSE, a React 19 frontend with a radial deliberation view, and support for nine LLM providers including OpenRouter, Ollama, Groq, OpenAI, and Anthropic.</p>
       </div>
     </div>
+  </section>
 
-    <h2>Tech Stack</h2>
-    <div class="stack-grid">
-      <div class="stack-card">
-        <h3>Backend</h3>
-        <ul>
-          <li>FastAPI + uvicorn (port 8001)</li>
-          <li>Async httpx — concurrent LLM requests</li>
-          <li>SSE streaming to frontend</li>
-          <li>9 provider adapters (OpenRouter, Ollama, Groq, OpenAI, Anthropic, Google, Mistral, DeepSeek, custom)</li>
-          <li>DuckDuckGo / Tavily / Brave web search</li>
-          <li>JSON file storage — no database</li>
-          <li>uv for package management</li>
-        </ul>
+  <!-- WALKTHROUGH -->
+  <section id="walkthrough">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Walkthrough</span>
+        <div class="s-rule"></div>
+        <span class="s-num">02 / 04</span>
       </div>
-      <div class="stack-card">
-        <h3>Frontend</h3>
-        <ul>
-          <li>React 19 + Vite</li>
-          <li>Radial deliberation view</li>
-          <li>react-markdown for responses</li>
-          <li>3-mode execution: chat only, + ranking, full deliberation</li>
-          <li>Configurable personas per model</li>
-          <li>Responsive, CSS-native design</li>
-        </ul>
+      <figure class="fig reveal" style="margin-bottom: 24px;">
+        <img src="Start%20Page.png" alt="La Colonia start page showing council members" />
+        <figcaption>Start page &middot; council roster</figcaption>
+      </figure>
+      <div class="grid-3">
+        <figure class="fig reveal">
+          <img src="Question%20sent.png" alt="Question sent to council" />
+          <figcaption>01 Deliberation &middot; models query in parallel</figcaption>
+        </figure>
+        <figure class="fig reveal">
+          <img src="final%20ranking.png" alt="Peer ranking leaderboard" />
+          <figcaption>02 Peer Review &middot; models rank each other</figcaption>
+        </figure>
+        <figure class="fig reveal">
+          <img src="final%20verdict.png" alt="Final verdict from El Patrón" />
+          <figcaption>03 Synthesis &middot; El Patr&oacute;n delivers the verdict</figcaption>
+        </figure>
       </div>
     </div>
+  </section>
 
-    <h2>Highlights</h2>
-    <div class="results-section">
-      <h3>Key Outcomes</h3>
-      <ul>
-        <li><strong>Real-time streaming:</strong> SSE delivers partial results as each model finishes — no waiting for the slowest model</li>
-        <li><strong>Provider agnostic:</strong> Mix cloud (OpenRouter, Groq) and local (Ollama) models in the same council</li>
-        <li><strong>Culturally grounded:</strong> Spanish-language personas and prompts designed for the Latino community</li>
-        <li><strong>Zero-database deploy:</strong> Conversations persist as JSON; runs anywhere with <code>uv</code> and <code>npm</code></li>
+  <!-- THREE-STAGE PIPELINE -->
+  <section id="pipeline">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Three-Stage Pipeline</span>
+        <div class="s-rule"></div>
+        <span class="s-num">03 / 04</span>
+      </div>
+      <ul class="bullets reveal">
+        <li>
+          <strong>Deliberation</strong>
+          Four to eight council models answer in parallel. Results stream back as they arrive over Server-Sent Events, so nobody waits on the slowest model.
+        </li>
+        <li>
+          <strong>Peer Ranking</strong>
+          Each model anonymously scores every other response. Aggregate rankings surface the strongest answers without a human in the loop.
+        </li>
+        <li>
+          <strong>Synthesis</strong>
+          A designated Chairman model reads every answer and every ranking, then delivers one verdict.
+        </li>
       </ul>
     </div>
-  </div>
+  </section>
 
-  <script>
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-    document.querySelectorAll('.section > *').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-  </script>
+  <!-- STACK & OUTCOMES -->
+  <section id="stack">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <span class="s-label">Stack &amp; Outcomes</span>
+        <div class="s-rule"></div>
+        <span class="s-num">04 / 04</span>
+      </div>
+      <div class="prose reveal">
+        <p>The backend runs on FastAPI with async httpx firing requests at up to nine LLM providers in parallel, OpenRouter, Ollama, Groq, OpenAI, Anthropic, Google, Mistral, and DeepSeek, then streams results to the frontend over SSE as each model finishes. There's no database; conversations persist as JSON files, so the whole stack runs anywhere <code>uv</code> and <code>npm</code> exist.</p>
+        <p>The frontend is React 19 on Vite, rendering responses through react-markdown inside a radial view that shows every council member at once. Three execution modes let you run chat-only, add peer ranking, or run the full deliberation pipeline, with personas configurable per model.</p>
+      </div>
+
+      <dl class="stats-row reveal">
+        <div class="stat-cell">
+          <div class="stat-num">9</div>
+          <div class="stat-label">LLM Providers Supported</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Deliberation Stages</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Database Required</div>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-mono">Emiliano Villicana Brugada</span>
+      <span class="footer-mono"><a href="/">← Portfolio</a></span>
+      <span class="footer-mono">&copy; 2026</span>
+    </div>
+  </footer>
+
+  <script src="../assets/project-page.js"></script>
 </body>
 </html>
