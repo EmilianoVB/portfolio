@@ -603,6 +603,7 @@
       .cred-section { margin-bottom: 48px; }
     }
   </style>
+  <link rel="stylesheet" href="assets/home-update.css">
 </head>
 <body>
 
@@ -647,7 +648,14 @@
     <div class="hero-content">
       <div class="hero-eyebrow">Mechanical Engineer &amp; Roboticist</div>
       <h1 class="hero-name"><span class="w1">Emiliano</span><span class="w2">VB</span></h1>
-      <div class="hero-sub" id="heroSub">&nbsp;</div>
+      <p class="hero-focus">I design and build robotic systems, from mechanical design and fabrication to embedded control and simulation.</p>
+      <p class="hero-current">Graduate Researcher · Creative Machines Lab, Columbia University</p>
+      <div class="hero-actions">
+        <a class="hero-action primary" href="#projects">View Projects <span aria-hidden="true">↗</span></a>
+        <a class="hero-action" href="assets/Resume_Portfolio_Emiliano_VB.pdf">Résumé <span aria-hidden="true">↗</span></a>
+        <a class="hero-action" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+      </div>
+      <a class="hero-building" href="#live"><span class="building-dot" aria-hidden="true"></span>Currently building: spherical robots <span aria-hidden="true">→</span></a>
     </div>
     <div class="scroll-cue">
       <div class="scroll-cue-line"></div>
@@ -662,42 +670,74 @@
       <div class="s-header reveal">
         <span class="s-label">Selected Work</span>
         <div class="s-rule"></div>
-        <span class="s-num">01 / 05</span>
+        <span class="s-num">01 / 06</span>
       </div>
 
-      <div class="project-grid">
-
-        <a class="proj-card reveal" href="vision-arm/">
-          <span class="proj-card-num">01</span>
+      <div class="project-intro">
+        <p>Four projects across design, control, simulation, and fabrication.</p>
+        <div class="project-focus" role="group" aria-label="Featured project focus" hidden>
+          <button type="button" data-focus="robotics" aria-pressed="true">Robotics &amp; Mechatronics</button>
+          <button type="button" data-focus="mechanical" aria-pressed="false">Mechanical Design</button>
+        </div>
+      </div>
+      <p class="sr-only" id="project-announcement" role="status" aria-live="polite"></p>
+      <div class="project-grid" id="featured-projects">
+        <a class="proj-card" data-project="lunabotics" href="lunabotics/">
+          <span class="proj-card-num">07</span>
           <div class="proj-card-img">
-            <img src="vision-arm/Coins%20recognition_Columbia%20University%20Dining%20coin_%20Mexican%2020%20pesos%20coin_%20and%201%20dollar%20coin.png" alt="Vision-Guided Robotic Arm">
+            <img src="assets/spaceposium.svg" alt="ATLAS Lunar Robot">
           </div>
           <div class="proj-card-body">
-            <h3 class="proj-card-title">Real-Time Vision-Guided Robotic Arm Simulation</h3>
-            <div class="proj-card-tags">
-              <span class="proj-tag">Inverse Kinematics</span><span class="proj-tag">Computer Vision</span>
-              <span class="proj-tag">Motion Planning</span><span class="proj-tag">Real-Time Control</span>
-              <span class="proj-tag">Multi-DOF Manipulator</span>
-            </div>
+            <h3 class="proj-card-title">ATLAS — Lunar Excavation Robot</h3>
+            <p class="proj-summary">I co-led the program and owned mechanical architecture, CAD, and chassis fabrication.</p>
+            <p class="proj-result">Delivered a fabricated test chassis and a complete core-drill design.</p>
+            <div class="proj-card-tags"><span class="proj-tag">Mechanical Design</span><span class="proj-tag">Manufacturing</span><span class="proj-tag">Project Management</span></div>
           </div>
         </a>
 
-        <a class="proj-card reveal" href="rover-twin/">
+        <a class="proj-card" data-project="rover-twin" href="rover-twin/">
           <span class="proj-card-num">02</span>
           <div class="proj-card-img">
             <img src="rover-twin/simplified%20CAD%20Model%20with%20rocker%20bogie%20pivot%20highlighted.png" alt="Rocker-Bogie Rover">
           </div>
           <div class="proj-card-body">
             <h3 class="proj-card-title">Rocker-Bogie Rover Digital Twin</h3>
-            <div class="proj-card-tags">
-              <span class="proj-tag">ROS2</span><span class="proj-tag">URDF/Xacro</span>
-              <span class="proj-tag">SolidWorks</span><span class="proj-tag">Gazebo</span>
-              <span class="proj-tag">Isaac Sim</span><span class="proj-tag">Sim2Real</span>
-            </div>
+            <p class="proj-summary">I built the CAD-to-URDF model and a ROS2 swerve-drive controller.</p>
+            <p class="proj-result">Validated four drive modes across RViz2, Gazebo, and Isaac Sim.</p>
+            <div class="proj-card-tags"><span class="proj-tag">ROS2</span><span class="proj-tag">URDF/Xacro</span><span class="proj-tag">Isaac Sim</span></div>
           </div>
         </a>
 
-        <a class="proj-card reveal" href="teleop-arms/">
+        <a class="proj-card" data-project="vision-arm" href="vision-arm/">
+          <span class="proj-card-num">01</span>
+          <div class="proj-card-img">
+            <img src="vision-arm/Coins%20recognition_Columbia%20University%20Dining%20coin_%20Mexican%2020%20pesos%20coin_%20and%201%20dollar%20coin.png" alt="Vision-Guided Robotic Arm">
+          </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Real-Time Vision-Guided Robotic Arm Simulation</h3>
+            <p class="proj-summary">I fine-tuned object-segmentation models and connected detections to inverse-kinematics targeting.</p>
+            <p class="proj-result">Streams object coordinates into a 10 Hz control loop.</p>
+            <div class="proj-card-tags"><span class="proj-tag">Computer Vision</span><span class="proj-tag">Inverse Kinematics</span><span class="proj-tag">ONNX</span></div>
+          </div>
+        </a>
+
+        <a class="proj-card" data-project="machinedesign" href="machinedesign/">
+          <span class="proj-card-num">09</span>
+          <div class="proj-card-img" style="background:#F0EDE6; padding: 24px;">
+            <img src="assets/machined1.png" alt="Robotic Linkage System" style="object-fit:contain; max-height:320px; margin:0 auto; display:block;">
+          </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Automated Robotic Linkage System</h3>
+            <p class="proj-summary">I led electronics, Arduino firmware, and PID tuning for a team-built four-bar mechanism.</p>
+            <p class="proj-result">Achieved ±10° control precision within a $100 material budget.</p>
+            <div class="proj-card-tags"><span class="proj-tag">PID Control</span><span class="proj-tag">C++</span><span class="proj-tag">CNC Machining</span></div>
+          </div>
+        </a>
+      </div>
+      <details class="project-collection" id="project-collection">
+        <summary>Explore more projects <span>8 additional projects</span></summary>
+        <div class="project-grid" id="additional-projects">
+        <a class="proj-card" data-project="teleop-arms" href="teleop-arms/">
           <span class="proj-card-num">03</span>
           <div class="proj-card-img">
             <img src="teleop-arms/thumnail.png" alt="Teleoperated Robot Arms">
@@ -712,7 +752,7 @@
           </div>
         </a>
 
-        <a class="proj-card reveal" href="la-colonia/">
+        <a class="proj-card" data-project="la-colonia" href="la-colonia/">
           <span class="proj-card-num">04</span>
           <div class="proj-card-img">
             <img src="la-colonia/Start%20Page.png" alt="La Colonia Multi-LLM">
@@ -727,7 +767,7 @@
           </div>
         </a>
 
-        <a class="proj-card reveal" href="software/">
+        <a class="proj-card" data-project="software" href="software/">
           <span class="proj-card-num">05</span>
           <div class="proj-card-img">
             <img src="software/Carousel%20Generator_loaded%20photos%20and%20generated%20with%20input%20text.png" alt="Software Development">
@@ -741,37 +781,20 @@
           </div>
         </a>
 
-        <a class="proj-card reveal" href="uav/">
+        <a class="proj-card" data-project="uav" href="uav/">
           <span class="proj-card-num">06</span>
           <div class="proj-card-img">
             <img src="assets/uav1.png" alt="Solar-Electric UAV">
           </div>
           <div class="proj-card-body">
             <h3 class="proj-card-title">Autonomous Solar-Electric UAV</h3>
-            <div class="proj-card-tags">
-              <span class="proj-tag">3D CAD</span><span class="proj-tag">FEA</span>
-              <span class="proj-tag">Raspberry Pi</span><span class="proj-tag">Machine Learning</span>
-              <span class="proj-tag">Thermal Imaging</span>
-            </div>
+            <p class="proj-summary">I designed and analyzed modular airframe components using SolidWorks and FEA.</p>
+            <p class="proj-result">Validated critical load paths above a 2.0 factor of safety.</p>
+            <div class="proj-card-tags"><span class="proj-tag">Mechanical Design</span><span class="proj-tag">FEA</span><span class="proj-tag">Prototyping</span></div>
           </div>
         </a>
 
-        <a class="proj-card reveal" href="lunabotics/">
-          <span class="proj-card-num">07</span>
-          <div class="proj-card-img">
-            <img src="assets/spaceposium.svg" alt="ATLAS Lunar Robot">
-          </div>
-          <div class="proj-card-body">
-            <h3 class="proj-card-title">Autonomous Lunar Robot – ATLAS</h3>
-            <div class="proj-card-tags">
-              <span class="proj-tag">ROS2</span><span class="proj-tag">Arduino</span>
-              <span class="proj-tag">LiDAR</span><span class="proj-tag">Simulink</span>
-              <span class="proj-tag">3D CAD</span>
-            </div>
-          </div>
-        </a>
-
-        <a class="proj-card reveal" href="spiderbot/">
+        <a class="proj-card" data-project="spiderbot" href="spiderbot/">
           <span class="proj-card-num">08</span>
           <div class="proj-card-img">
             <img src="assets/spiderbot1.png" alt="RL Legged Robot">
@@ -785,21 +808,7 @@
           </div>
         </a>
 
-        <a class="proj-card reveal" href="machinedesign/">
-          <span class="proj-card-num">09</span>
-          <div class="proj-card-img" style="background:#F0EDE6; padding: 24px;">
-            <img src="assets/machined1.png" alt="Robotic Linkage System" style="object-fit:contain; max-height:320px; margin:0 auto; display:block;">
-          </div>
-          <div class="proj-card-body">
-            <h3 class="proj-card-title">Automated Robotic Linkage System</h3>
-            <div class="proj-card-tags">
-              <span class="proj-tag">3D CAD</span><span class="proj-tag">CNC Machining</span>
-              <span class="proj-tag">PID Control</span><span class="proj-tag">C++</span>
-            </div>
-          </div>
-        </a>
-
-        <a class="proj-card reveal" href="holonomic/">
+        <a class="proj-card" data-project="holonomic" href="holonomic/">
           <span class="proj-card-num">10</span>
           <div class="proj-card-img">
             <img src="assets/holonomic1.png" alt="Holonomic Platform">
@@ -813,7 +822,7 @@
           </div>
         </a>
 
-        <a class="proj-card reveal" href="em/">
+        <a class="proj-card" data-project="em" href="em/">
           <span class="proj-card-num">11</span>
           <div class="proj-card-img">
             <img src="assets/em1.png" alt="EM Transportation System">
@@ -827,7 +836,7 @@
           </div>
         </a>
 
-        <a class="proj-card reveal" href="pablo/">
+        <a class="proj-card" data-project="pablo" href="pablo/">
           <span class="proj-card-num">12</span>
           <div class="proj-card-img">
             <img src="pablo/system-map-card.png" alt="Pablo: A Personal AI Operating System">
@@ -840,8 +849,8 @@
             </div>
           </div>
         </a>
-
-      </div>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -851,15 +860,41 @@
       <div class="s-header reveal">
         <span class="s-label">Experience</span>
         <div class="s-rule"></div>
-        <span class="s-num">02 / 05</span>
+        <span class="s-num">02 / 06</span>
       </div>
       <div class="exp-timeline">
 
         <div class="exp-node reveal">
           <div class="exp-block">
-            <div class="exp-co">Self-Employed</div>
+            <div class="exp-co">Creative Machines Lab, Columbia University</div>
+            <div class="exp-date">Sep 2026 – Present</div>
+            <div class="exp-role">Graduate Researcher</div>
+            <p class="exp-desc">Designing and prototyping spherical robots with compact motorized drivetrains, embedded control, and sensing. Developing an Isaac Sim digital twin with compliant shell dynamics for reinforcement learning and coordinated behavior across 50 sphere robots.</p>
+            <div class="exp-skills"><span class="exp-skill">SolidWorks</span><span class="exp-skill">Isaac Sim</span><span class="exp-skill">3D Printing</span><span class="exp-skill">CNC Machining</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
+        </div>
+
+        <!-- TA course and responsibilities supplied directly by Emiliano; dates not supplied. -->
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">Columbia University</div>
+
+            <div class="exp-role">Teaching Assistant — Machine Design</div>
+            <p class="exp-desc">Help students learn torque calculations, gear reduction selection, transmissions, linkage synthesis, PID tuning, and electronics. Machine and waterjet parts to prepare student project kits, and hold office hours to review concepts and homework questions.</p>
+            <div class="exp-skills"><span class="exp-skill">Machine Design</span><span class="exp-skill">Machining</span><span class="exp-skill">PID Control</span><span class="exp-skill">Teaching</span></div>
+
+
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
+        </div>
+
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
+            <div class="exp-co">Robotics Consulting</div>
             <div class="exp-date">Dec 2025 – Present</div>
-            <div class="exp-role">Freelance Robotics Engineer</div>
+            <div class="exp-role">Robotics Simulation Engineer</div>
             <p class="exp-desc">Build simulation-ready digital twins in Gazebo and Isaac Sim. URDF/Xacro modeling, controller configuration, action graphs for ROS2 integration.</p>
             <div class="exp-skills"><span class="exp-skill">URDF/Xacro</span><span class="exp-skill">Gazebo</span><span class="exp-skill">Isaac Sim</span><span class="exp-skill">ROS2</span></div>
           </div>
@@ -869,9 +904,9 @@
         <div class="exp-node reveal">
           <div class="exp-block">
             <div class="exp-co">ASC Process Systems</div>
-            <div class="exp-date">Oct 2025 – Present</div>
+            <div class="exp-date">Oct 2025 – Jul 2026</div>
             <div class="exp-role">Mechanical Engineer &amp; Project Manager</div>
-            <p class="exp-desc">Design and manage aerospace-grade autoclave projects. Validate pressure vessel designs to ASME code, fluid flow and structural simulations.</p>
+            <p class="exp-desc">Managed aerospace autoclave projects from design to commissioning. Designed ASME-compliant pressure vessels with Compress and ANSYS Workbench FEA, and created process/instrumentation drawings and fluid flow simulations.</p>
             <div class="exp-skills"><span class="exp-skill">Project Management</span><span class="exp-skill">ASME</span><span class="exp-skill">ANSYS FEA</span><span class="exp-skill">Fluid Systems</span></div>
           </div>
           <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
@@ -891,9 +926,9 @@
         <div class="exp-node reveal">
           <div class="exp-block">
             <div class="exp-co">Columbia Space Initiative</div>
-            <div class="exp-date">Sep 2024 – Present</div>
+            <div class="exp-date">Sep 2024 – May 2025</div>
             <div class="exp-role">Lead Mechanical Engineer</div>
-            <p class="exp-desc">Led design and fabrication of an autonomous robotic excavator for NASA Lunabotics. Managed a multidisciplinary team.</p>
+            <p class="exp-desc">Led the mechanical design and fabrication work for NASA Lunabotics, managing a 17-person multidisciplinary team. Conducted materials research and FEA on 3D-printed TPU structures and LM-1 regolith simulant.</p>
             <div class="exp-skills"><span class="exp-skill">Project Management</span><span class="exp-skill">3D CAD</span><span class="exp-skill">FEA</span></div>
           </div>
           <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
@@ -915,7 +950,7 @@
             <div class="exp-co">Copeland</div>
             <div class="exp-date">May – Aug 2023</div>
             <div class="exp-role">Mechanical Engineering Co-op</div>
-            <p class="exp-desc">Engineered liquid desiccant HVAC systems using NX CAD. Supported rapid prototyping and iterative experimental design.</p>
+            <p class="exp-desc">Engineered liquid desiccant HVAC systems using NX CAD. Supported rapid prototyping and iterative experimental design. Hired, paid, and managed by Emerson while the division transitioned to Copeland; work spanned both brands.</p>
             <div class="exp-skills"><span class="exp-skill">HVAC</span><span class="exp-skill">NX CAD</span><span class="exp-skill">Rapid Prototyping</span></div>
           </div>
           <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
@@ -969,18 +1004,75 @@
     </div>
   </section>
 
+  <!-- LIVE: mockup placeholders approved by Emiliano; replace before publication. -->
+  <section id="live">
+    <div class="wrap">
+      <div class="s-header reveal">
+        <h2 class="s-label">LIVE — Build Log</h2>
+        <div class="s-rule"></div>
+        <span class="s-num">03 / 06</span>
+      </div>
+      <div class="live-intro reveal">
+        <p class="live-heading">Work in progress, documented.</p>
+        <p>Build notes, experiments, and next steps from projects in development.</p>
+      </div>
+      <div class="live-empty reveal">
+        <span class="live-label">Mockup only · Placeholder content</span>
+        <p>No build-log updates published yet. The cards below show the format for future entries.</p>
+      </div>
+      <div class="live-grid">
+        <article class="live-card">
+          <div class="live-card-meta"><span>Example 01 · Placeholder</span><span>Date TBD</span></div>
+          <h3>Project name / update title</h3>
+          <p class="live-status">Status TBD · Active, Paused, or Completed</p>
+          <div class="live-media-placeholder" role="img" aria-label="Placeholder for a future project photo or video">Photo or short clip placeholder</div>
+          <dl>
+            <dt>What changed</dt><dd>Add the build change or experiment.</dd>
+            <dt>What it showed</dt><dd>Add the observation or measured result.</dd>
+            <dt>Next step</dt><dd>Add the next test or design change.</dd>
+          </dl>
+          <span class="live-future-link">Case study link · Placeholder</span>
+        </article>
+        <article class="live-card">
+          <div class="live-card-meta"><span>Example 02 · Placeholder</span><span>Date TBD</span></div>
+          <h3>Project name / update title</h3>
+          <p class="live-status">Status TBD · Active, Paused, or Completed</p>
+          <div class="live-media-placeholder" role="img" aria-label="Placeholder for a future project photo or video">Photo or short clip placeholder</div>
+          <dl>
+            <dt>What changed</dt><dd>Add the build change or experiment.</dd>
+            <dt>What it showed</dt><dd>Add the observation or measured result.</dd>
+            <dt>Next step</dt><dd>Add the next test or design change.</dd>
+          </dl>
+          <span class="live-future-link">Case study link · Placeholder</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- CREDENTIALS -->
   <section id="education">
     <div class="wrap">
       <div class="s-header reveal">
         <span class="s-label">Credentials</span>
         <div class="s-rule"></div>
-        <span class="s-num">03 / 05</span>
+        <span class="s-num">04 / 06</span>
       </div>
 
       <!-- Education -->
       <div class="cred-section reveal">
         <span class="cred-sub">Education</span>
+        <div class="edu-banner graduate-education">
+          <div>
+            <div class="edu-school">Columbia University</div>
+            <div class="edu-meta">
+              <span class="edu-degree">M.S. Mechanical Engineering</span>
+              <span class="edu-dates">Expected Dec 2027</span>
+            </div>
+            <div class="edu-focus">Concentration in Robotics and Control</div>
+          </div>
+          <div class="edu-ghost-year">2027</div>
+        </div>
+
         <div class="edu-banner">
           <div>
             <div class="edu-school">Columbia University</div>
@@ -1086,7 +1178,7 @@
       <div class="s-header reveal">
         <span class="s-label">About</span>
         <div class="s-rule"></div>
-        <span class="s-num">04 / 05</span>
+        <span class="s-num">05 / 06</span>
       </div>
       <div class="about-layout">
         <div class="about-photo-wrap reveal">
@@ -1112,7 +1204,7 @@
       <div class="s-header reveal">
         <span class="s-label">Contact</span>
         <div class="s-rule"></div>
-        <span class="s-num">05 / 05</span>
+        <span class="s-num">06 / 06</span>
       </div>
       <div class="contact-layout">
         <div>
@@ -1159,23 +1251,6 @@
         nav.classList.toggle('dark', pastProjects && !pastExperience);
       }, { passive: true });
     })();
-
-    // ── Hero typewriter ──
-    const phrases = ['Mechanical Engineer', 'Roboticist', 'Building things that matter.'];
-    let pIdx = 0, cIdx = 0, deleting = false;
-    const subEl = document.getElementById('heroSub');
-    function type() {
-      const cur = phrases[pIdx];
-      if (!deleting) {
-        subEl.textContent = cur.slice(0, ++cIdx) + '▮';
-        if (cIdx === cur.length) { deleting = true; setTimeout(type, 2200); return; }
-      } else {
-        subEl.textContent = cur.slice(0, --cIdx) + '▮';
-        if (cIdx === 0) { deleting = false; pIdx = (pIdx + 1) % phrases.length; }
-      }
-      setTimeout(type, deleting ? 35 : 65);
-    }
-    setTimeout(type, 1500);
 
     // ── Frame counter ──
     let fc = 0;
@@ -1318,5 +1393,6 @@ ______(__)_(_)_(__)________/_]_[_\\________________________`;
       });
     });
   </script>
+  <script src="assets/home-update.js"></script>
 </body>
 </html>
