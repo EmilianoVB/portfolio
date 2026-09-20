@@ -603,7 +603,7 @@
       .cred-section { margin-bottom: 48px; }
     }
   </style>
-  <link rel="stylesheet" href="assets/home-update.css">
+  <link rel="stylesheet" href="assets/home-update.css?v=2">
 </head>
 <body>
 
@@ -667,35 +667,63 @@
   <section id="projects">
     <canvas id="projCanvas" aria-hidden="true"></canvas>
     <div class="wrap">
-      <div class="s-header reveal">
-        <span class="s-label">Selected Work</span>
-        <div class="s-rule"></div>
-        <span class="s-num">01 / 06</span>
-      </div>
-
-      <div class="project-intro">
-        <p>Four projects across design, control, simulation, and fabrication.</p>
-        <div class="project-focus" role="group" aria-label="Featured project focus" hidden>
-          <button type="button" data-focus="robotics" aria-pressed="true">Robotics &amp; Mechatronics</button>
-          <button type="button" data-focus="mechanical" aria-pressed="false">Mechanical Design</button>
+      <div class="current-projects" id="live" role="region" aria-roledescription="carousel" aria-label="Current projects">
+        <span class="live-stamp" aria-label="Live">LIVE</span>
+        <div class="current-controls">
+          <button type="button" id="current-prev" aria-label="Previous current project">←</button>
+          <button type="button" id="current-pause" aria-label="Pause current project carousel" aria-pressed="false">Pause</button>
+          <button type="button" id="current-next" aria-label="Next current project">→</button>
+        </div>
+        <div class="current-track" id="current-track">
+          <button type="button" class="current-card" data-current="spheres" aria-haspopup="dialog" aria-controls="current-dialog">
+            <img src="assets/live-spheres.svg" alt="" width="420" height="180">
+            <span class="current-copy"><strong>Spherical Robot Swarm</strong><span>Creative Machines Lab</span></span>
+          </button>
+          <button type="button" class="current-card" data-current="legged" aria-haspopup="dialog" aria-controls="current-dialog">
+            <img src="assets/live-legged.svg" alt="" width="420" height="180">
+            <span class="current-copy"><strong>Quadruped &amp; Bipedal Robots</strong><span>In collaboration with Rutgers and Caltech</span></span>
+          </button>
+          <button type="button" class="current-card" data-current="humanoid" aria-haspopup="dialog" aria-controls="current-dialog">
+            <img src="assets/live-humanoid.svg" alt="" width="420" height="180">
+            <span class="current-copy"><strong>Compact Humanoid Animatronic</strong><span>A compact humanoid build in progress</span></span>
+          </button>
+          <button type="button" class="current-card" data-current="friction" aria-haspopup="dialog" aria-controls="current-dialog">
+            <img src="assets/live-friction.svg" alt="" width="420" height="180">
+            <span class="current-copy"><strong>Joint Friction in Microgravity</strong><span>Measuring the CCSV friction model</span></span>
+          </button>
         </div>
       </div>
-      <p class="sr-only" id="project-announcement" role="status" aria-live="polite"></p>
+      <div class="s-header featured-header">
+        <h2 class="s-label">Featured Projects</h2><div class="s-rule"></div><span class="s-num">01 / 05</span>
+      </div>
       <div class="project-grid" id="featured-projects">
-        <a class="proj-card" data-project="lunabotics" href="lunabotics/">
-          <span class="proj-card-num">07</span>
+<a class="proj-card" data-project="uav" href="uav/">
+          <span class="proj-card-num">06</span>
           <div class="proj-card-img">
-            <img src="assets/spaceposium.svg" alt="ATLAS Lunar Robot">
+            <img src="assets/uav1.png" alt="Solar-Electric UAV">
           </div>
           <div class="proj-card-body">
-            <h3 class="proj-card-title">ATLAS — Lunar Excavation Robot</h3>
-            <p class="proj-summary">I co-led the program and owned mechanical architecture, CAD, and chassis fabrication.</p>
-            <p class="proj-result">Delivered a fabricated test chassis and a complete core-drill design.</p>
-            <div class="proj-card-tags"><span class="proj-tag">Mechanical Design</span><span class="proj-tag">Manufacturing</span><span class="proj-tag">Project Management</span></div>
+            <h3 class="proj-card-title">Autonomous Solar-Electric UAV</h3>
+            <p class="proj-summary">I designed and analyzed modular airframe components using SolidWorks and FEA.</p>
+            <p class="proj-result">Validated critical load paths above a 2.0 factor of safety.</p>
+            <div class="proj-card-tags"><span class="proj-tag">Mechanical Design</span><span class="proj-tag">FEA</span><span class="proj-tag">Prototyping</span></div>
           </div>
         </a>
 
-        <a class="proj-card" data-project="rover-twin" href="rover-twin/">
+<a class="proj-card" data-project="machinedesign" href="machinedesign/">
+          <span class="proj-card-num">09</span>
+          <div class="proj-card-img" style="background:#F0EDE6; padding: 24px;">
+            <img src="assets/machined1.png" alt="Robotic Linkage System" style="object-fit:contain; max-height:320px; margin:0 auto; display:block;">
+          </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">Automated Robotic Linkage System</h3>
+            <p class="proj-summary">I led electronics, Arduino firmware, and PID tuning for a team-built four-bar mechanism.</p>
+            <p class="proj-result">Achieved ±10° control precision within a $100 material budget.</p>
+            <div class="proj-card-tags"><span class="proj-tag">PID Control</span><span class="proj-tag">C++</span><span class="proj-tag">CNC Machining</span></div>
+          </div>
+        </a>
+
+<a class="proj-card" data-project="rover-twin" href="rover-twin/">
           <span class="proj-card-num">02</span>
           <div class="proj-card-img">
             <img src="rover-twin/simplified%20CAD%20Model%20with%20rocker%20bogie%20pivot%20highlighted.png" alt="Rocker-Bogie Rover">
@@ -708,7 +736,25 @@
           </div>
         </a>
 
-        <a class="proj-card" data-project="vision-arm" href="vision-arm/">
+<a class="proj-card" data-project="lunabotics" href="lunabotics/">
+          <span class="proj-card-num">07</span>
+          <div class="proj-card-img">
+            <img src="assets/spaceposium.svg" alt="ATLAS Lunar Robot">
+          </div>
+          <div class="proj-card-body">
+            <h3 class="proj-card-title">ATLAS — Lunar Excavation Robot</h3>
+            <p class="proj-summary">I co-led the program and owned mechanical architecture, CAD, and chassis fabrication.</p>
+            <p class="proj-result">Delivered a fabricated test chassis and a complete core-drill design.</p>
+            <div class="proj-card-tags"><span class="proj-tag">Mechanical Design</span><span class="proj-tag">Manufacturing</span><span class="proj-tag">Project Management</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="project-collection" id="project-collection">
+      <div class="collection-window" id="collection-window">
+        <div class="wrap">
+          <div class="project-grid" id="additional-projects" inert>
+<a class="proj-card" data-project="vision-arm" href="vision-arm/">
           <span class="proj-card-num">01</span>
           <div class="proj-card-img">
             <img src="vision-arm/Coins%20recognition_Columbia%20University%20Dining%20coin_%20Mexican%2020%20pesos%20coin_%20and%201%20dollar%20coin.png" alt="Vision-Guided Robotic Arm">
@@ -721,23 +767,7 @@
           </div>
         </a>
 
-        <a class="proj-card" data-project="machinedesign" href="machinedesign/">
-          <span class="proj-card-num">09</span>
-          <div class="proj-card-img" style="background:#F0EDE6; padding: 24px;">
-            <img src="assets/machined1.png" alt="Robotic Linkage System" style="object-fit:contain; max-height:320px; margin:0 auto; display:block;">
-          </div>
-          <div class="proj-card-body">
-            <h3 class="proj-card-title">Automated Robotic Linkage System</h3>
-            <p class="proj-summary">I led electronics, Arduino firmware, and PID tuning for a team-built four-bar mechanism.</p>
-            <p class="proj-result">Achieved ±10° control precision within a $100 material budget.</p>
-            <div class="proj-card-tags"><span class="proj-tag">PID Control</span><span class="proj-tag">C++</span><span class="proj-tag">CNC Machining</span></div>
-          </div>
-        </a>
-      </div>
-      <details class="project-collection" id="project-collection">
-        <summary>Explore more projects <span>8 additional projects</span></summary>
-        <div class="project-grid" id="additional-projects">
-        <a class="proj-card" data-project="teleop-arms" href="teleop-arms/">
+<a class="proj-card" data-project="teleop-arms" href="teleop-arms/">
           <span class="proj-card-num">03</span>
           <div class="proj-card-img">
             <img src="teleop-arms/thumnail.png" alt="Teleoperated Robot Arms">
@@ -752,7 +782,7 @@
           </div>
         </a>
 
-        <a class="proj-card" data-project="la-colonia" href="la-colonia/">
+<a class="proj-card" data-project="la-colonia" href="la-colonia/">
           <span class="proj-card-num">04</span>
           <div class="proj-card-img">
             <img src="la-colonia/Start%20Page.png" alt="La Colonia Multi-LLM">
@@ -767,7 +797,7 @@
           </div>
         </a>
 
-        <a class="proj-card" data-project="software" href="software/">
+<a class="proj-card" data-project="software" href="software/">
           <span class="proj-card-num">05</span>
           <div class="proj-card-img">
             <img src="software/Carousel%20Generator_loaded%20photos%20and%20generated%20with%20input%20text.png" alt="Software Development">
@@ -781,20 +811,7 @@
           </div>
         </a>
 
-        <a class="proj-card" data-project="uav" href="uav/">
-          <span class="proj-card-num">06</span>
-          <div class="proj-card-img">
-            <img src="assets/uav1.png" alt="Solar-Electric UAV">
-          </div>
-          <div class="proj-card-body">
-            <h3 class="proj-card-title">Autonomous Solar-Electric UAV</h3>
-            <p class="proj-summary">I designed and analyzed modular airframe components using SolidWorks and FEA.</p>
-            <p class="proj-result">Validated critical load paths above a 2.0 factor of safety.</p>
-            <div class="proj-card-tags"><span class="proj-tag">Mechanical Design</span><span class="proj-tag">FEA</span><span class="proj-tag">Prototyping</span></div>
-          </div>
-        </a>
-
-        <a class="proj-card" data-project="spiderbot" href="spiderbot/">
+<a class="proj-card" data-project="spiderbot" href="spiderbot/">
           <span class="proj-card-num">08</span>
           <div class="proj-card-img">
             <img src="assets/spiderbot1.png" alt="RL Legged Robot">
@@ -808,7 +825,7 @@
           </div>
         </a>
 
-        <a class="proj-card" data-project="holonomic" href="holonomic/">
+<a class="proj-card" data-project="holonomic" href="holonomic/">
           <span class="proj-card-num">10</span>
           <div class="proj-card-img">
             <img src="assets/holonomic1.png" alt="Holonomic Platform">
@@ -822,7 +839,7 @@
           </div>
         </a>
 
-        <a class="proj-card" data-project="em" href="em/">
+<a class="proj-card" data-project="em" href="em/">
           <span class="proj-card-num">11</span>
           <div class="proj-card-img">
             <img src="assets/em1.png" alt="EM Transportation System">
@@ -836,7 +853,7 @@
           </div>
         </a>
 
-        <a class="proj-card" data-project="pablo" href="pablo/">
+<a class="proj-card" data-project="pablo" href="pablo/">
           <span class="proj-card-num">12</span>
           <div class="proj-card-img">
             <img src="pablo/system-map-card.png" alt="Pablo: A Personal AI Operating System">
@@ -849,8 +866,13 @@
             </div>
           </div>
         </a>
+          </div>
         </div>
-      </details>
+      </div>
+      <button type="button" class="collection-reveal" id="collection-reveal" aria-expanded="false" aria-controls="additional-projects">
+        <span>Explore more projects <span aria-hidden="true">↓</span></span>
+        <span class="collection-count">8 additional projects</span>
+      </button>
     </div>
   </section>
 
@@ -860,7 +882,7 @@
       <div class="s-header reveal">
         <span class="s-label">Experience</span>
         <div class="s-rule"></div>
-        <span class="s-num">02 / 06</span>
+        <span class="s-num">02 / 05</span>
       </div>
       <div class="exp-timeline">
 
@@ -1004,58 +1026,13 @@
     </div>
   </section>
 
-  <!-- LIVE: mockup placeholders approved by Emiliano; replace before publication. -->
-  <section id="live">
-    <div class="wrap">
-      <div class="s-header reveal">
-        <h2 class="s-label">LIVE — Build Log</h2>
-        <div class="s-rule"></div>
-        <span class="s-num">03 / 06</span>
-      </div>
-      <div class="live-intro reveal">
-        <p class="live-heading">Work in progress, documented.</p>
-        <p>Build notes, experiments, and next steps from projects in development.</p>
-      </div>
-      <div class="live-empty reveal">
-        <span class="live-label">Mockup only · Placeholder content</span>
-        <p>No build-log updates published yet. The cards below show the format for future entries.</p>
-      </div>
-      <div class="live-grid">
-        <article class="live-card">
-          <div class="live-card-meta"><span>Example 01 · Placeholder</span><span>Date TBD</span></div>
-          <h3>Project name / update title</h3>
-          <p class="live-status">Status TBD · Active, Paused, or Completed</p>
-          <div class="live-media-placeholder" role="img" aria-label="Placeholder for a future project photo or video">Photo or short clip placeholder</div>
-          <dl>
-            <dt>What changed</dt><dd>Add the build change or experiment.</dd>
-            <dt>What it showed</dt><dd>Add the observation or measured result.</dd>
-            <dt>Next step</dt><dd>Add the next test or design change.</dd>
-          </dl>
-          <span class="live-future-link">Case study link · Placeholder</span>
-        </article>
-        <article class="live-card">
-          <div class="live-card-meta"><span>Example 02 · Placeholder</span><span>Date TBD</span></div>
-          <h3>Project name / update title</h3>
-          <p class="live-status">Status TBD · Active, Paused, or Completed</p>
-          <div class="live-media-placeholder" role="img" aria-label="Placeholder for a future project photo or video">Photo or short clip placeholder</div>
-          <dl>
-            <dt>What changed</dt><dd>Add the build change or experiment.</dd>
-            <dt>What it showed</dt><dd>Add the observation or measured result.</dd>
-            <dt>Next step</dt><dd>Add the next test or design change.</dd>
-          </dl>
-          <span class="live-future-link">Case study link · Placeholder</span>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <!-- CREDENTIALS -->
   <section id="education">
     <div class="wrap">
       <div class="s-header reveal">
         <span class="s-label">Credentials</span>
         <div class="s-rule"></div>
-        <span class="s-num">04 / 06</span>
+        <span class="s-num">03 / 05</span>
       </div>
 
       <!-- Education -->
@@ -1073,7 +1050,7 @@
           <div class="edu-ghost-year">2027</div>
         </div>
 
-        <div class="edu-banner">
+        <div class="undergraduate-education">
           <div>
             <div class="edu-school">Columbia University</div>
             <div class="edu-meta">
@@ -1082,7 +1059,7 @@
             </div>
             <div class="edu-focus">Robotics &nbsp;·&nbsp; Automation &nbsp;·&nbsp; Manufacturing</div>
           </div>
-          <div class="edu-ghost-year">2025</div>
+
         </div>
       </div>
 
@@ -1178,7 +1155,7 @@
       <div class="s-header reveal">
         <span class="s-label">About</span>
         <div class="s-rule"></div>
-        <span class="s-num">05 / 06</span>
+        <span class="s-num">04 / 05</span>
       </div>
       <div class="about-layout">
         <div class="about-photo-wrap reveal">
@@ -1204,7 +1181,7 @@
       <div class="s-header reveal">
         <span class="s-label">Contact</span>
         <div class="s-rule"></div>
-        <span class="s-num">06 / 06</span>
+        <span class="s-num">05 / 05</span>
       </div>
       <div class="contact-layout">
         <div>
@@ -1393,6 +1370,12 @@ ______(__)_(_)_(__)________/_]_[_\\________________________`;
       });
     });
   </script>
-  <script src="assets/home-update.js"></script>
+  <dialog class="current-dialog" id="current-dialog" aria-labelledby="current-dialog-title" aria-describedby="current-dialog-description">
+    <button type="button" class="dialog-close" aria-label="Close project details" autofocus>×</button>
+    <span class="dialog-eyebrow">Current project</span>
+    <h2 id="current-dialog-title"></h2>
+    <p id="current-dialog-description"></p>
+  </dialog>
+  <script src="assets/home-update.js?v=2"></script>
 </body>
 </html>
