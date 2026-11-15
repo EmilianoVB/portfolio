@@ -1,0 +1,6 @@
+.hand-overview { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+.hand-illustration { min-width: 0; }.hand-illustration img { width: 100%; height: auto; border: 1px solid #303335; }
+.mechanism-intro { margin-bottom: 28px; }
+.development-note { margin-top: 28px; max-width: 70ch; font-size: .85rem; line-height: 1.7; color: #666; }
+@media (max-width: 760px) { .hand-overview { grid-template-columns: 1fr; gap: 28px; }.hand-illustration { max-width: 480px; } }
+@media (max-width: 480px) { .s-header { gap: 10px; }.s-label { white-space: normal; line-height: 1.6; }.s-rule { min-width: 16px; }.s-num { flex-shrink: 0; } }

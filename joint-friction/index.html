@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joint Friction Characterization · Emiliano VB</title>
+  <meta name="description" content="Investigating how gravitational loading affects friction in a robotic actuator and joint. Preliminary design review and apparatus design.">
+  <link rel="icon" href="../favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Project navigation"><div class="nav-inner">
+    <a href="../#live" class="nav-back"><span class="arrow">←</span>Active projects</a>
+    <span class="nav-meta">Research in progress</span>
+  </div></nav>
+  <header class="page-hero" style="--page-gradient: linear-gradient(135deg, #10191e 0%, #304853 65%, #6b888c 100%);">
+    <div class="wrap">
+      <div class="page-eyebrow"><span class="pulse-dot" aria-hidden="true"></span><span>Active project</span><span class="sep">/</span><span class="meta-text">Robotics · Microgravity</span></div>
+      <h1 class="page-title">Joint Friction Characterization</h1>
+      <p class="page-sub">Robotic actuator friction under changing gravitational loads</p>
+      <div class="tags"><span class="tag">Microgravity</span><span class="tag">Stribeck Model</span><span class="tag">Mechanical Design</span><span class="tag">Motor Control</span></div>
+    </div>
+  </header>
+  <main>
+    <section class="lead" aria-labelledby="overview-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="overview-title">Overview</h2><div class="s-rule"></div><span class="s-num">01 / 03</span></div>
+      <div class="prose">
+        <p>Our experiment investigates how gravitational loading affects friction within a robotic actuator and joint. We aim to identify which components of the Stribeck friction model are most sensitive to changes in loading, supporting more accurate modeling and control of robots in space.</p>
+        <p>The proposed apparatus uses an adjustable flywheel assembly to compare joint behavior at different orientations. Motor current, shaft speed, orientation, and temperature measurements will support comparisons of breakaway torque, coast-down behavior, and fitted friction parameters between ground and microgravity conditions.</p>
+        <p>My work focuses on materials selection and CAD. The preliminary design review also outlines my planned role as the experiment operator, running test scripts during flight.</p>
+      </div>
+    </div></section>
+    <section aria-labelledby="apparatus-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="apparatus-title">Apparatus design</h2><div class="s-rule"></div><span class="s-num">02 / 03</span></div>
+      <figure class="fig contain"><img src="apparatus.webp" width="1692" height="946" alt="CAD rendering of the joint friction apparatus, showing the enclosed flywheel, electronics, and a separate view of the adjustable angle mount." loading="lazy"><figcaption>Proposed experiment assembly and adjustable flywheel mount</figcaption></figure>
+    </div></section>
+    <section aria-labelledby="review-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="review-title">Preliminary design review</h2><div class="s-rule"></div><span class="s-num">03 / 03</span></div>
+      <div class="review-intro prose"><p>The October 29 presentation covers the experiment rationale, system requirements, hardware integration, flight operations, and expected results.</p></div>
+      <div class="slide-viewer" role="region" aria-label="October 29 preliminary design review slides" tabindex="0">
+        <img id="review-slide" src="slides/slide-01.webp" width="1600" height="900" alt="Slide 1: Robotic Microgravity Joint Friction Characterization">
+        <div class="slide-controls" hidden>
+          <button type="button" id="slide-prev" aria-label="Previous slide">← <span>Previous</span></button>
+          <label for="slide-select" class="visually-hidden">Select slide</label>
+          <select id="slide-select" aria-label="Select slide"></select>
+          <button type="button" id="slide-next" aria-label="Next slide"><span>Next</span> →</button>
+        </div>
+        <p id="slide-status" class="visually-hidden" aria-live="polite"></p>
+      </div>
+      <p class="media-caption">October 29 · 18 slides <span class="keyboard-hint">· Use the arrow keys to browse</span></p>
+      <div class="review-links"><a class="mono-link" href="PDR-Oct-29.pptx" download>Download PowerPoint <span class="arrow" aria-hidden="true">↓</span></a><a class="mono-link" href="PDR-Oct-29.pdf" target="_blank" rel="noopener">Open PDF <span class="arrow" aria-hidden="true">↗</span></a></div>
+      <noscript><p class="prose">Open the PDF above to view all 18 slides, or download the original PowerPoint.</p></noscript>
+      <details class="slide-transcript"><summary>Slide text</summary><div id="slide-text" class="prose"></div></details>
+    </div></section>
+  </main>
+  <footer><div class="footer-inner"><span class="footer-mono">Emiliano Villicana Brugada</span><span class="footer-mono"><a href="../#live">← Active projects</a></span><span class="footer-mono">&copy; 2026</span></div></footer>
+  <script src="slides.js"></script>
+</body>
+</html>

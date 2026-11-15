@@ -603,7 +603,7 @@
       .cred-section { margin-bottom: 48px; }
     }
   </style>
-  <link rel="stylesheet" href="assets/home-update.css?v=2">
+  <link rel="stylesheet" href="assets/home-update.css?v=4">
 </head>
 <body>
 
@@ -674,10 +674,10 @@
           <button type="button" id="current-next" aria-label="Next current project">→</button>
         </div>
         <div class="current-track" id="current-track">
-          <button type="button" class="current-card" data-current="spheres" aria-haspopup="dialog" aria-controls="current-dialog">
+          <a class="current-card" href="spherical-swarm/">
             <img src="assets/live-spheres.svg" alt="" width="420" height="180">
-            <span class="current-copy"><strong>Spherical Robot Swarm</strong><span>Creative Machines Lab</span></span>
-          </button>
+            <span class="current-copy"><strong>Spherical Robot Swarm</strong><span>Creative Machines Lab ↗</span></span>
+          </a>
           <button type="button" class="current-card" data-current="legged" aria-haspopup="dialog" aria-controls="current-dialog">
             <img src="assets/live-legged.svg" alt="" width="420" height="180">
             <span class="current-copy"><strong>Quadruped &amp; Bipedal Robots</strong><span>In collaboration with Rutgers and Caltech</span></span>
@@ -686,10 +686,22 @@
             <img src="assets/live-humanoid.svg" alt="" width="420" height="180">
             <span class="current-copy"><strong>Compact Humanoid Animatronic</strong><span>A compact humanoid build in progress</span></span>
           </button>
-          <button type="button" class="current-card" data-current="friction" aria-haspopup="dialog" aria-controls="current-dialog">
-            <img src="assets/live-friction.svg" alt="" width="420" height="180">
-            <span class="current-copy"><strong>Joint Friction in Microgravity</strong><span>Measuring the CCSV friction model</span></span>
+          <a class="current-card current-card-friction" href="joint-friction/">
+            <img src="assets/joint-friction-thumbnail.webp" alt="" width="840" height="470" loading="lazy">
+            <span class="current-copy"><strong>Joint Friction in Microgravity</strong><span>Measuring the CCSV friction model ↗</span></span>
+          </a>
+          <button type="button" class="current-card" data-current="teleoperation" aria-haspopup="dialog" aria-controls="current-dialog">
+            <img src="assets/live-teleoperation.svg" alt="" width="420" height="180" loading="lazy">
+            <span class="current-copy"><strong>Teleoperation Device</strong><span>A teleoperation device in development</span></span>
           </button>
+          <button type="button" class="current-card" data-current="payload" aria-haspopup="dialog" aria-controls="current-dialog">
+            <img src="assets/live-payload-estimator.svg" alt="" width="420" height="180" loading="lazy">
+            <span class="current-copy"><strong>Drone Payload Event Estimator</strong><span>Detecting pickup &amp; drop-off from telemetry</span></span>
+          </button>
+          <a class="current-card" href="hybrid-hand/">
+            <img src="assets/live-hybrid-hand.svg" alt="" width="420" height="180" loading="lazy">
+            <span class="current-copy"><strong>Hybrid Drive Robot Hand</strong><span>Tendon &amp; direct drive · ROAR Lab ↗</span></span>
+          </a>
         </div>
       </div>
       <div class="s-header featured-header">
@@ -887,6 +899,17 @@
 
         <div class="exp-node reveal">
           <div class="exp-block">
+            <div class="exp-co">ROAR Lab, Columbia University</div>
+            <div class="exp-date">Oct 2026 – Present</div>
+            <div class="exp-role">Robot Hand Design &amp; Prototyping</div>
+            <p class="exp-desc">Designing and prototyping a hybrid tendon and direct drive robot hand.</p>
+            <div class="exp-skills"><span class="exp-skill">Mechanical Design</span><span class="exp-skill">Tendon Drive</span><span class="exp-skill">Direct Drive</span><span class="exp-skill">Prototyping</span></div>
+          </div>
+          <div class="exp-dot-wrap"><div class="exp-dot"></div></div>
+        </div>
+
+        <div class="exp-node reveal">
+          <div class="exp-block">
             <div class="exp-co">Creative Machines Lab, Columbia University</div>
             <div class="exp-date">Sep 2026 – Present</div>
             <div class="exp-role">Graduate Researcher</div>
@@ -1054,7 +1077,6 @@
             <div class="edu-school">Columbia University</div>
             <div class="edu-meta">
               <span class="edu-degree">B.S. Mechanical Engineering</span>
-              <span class="edu-dates">2021 – 2025</span>
             </div>
             <div class="edu-focus">Robotics &nbsp;·&nbsp; Automation &nbsp;·&nbsp; Manufacturing</div>
           </div>
@@ -1070,25 +1092,25 @@
             <span class="cert-num">01</span>
             <span class="cert-cat">Robot Modeling</span>
             <span class="cert-name">Robotics Foundations I – Robot Modeling</span>
-            <span class="cert-issuer">FedericaX · Università di Napoli Federico II · Feb 2026</span>
+            <span class="cert-issuer">FedericaX · Università di Napoli Federico II</span>
           </div>
           <div class="cert-row">
             <span class="cert-num">02</span>
             <span class="cert-cat">Machine Learning</span>
             <span class="cert-name">Introduction to Deep RL from a Robotics Perspective</span>
-            <span class="cert-issuer">Columbia+ · Columbia University · Dec 2025</span>
+            <span class="cert-issuer">Columbia+ · Columbia University</span>
           </div>
           <div class="cert-row">
             <span class="cert-num">03</span>
             <span class="cert-cat">Safety</span>
             <span class="cert-name">OSHA 10</span>
-            <span class="cert-issuer">HSI · May 2024</span>
+            <span class="cert-issuer">HSI</span>
           </div>
           <div class="cert-row">
             <span class="cert-num">04</span>
             <span class="cert-cat">Language</span>
             <span class="cert-name">Seal of Biliteracy</span>
-            <span class="cert-issuer">California Department of Education · May 2021</span>
+            <span class="cert-issuer">California Department of Education</span>
           </div>
         </div>
       </div>
@@ -1100,47 +1122,38 @@
           <div class="affil-card">
             <div class="affil-acronym">SHPE</div>
             <div class="affil-full">Society of Hispanic Professional Engineers</div>
-            <div class="affil-meta">Columbia Chapter · 2021–Present</div>
           </div>
           <div class="affil-card">
             <div class="affil-acronym">ASME</div>
             <div class="affil-full">American Society of Mechanical Engineers</div>
-            <div class="affil-meta">Member · 2021–Present</div>
           </div>
           <div class="affil-card">
             <div class="affil-acronym">IEEE</div>
             <div class="affil-full">Institute of Electrical and Electronics Engineers</div>
-            <div class="affil-meta">Student Member · 2021–Present</div>
           </div>
           <div class="affil-card">
             <div class="affil-acronym">HSF</div>
             <div class="affil-full">Hispanic Scholarship Fund</div>
-            <div class="affil-meta">Scholar &amp; Mentor · 2023–Present</div>
           </div>
           <div class="affil-card">
             <div class="affil-acronym">e4c</div>
             <div class="affil-full">Engineering for Change</div>
-            <div class="affil-meta">Community Member · 2024–Present</div>
           </div>
           <div class="affil-card">
             <div class="affil-acronym">CAA</div>
             <div class="affil-full">Columbia Alumni Association</div>
-            <div class="affil-meta">Member · 2025–Present</div>
           </div>
           <div class="affil-card">
             <div class="affil-acronym">CEAA</div>
             <div class="affil-full">Columbia Engineering Alumni Association</div>
-            <div class="affil-meta">Member · 2025–Present</div>
           </div>
           <div class="affil-card">
             <div class="affil-acronym">LAACU</div>
             <div class="affil-full">Latino Alumni Association of Columbia University</div>
-            <div class="affil-meta">Member · 2025–Present</div>
           </div>
           <div class="affil-card">
             <div class="affil-acronym">S1S2</div>
             <div class="affil-full">S1S2 Robotics Community</div>
-            <div class="affil-meta">Founding Member · 2025–Present</div>
           </div>
         </div>
       </div>
@@ -1374,7 +1387,8 @@ ______(__)_(_)_(__)________/_]_[_\\________________________`;
     <span class="dialog-eyebrow">Current project</span>
     <h2 id="current-dialog-title"></h2>
     <p id="current-dialog-description"></p>
+    <a id="current-dialog-source" class="dialog-source" href="https://huggingface.co/datasets/Ethgar/skyjepa-mission-5k" target="_blank" rel="noopener" hidden>View the SkyJEPA mission dataset ↗</a>
   </dialog>
-  <script src="assets/home-update.js?v=2"></script>
+  <script src="assets/home-update.js?v=3"></script>
 </body>
 </html>

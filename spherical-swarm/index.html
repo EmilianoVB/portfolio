@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spherical Robot Swarm · Emiliano VB</title>
+  <meta name="description" content="Spherical robot research at Columbia's Creative Machines Lab. CAD-to-simulation integration, eccentric flywheel design, and experiments connecting simulation to hardware.">
+  <link rel="icon" href="../favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
+  <link rel="stylesheet" href="swarm.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Project navigation"><div class="nav-inner"><a href="../#live" class="nav-back"><span class="arrow">←</span>Active projects</a><span class="nav-meta">Creative Machines Lab · Columbia</span></div></nav>
+  <header class="page-hero" style="--page-gradient: linear-gradient(120deg, #10191e, #273d43);">
+    <div class="wrap swarm-hero">
+      <div>
+        <div class="page-eyebrow"><span class="pulse-dot" aria-hidden="true"></span><span>Active research</span><span class="sep">/</span><span class="meta-text">Creative Machines Lab</span></div>
+        <h1 class="page-title">Spherical<br>Robot Swarm</h1>
+        <p class="swarm-sub">Small robots. Collective motion.</p>
+        <p class="hero-description">Exploring how robots with internal flywheels can work together to move a flexible bag on the ground and reconfigure it in microgravity.</p>
+        <div class="tags"><span class="tag">CAD &amp; Simulation</span><span class="tag">Flywheel Design</span><span class="tag">Swarm Robotics</span></div>
+        <a class="explore-link" href="#cad">Explore the robot in 3D <span aria-hidden="true">↓</span></a>
+      </div>
+      <figure class="hero-robot"><img src="robot-cad.webp" width="1516" height="1494" alt="Transparent CAD rendering of the spherical robot, exposing the internal flywheels, motors, frame, and electronics."><figcaption>SwarmV3 assembly · CAD by Cole</figcaption></figure>
+    </div>
+  </header>
+  <main>
+    <section class="lead" aria-labelledby="work-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="work-title">My contribution</h2><div class="s-rule"></div><span class="s-num">01 / 05</span></div>
+      <div class="contribution-layout">
+        <p class="section-intro">Connecting the robot’s mechanical design to its behavior in simulation.</p>
+        <dl class="work-list">
+          <div><dt>CAD → simulation</dt><dd>Completed the initial CAD import and parameterized eccentric flywheel cutouts for simulation.</dd></div>
+          <div><dt>Experiment design</dt><dd>Built experiment matrices to study contact friction and bag design. Simulations pointed toward lower ball-to-ball friction and a slick inner lining.</dd></div>
+          <div><dt>Hardware &amp; learning</dt><dd>Researching tracking methods and materials, working on PCB design, and validating a learned MLP controller.</dd></div>
+        </dl>
+      </div>
+    </div></section>
+    <section id="cad" aria-labelledby="cad-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="cad-title">Explore the robot</h2><div class="s-rule"></div><span class="s-num">02 / 05</span></div>
+      <div class="cad-viewer" id="cad-viewer">
+        <div class="cad-stage" id="cad-stage">
+          <img id="cad-fallback" src="robot-cad.webp" width="1516" height="1494" alt="SwarmV2 CAD assembly reference.">
+          <canvas data-model="sphere-cad.glb" data-model-lite="sphere-cad-lite.glb" id="cad-canvas" aria-label="3D sphere CAD viewer. Drag to rotate, scroll or pinch to zoom. Arrow keys rotate the view, plus and minus zoom, and Home resets." tabindex="0" hidden></canvas>
+          <p id="cad-status" role="status">Loading the CAD assembly…</p>
+        </div>
+        <div class="cad-toolbar">
+          <span id="cad-hint">Drag to rotate · Scroll or pinch to zoom</span>
+          <div class="cad-actions"><button type="button" id="cad-reset" disabled>Reset view</button><label class="shell-label" for="cad-shell">Shell</label><select id="cad-shell" disabled><option value="cutaway">Cutaway</option><option value="transparent">Transparent</option><option value="solid">Solid</option><option value="hidden">Hidden</option></select></div>
+        </div>
+      </div>
+      <p class="media-caption">SwarmV2 · Original CAD-to-simulation import · Model geometry from the STEP assembly</p>
+    </div></section>
+    <section aria-labelledby="simulation-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="simulation-title">Swarm in simulation</h2><div class="s-rule"></div><span class="s-num">03 / 05</span></div>
+      <figure><video class="swarm-video" controls playsinline preload="metadata" poster="simulation-poster.webp" aria-label="Simulation of 25 spherical robots moving a flexible bag with a learned controller"><source src="simulation.mp4" type="video/mp4">Your browser does not support embedded video. <a href="simulation.mp4">Download the simulation video</a>.</video><figcaption>25-robot bag · Learned controller · Newton simulation · 2.1× playback</figcaption></figure>
+    </div></section>
+    <section aria-labelledby="electrical-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="electrical-title">Electrical architecture</h2><div class="s-rule"></div><span class="s-num">04 / 05</span></div>
+      <p class="schematic-intro">A 2S battery supplies the motor controller and a regulated 5 V rail. The XIAO ESP32C6 reads the IMU and commands the three flywheel motors.</p>
+      <figure class="fig"><a href="wiring.png" target="_blank" rel="noopener" aria-label="Open full-resolution system wiring schematic"><img width="2600" height="1839" src="wiring.png" alt="KiCad system wiring schematic showing the 2S LiPo battery, 5 V buck regulator, XIAO ESP32C6, IMU, and 4-in-1 ESC connected to three motors." loading="lazy"></a><figcaption>System wiring · Provisional GPIO mapping · Click to open full resolution</figcaption></figure>
+    </div></section>
+    <section aria-labelledby="next-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="next-title">From simulation to hardware</h2><div class="s-rule"></div><span class="s-num">05 / 05</span></div>
+      <div class="contribution-layout"><h3 class="next-heading">Testing what <br>transfers.</h3><div class="prose"><p>The current focus is matching real materials to the friction assumptions in simulation and checking the learned controller. Next, I want to take on more motor control and fabrication of the ball exterior.</p><p class="research-note">The team has demonstrated collective motion in simulation. Hardware validation is ongoing, and obstacle climbing and commanded shape changes remain open research goals.</p></div></div>
+    </div></section>
+  </main>
+  <footer><div class="footer-inner"><span class="footer-mono">Emiliano Villicana Brugada</span><span class="footer-mono"><a href="../#live">← Active projects</a></span><span class="footer-mono">&copy; 2026</span></div></footer>
+  <script type="module" src="cad-viewer.js"></script>
+</body>
+</html>

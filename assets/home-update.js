@@ -25,10 +25,10 @@
   });
 
   const descriptions = {
-    spheres: ['Spherical Robot Swarm @ CML', 'I’m designing and prototyping spherical robots at Creative Machines Lab, integrating motorized drivetrains, embedded control, and sensing. I’m also developing an Isaac Sim digital twin with compliant shell dynamics for reinforcement learning and coordinated swarm behavior.'],
     legged: ['Quadruped & Bipedal Robots', 'I’m working on quadruped and bipedal robots in collaboration with Rutgers and Caltech.'],
     humanoid: ['Compact Humanoid Animatronic', 'I’m working on a compact humanoid animatronic.'],
-    friction: ['Motor Joint Friction in Microgravity', 'I’m measuring the CCSV model of motor joint friction dynamics in microgravity: Coulomb, Static, Stribeck, and Viscous friction.']
+    teleoperation: ['Teleoperation Device', 'I’m developing a teleoperation device.'],
+    payload: ['Drone Payload Event Estimator', 'I’m developing a state and event estimator that uses drone telemetry to infer whether and when a payload is picked up or dropped off, with payload status withheld from the estimator. I’m using the simulated SkyJEPA mission dataset to study these events under varying flight conditions. The processing target is under 50 ms per telemetry update. Evaluation will track detection delay, missed events, and false positives.']
   };
   const dialog = document.getElementById('current-dialog');
   const track = document.getElementById('current-track');
@@ -66,6 +66,7 @@
     const [title, description] = descriptions[card.dataset.current];
     document.getElementById('current-dialog-title').textContent = title;
     document.getElementById('current-dialog-description').textContent = description;
+    document.getElementById('current-dialog-source').hidden = card.dataset.current !== 'payload';
     document.body.classList.add('project-dialog-open');
     dialog.showModal();
   });

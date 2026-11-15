@@ -82,3 +82,11 @@ body.project-dialog-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .collection-window { transition: none; }
 }
+
+/* Keep the complete apparatus render within the current-project image strip. */
+a.current-card { text-decoration: none; }
+.current-card-friction img { object-fit: contain; background: #e7e7e7; }
+
+.dialog-source { display: inline-block; margin-top: 16px; color: #f7f4ee; font: .7rem/1.6 var(--mono); text-underline-offset: 4px; }
+.dialog-source[hidden] { display: none; }
+.dialog-source:focus-visible { outline: 2px solid #ff4149; outline-offset: 4px; }

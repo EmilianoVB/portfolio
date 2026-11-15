@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hybrid Drive Robot Hand · Emiliano VB</title>
+  <meta name="description" content="Designing and prototyping a hybrid tendon and direct drive robot hand at Columbia's ROAR Lab.">
+  <link rel="icon" href="../favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/project-page.css">
+  <link rel="stylesheet" href="hand.css">
+  <link rel="stylesheet" href="presentation.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Project navigation"><div class="nav-inner"><a href="../#live" class="nav-back"><span class="arrow">←</span>Active projects</a><span class="nav-meta">ROAR Lab · Columbia University</span></div></nav>
+  <header class="page-hero" style="--page-gradient: linear-gradient(120deg, #14191d, #3a3030);"><div class="wrap">
+    <div class="page-eyebrow"><span class="pulse-dot" aria-hidden="true"></span><span>Active research</span><span class="sep">/</span><span class="meta-text">ROAR Lab</span></div>
+    <h1 class="page-title">Hybrid Drive<br>Robot Hand</h1>
+    <p class="page-sub">Tendon positioning with direct motor assistance</p>
+    <div class="tags"><span class="tag">Robotic Manipulation</span><span class="tag">Tendon Drive</span><span class="tag">Direct Drive</span><span class="tag">Prototyping</span></div>
+  </div></header>
+  <main>
+    <section class="lead" aria-labelledby="overview-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="overview-title">The project</h2><div class="s-rule"></div><span class="s-num">01 / 03</span></div>
+      <div class="hand-overview"><div class="prose"><p>I’m designing and prototyping a hybrid tendon and direct drive robot hand at Columbia’s ROAR Lab.</p><p>The tendons position the finger links and apply large forces. A local motor adds force in the tangential direction, with a ratchet mechanism intended to let it assist the motion without opposing the tendons.</p></div><figure class="hand-illustration"><img src="../assets/live-hybrid-hand.svg" width="420" height="180" alt="Conceptual robot hand illustration with tendon paths and a motor at the palm."><figcaption>Concept illustration</figcaption></figure></div>
+    </div></section>
+    <section aria-labelledby="mechanism-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="mechanism-title">Intended mechanism behavior</h2><div class="s-rule"></div><span class="s-num">02 / 03</span></div>
+      <div class="prose mechanism-intro"><p>The relative tension in the two tendons determines how the motor should be allowed to drive the next link.</p></div>
+      <dl class="spec-list">
+        <div class="spec-row"><dt>Similar tendon forces</dt><dd>The ratchet stays centered, allowing the motor to drive the next link in either direction.</dd></div>
+        <div class="spec-row"><dt>One tendon dominates</dt><dd>The ratchet engages to one side. The motor can assist in the dominant tendon’s intended direction, while motion in the opposing direction slips.</dd></div>
+      </dl>
+      <p class="development-note">Current work focuses on mechanism design and prototyping. These behaviors describe the design intent.</p>
+    </div></section>
+    <section id="presentation" aria-labelledby="presentation-title"><div class="wrap">
+      <div class="s-header"><h2 class="s-label" id="presentation-title">Design presentation</h2><div class="s-rule"></div><span class="s-num">03 / 03</span></div>
+      <div class="review-intro prose"><p>Tendon routing, actuator relationships, and joint torque equations for the hybrid hand.</p></div>
+      <div class="slide-viewer" role="region" aria-label="Hybrid hand design presentation" tabindex="0">
+        <img id="review-slide" src="slides/slide-01.webp" width="1600" height="901" alt="Slide 1: Tendon routing and actuator kinematics">
+        <div class="slide-controls" hidden>
+          <button type="button" id="slide-prev" aria-label="Previous slide">← <span>Previous</span></button>
+          <label for="slide-select" class="visually-hidden">Select slide</label>
+          <select id="slide-select" aria-label="Select slide"></select>
+          <button type="button" id="slide-next" aria-label="Next slide"><span>Next</span> →</button>
+        </div>
+        <p id="slide-status" class="visually-hidden" aria-live="polite"></p>
+      </div>
+      <p class="media-caption">2 slides <span class="keyboard-hint">· Use the arrow keys to browse</span></p>
+      <div class="review-links"><a class="mono-link" href="Emiliano-Hybrid-Hand-ROAR.pptx" download>Download PowerPoint <span class="arrow" aria-hidden="true">↓</span></a><a class="mono-link" href="Emiliano-Hybrid-Hand-ROAR.pdf" target="_blank" rel="noopener">Open PDF <span class="arrow" aria-hidden="true">↗</span></a></div>
+      <noscript><p class="prose">Open the PDF above to view both slides, or download the original PowerPoint.</p></noscript>
+      <details class="slide-transcript"><summary>Slide description</summary><div id="slide-text" class="prose"></div></details>
+    </div></section>
+  </main>
+  <footer><div class="footer-inner"><span class="footer-mono">Emiliano Villicana Brugada</span><span class="footer-mono"><a href="../#live">← Active projects</a></span><span class="footer-mono">&copy; 2026</span></div></footer>
+  <script src="slides.js"></script>
+</body>
+</html>
